@@ -1,0 +1,86 @@
+﻿// Copyright © 2014 NForza. All Rights Reserved.
+//
+// This code is a C# port of the Java version created and maintained by Cognitect, therefore
+//
+// Copyright © 2014 Cognitect. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using NForza.Transit.Numerics;
+using System;
+using System.Numerics;
+
+namespace NForza.Transit.Impl
+{
+    public class Ratio : IRatio, IComparable, IComparable<IRatio>, IEquatable<IRatio>
+    {
+        private readonly BigInteger numerator;
+        private readonly BigInteger denominator;
+
+        public Ratio(BigInteger numerator, BigInteger denominator) 
+        {
+            this.numerator = numerator;
+            this.denominator = denominator;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Ratio && ((Ratio)obj).GetNumerator() == numerator && ((Ratio)obj).GetDenominator() == denominator;
+        }
+
+        public override int GetHashCode()
+        {
+            return GetValue().GetHashCode();
+        } 
+
+        public double GetValue()
+        {
+            return (double)(new BigRational(numerator, denominator));
+        }
+
+        public BigInteger GetNumerator()
+        {
+            return numerator;
+        }
+
+        public BigInteger GetDenominator()
+        {
+            return denominator;
+        }
+
+        public int CompareTo(IRatio other)
+        {
+            return GetValue().CompareTo(other.GetValue());
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            if (!(obj is IRatio))
+            {
+                throw new ArgumentException("obj must be an IRatio.");
+            }
+
+            return CompareTo((IRatio)obj);
+        }
+
+        public bool Equals(IRatio other)
+        {
+            return CompareTo(other) == 0;
+        }
+    }
+}

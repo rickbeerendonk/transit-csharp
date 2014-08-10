@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E4858DF4-50A2-476E-AB3D-2C901D6ED24D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NForza.Transit</RootNamespace>
+    <AssemblyName>Transit</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Impl\ReadHandlers\BinaryReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\IdentityReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\CmapReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\SetReadHandler.cs" />
+    <Compile Include="Java\Convert.cs" />
+    <Compile Include="Extensions\JsonTextReaderExtensions.cs" />
+    <Compile Include="IDictionaryReadHandler.cs" />
+    <Compile Include="ILink.cs" />
+    <Compile Include="Impl\JsonParser.cs" />
+    <Compile Include="Impl\Keyword.cs" />
+    <Compile Include="Impl\Ratio.cs" />
+    <Compile Include="Impl\ReadHandlers\BigIntegerReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\BigRationalReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\DateTimeReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\VerboseDateTimeReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\LinkReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\GuidReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\ListReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\RatioReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\UriReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\DoubleReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\CharacterReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\NullReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\BooleanReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\IntegerReadHandler.cs" />
+    <Compile Include="Impl\Symbol.cs" />
+    <Compile Include="Impl\Link.cs" />
+    <Compile Include="INamed.cs" />
+    <Compile Include="IRatio.cs" />
+    <Compile Include="ISymbol.cs" />
+    <Compile Include="IKeyword.cs" />
+    <Compile Include="IListReader.cs" />
+    <Compile Include="IDefaultReadHandler.cs" />
+    <Compile Include="IDictionaryReader.cs" />
+    <Compile Include="IListReadHandler.cs" />
+    <Compile Include="Impl\AbstractParser.cs" />
+    <Compile Include="Impl\Constants.cs" />
+    <Compile Include="Impl\DictionaryBuilder.cs" />
+    <Compile Include="Impl\IParser.cs" />
+    <Compile Include="Impl\ListBuilder.cs" />
+    <Compile Include="Impl\ReadCache.cs" />
+    <Compile Include="Impl\ReaderFactory.cs" />
+    <Compile Include="Impl\ReadHandlers\SymbolReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\KeywordReadHandler.cs" />
+    <Compile Include="Impl\Tag.cs" />
+    <Compile Include="Impl\TaggedValue.cs" />
+    <Compile Include="Impl\WriteCache.cs" />
+    <Compile Include="IReader.cs" />
+    <Compile Include="IReadHandler.cs" />
+    <Compile Include="ITaggedValue.cs" />
+    <Compile Include="Java\Uuid.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spi\IReaderSpi.cs" />
+    <Compile Include="Numerics\BigRational.cs" />
+    <Compile Include="TransitException.cs" />
+    <Compile Include="TransitFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>..\packages\Microsoft.Bcl.Immutable.1.0.34\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

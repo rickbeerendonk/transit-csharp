@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transit", "Transit.csproj", "{E4858DF4-50A2-476E-AB3D-2C901D6ED24D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transit", "Transit\Transit.csproj", "{E4858DF4-50A2-476E-AB3D-2C901D6ED24D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transit.Tests", "..\Transit.Tests\Transit.Tests.csproj", "{0A95E77B-6676-42A4-9BEB-C90295E1079D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transit.Tests", "Transit.Tests\Transit.Tests.csproj", "{0A95E77B-6676-42A4-9BEB-C90295E1079D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
