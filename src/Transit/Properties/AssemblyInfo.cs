@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Transit")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Transit is a data format and a set of libraries for conveying values between applications written in different languages. This library provides support for marshalling Transit data to/from .NET.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("NForza")]
 [assembly: AssemblyProduct("Transit")]
 [assembly: AssemblyCopyright("Copyright © NForza 2014")]
 [assembly: AssemblyTrademark("")]
@@ -27,4 +27,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.8.*")]
-[assembly: AssemblyFileVersion("0.8.*")]
+[assembly: AssemblyFileVersion("0.8.0.0")]
