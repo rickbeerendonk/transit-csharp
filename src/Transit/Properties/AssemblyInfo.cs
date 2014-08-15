@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("NForza")]
 [assembly: AssemblyProduct("Transit")]
-[assembly: AssemblyCopyright("Copyright © NForza 2014")]
+[assembly: AssemblyCopyright("NForza 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]

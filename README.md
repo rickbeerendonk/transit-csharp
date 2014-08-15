@@ -1,11 +1,13 @@
 # transit-csharp
 
-[![Build status](https://ci.appveyor.com/api/projects/status/alqa3coqq44j25ul/branch/master)](https://ci.appveyor.com/project/rickbeerendonk/transit-csharp/branch/master)
+[![Build status](http://img.shields.io/appveyor/ci/rickbeerendonk/transit-csharp.svg)](https://ci.appveyor.com/project/rickbeerendonk/transit-csharp/branch/master)
+[![NuGet version](http://img.shields.io/nuget/v/Transit.svg)](https://www.nuget.org/packages/Transit)
+[![NuGet downloads](http://img.shields.io/nuget/dt/Transit.svg)](https://www.nuget.org/packages/Transit)
 
 Transit is a data format and a set of libraries for conveying values between applications written in different languages. This library provides support for marshalling Transit data to/from C#.
 
 * [Rationale](http://blog.cognitect.com/blog/2014/7/22/transit)
-* [API docs](http://cognitect.github.io/transit-java/)
+* API docs
 * [Specification](http://github.com/cognitect/transit-format)
 
 This implementation's major.minor version number corresponds to the version of the Transit specification it supports.
