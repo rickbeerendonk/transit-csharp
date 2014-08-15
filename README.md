@@ -1,5 +1,7 @@
 # transit-csharp
 
+[![Build status](https://ci.appveyor.com/api/projects/status/alqa3coqq44j25ul/branch/master)](https://ci.appveyor.com/project/rickbeerendonk/transit-csharp/branch/master)
+
 Transit is a data format and a set of libraries for conveying values between applications written in different languages. This library provides support for marshalling Transit data to/from C#.
 
 * [Rationale](http://blog.cognitect.com/blog/2014/7/22/transit)
