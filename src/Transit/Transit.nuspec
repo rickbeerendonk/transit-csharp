@@ -6,7 +6,7 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>https://github.com/NForza/transit-csharp/LICENSE</licenseUrl>
+    <licenseUrl>https://github.com/NForza/transit-csharp/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/NForza/transit-csharp</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
