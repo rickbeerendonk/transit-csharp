@@ -101,7 +101,6 @@ namespace NForza.Transit.Impl
             this.dictionary = dictionary;
         }
 
-
         /// <summary>
         /// Converts the link to a dictionary.
         /// </summary>

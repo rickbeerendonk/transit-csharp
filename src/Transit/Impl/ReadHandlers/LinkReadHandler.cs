@@ -24,7 +24,16 @@ namespace NForza.Transit.Impl.ReadHandlers
     {
         public object FromRepresentation(object representation)
         {
-            return new Link((IImmutableDictionary<string, object>)representation);
+            var dictionaryRepresentation = (IImmutableDictionary<object, object>)representation;
+
+            var dic = ImmutableDictionary.Create<string, object>();
+
+            foreach (var item in dictionaryRepresentation)
+            {
+                dic = dic.Add((string)item.Key, item.Value);
+            }
+
+            return new Link(dic);
         }
     }
 }

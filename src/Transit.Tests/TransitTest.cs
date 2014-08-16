@@ -384,8 +384,13 @@ namespace NForza.Transit.Tests
         [TestMethod]
         public void TestReadLink()
         {
-            Assert.Inconclusive();
-            // TODO
+            IReader r = Reader("[\"~#link\" , {\"href\": \"~rhttp://www.nforza.nl\", \"rel\": \"a-rel\", \"name\": \"a-name\", \"prompt\": \"a-prompt\", \"render\": \"link or image\"}]");
+            ILink v = r.Read<ILink>();
+            Assert.AreEqual(new Uri("http://www.nforza.nl"), v.Href);
+            Assert.AreEqual("a-rel", v.Rel);
+            Assert.AreEqual("a-name", v.Name);
+            Assert.AreEqual("a-prompt", v.Prompt);
+            Assert.AreEqual("link or image", v.Render);
         }
 
 

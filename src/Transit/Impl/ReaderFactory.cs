@@ -57,7 +57,7 @@ namespace NForza.Transit.Impl
             builder.Add("list", new ListReadHandler());
             builder.Add("ratio", new RatioReadHandler());
             builder.Add("cmap", new CDictionaryReadHandler());
-            //builder.Add("link", new LinkReadHandler());
+            builder.Add("link", new LinkReadHandler());
 
             return builder.ToImmutableDictionary<string, IReadHandler>();
         }
