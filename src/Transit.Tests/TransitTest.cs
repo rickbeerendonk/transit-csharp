@@ -341,17 +341,13 @@ namespace NForza.Transit.Tests
             Assert.AreEqual<BigInteger>(expected, v);
             */
 
-            Assert.Inconclusive();
-            // TODO
-            /*
             IReader r = Reader("true null false \"foo\" 42.2 42");
-            Assert.IsTrue(r.Read<bool>());
-            Assert.IsNull(r.Read<object>());
-            Assert.IsFalse(r.Read<bool>());
-            Assert.AreEqual("foo", r.Read<string>());
-            Assert.AreEqual(42.2, r.Read<double>());
-            Assert.AreEqual(42L, r.Read<long>());
-            */ 
+            Assert.IsTrue(Reader("true").Read<bool>());
+            Assert.IsNull(Reader("null").Read<object>());
+            Assert.IsFalse(Reader("false").Read<bool>());
+            Assert.AreEqual("foo", Reader("\"foo\"").Read<string>());
+            Assert.AreEqual(42.2, Reader("42.2").Read<double>());
+            Assert.AreEqual(42L, Reader("42").Read<long>());
         }
 
         [TestMethod]
@@ -377,8 +373,9 @@ namespace NForza.Transit.Tests
         [TestMethod]
         public void TestReadIdentity()
         {
-            Assert.Inconclusive();
-            // TODO
+            IReader r = Reader("\"~\\'42\"");
+            string v = r.Read<string>();
+            Assert.AreEqual<string>("42", v);
         }
 
         [TestMethod]

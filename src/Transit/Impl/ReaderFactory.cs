@@ -52,7 +52,7 @@ namespace NForza.Transit.Impl
             builder.Add("r", new UriReadHandler());
             builder.Add("u", new GuidReadHandler());
             builder.Add("b", new BinaryReadHandler());
-            //builder.Add("\'", new IdentityReadHandler());
+            builder.Add("\'", new IdentityReadHandler());
             builder.Add("set", new SetReadHandler());
             builder.Add("list", new ListReadHandler());
             builder.Add("ratio", new RatioReadHandler());
