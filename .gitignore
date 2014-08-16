@@ -78,6 +78,10 @@ build/
 *.log
 *.scc
 
+# Sandcastle results
+
+Help/
+
 # Visual C++ cache files
 ipch/
 *.aps
