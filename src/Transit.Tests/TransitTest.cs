@@ -101,9 +101,12 @@ namespace NForza.Transit.Tests
         [TestMethod]
         public void TestReadDouble()
         {
-            IReader r = Reader("\"~d42.5\"");
-            double v = r.Read<double>();
-            Assert.AreEqual<double>(42.5D, v);
+            Assert.AreEqual<double>(42.5D, Reader("\"~d42.5\"").Read<double>());
+
+            // TODO Pending: https://github.com/cognitect/transit-format/issues/20
+            Assert.AreEqual<double>(double.NaN, Reader("\"~dNaN\"").Read<double>());
+            Assert.AreEqual<double>(double.NegativeInfinity, Reader("\"~d-Infinity\"").Read<double>());
+            Assert.AreEqual<double>(double.PositiveInfinity, Reader("\"~dInfinity\"").Read<double>());
         }
 
         [TestMethod]
