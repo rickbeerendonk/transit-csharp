@@ -20,8 +20,18 @@ using System;
 
 namespace NForza.Transit.Impl.ReadHandlers
 {
+    /// <summary>
+    /// Represents a binary read handler.
+    /// </summary>
     internal class BinaryReadHandler : IReadHandler
     {
+        /// <summary>
+        /// Converts a transit value to a byte array.
+        /// </summary>
+        /// <param name="representation">The transit value.</param>
+        /// <returns>
+        /// The converted object.
+        /// </returns>
         public object FromRepresentation(object representation)
         {
             return Convert.FromBase64String((string)representation);

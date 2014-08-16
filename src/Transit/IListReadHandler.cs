@@ -30,7 +30,7 @@ namespace NForza.Transit
         /// a parser can use to convert a list representation to 
         /// an instance of a type incrementally.
         /// </summary>
-        /// <returns>A ListReader</returns>
+        /// <returns>A ListReader.</returns>
         IListReader ListReader();
     }
 }

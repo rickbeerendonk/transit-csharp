@@ -20,6 +20,9 @@ using System;
 
 namespace NForza.Transit.Impl
 {
+    /// <summary>
+    /// Represents a symbol.
+    /// </summary>
     public class Symbol : ISymbol, INamed, IComparable, IComparable<ISymbol>, IEquatable<ISymbol>
     {
         private const char separator = '/';
@@ -28,6 +31,10 @@ namespace NForza.Transit.Impl
         private readonly string name;
         private string str;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Symbol"/> class.
+        /// </summary>
+        /// <param name="nsname">The namespace name.</param>
         public Symbol(string nsname)
         {
             int i = nsname.IndexOf(separator);
@@ -43,6 +50,12 @@ namespace NForza.Transit.Impl
             }
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             if (str == null)
@@ -60,21 +73,40 @@ namespace NForza.Transit.Impl
             return str;
         }
 
-        public string GetName()
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        public string Name
         {
-            return name;
+            get { return name; }
         }
 
-        public string GetNamespace()
+        /// <summary>
+        /// Gets the namespace.
+        /// </summary>
+        public string Namespace
         {
-            return ns;
+            get { return ns; }
         }
 
-        public string GetValue()
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <value>
+        /// The value.
+        /// </value>
+        public string Value
         {
-            return ToString();
+            get { return ToString(); }
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             if (obj == this)
@@ -82,19 +114,40 @@ namespace NForza.Transit.Impl
                 return true;
             }
 
-            return obj is Symbol && ((Symbol)obj).GetValue().Equals(GetValue());
+            return obj is Symbol && ((Symbol)obj).Value.Equals(Value);
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
-            return 19 * GetValue().GetHashCode();
+            return 19 * Value.GetHashCode();
         }
 
+        /// <summary>
+        /// Compares the current object with another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other" /> parameter.Zero This object is equal to <paramref name="other" />. Greater than zero This object is greater than <paramref name="other" />.
+        /// </returns>
         public int CompareTo(ISymbol other)
         {
-            return GetValue().CompareTo(((ISymbol)other).GetValue());
+            return Value.CompareTo(((ISymbol)other).Value);
         }
 
+        /// <summary>
+        /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>
+        /// A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes <paramref name="obj" /> in the sort order. Zero This instance occurs in the same position in the sort order as <paramref name="obj" />. Greater than zero This instance follows <paramref name="obj" /> in the sort order.
+        /// </returns>
+        /// <exception cref="System.ArgumentException">obj must be an ISymbol.</exception>
         public int CompareTo(object obj)
         {
             if (obj == null)
@@ -110,6 +163,13 @@ namespace NForza.Transit.Impl
             return CompareTo((ISymbol)obj);
         }
 
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+        /// </returns>
         public bool Equals(ISymbol other)
         {
             return CompareTo(other) == 0;

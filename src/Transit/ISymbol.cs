@@ -21,14 +21,16 @@ using System;
 namespace NForza.Transit
 {
     /// <summary>
-    /// Represents a keyword.
+    /// Represents a symbol.
     /// </summary>
     public interface ISymbol : IComparable<ISymbol>
     {
         /// <summary>
-        /// Gets the value of the symbol, a string.
+        /// Gets the value.
         /// </summary>
-        /// <returns>A symbol</returns>
-        string GetValue();
+        /// <value>
+        /// The value.
+        /// </value>
+        string Value { get; }
     }
 }

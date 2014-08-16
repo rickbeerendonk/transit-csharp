@@ -43,6 +43,9 @@ using System.Text.RegularExpressions;
 
 namespace NForza.Transit.Numerics
 {
+    /// <summary>
+    /// Represents a rational with infinite precision.
+    /// </summary>
     [ComVisible(false)]
     public struct BigRational : IComparable, IComparable<BigRational>, IEquatable<BigRational>
     {
@@ -90,6 +93,12 @@ namespace NForza.Transit.Numerics
 
         // ---- SECTION: public properties --------------*
         #region Public Properties
+        /// <summary>
+        /// Gets zero as a big rational.
+        /// </summary>
+        /// <value>
+        /// The zero.
+        /// </value>
         public static BigRational Zero
         {
             get
@@ -98,6 +107,12 @@ namespace NForza.Transit.Numerics
             }
         }
 
+        /// <summary>
+        /// Gets one as a big rational.
+        /// </summary>
+        /// <value>
+        /// The one.
+        /// </value>
         public static BigRational One
         {
             get
@@ -106,6 +121,12 @@ namespace NForza.Transit.Numerics
             }
         }
 
+        /// <summary>
+        /// Gets minus one as a big rational.
+        /// </summary>
+        /// <value>
+        /// The minus one.
+        /// </value>
         public static BigRational MinusOne
         {
             get
@@ -114,6 +135,12 @@ namespace NForza.Transit.Numerics
             }
         }
 
+        /// <summary>
+        /// Gets the sign.
+        /// </summary>
+        /// <value>
+        /// The sign.
+        /// </value>
         public Int32 Sign
         {
             get
@@ -122,6 +149,12 @@ namespace NForza.Transit.Numerics
             }
         }
 
+        /// <summary>
+        /// Gets the numerator.
+        /// </summary>
+        /// <value>
+        /// The numerator.
+        /// </value>
         public BigInteger Numerator
         {
             get
@@ -130,6 +163,12 @@ namespace NForza.Transit.Numerics
             }
         }
 
+        /// <summary>
+        /// Gets the denominator.
+        /// </summary>
+        /// <value>
+        /// The denominator.
+        /// </value>
         public BigInteger Denominator
         {
             get
@@ -143,26 +182,51 @@ namespace NForza.Transit.Numerics
         // ---- SECTION: public instance methods --------------*
         #region Public Instance Methods
 
-        // GetWholePart() and GetFractionPart()
-        // 
-        // BigRational == Whole, Fraction
-        //  0/2        ==     0,  0/2
-        //  1/2        ==     0,  1/2
-        // -1/2        ==     0, -1/2
-        //  1/1        ==     1,  0/1
-        // -1/1        ==    -1,  0/1
-        // -3/2        ==    -1, -1/2
-        //  3/2        ==     1,  1/2
+        /// <summary>
+        /// <code>
+        /// GetWholePart() and GetFractionPart()
+        /// BigRational == Whole, Fraction
+        /// 0/2        ==     0,  0/2
+        /// 1/2        ==     0,  1/2
+        /// -1/2        ==     0, -1/2
+        /// 1/1        ==     1,  0/1
+        /// -1/1        ==    -1,  0/1
+        /// -3/2        ==    -1, -1/2
+        /// 3/2        ==     1,  1/2
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
         public BigInteger GetWholePart()
         {
             return BigInteger.Divide(m_numerator, m_denominator);
         }
 
+        /// <summary>
+        /// <code>
+        /// GetWholePart() and GetFractionPart()
+        /// BigRational == Whole, Fraction
+        /// 0/2        ==     0,  0/2
+        /// 1/2        ==     0,  1/2
+        /// -1/2        ==     0, -1/2
+        /// 1/1        ==     1,  0/1
+        /// -1/1        ==    -1,  0/1
+        /// -3/2        ==    -1, -1/2
+        /// 3/2        ==     1,  1/2
+        /// </code>
+        /// </summary>
+        /// <returns></returns>
         public BigRational GetFractionPart()
         {
             return new BigRational(BigInteger.Remainder(m_numerator, m_denominator), m_denominator);
         }
 
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current instance.</param>
+        /// <returns>
+        /// true if <paramref name="obj" /> and this instance are the same type and represent the same value; otherwise, false.
+        /// </returns>
         public override bool Equals(Object obj)
         {
             if (obj == null)
@@ -173,6 +237,12 @@ namespace NForza.Transit.Numerics
             return this.Equals((BigRational)obj);
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             return (m_numerator / Denominator).GetHashCode();
@@ -188,13 +258,24 @@ namespace NForza.Transit.Numerics
             return Compare(this, (BigRational)obj);
         }
 
-        // IComparable<BigRational>
+        /// <summary>
+        /// Compares the current object with another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other" /> parameter.Zero This object is equal to <paramref name="other" />. Greater than zero This object is greater than <paramref name="other" />.
+        /// </returns>
         public int CompareTo(BigRational other)
         {
             return Compare(this, other);
         }
 
-        // Object.ToString
+        /// <summary>
+        /// Returns the fully qualified type name of this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String" /> containing a fully qualified type name.
+        /// </returns>
         public override String ToString()
         {
             StringBuilder ret = new StringBuilder();
@@ -204,8 +285,14 @@ namespace NForza.Transit.Numerics
             return ret.ToString();
         }
 
-        // IEquatable<BigRational>
-        // a/b = c/d, iff ad = bc
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// a/b = c/d, iff ad = bc
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+        /// </returns>
         public Boolean Equals(BigRational other)
         {
             if (this.Denominator == other.Denominator)
@@ -223,13 +310,25 @@ namespace NForza.Transit.Numerics
         // -------- SECTION: constructors -----------------*
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BigRational"/> struct.
+        /// </summary>
+        /// <param name="numerator">The numerator.</param>
         public BigRational(BigInteger numerator)
         {
             m_numerator = numerator;
             m_denominator = BigInteger.One;
         }
 
-        // BigRational(Double)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BigRational"/> struct.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <exception cref="System.ArgumentException">
+        /// Argument is not a number;value
+        /// or
+        /// Argument is infinity;value
+        /// </exception>
         public BigRational(Double value)
         {
             if (Double.IsNaN(value))
@@ -271,11 +370,14 @@ namespace NForza.Transit.Numerics
             Simplify();
         }
 
-        // BigRational(Decimal) -
-        //
-        // The Decimal type represents floating point numbers exactly, with no rounding error.
-        // Values such as "0.1" in Decimal are actually representable, and convert cleanly
-        // to BigRational as "11/10"
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BigRational"/> struct.
+        /// The Decimal type represents floating point numbers exactly, with no rounding error.
+        /// Values such as "0.1" in Decimal are actually representable, and convert cleanly
+        /// to BigRational as "11/10"
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <exception cref="System.ArgumentException">invalid Decimal;value</exception>
         public BigRational(Decimal value)
         {
             int[] bits = Decimal.GetBits(value);
@@ -307,6 +409,12 @@ namespace NForza.Transit.Numerics
             Simplify();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BigRational"/> struct.
+        /// </summary>
+        /// <param name="numerator">The numerator.</param>
+        /// <param name="denominator">The denominator.</param>
+        /// <exception cref="System.DivideByZeroException"></exception>
         public BigRational(BigInteger numerator, BigInteger denominator)
         {
             if (denominator.Sign == 0)
@@ -332,6 +440,13 @@ namespace NForza.Transit.Numerics
             Simplify();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BigRational"/> struct.
+        /// </summary>
+        /// <param name="whole">The whole.</param>
+        /// <param name="numerator">The numerator.</param>
+        /// <param name="denominator">The denominator.</param>
+        /// <exception cref="System.DivideByZeroException"></exception>
         public BigRational(BigInteger whole, BigInteger numerator, BigInteger denominator)
         {
             if (denominator.Sign == 0)
@@ -360,47 +475,99 @@ namespace NForza.Transit.Numerics
         // -------- SECTION: public static methods -----------------*
         #region Public Static Methods
 
+        /// <summary>
+        /// Get the absolute value of the specified r.
+        /// </summary>
+        /// <param name="r">The big rational.</param>
+        /// <returns>The absolute value.</returns>
         public static BigRational Abs(BigRational r)
         {
             return (r.m_numerator.Sign < 0 ? new BigRational(BigInteger.Abs(r.m_numerator), r.Denominator) : r);
         }
 
+        /// <summary>
+        /// Negates the specified r.
+        /// </summary>
+        /// <param name="r">The big rational.</param>
+        /// <returns>The negate.</returns>
         public static BigRational Negate(BigRational r)
         {
             return new BigRational(BigInteger.Negate(r.m_numerator), r.Denominator);
         }
 
+        /// <summary>
+        /// Inverts the specified r.
+        /// </summary>
+        /// <param name="r">The big rational.</param>
+        /// <returns>The invert.</returns>
         public static BigRational Invert(BigRational r)
         {
             return new BigRational(r.Denominator, r.m_numerator);
         }
 
+        /// <summary>
+        /// Adds the specified x and y.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>x + y</returns>
         public static BigRational Add(BigRational x, BigRational y)
         {
             return x + y;
         }
 
+        /// <summary>
+        /// Subtracts y from the specified x.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>x - y</returns>
         public static BigRational Subtract(BigRational x, BigRational y)
         {
             return x - y;
         }
 
 
+        /// <summary>
+        /// Multiplies the specified x and y.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>x * y</returns>
         public static BigRational Multiply(BigRational x, BigRational y)
         {
             return x * y;
         }
 
+        /// <summary>
+        /// Divides the specified dividend.
+        /// </summary>
+        /// <param name="dividend">The dividend.</param>
+        /// <param name="divisor">The divisor.</param>
+        /// <returns>dividend / divisor</returns>
         public static BigRational Divide(BigRational dividend, BigRational divisor)
         {
             return dividend / divisor;
         }
 
+        /// <summary>
+        /// Calculates the remainder.
+        /// </summary>
+        /// <param name="dividend">The dividend.</param>
+        /// <param name="divisor">The divisor.</param>
+        /// <returns>dividend % divisor</returns>
         public static BigRational Remainder(BigRational dividend, BigRational divisor)
         {
             return dividend % divisor;
         }
 
+        /// <summary>
+        /// Get the remainder of the division.
+        /// </summary>
+        /// <param name="dividend">The dividend.</param>
+        /// <param name="divisor">The divisor.</param>
+        /// <param name="remainder">The remainder.</param>
+        /// <returns></returns>
         public static BigRational DivRem(BigRational dividend, BigRational divisor, out BigRational remainder)
         {
             // a/b / c/d  == (ad)/(bc)
@@ -416,6 +583,13 @@ namespace NForza.Transit.Numerics
         }
 
 
+        /// <summary>
+        /// Gets the powers the specified base value.
+        /// </summary>
+        /// <param name="baseValue">The base value.</param>
+        /// <param name="exponent">The exponent.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">cannot raise zero to a negative power;baseValue</exception>
         public static BigRational Pow(BigRational baseValue, BigInteger exponent)
         {
             if (exponent.Sign == 0)
@@ -445,23 +619,31 @@ namespace NForza.Transit.Numerics
             return result;
         }
 
-        // Least Common Denominator (LCD)
-        //
-        // The LCD is the least common multiple of the two denominators.  For instance, the LCD of
-        // {1/2, 1/4} is 4 because the least common multiple of 2 and 4 is 4.  Likewise, the LCD
-        // of {1/2, 1/3} is 6.
-        //       
-        // To find the LCD:
-        //
-        // 1) Find the Greatest Common Divisor (GCD) of the denominators
-        // 2) Multiply the denominators together
-        // 3) Divide the product of the denominators by the GCD
+        /// <summary>
+        /// Least Common Denominator (LCD)
+        /// The LCD is the least common multiple of the two denominators.  For instance, the LCD of
+        /// {1/2, 1/4} is 4 because the least common multiple of 2 and 4 is 4.  Likewise, the LCD
+        /// of {1/2, 1/3} is 6.
+        /// To find the LCD:
+        /// 1) Find the Greatest Common Divisor (GCD) of the denominators
+        /// 2) Multiply the denominators together
+        /// 3) Divide the product of the denominators by the GCD
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns></returns>
         public static BigInteger LeastCommonDenominator(BigRational x, BigRational y)
         {
             // LCD( a/b, c/d ) == (bd) / gcd(b,d)
             return (x.Denominator * y.Denominator) / BigInteger.GreatestCommonDivisor(x.Denominator, y.Denominator);
         }
 
+        /// <summary>
+        /// Compares the specified r1.
+        /// </summary>
+        /// <param name="r1">The r1.</param>
+        /// <param name="r2">The r2.</param>
+        /// <returns></returns>
         public static int Compare(BigRational r1, BigRational r2)
         {
             //     a/b = c/d, iff ad = bc
@@ -470,80 +652,196 @@ namespace NForza.Transit.Numerics
         #endregion Public Static Methods
 
         #region Operator Overloads
+        /// <summary>
+        /// Implements the operator ==.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator ==(BigRational x, BigRational y)
         {
             return Compare(x, y) == 0;
         }
 
+        /// <summary>
+        /// Implements the operator !=.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator !=(BigRational x, BigRational y)
         {
             return Compare(x, y) != 0;
         }
 
+        /// <summary>
+        /// Implements the operator &lt;.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator <(BigRational x, BigRational y)
         {
             return Compare(x, y) < 0;
         }
 
+        /// <summary>
+        /// Implements the operator &lt;=.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator <=(BigRational x, BigRational y)
         {
             return Compare(x, y) <= 0;
         }
 
+        /// <summary>
+        /// Implements the operator &gt;.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator >(BigRational x, BigRational y)
         {
             return Compare(x, y) > 0;
         }
 
+        /// <summary>
+        /// Implements the operator &gt;=.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static bool operator >=(BigRational x, BigRational y)
         {
             return Compare(x, y) >= 0;
         }
 
+        /// <summary>
+        /// Implements the operator +.
+        /// </summary>
+        /// <param name="r">The r.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static BigRational operator +(BigRational r)
         {
             return r;
         }
 
+        /// <summary>
+        /// Implements the operator -.
+        /// </summary>
+        /// <param name="r">The r.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static BigRational operator -(BigRational r)
         {
             return new BigRational(-r.m_numerator, r.Denominator);
         }
 
+        /// <summary>
+        /// Implements the operator ++.
+        /// </summary>
+        /// <param name="r">The r.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static BigRational operator ++(BigRational r)
         {
             return r + BigRational.One;
         }
 
+        /// <summary>
+        /// Implements the operator --.
+        /// </summary>
+        /// <param name="r">The r.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static BigRational operator --(BigRational r)
         {
             return r - BigRational.One;
         }
 
+        /// <summary>
+        /// Implements the operator +.
+        /// </summary>
+        /// <param name="r1">The r1.</param>
+        /// <param name="r2">The r2.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static BigRational operator +(BigRational r1, BigRational r2)
         {
             // a/b + c/d  == (ad + bc)/bd
             return new BigRational((r1.m_numerator * r2.Denominator) + (r1.Denominator * r2.m_numerator), (r1.Denominator * r2.Denominator));
         }
 
+        /// <summary>
+        /// Implements the operator -.
+        /// </summary>
+        /// <param name="r1">The r1.</param>
+        /// <param name="r2">The r2.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static BigRational operator -(BigRational r1, BigRational r2)
         {
             // a/b - c/d  == (ad - bc)/bd
             return new BigRational((r1.m_numerator * r2.Denominator) - (r1.Denominator * r2.m_numerator), (r1.Denominator * r2.Denominator));
         }
 
+        /// <summary>
+        /// Implements the operator *.
+        /// </summary>
+        /// <param name="r1">The r1.</param>
+        /// <param name="r2">The r2.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static BigRational operator *(BigRational r1, BigRational r2)
         {
             // a/b * c/d  == (ac)/(bd)
             return new BigRational((r1.m_numerator * r2.m_numerator), (r1.Denominator * r2.Denominator));
         }
 
+        /// <summary>
+        /// Implements the operator /.
+        /// </summary>
+        /// <param name="r1">The r1.</param>
+        /// <param name="r2">The r2.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static BigRational operator /(BigRational r1, BigRational r2)
         {
             // a/b / c/d  == (ad)/(bc)
             return new BigRational((r1.m_numerator * r2.Denominator), (r1.Denominator * r2.m_numerator));
         }
 
+        /// <summary>
+        /// Implements the operator %.
+        /// </summary>
+        /// <param name="r1">The r1.</param>
+        /// <param name="r2">The r2.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static BigRational operator %(BigRational r1, BigRational r2)
         {
             // a/b % c/d  == (ad % bc)/bd
@@ -553,51 +851,121 @@ namespace NForza.Transit.Numerics
 
         // ----- SECTION: explicit conversions from BigRational to numeric base types  ----------------*
         #region explicit conversions from BigRational
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="SByte"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static explicit operator SByte(BigRational value)
         {
             return (SByte)(BigInteger.Divide(value.m_numerator, value.m_denominator));
         }
 
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="UInt16"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static explicit operator UInt16(BigRational value)
         {
             return (UInt16)(BigInteger.Divide(value.m_numerator, value.m_denominator));
         }
 
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="UInt32"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static explicit operator UInt32(BigRational value)
         {
             return (UInt32)(BigInteger.Divide(value.m_numerator, value.m_denominator));
         }
 
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="UInt64"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static explicit operator UInt64(BigRational value)
         {
             return (UInt64)(BigInteger.Divide(value.m_numerator, value.m_denominator));
         }
 
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="Byte"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static explicit operator Byte(BigRational value)
         {
             return (Byte)(BigInteger.Divide(value.m_numerator, value.m_denominator));
         }
 
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="Int16"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static explicit operator Int16(BigRational value)
         {
             return (Int16)(BigInteger.Divide(value.m_numerator, value.m_denominator));
         }
 
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="Int32"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static explicit operator Int32(BigRational value)
         {
             return (Int32)(BigInteger.Divide(value.m_numerator, value.m_denominator));
         }
 
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="Int64"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static explicit operator Int64(BigRational value)
         {
             return (Int64)(BigInteger.Divide(value.m_numerator, value.m_denominator));
         }
 
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="BigInteger"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static explicit operator BigInteger(BigRational value)
         {
             return BigInteger.Divide(value.m_numerator, value.m_denominator);
         }
 
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="Single"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static explicit operator Single(BigRational value)
         {
             // The Single value type represents a single-precision 32-bit number with
@@ -606,6 +974,13 @@ namespace NForza.Transit.Numerics
             return (Single)((Double)value);
         }
 
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="Double"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static explicit operator Double(BigRational value)
         {
             // The Double value type represents a double-precision 64-bit number with
@@ -649,6 +1024,14 @@ namespace NForza.Transit.Numerics
                 return result;
         }
 
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="BigRational"/> to <see cref="Decimal"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
+        /// <exception cref="System.OverflowException">Value was either too large or too small for a Decimal.</exception>
         public static explicit operator Decimal(BigRational value)
         {
             // The Decimal value type represents decimal numbers ranging
@@ -686,61 +1069,145 @@ namespace NForza.Transit.Numerics
         // ----- SECTION: implicit conversions from numeric base types to BigRational  ----------------*
         #region implicit conversions to BigRational
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="SByte"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(SByte value)
         {
             return new BigRational((BigInteger)value);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="UInt16"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(UInt16 value)
         {
             return new BigRational((BigInteger)value);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="UInt32"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(UInt32 value)
         {
             return new BigRational((BigInteger)value);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="UInt64"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(UInt64 value)
         {
             return new BigRational((BigInteger)value);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="Byte"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(Byte value)
         {
             return new BigRational((BigInteger)value);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="Int16"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(Int16 value)
         {
             return new BigRational((BigInteger)value);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="Int32"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(Int32 value)
         {
             return new BigRational((BigInteger)value);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="Int64"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(Int64 value)
         {
             return new BigRational((BigInteger)value);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="BigInteger"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(BigInteger value)
         {
             return new BigRational(value);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="Single"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(Single value)
         {
             return new BigRational((Double)value);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="Double"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(Double value)
         {
             return new BigRational(value);
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="Decimal"/> to <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
         public static implicit operator BigRational(Decimal value)
         {
             return new BigRational(value);
@@ -913,6 +1380,12 @@ namespace NForza.Transit.Numerics
         private static Regex DigitSlashDigit = new Regex(@"^(\-|\+)?\d+/\d+$");
         private static Regex DotDigit = new Regex(@"^(\-|\+)?(\.\d+)");
 
+        /// <summary>
+        /// Tries to parse.
+        /// </summary>
+        /// <param name="parse">The parse.</param>
+        /// <param name="result">The result.</param>
+        /// <returns><c>true</c> if successful; otherwise <c>false</c>.</returns>
         public static bool TryParse(string parse, out BigRational result)
         {
             if (DigitDotDigit.IsMatch(parse))

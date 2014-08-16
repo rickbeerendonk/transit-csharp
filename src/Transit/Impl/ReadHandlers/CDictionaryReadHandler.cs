@@ -21,13 +21,32 @@ using System.Collections.Immutable;
 
 namespace NForza.Transit.Impl.ReadHandlers
 {
-    public class CmapReadHandler : IListReadHandler
+    /// <summary>
+    /// Represents a read handler of a dictionary with composite keys.
+    /// </summary>
+    public class CDictionaryReadHandler : IListReadHandler
     {
+        /// <summary>
+        /// Provides an <see cref="IListReader" /> that
+        /// a parser can use to convert a list representation to
+        /// an instance of a type incrementally.
+        /// </summary>
+        /// <returns>
+        /// A ListReader.
+        /// </returns>
         public IListReader ListReader()
         {
             return new ListReaderImpl();
         }
 
+        /// <summary>
+        /// Converts a transit value to an instance of dictionary with composite keys.
+        /// </summary>
+        /// <param name="representation">The transit value.</param>
+        /// <returns>
+        /// The converted object.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException">This method is not supported.</exception>
         public object FromRepresentation(object representation)
         {
             throw new NotSupportedException();

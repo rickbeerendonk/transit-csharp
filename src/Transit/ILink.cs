@@ -26,33 +26,43 @@ namespace NForza.Transit
     public interface ILink
     {
         /// <summary>
-        /// Get the link's href
+        /// Gets the href.
         /// </summary>
-        /// <returns>href</returns>
-        Uri GetHref();
+        /// <value>
+        /// The href.
+        /// </value>
+        Uri Href { get; }
 
         /// <summary>
-        /// Get the link's rel
+        /// Gets the rel.
         /// </summary>
-        /// <returns>rel</returns>
-        string GetRel();
+        /// <value>
+        /// The rel.
+        /// </value>
+        string Rel { get; }
 
         /// <summary>
-        /// Get the link's name
+        /// Gets the name.
         /// </summary>
-        /// <returns>name</returns>
-        string GetName();
+        /// <value>
+        /// The name.
+        /// </value>
+        string Name { get; }
 
         /// <summary>
-        /// Get the link's prompt
+        /// Gets the prompt.
         /// </summary>
-        /// <returns>prompt</returns>
-        string GetPrompt();
+        /// <value>
+        /// The prompt.
+        /// </value>
+        string Prompt { get; }
 
         /// <summary>
-        /// Get the link's render semantic
+        /// Gets the render semantic
         /// </summary>
-        /// <returns>render</returns>
-        string GetRender();
+        /// <value>
+        /// The render.
+        /// </value>
+        string Render { get; }
     }
 }

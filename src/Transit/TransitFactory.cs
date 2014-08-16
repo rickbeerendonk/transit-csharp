@@ -65,7 +65,6 @@ namespace NForza.Transit
         /// <summary>
         /// Creates a reader instance.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="type">The format to read in.</param>
         /// <param name="input">The input stream to read from.</param>
         /// <param name="customDefaultHandler">
@@ -118,17 +117,15 @@ namespace NForza.Transit
         /// <summary>
         /// Creates a reader instance.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="Rep"></typeparam>
-        /// <param name="type">The format to read in</param>
-        /// <param name="input">The input stream to read from</param>
+        /// <param name="type">The format to read in.</param>
+        /// <param name="input">The input stream to read from.</param>
         /// <param name="customHandlers">
-        /// A dictionary of custom ReadHandlers to use in addition or in place of the default ReadHandlers
+        /// A dictionary of custom ReadHandlers to use in addition or in place of the default ReadHandlers.
         /// </param>
         /// <param name="customDefaultHandler">
-        /// A DefaultReadHandler to use for processing encoded values for which there is no read handler
+        /// A DefaultReadHandler to use for processing encoded values for which there is no read handler.
         /// </param>
-        /// <returns>A reader</returns>
+        /// <returns>A reader.</returns>
         public static IReader Reader(Format type, Stream input,
                                     IImmutableDictionary<string, IReadHandler> customHandlers,
                                     IDefaultReadHandler<object> customDefaultHandler) 
@@ -152,8 +149,8 @@ namespace NForza.Transit
         /// <summary>
         /// Converts a <see cref="string"/> or <see cref="IKeyword"/> to an <see cref="IKeyword"/>.
         /// </summary>
-        /// <param name="obj">A string or a keyword</param>
-        /// <returns>A keyword</returns>
+        /// <param name="obj">A string or a keyword.</param>
+        /// <returns>A keyword.</returns>
         public static IKeyword Keyword(object obj)
         {
             if (obj is IKeyword)
@@ -181,8 +178,8 @@ namespace NForza.Transit
         /// <summary>
         /// Converts a <see cref="string"/> or <see cref="ISymbol"/> to an <see cref="ISymbol"/>.
         /// </summary>
-        /// <param name="obj">A string or a symbol</param>
-        /// <returns>A symbol</returns>
+        /// <param name="obj">A string or a symbol.</param>
+        /// <returns>A symbol.</returns>
         public static ISymbol Symbol(object obj)
         {
             if (obj is ISymbol)
@@ -210,18 +207,17 @@ namespace NForza.Transit
         /// <summary>
         /// Creates an <see cref="ITaggedValue"/>.
         /// </summary>
-        /// <typeparam name="T">Tagged value type.</typeparam>
-        /// <param name="tag">Tag string</param>
-        /// <param name="representation">Value representation</param>
-        /// <returns>A tagged value</returns>
+        /// <param name="tag">Tag string.</param>
+        /// <param name="representation">Value representation.</param>
+        /// <returns>A tagged value.</returns>
         public static ITaggedValue TaggedValue(string tag, object representation) {
             return new TaggedValue(tag, representation);
         }
 
         /// <summary>
-        /// Returns the <see cref="IDefaultReadHandler"/> that is used by default.
+        /// Returns the <see cref="IDefaultReadHandler{T}"/> of <see cref="ITaggedValue"/> that is used by default.
         /// </summary>
-        /// <returns><see cref="IDefaultReadHandler"/> instance</returns>
+        /// <returns><see cref="IDefaultReadHandler{T}"/> of <see cref="ITaggedValue"/> instance.</returns>
         public static IDefaultReadHandler<ITaggedValue> DefaultDefaultReadHandler()
         {
             return ReaderFactory.DefaultDefaultHandler();

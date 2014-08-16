@@ -20,8 +20,19 @@ using NForza.Transit.Numerics;
 
 namespace NForza.Transit.Impl.ReadHandlers
 {
+    /// <summary>
+    /// Represents a <see cref="BigRational"/> read handler.
+    /// </summary>
     public class BigRationalReadHandler : IReadHandler
     {
+        /// <summary>
+        /// Converts a transit value to an instance of <see cref="BigRational"/>.
+        /// </summary>
+        /// <param name="representation">The transit value.</param>
+        /// <returns>
+        /// The converted object.
+        /// </returns>
+        /// <exception cref="NForza.Transit.TransitException">Cannot parse representation as a BigRational.</exception>
         public object FromRepresentation(object representation)
         {
             BigRational result;

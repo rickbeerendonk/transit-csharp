@@ -204,8 +204,8 @@ namespace NForza.Transit.Tests
 
             ITaggedValue expected = TransitFactory.TaggedValue("point", l);
             ITaggedValue result = Reader("{\"~#point\":[1,2]}").Read<ITaggedValue>();
-            Assert.AreEqual(expected.GetTag(), result.GetTag());
-            CollectionAssert.AreEqual(((IList<object>)expected.GetRepresentation()).ToArray(), ((IList<object>)result.GetRepresentation()).ToArray());
+            Assert.AreEqual(expected.Tag, result.Tag);
+            CollectionAssert.AreEqual(((IList<object>)expected.Representation).ToArray(), ((IList<object>)result.Representation).ToArray());
         }
 
         [TestMethod]
@@ -290,13 +290,13 @@ namespace NForza.Transit.Tests
         {
             IRatio r = Reader("{\"~#ratio\": [\"~n1\",\"~n2\"]}").Read<IRatio>();
 
-            Assert.AreEqual(BigInteger.One, r.GetNumerator());
-            Assert.AreEqual(BigInteger.One + 1, r.GetDenominator());
+            Assert.AreEqual(BigInteger.One, r.Numerator);
+            Assert.AreEqual(BigInteger.One + 1, r.Denominator);
             Assert.AreEqual(0.5d, r.GetValue(), 0.01d);
         }
 
         [TestMethod]
-        public void TestReadCmap()
+        public void TestReadCDictionary()
         {
             IDictionary m = Reader("{\"~#cmap\": [{\"~#ratio\":[\"~n1\",\"~n2\"]},1,{\"~#list\":[1,2,3]},2]}").Read<IDictionary>();
 
@@ -307,8 +307,8 @@ namespace NForza.Transit.Tests
                 if ((long)e.Value == 1L) 
                 {
                     Ratio r = (Ratio)e.Key;
-                    Assert.AreEqual(new BigInteger(1), r.GetNumerator());
-                    Assert.AreEqual(new BigInteger(2), r.GetDenominator());
+                    Assert.AreEqual(new BigInteger(1), r.Numerator);
+                    Assert.AreEqual(new BigInteger(2), r.Denominator);
                 }
                 else 
                 {

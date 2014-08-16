@@ -21,18 +21,43 @@ using System.Collections.Immutable;
 
 namespace NForza.Transit.Impl
 {
+    /// <summary>
+    /// Represents a list builder.
+    /// </summary>
     public class ListBuilder : IListReader
     {
+        /// <summary>
+        /// Initializes a new gestational list.
+        /// </summary>
+        /// <returns>
+        /// A new gestational list.
+        /// </returns>
         public object Init()
         {
             return ImmutableList.Create<object>();
         }
 
+        /// <summary>
+        /// Adds an item to the list, returning a new list;
+        /// new list must be used for any further invocations.
+        /// </summary>
+        /// <param name="list">A gestational list.</param>
+        /// <param name="item">An item.</param>
+        /// <returns>
+        /// A new gestational list.
+        /// </returns>
         public object Add(object list, object item)
         {
             return ((IImmutableList<object>)list).Add(item);
         }
 
+        /// <summary>
+        /// Completes building of a list from a gestational list.
+        /// </summary>
+        /// <param name="list">The gestational list.</param>
+        /// <returns>
+        /// The completed list.
+        /// </returns>
         public object Complete(object list)
         {
             return list;

@@ -26,13 +26,13 @@ namespace NForza.Transit
         /// <summary>
         /// Gets the namespace.
         /// </summary>
-        /// <returns>Namespace</returns>
-        string GetNamespace();
+        /// <returns>Namespace.</returns>
+        string Namespace { get; }
 
         /// <summary>
         /// Gets the name.
         /// </summary>
-        /// <returns>Name</returns>
-        string GetName();
+        /// <returns>Name.</returns>
+        string Name { get; }
     }
 }

@@ -29,19 +29,23 @@ namespace NForza.Transit
         /// <summary>
         /// The value of the ratio as double.
         /// </summary>
-        /// <returns>A double</returns>
+        /// <returns>A double.</returns>
         Double GetValue();
 
         /// <summary>
         /// Gets the numerator.
         /// </summary>
-        /// <returns>Numerator</returns>
-        BigInteger GetNumerator();
+        /// <value>
+        /// The numerator.
+        /// </value>
+        BigInteger Numerator { get; }
 
         /// <summary>
         /// Gets the denominator.
         /// </summary>
-        /// <returns>Denominator</returns>
-        BigInteger GetDenominator();
+        /// <value>
+        /// The denominator.
+        /// </value>
+        BigInteger Denominator { get; }
     }
 }

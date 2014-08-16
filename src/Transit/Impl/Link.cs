@@ -21,6 +21,9 @@ using System.Collections.Immutable;
 
 namespace NForza.Transit.Impl
 {
+    /// <summary>
+    /// Represents a link.
+    /// </summary>
     public class Link : ILink
     {
         private const string LINK = "link";
@@ -34,6 +37,20 @@ namespace NForza.Transit.Impl
 
         private IImmutableDictionary<string, object> dictionary;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Link"/> class.
+        /// </summary>
+        /// <param name="href">The href.</param>
+        /// <param name="rel">The rel.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="render">The render.</param>
+        /// <param name="prompt">The prompt.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// href
+        /// or
+        /// rel
+        /// </exception>
+        /// <exception cref="System.ArgumentException">Value of render must be "link" or "image".</exception>
         public Link(Uri href, string rel, string name, string render, string prompt)
         {
             var dictionary = ImmutableDictionary.Create<string, object>();
@@ -68,47 +85,85 @@ namespace NForza.Transit.Impl
                 }
                 else
                 {
-                    throw new ArgumentException("Value of render must be \"link\" or \"image\"");
+                    throw new ArgumentException("Value of render must be \"link\" or \"image\".");
                 }
             }
 
             this.dictionary = dictionary;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Link"/> class.
+        /// </summary>
+        /// <param name="dictionary">The dictionary.</param>
         public Link(IImmutableDictionary<string, object> dictionary)
         {
             this.dictionary = dictionary;
         }
 
 
+        /// <summary>
+        /// Converts the link to a dictionary.
+        /// </summary>
+        /// <returns>The dictionary.</returns>
         public IImmutableDictionary<string, object> ToDictionary()
         {
             return dictionary;
         }
 
-        public Uri GetHref()
+        /// <summary>
+        /// Gets the href.
+        /// </summary>
+        /// <value>
+        /// The href.
+        /// </value>
+        public Uri Href
         {
-            return (Uri)dictionary[HREF];
+            get { return (Uri)dictionary[HREF]; }
         }
 
-        public string GetRel()
+        /// <summary>
+        /// Gets the rel.
+        /// </summary>
+        /// <value>
+        /// The rel.
+        /// </value>
+        public string Rel
         {
-            return (string)dictionary[REL];
+            get { return (string)dictionary[REL]; }
         }
 
-        public string GetName()
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name
         {
-            return (string)dictionary[NAME];
+            get { return (string)dictionary[NAME]; }
         }
 
-        public string GetPrompt()
+        /// <summary>
+        /// Gets the prompt.
+        /// </summary>
+        /// <value>
+        /// The prompt.
+        /// </value>
+        public string Prompt
         {
-            return (string)dictionary[PROMPT];
+            get { return (string)dictionary[PROMPT]; }
         }
 
-        public string GetRender()
+        /// <summary>
+        /// Gets the render semantic
+        /// </summary>
+        /// <value>
+        /// The render.
+        /// </value>
+        public string Render
         {
-            return (string)dictionary[RENDER];
+            get { return (string)dictionary[RENDER]; }
         }
     }
 }

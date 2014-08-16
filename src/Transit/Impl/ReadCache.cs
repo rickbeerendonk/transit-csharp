@@ -18,11 +18,17 @@
 
 namespace NForza.Transit.Impl
 {
+    /// <summary>
+    /// Represents a read cache.
+    /// </summary>
     public class ReadCache
     {
         private object[] cache;
         private int index;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReadCache"/> class.
+        /// </summary>
         public ReadCache()
         {
             cache = new object[WriteCache.MaxCacheEntries];
@@ -48,11 +54,24 @@ namespace NForza.Transit.Impl
             }
         }
 
+        /// <summary>
+        /// Caches the read.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
+        /// <returns></returns>
         public object CacheRead(string s, bool asDictionaryKey) 
         { 
             return CacheRead(s, asDictionaryKey, null); 
         }
 
+        /// <summary>
+        /// Caches the read.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
+        /// <param name="p">The p.</param>
+        /// <returns></returns>
         public object CacheRead(string s, bool asDictionaryKey, AbstractParser p)
         {
             if (s.Length != 0)
@@ -74,6 +93,10 @@ namespace NForza.Transit.Impl
             return p != null ? p.ParseString(s) : s;
         }
 
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        /// <returns>The read cache.</returns>
         public ReadCache Init()
         {
             //need not clear array

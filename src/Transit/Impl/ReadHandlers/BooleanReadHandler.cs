@@ -18,8 +18,18 @@
 
 namespace NForza.Transit.Impl.ReadHandlers
 {
+    /// <summary>
+    /// Represents a <see cref="bool"/> read handler.
+    /// </summary>
     internal class BooleanReadHandler : IReadHandler
     {
+        /// <summary>
+        /// Converts a transit value to a <see cref="bool"/>.
+        /// </summary>
+        /// <param name="representation">The transit value.</param>
+        /// <returns>
+        /// The converted object.
+        /// </returns>
         public object FromRepresentation(object representation)
         {
             return ((string)representation).Equals("t");

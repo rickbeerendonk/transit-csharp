@@ -56,8 +56,8 @@ namespace NForza.Transit.Java
         /// Returns a value that indicates whether this instance is equal to a specified
         /// object.
         /// </summary>
-        /// <param name="o">The object to compare with this instance.</param>
-        /// <returns>true if o is a <paramref name="uuid"/> that has the same value as this instance; otherwise, false.</returns>
+        /// <param name="obj">The object to compare with this instance.</param>
+        /// <returns>true if obj is a <see href="Uuid"/> that has the same value as this instance; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is Uuid))
@@ -91,7 +91,7 @@ namespace NForza.Transit.Java
         }
 
         /// <summary>
-        /// <para></para>
+        /// <para>
         /// Returns a String object representing this UUID.
         /// </para>
         /// <para>
@@ -139,7 +139,7 @@ namespace NForza.Transit.Java
         }
 
         /// <summary>Converts an <see cref="T:Uuid"/> to a <see cref="T:System.Guid" />.</summary>
-        /// <param name="value">The value to convert. </param>
+        /// <param name="uuid">The value to convert. </param>
         /// <returns>A <see cref="T:System.Guid"/> that represents the converted <see cref="T:Uuid" />.</returns>
         public static explicit operator Guid(Uuid uuid)
         {

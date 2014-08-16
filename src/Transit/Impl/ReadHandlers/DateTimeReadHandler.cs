@@ -21,8 +21,19 @@ using System;
 
 namespace NForza.Transit.Impl.ReadHandlers
 {
+    /// <summary>
+    /// Represents a <see cref="DateTime"/> read handler.
+    /// </summary>
     internal class DateTimeReadHandler : IReadHandler
     {
+        /// <summary>
+        /// Converts a transit value to a <see cref="DateTime"/>.
+        /// </summary>
+        /// <param name="representation">The transit value.</param>
+        /// <returns>
+        /// The converted object.
+        /// </returns>
+        /// <exception cref="TransitException">Cannot parse representation as a long (DateTime):  + representation</exception>
         public object FromRepresentation(object representation)
         {
             long n;

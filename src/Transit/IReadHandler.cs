@@ -29,8 +29,8 @@ namespace NForza.Transit
         /// <summary>
         /// Converts a transit value to an instance of a type.
         /// </summary>
-        /// <param name="representation">The transit value</param>
-        /// <returns>The converted object</returns>
+        /// <param name="representation">The transit value.</param>
+        /// <returns>The converted object.</returns>
         object FromRepresentation(object representation);
     }
 }

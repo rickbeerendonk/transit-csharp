@@ -20,28 +20,59 @@ using System.Collections.Immutable;
 
 namespace NForza.Transit.Impl
 {
+    /// <summary>
+    /// Represents a write cache.
+    /// </summary>
     public class WriteCache
     {
+        /// <summary>
+        /// The minimum size cacheable.
+        /// </summary>
         public const int MinSizeCacheable = 4;
+
+        /// <summary>
+        /// The cache code digits.
+        /// </summary>
         public const int CacheCodeDigits = 44;
+
+        /// <summary>
+        /// The maximum cache entries.
+        /// </summary>
         public const int MaxCacheEntries = CacheCodeDigits * CacheCodeDigits;
+
+        /// <summary>
+        /// The base character index.
+        /// </summary>
         public const int BaseCharIdx = 48;
 
         private IImmutableDictionary<string, string> cache = ImmutableDictionary.Create<string, string>();
         private int index;
         private bool enabled;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WriteCache"/> class.
+        /// </summary>
         public WriteCache() 
             : this(true)
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WriteCache"/> class.
+        /// </summary>
+        /// <param name="enabled">if set to <c>true</c> [enabled].</param>
         public WriteCache(bool enabled) 
         {
             index = 0;
             this.enabled = enabled;
         }
 
+        /// <summary>
+        /// Determines whether the specified s is cacheable.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
+        /// <returns></returns>
         public static bool IsCacheable(string s, bool asDictionaryKey) 
         {
             return (s.Length >= MinSizeCacheable) &&
@@ -64,6 +95,12 @@ namespace NForza.Transit.Impl
             }
         }
 
+        /// <summary>
+        /// Caches the write.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
+        /// <returns></returns>
         public string CacheWrite(string s, bool asDictionaryKey) 
         {
             if (enabled && IsCacheable(s, asDictionaryKey)) 
@@ -88,6 +125,10 @@ namespace NForza.Transit.Impl
             return s;
         }
 
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        /// <returns>The write cache.</returns>
 	    public WriteCache Init()
         {
 		    index = 0;

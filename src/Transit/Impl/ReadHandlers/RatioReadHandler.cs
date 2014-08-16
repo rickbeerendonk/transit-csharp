@@ -21,8 +21,18 @@ using System.Numerics;
 
 namespace NForza.Transit.Impl.ReadHandlers
 {
+    /// <summary>
+    /// Represents a ratio read handler.
+    /// </summary>
     public class RatioReadHandler : IReadHandler
     {
+        /// <summary>
+        /// Converts a transit value to an instance of <see cref="Ratio"/>.
+        /// </summary>
+        /// <param name="representation">The transit value.</param>
+        /// <returns>
+        /// The converted object.
+        /// </returns>
         public object FromRepresentation(object representation)
         {
             var rep = (IImmutableList<object>)representation;

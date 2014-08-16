@@ -18,8 +18,18 @@
 
 namespace NForza.Transit.Impl.ReadHandlers
 {
+    /// <summary>
+    /// Represents a <see cref="char"/> read handler.
+    /// </summary>
     internal class CharacterReadHandler : IReadHandler
     {
+        /// <summary>
+        /// Converts a transit value to a <see cref="char"/>.
+        /// </summary>
+        /// <param name="representation">The transit value.</param>
+        /// <returns>
+        /// The converted object.
+        /// </returns>
         public object FromRepresentation(object representation)
         {
             return ((string)representation)[0];

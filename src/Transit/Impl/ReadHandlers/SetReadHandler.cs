@@ -21,13 +21,32 @@ using System.Collections.Immutable;
 
 namespace NForza.Transit.Impl.ReadHandlers
 {
+    /// <summary>
+    /// Represents a set read handler.
+    /// </summary>
     public class SetReadHandler : IListReadHandler
     {
+        /// <summary>
+        /// Provides an <see cref="IListReader" /> that
+        /// a parser can use to convert a list representation to
+        /// an instance of a type incrementally.
+        /// </summary>
+        /// <returns>
+        /// A ListReader.
+        /// </returns>
         public IListReader ListReader()
         {
             return new ListReaderImpl();
         }
 
+        /// <summary>
+        /// Converts a transit value to an instance of a set.
+        /// </summary>
+        /// <param name="representation">The transit value.</param>
+        /// <returns>
+        /// The converted object.
+        /// </returns>
+        /// <exception cref="System.NotSupportedException"></exception>
         public object FromRepresentation(object representation)
         {
             throw new NotSupportedException();

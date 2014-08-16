@@ -16,6 +16,9 @@ using System;
 
 namespace NForza.Transit.Java
 {
+    /// <summary>
+    /// Contains conversations from Java to .NET and vice versa.
+    /// </summary>
     public static class Convert
     {
         private const long JavaTimePrecisionDifference = 10000;

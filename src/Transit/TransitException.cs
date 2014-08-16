@@ -16,6 +16,9 @@ using System;
 
 namespace NForza.Transit
 {
+    /// <summary>
+    /// Class for Transit exceptions.
+    /// </summary>
     public class TransitException : Exception
     {
         /// <summary>Initializes a new instance of the <see cref="TransitException" /> class.</summary>

@@ -23,10 +23,21 @@ using System.Collections.Immutable;
 
 namespace NForza.Transit.Impl
 {
+    /// <summary>
+    /// Represents a JSON parser.
+    /// </summary>
     public class JsonParser : AbstractParser
     {
         private readonly JsonTextReader jp;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonParser"/> class.
+        /// </summary>
+        /// <param name="jsonTextReader">The json text reader.</param>
+        /// <param name="handlers">The handlers.</param>
+        /// <param name="defaultHandler">The default handler.</param>
+        /// <param name="dictionaryBuilder">The dictionary builder.</param>
+        /// <param name="listBuilder">The list builder.</param>
         public JsonParser(
             JsonTextReader jsonTextReader,
             IImmutableDictionary<string, IReadHandler> handlers,
@@ -51,6 +62,11 @@ namespace NForza.Transit.Impl
             return val;
         }
 
+        /// <summary>
+        /// Parses the specified cache.
+        /// </summary>
+        /// <param name="cache">The cache.</param>
+        /// <returns></returns>
         public override object Parse(ReadCache cache)
         {
             if (jp.Read())
@@ -63,6 +79,14 @@ namespace NForza.Transit.Impl
             }
         }
 
+        /// <summary>
+        /// Parses the value.
+        /// </summary>
+        /// <param name="asDictionaryKey">If set to <c>true</c> [as dictionary key].</param>
+        /// <param name="cache">The cache.</param>
+        /// <returns>
+        /// The parsed value.
+        /// </returns>
         public override object ParseVal(bool asDictionaryKey, ReadCache cache)
         {
             switch (jp.TokenType)
@@ -98,11 +122,26 @@ namespace NForza.Transit.Impl
             }
         }
 
+        /// <summary>
+        /// Parses the dictionary.
+        /// </summary>
+        /// <param name="ignored">if set to <c>true</c> [ignored].</param>
+        /// <param name="cache">The cache.</param>
+        /// <param name="handler">The handler.</param>
+        /// <returns></returns>
         public override object ParseDictionary(bool ignored, ReadCache cache, IDictionaryReadHandler handler)
         {
             return ParseDictionary(ignored, cache, handler, JsonToken.EndObject);
         }
 
+        /// <summary>
+        /// Parses the dictionary.
+        /// </summary>
+        /// <param name="ignored">if set to <c>true</c> [ignored].</param>
+        /// <param name="cache">The cache.</param>
+        /// <param name="handler">The handler.</param>
+        /// <param name="endToken">The end token.</param>
+        /// <returns></returns>
         public object ParseDictionary(bool ignored, ReadCache cache, IDictionaryReadHandler handler, JsonToken endToken)
         {
             IDictionaryReader dr = (handler != null) ? handler.DictionaryReader() : dictionaryBuilder;
@@ -147,6 +186,15 @@ namespace NForza.Transit.Impl
             return dr.Complete(d);
         }
 
+        /// <summary>
+        /// Parses the list.
+        /// </summary>
+        /// <param name="asDictionaryKey">If set to <c>true</c> [as dictionary key].</param>
+        /// <param name="cache">The cache.</param>
+        /// <param name="handler">The handler.</param>
+        /// <returns>
+        /// The parsed list.
+        /// </returns>
         public override object ParseList(bool asDictionaryKey, ReadCache cache, IListReadHandler handler)
         {
             // if nextToken == JsonToken.EndArray

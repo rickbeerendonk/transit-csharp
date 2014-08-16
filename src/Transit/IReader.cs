@@ -27,7 +27,7 @@ namespace NForza.Transit
         /// Reads a single value from an input source.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <returns>The value</returns>
+        /// <returns>The value.</returns>
         T Read<T>();
     }
 }

@@ -21,18 +21,44 @@ using System.Collections.Immutable;
 
 namespace NForza.Transit.Impl
 {
+    /// <summary>
+    /// Represents a dictionary builder.
+    /// </summary>
     public class DictionaryBuilder : IDictionaryReader
     {
+        /// <summary>
+        /// Initializes a new gestational dictionary.
+        /// </summary>
+        /// <returns>
+        /// A new gestational dictionary.
+        /// </returns>
         public object Init()
         {
             return ImmutableDictionary.Create<object, object>();
         }
 
+        /// <summary>
+        /// Adds a key and value to the dictionary, returning a new dictionary;
+        /// new dictionary must be used for any further invocations.
+        /// </summary>
+        /// <param name="dictionary">A gestational dictionary.</param>
+        /// <param name="key">A key.</param>
+        /// <param name="value">A value.</param>
+        /// <returns>
+        /// A new gestational dictionary.
+        /// </returns>
         public object Add(object dictionary, object key, object value)
         {
             return ((IImmutableDictionary<object, object>)dictionary).Add(key, value);
         }
 
+        /// <summary>
+        /// Completes building of a dictionary from a gestational dictionary.
+        /// </summary>
+        /// <param name="dictionary">The gestational dictionary.</param>
+        /// <returns>
+        /// The completed dictionary.
+        /// </returns>
         public object Complete(object dictionary)
         {
             return dictionary;

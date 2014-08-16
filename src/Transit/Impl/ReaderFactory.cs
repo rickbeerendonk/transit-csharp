@@ -25,8 +25,15 @@ using System.IO;
 
 namespace NForza.Transit.Impl
 {
+    /// <summary>
+    /// Represents a reader factory.
+    /// </summary>
     public class ReaderFactory
     {
+        /// <summary>
+        /// Get the default handlers.
+        /// </summary>
+        /// <returns>The default handlers.</returns>
         public static IImmutableDictionary<string, IReadHandler> DefaultHandlers()
         {
             var builder = ImmutableDictionary.Create<string, IReadHandler>().ToBuilder();
@@ -49,12 +56,16 @@ namespace NForza.Transit.Impl
             builder.Add("set", new SetReadHandler());
             builder.Add("list", new ListReadHandler());
             builder.Add("ratio", new RatioReadHandler());
-            builder.Add("cmap", new CmapReadHandler());
+            builder.Add("cmap", new CDictionaryReadHandler());
             //builder.Add("link", new LinkReadHandler());
 
             return builder.ToImmutableDictionary<string, IReadHandler>();
         }
 
+        /// <summary>
+        /// THe defaults default handler.
+        /// </summary>
+        /// <returns>The default read handler.</returns>
         public static IDefaultReadHandler<ITaggedValue> DefaultDefaultHandler()
         {
             return new DefaultReadHandler();
@@ -95,6 +106,13 @@ namespace NForza.Transit.Impl
             return customDefaultHandler != null ? customDefaultHandler : DefaultDefaultHandler();
         }
 
+        /// <summary>
+        /// Gets the JSON instance.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="customHandlers">The custom handlers.</param>
+        /// <param name="customDefaultHandler">The custom default handler.</param>
+        /// <returns>A reader.</returns>
         public static IReader GetJsonInstance(Stream input,
             IImmutableDictionary<string, IReadHandler> customHandlers,
             IDefaultReadHandler<object> customDefaultHandler)

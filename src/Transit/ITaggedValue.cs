@@ -30,13 +30,17 @@ namespace NForza.Transit
         /// <summary>
         /// Gets the tag.
         /// </summary>
-        /// <returns>The tag</returns>
-        string GetTag();
+        /// <value>
+        /// The tag.
+        /// </value>
+        string Tag { get; }
 
         /// <summary>
-        /// Gets the representation of the value.
+        /// Gets the representation.
         /// </summary>
-        /// <returns>The representation</returns>
-        object GetRepresentation();
+        /// <value>
+        /// The representation.
+        /// </value>
+        object Representation { get; }
     }
 }

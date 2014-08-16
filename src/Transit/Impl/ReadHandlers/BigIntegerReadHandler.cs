@@ -20,8 +20,19 @@ using System.Numerics;
 
 namespace NForza.Transit.Impl.ReadHandlers
 {
+    /// <summary>
+    /// Represents a <see cref="BigInteger"/> read handler.
+    /// </summary>
     internal class BigIntegerReadHandler : IReadHandler
     {
+        /// <summary>
+        /// Converts a transit value to an instance of <see cref="BigInteger"/>.
+        /// </summary>
+        /// <param name="representation">The transit value.</param>
+        /// <returns>
+        /// The converted object.
+        /// </returns>
+        /// <exception cref="NForza.Transit.TransitException">Cannot parse representation as a BigInteger:  + representation</exception>
         public object FromRepresentation(object representation)
         {
             BigInteger result;

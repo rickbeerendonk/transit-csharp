@@ -27,9 +27,9 @@ namespace NForza.Transit
         /// <summary>
         /// Reads a transit representation that cannot otherwise be read.
         /// </summary>
-        /// <param name="tag">The transit value's tag</param>
-        /// <param name="representation">The transit value's representation</param>
-        /// <returns>The resulting generic object</returns>
+        /// <param name="tag">The transit value's tag.</param>
+        /// <param name="representation">The transit value's representation.</param>
+        /// <returns>The resulting generic object.</returns>
         T FromRepresentation(string tag, object representation);
     }
 }

@@ -40,7 +40,7 @@
   <ItemGroup>
     <Compile Include="Impl\ReadHandlers\BinaryReadHandler.cs" />
     <Compile Include="Impl\ReadHandlers\IdentityReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\CmapReadHandler.cs" />
+    <Compile Include="Impl\ReadHandlers\CDictionaryReadHandler.cs" />
     <Compile Include="Impl\ReadHandlers\SetReadHandler.cs" />
     <Compile Include="Java\Convert.cs" />
     <Compile Include="Extensions\JsonTextReaderExtensions.cs" />

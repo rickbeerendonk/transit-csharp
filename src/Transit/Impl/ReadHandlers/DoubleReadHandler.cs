@@ -20,8 +20,19 @@ using System.Globalization;
 
 namespace NForza.Transit.Impl.ReadHandlers
 {
+    /// <summary>
+    /// Represents a <see cref="double"/> read handler.
+    /// </summary>
     internal class DoubleReadHandler : IReadHandler
     {
+        /// <summary>
+        /// Converts a transit value to a <see cref="double"/>.
+        /// </summary>
+        /// <param name="representation">The transit value.</param>
+        /// <returns>
+        /// The converted object.
+        /// </returns>
+        /// <exception cref="TransitException">Cannot parse representation as a double:  + representation</exception>
         public object FromRepresentation(object representation)
         {
             double result;

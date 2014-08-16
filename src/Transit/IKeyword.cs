@@ -26,9 +26,11 @@ namespace NForza.Transit
     public interface IKeyword : IComparable, IComparable<IKeyword>, IEquatable<IKeyword>
     {
         /// <summary>
-        /// Gets the value of the keyword, a string.
+        /// Gets the value.
         /// </summary>
-        /// <returns>A keyword</returns>
-        string GetValue();
+        /// <value>
+        /// The value.
+        /// </value>
+        string Value { get; }
     }
 }

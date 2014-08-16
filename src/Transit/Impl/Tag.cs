@@ -18,15 +18,26 @@
 
 namespace NForza.Transit.Impl
 {
+    /// <summary>
+    /// Represents a tag.
+    /// </summary>
     public class Tag
     {
         private string value;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tag"/> class.
+        /// </summary>
+        /// <param name="value">The value.</param>
         public Tag(string value)
         {
             this.value = value;
         }
 
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <returns>The value.</returns>
         public string GetValue()
         {
             return value;

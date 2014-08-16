@@ -25,11 +25,11 @@ namespace NForza.Transit
     public interface IDictionaryReadHandler : IReadHandler 
     {
         /// <summary>
-        /// Provides an <see cref="IDictionaryReader{G, D, K, V}"/> 
+        /// Provides an <see cref="IDictionaryReader"/> 
         /// that a parser can use to convert a dictionary 
         /// representation to an instance of a type incrementally.
         /// </summary>
-        /// <returns>A DictionaryReader</returns>
+        /// <returns>A DictionaryReader.</returns>
         IDictionaryReader DictionaryReader();
     }
 }

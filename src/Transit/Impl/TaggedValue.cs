@@ -18,27 +18,54 @@
 
 namespace NForza.Transit.Impl
 {
+    /// <summary>
+    /// Represents a tagged value.
+    /// </summary>
     public class TaggedValue : ITaggedValue 
     {
         private readonly string tag;
         private readonly object representation;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TaggedValue"/> class.
+        /// </summary>
+        /// <param name="tag">The tag.</param>
+        /// <param name="representation">The representation.</param>
         public TaggedValue(string tag, object representation)
         {
             this.tag = tag;
             this.representation = representation;
         }
 
-        public string GetTag() 
+        /// <summary>
+        /// Gets the tag.
+        /// </summary>
+        /// <value>
+        /// The tag.
+        /// </value>
+        public string Tag
         {
-            return tag;
+            get { return tag; }
         }
 
-        public object GetRepresentation() 
+        /// <summary>
+        /// Gets the representation.
+        /// </summary>
+        /// <value>
+        /// The representation.
+        /// </value>
+        public object Representation
         {
-            return representation;
+            get { return representation; }
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             if (this == obj)
@@ -52,10 +79,16 @@ namespace NForza.Transit.Impl
             }
 
             var other = (TaggedValue)obj;
-            return (this.tag.Equals(other.GetTag()) && 
-                this.representation.Equals(other.GetRepresentation()));
+            return (this.tag.Equals(other.Tag) && 
+                this.representation.Equals(other.Representation));
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
         public override int GetHashCode()
         {
             int result = 17;
