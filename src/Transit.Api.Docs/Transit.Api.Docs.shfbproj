@@ -20,56 +20,35 @@
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
     <IndentHtml>True</IndentHtml>
-    <KeepLogFile>True</KeepLogFile>
+    <KeepLogFile>False</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <CppCommentsFixup>False</CppCommentsFixup>
     <CleanIntermediates>True</CleanIntermediates>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\Transit\Transit.csproj" />
     </DocumentationSources>
-    <BuildLogFile>..\..\target\Transit\Transit.Sandcastle.log</BuildLogFile>
+    <BuildLogFile>..\..\target\Transit.Api.Docs\Transit.Api.Docs.log</BuildLogFile>
     <HtmlHelp1xCompilerPath />
     <HtmlHelp2xCompilerPath />
     <WorkingPath>..\..\target\Transit.Api.Docs\Working\</WorkingPath>
     <ComponentPath />
-    <MaximumGroupParts>2</MaximumGroupParts>
+    <MaximumGroupParts>3</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>C#</SyntaxFilters>
     <SdkLinkTarget>Blank</SdkLinkTarget>
-    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <RootNamespaceContainer>True</RootNamespaceContainer>
     <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>True</Preliminary>
-    <NamingMethod>Guid</NamingMethod>
+    <NamingMethod>MemberName</NamingMethod>
     <HelpTitle>Transit C# developer API</HelpTitle>
     <CopyrightText>Copyright &amp;#169%3b 2014 NForza. All Rights Reserved.</CopyrightText>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <ComponentConfigurations>
-      <ComponentConfig id="Syntax Component" enabled="True" xmlns="">
-        <component id="Syntax Component">
-          <syntax input="/document/reference" output="/document/syntax" renderReferenceLinks="false" />
-          <generators>
-    {@SyntaxFilters}
-</generators>
-          <containerElement name="codeSnippetGroup" addNoExampleTabs="true" includeOnSingleSnippets="false" groupingEnabled="{@CodeSnippetGrouping}" />
-          <configurations>
-            <generator id="C#" />
-            <generator id="Visual Basic">
-              <includeLineContinuation value="false" />
-            </generator>
-            <generator id="Visual Basic Usage">
-              <includeLineContinuation value="false" />
-            </generator>
-            <generator id="Managed C++" />
-            <generator id="F#" />
-            <generator id="J#" />
-            <generator id="JScript" />
-            <generator id="JavaScript" />
-            <generator id="XAML Usage" />
-            <generator id="ASP.NET" />
-          </configurations>
-        </component>
+      <ComponentConfig id="API Token Resolution" enabled="True">
+        <component id="API Token Resolution">{@TokenFiles}
+<replace elements="/*//token" item="string(.)" /></component>
       </ComponentConfig>
-      <ComponentConfig id="Code Block Component" enabled="True" xmlns="">
+      <ComponentConfig id="Code Block Component" enabled="True">
         <component id="Code Block Component">
           <basePath value="{@HtmlEncProjectFolder}" />
           <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
@@ -80,6 +59,28 @@
       </ComponentConfig>
     </ComponentConfigurations>
     <MissingTags>AutoDocumentCtors, AutoDocumentDispose</MissingTags>
+    <ApiFilter>
+      <Filter entryType="Namespace" fullName="NForza.Transit.Impl" isExposed="False">
+  <Filter entryType="Class" fullName="NForza.Transit.Impl.Keyword" filterName="Keyword" isExposed="True" />
+  <Filter entryType="Class" fullName="NForza.Transit.Impl.Link" filterName="Link" isExposed="True" />
+  <Filter entryType="Class" fullName="NForza.Transit.Impl.Ratio" filterName="Ratio" isExposed="True" />
+  <Filter entryType="Class" fullName="NForza.Transit.Impl.Symbol" filterName="Symbol" isExposed="True" />
+  <Filter entryType="Class" fullName="NForza.Transit.Impl.TaggedValue" filterName="TaggedValue" isExposed="True" />
+</Filter>
+<Filter entryType="Namespace" fullName="NForza.Transit.Impl.ReadHandlers" isExposed="False" />
+<Filter entryType="Namespace" fullName="NForza.Transit.Java" isExposed="False" /></ApiFilter>
+    <VisibleItems>InheritedMembers, Protected, ProtectedInternalAsProtected</VisibleItems>
+    <NamespaceSummaries>
+      <NamespaceSummaryItem name="NForza.Transit" isDocumented="True">Contains the main transit interfaces and classes.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="NForza.Transit.Impl" isDocumented="True">Contains the interface implementations.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="NForza.Transit.Impl.ReadHandlers" isDocumented="True">Contains the read handlers</NamespaceSummaryItem>
+<NamespaceSummaryItem name="NForza.Transit.Java" isDocumented="True">Contains .NET versions of Java types.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="NForza.Transit.Numerics" isDocumented="True">Contains numerics that are not part of the .NET Framework.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="(global)" isDocumented="False" /></NamespaceSummaries>
+    <WebsiteSdkLinkType>Msdn</WebsiteSdkLinkType>
+    <HtmlSdkLinkType>Msdn</HtmlSdkLinkType>
+    <IncludeFavorites>False</IncludeFavorites>
+    <BinaryTOC>True</BinaryTOC>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
