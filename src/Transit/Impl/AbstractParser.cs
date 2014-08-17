@@ -24,7 +24,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents an abstract parser.
     /// </summary>
-    public abstract class AbstractParser : IParser
+    internal abstract class AbstractParser : IParser
     {
         /// <summary>
         /// Formats the date time.

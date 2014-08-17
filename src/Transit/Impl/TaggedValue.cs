@@ -21,7 +21,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a tagged value.
     /// </summary>
-    public class TaggedValue : ITaggedValue 
+    internal class TaggedValue : ITaggedValue 
     {
         private readonly string tag;
         private readonly object representation;

@@ -14,6 +14,7 @@
     <Name>Documentation</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Portable Library 4.5</FrameworkVersion>
+    <BaseIntermediateOutputPath>..\..\target\Transit.Api.Docs\obj\</BaseIntermediateOutputPath>
     <OutputPath>..\..\target\Transit.Api.Docs\Help\</OutputPath>
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
@@ -58,7 +59,7 @@
         </component>
       </ComponentConfig>
     </ComponentConfigurations>
-    <MissingTags>AutoDocumentCtors, AutoDocumentDispose</MissingTags>
+    <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter, AutoDocumentDispose</MissingTags>
     <ApiFilter>
       <Filter entryType="Namespace" fullName="NForza.Transit.Impl" isExposed="False">
   <Filter entryType="Class" fullName="NForza.Transit.Impl.Keyword" filterName="Keyword" isExposed="True" />
@@ -69,14 +70,15 @@
 </Filter>
 <Filter entryType="Namespace" fullName="NForza.Transit.Impl.ReadHandlers" isExposed="False" />
 <Filter entryType="Namespace" fullName="NForza.Transit.Java" isExposed="False" /></ApiFilter>
-    <VisibleItems>InheritedMembers, Protected, ProtectedInternalAsProtected</VisibleItems>
+    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected</VisibleItems>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="NForza.Transit" isDocumented="True">Contains the main transit interfaces and classes.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="NForza.Transit.Impl" isDocumented="True">Contains the interface implementations.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="NForza.Transit.Impl.ReadHandlers" isDocumented="True">Contains the read handlers</NamespaceSummaryItem>
-<NamespaceSummaryItem name="NForza.Transit.Java" isDocumented="True">Contains .NET versions of Java types.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="NForza.Transit.Impl" isDocumented="False">Contains the interface implementations.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="NForza.Transit.Impl.ReadHandlers" isDocumented="False">Contains the read handlers</NamespaceSummaryItem>
+<NamespaceSummaryItem name="NForza.Transit.Java" isDocumented="False">Contains .NET versions of Java types.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="NForza.Transit.Numerics" isDocumented="True">Contains numerics that are not part of the .NET Framework.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="(global)" isDocumented="False" /></NamespaceSummaries>
+<NamespaceSummaryItem name="(global)" isDocumented="False" />
+<NamespaceSummaryItem name="NForza.Transit.Spi" isDocumented="True">Provides extension points for other .NET languages.</NamespaceSummaryItem></NamespaceSummaries>
     <WebsiteSdkLinkType>Msdn</WebsiteSdkLinkType>
     <HtmlSdkLinkType>Msdn</HtmlSdkLinkType>
     <IncludeFavorites>False</IncludeFavorites>

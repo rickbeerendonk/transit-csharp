@@ -21,6 +21,7 @@ using NForza.Transit.Spi;
 using System;
 using System.Collections.Immutable;
 using System.IO;
+using System.Numerics;
 
 namespace NForza.Transit
 {
@@ -213,6 +214,87 @@ namespace NForza.Transit
         public static ITaggedValue TaggedValue(string tag, object representation) {
             return new TaggedValue(tag, representation);
         }
+
+        /// <summary>
+        /// Creates a <see cref="ILink"/>.
+        /// </summary>
+        /// <param name="href">The href.</param>
+        /// <param name="rel">The relative.</param>
+        /// <returns>An <see cref="ILink"/> instance.</returns>
+        public static ILink Link(string href, string rel)
+        {
+            return Link(href, rel, null, null, null);
+        }
+
+        /// <summary>
+        /// Creates a <see cref="ILink"/>.
+        /// </summary>
+        /// <param name="href">The href.</param>
+        /// <param name="rel">The relative.</param>
+        /// <returns>An <see cref="ILink"/> instance.</returns>
+        public static ILink Link(Uri href, string rel)
+        {
+            return Link(href, rel, null, null, null);
+        }
+
+        /// <summary>
+        /// Creates a <see cref="ILink"/>.
+        /// </summary>
+        /// <param name="href">The href.</param>
+        /// <param name="rel">The rel.</param>
+        /// <param name="name">The optional name.</param>
+        /// <param name="prompt">The optional prompt.</param>
+        /// <param name="render">The optional render.</param>
+        /// <returns>An <see cref="ILink"/> instance.</returns>
+        public static ILink Link(string href, string rel, string name, string prompt, string render)
+        {
+            return Link(new Uri(href), rel, name, prompt, render);
+        }
+
+        /// <summary>
+        /// Creates a <see cref="ILink"/>.
+        /// </summary>
+        /// <param name="href">The href.</param>
+        /// <param name="rel">The rel.</param>
+        /// <param name="name">The optional name.</param>
+        /// <param name="prompt">The optional prompt.</param>
+        /// <param name="render">The optional render.</param>
+        /// <returns>An <see cref="ILink"/> instance.</returns>
+        public static ILink Link(Uri href, string rel, string name, string prompt, string render) 
+        {
+            return new Link(href, rel, name, prompt, render);
+        }
+
+        /// <summary>
+        /// Creates a <see cref="IRatio"/>.
+        /// </summary>
+        /// <param name="numerator">The numerator.</param>
+        /// <param name="denominator">The denominator.</param>
+        /// <returns>An <see cref="IRatio"/> instance.</returns>
+        public IRatio Ratio(BigInteger numerator, BigInteger denominator) 
+        {
+            return new Ratio(numerator, denominator);
+        }
+
+        /// <summary>
+        /// Returns a directory of classes to read handlers that is used by default.
+        /// </summary>
+        /// <returns>Tag to read handler directory.</returns>
+        public static IImmutableDictionary<string, IReadHandler> DefaultReadHandlers() 
+        { 
+            return ReaderFactory.DefaultHandlers(); 
+        }
+
+        /*
+        /// <summary>
+        /// Returns a directory of classes to write handlers that is used by default.
+        /// </summary>
+        /// <returns>Class to write handler directory.</returns>
+        public static IImmutableDictionary<string, IWriteHandler> DefaultWriteHandlers() 
+        {
+            return WriterFactory.defaultHandlers(); 
+        }
+        */ 
 
         /// <summary>
         /// Returns the <see cref="IDefaultReadHandler{T}"/> of <see cref="ITaggedValue"/> that is used by default.

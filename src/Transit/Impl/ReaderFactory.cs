@@ -28,7 +28,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a reader factory.
     /// </summary>
-    public class ReaderFactory
+    internal class ReaderFactory
     {
         /// <summary>
         /// Get the default handlers.

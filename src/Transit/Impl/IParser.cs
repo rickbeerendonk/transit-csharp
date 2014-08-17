@@ -21,7 +21,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Identifies a parser.
     /// </summary>
-    public interface IParser
+    internal interface IParser
     {
         /// <summary>
         /// Parses the specified cache.

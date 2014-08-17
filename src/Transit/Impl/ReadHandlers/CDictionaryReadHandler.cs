@@ -24,7 +24,7 @@ namespace NForza.Transit.Impl.ReadHandlers
     /// <summary>
     /// Represents a read handler of a dictionary with composite keys.
     /// </summary>
-    public class CDictionaryReadHandler : IListReadHandler
+    internal class CDictionaryReadHandler : IListReadHandler
     {
         /// <summary>
         /// Provides an <see cref="IListReader" /> that

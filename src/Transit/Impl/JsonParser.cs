@@ -26,7 +26,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a JSON parser.
     /// </summary>
-    public class JsonParser : AbstractParser
+    internal class JsonParser : AbstractParser
     {
         private readonly JsonTextReader jp;
 

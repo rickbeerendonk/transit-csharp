@@ -23,7 +23,7 @@ namespace NForza.Transit.Impl.ReadHandlers
     /// <summary>
     /// Represents a <see cref="BigRational"/> read handler.
     /// </summary>
-    public class BigRationalReadHandler : IReadHandler
+    internal class BigRationalReadHandler : IReadHandler
     {
         /// <summary>
         /// Converts a transit value to an instance of <see cref="BigRational"/>.

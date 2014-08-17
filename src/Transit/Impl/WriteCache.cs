@@ -23,7 +23,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a write cache.
     /// </summary>
-    public class WriteCache
+    internal class WriteCache
     {
         /// <summary>
         /// The minimum size cacheable.

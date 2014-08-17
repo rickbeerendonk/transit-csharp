@@ -21,7 +21,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a tag.
     /// </summary>
-    public class Tag
+    internal class Tag
     {
         private string value;
 

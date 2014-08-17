@@ -24,7 +24,7 @@ namespace NForza.Transit.Impl.ReadHandlers
     /// <summary>
     /// Represents a ratio read handler.
     /// </summary>
-    public class RatioReadHandler : IReadHandler
+    internal class RatioReadHandler : IReadHandler
     {
         /// <summary>
         /// Converts a transit value to an instance of <see cref="Ratio"/>.

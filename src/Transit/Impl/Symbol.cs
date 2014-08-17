@@ -23,7 +23,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a symbol.
     /// </summary>
-    public class Symbol : ISymbol, INamed, IComparable, IComparable<ISymbol>, IEquatable<ISymbol>
+    internal class Symbol : ISymbol, INamed, IComparable, IComparable<ISymbol>, IEquatable<ISymbol>
     {
         private const char separator = '/';
 

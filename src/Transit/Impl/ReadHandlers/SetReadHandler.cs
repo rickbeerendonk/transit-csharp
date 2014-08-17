@@ -24,7 +24,7 @@ namespace NForza.Transit.Impl.ReadHandlers
     /// <summary>
     /// Represents a set read handler.
     /// </summary>
-    public class SetReadHandler : IListReadHandler
+    internal class SetReadHandler : IListReadHandler
     {
         /// <summary>
         /// Provides an <see cref="IListReader" /> that

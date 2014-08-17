@@ -23,7 +23,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a keyword.
     /// </summary>
-    public class Keyword : IKeyword, INamed, IComparable, IComparable<IKeyword>, IEquatable<IKeyword>
+    internal class Keyword : IKeyword, INamed, IComparable, IComparable<IKeyword>, IEquatable<IKeyword>
     {
         private const char separator = '/';
 

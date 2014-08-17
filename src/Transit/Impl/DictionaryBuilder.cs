@@ -24,7 +24,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a dictionary builder.
     /// </summary>
-    public class DictionaryBuilder : IDictionaryReader
+    internal class DictionaryBuilder : IDictionaryReader
     {
         /// <summary>
         /// Initializes a new gestational dictionary.

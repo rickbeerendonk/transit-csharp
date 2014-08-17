@@ -25,7 +25,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a ratio.
     /// </summary>
-    public class Ratio : IRatio, IComparable, IComparable<IRatio>, IEquatable<IRatio>
+    internal class Ratio : IRatio, IComparable, IComparable<IRatio>, IEquatable<IRatio>
     {
         private readonly BigInteger numerator;
         private readonly BigInteger denominator;

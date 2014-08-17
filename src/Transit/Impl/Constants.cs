@@ -21,7 +21,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Contains a list of constants.
     /// </summary>
-    public static class Constants
+    internal static class Constants
     {
         /// <summary>
         /// The escape.

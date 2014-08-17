@@ -24,7 +24,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a list builder.
     /// </summary>
-    public class ListBuilder : IListReader
+    internal class ListBuilder : IListReader
     {
         /// <summary>
         /// Initializes a new gestational list.

@@ -20,7 +20,7 @@ namespace NForza.Transit.Java
     /// Represents an immutable Java universally unique identifier (UUID).
     /// A UUID represents a 128-bit value.
     /// </summary>
-    public struct Uuid : IEquatable<Uuid>
+    internal struct Uuid : IEquatable<Uuid>
     {
         private readonly long leastSignificantBits;
         private readonly long mostSignificantBits;

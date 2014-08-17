@@ -24,7 +24,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a link.
     /// </summary>
-    public class Link : ILink
+    internal class Link : ILink
     {
         private const string LINK = "link";
         private const string IMAGE = "image";

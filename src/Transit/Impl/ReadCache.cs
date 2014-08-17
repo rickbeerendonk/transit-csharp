@@ -21,7 +21,7 @@ namespace NForza.Transit.Impl
     /// <summary>
     /// Represents a read cache.
     /// </summary>
-    public class ReadCache
+    internal class ReadCache
     {
         private object[] cache;
         private int index;
