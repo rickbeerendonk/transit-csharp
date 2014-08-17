@@ -1,98 +1,112 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpTOC>
 
-  <HelpTOCNode Id="7bd0c131-3558-4b22-a23c-afecdf859d22" Title="Namespaces" Url="html/R_Project_Documentation.htm">
-    <HelpTOCNode Id="0d01f13c-1a4b-4c69-9b08-f603a913bef8" Title="NForza.Transit" Url="html/N_NForza_Transit.htm">
-      <HelpTOCNode Id="f942c9a9-9a22-4d1d-9b2d-f9ffacfe2a8b" Title="IDefaultReadHandler(T) Interface" Url="html/T_NForza_Transit_IDefaultReadHandler_1.htm">
-        <HelpTOCNode Id="2da718fe-b10e-4ffc-8a79-b3e1bf627667" Title="IDefaultReadHandler(T) Methods" Url="html/Methods_T_NForza_Transit_IDefaultReadHandler_1.htm">
+  <HelpTOCNode Id="fb3a1cfe-32b2-4e28-bab8-48fd63043c88" Title="Namespaces" Url="html/R_Project_Documentation.htm">
+    <HelpTOCNode Id="b0e0a056-efef-4d5f-8533-b5b41235807e" Title="NForza.Transit" Url="html/N_NForza_Transit.htm">
+      <HelpTOCNode Id="c32c9b77-eec9-4e4b-9eb8-e4cee7e1a975" Title="IDefaultReadHandler(T) Interface" Url="html/T_NForza_Transit_IDefaultReadHandler_1.htm">
+        <HelpTOCNode Id="d6f93c05-7069-4a9d-bf50-39531c5006d1" Title="IDefaultReadHandler(T) Methods" Url="html/Methods_T_NForza_Transit_IDefaultReadHandler_1.htm">
           <HelpTOCNode Title="FromRepresentation Method " Url="html/M_NForza_Transit_IDefaultReadHandler_1_FromRepresentation.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="e93f1776-f490-4a64-94ef-a0cc3aa5219d" Title="IDictionaryReader Interface" Url="html/T_NForza_Transit_IDictionaryReader.htm">
-        <HelpTOCNode Id="460b19d7-62db-4b9a-8bfb-8d9fa78b1417" Title="IDictionaryReader Methods" Url="html/Methods_T_NForza_Transit_IDictionaryReader.htm">
+      <HelpTOCNode Id="f35e9fcf-ec62-4ff3-ac5a-be3ee349be41" Title="IDictionaryReader Interface" Url="html/T_NForza_Transit_IDictionaryReader.htm">
+        <HelpTOCNode Id="b77b783e-de98-4bb0-ac42-7783f1ded848" Title="IDictionaryReader Methods" Url="html/Methods_T_NForza_Transit_IDictionaryReader.htm">
           <HelpTOCNode Title="Add Method " Url="html/M_NForza_Transit_IDictionaryReader_Add.htm" />
           <HelpTOCNode Title="Complete Method " Url="html/M_NForza_Transit_IDictionaryReader_Complete.htm" />
           <HelpTOCNode Title="Init Method " Url="html/M_NForza_Transit_IDictionaryReader_Init.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="a466163a-30b4-4840-8542-012df6fe21ae" Title="IDictionaryReadHandler Interface" Url="html/T_NForza_Transit_IDictionaryReadHandler.htm">
-        <HelpTOCNode Id="9ea34f1a-8dd6-4d01-aad8-699f4d150a93" Title="IDictionaryReadHandler Methods" Url="html/Methods_T_NForza_Transit_IDictionaryReadHandler.htm">
+      <HelpTOCNode Id="a054cbb9-8954-4e04-96e3-28888546aa3b" Title="IDictionaryReadHandler Interface" Url="html/T_NForza_Transit_IDictionaryReadHandler.htm">
+        <HelpTOCNode Id="13007996-afe5-4835-9840-599cac613fbc" Title="IDictionaryReadHandler Methods" Url="html/Methods_T_NForza_Transit_IDictionaryReadHandler.htm">
           <HelpTOCNode Title="DictionaryReader Method " Url="html/M_NForza_Transit_IDictionaryReadHandler_DictionaryReader.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="401eff1d-addd-4b05-aae5-da566da8955f" Title="IKeyword Interface" Url="html/T_NForza_Transit_IKeyword.htm">
-        <HelpTOCNode Id="f755241f-9aff-4f2a-9355-0fbe7500309c" Title="IKeyword Methods" Url="html/Methods_T_NForza_Transit_IKeyword.htm">
-          <HelpTOCNode Title="GetValue Method " Url="html/M_NForza_Transit_IKeyword_GetValue.htm" />
+      <HelpTOCNode Id="dbea4d00-e93d-4b6d-8d27-c0807a8ddafb" Title="IKeyword Interface" Url="html/T_NForza_Transit_IKeyword.htm">
+        <HelpTOCNode Title="IKeyword Methods" Url="html/Methods_T_NForza_Transit_IKeyword.htm" />
+        <HelpTOCNode Id="d836e3b6-9a1b-4287-ae16-ebc780ee1051" Title="IKeyword Properties" Url="html/Properties_T_NForza_Transit_IKeyword.htm">
+          <HelpTOCNode Title="Value Property " Url="html/P_NForza_Transit_IKeyword_Value.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="111dd2a0-b80c-49f9-bceb-7979f0cc7492" Title="ILink Interface" Url="html/T_NForza_Transit_ILink.htm">
-        <HelpTOCNode Id="ddec8d4b-35c2-414c-bbcd-a1ac7d722eaf" Title="ILink Methods" Url="html/Methods_T_NForza_Transit_ILink.htm">
-          <HelpTOCNode Title="GetHref Method " Url="html/M_NForza_Transit_ILink_GetHref.htm" />
-          <HelpTOCNode Title="GetName Method " Url="html/M_NForza_Transit_ILink_GetName.htm" />
-          <HelpTOCNode Title="GetPrompt Method " Url="html/M_NForza_Transit_ILink_GetPrompt.htm" />
-          <HelpTOCNode Title="GetRel Method " Url="html/M_NForza_Transit_ILink_GetRel.htm" />
-          <HelpTOCNode Title="GetRender Method " Url="html/M_NForza_Transit_ILink_GetRender.htm" />
+      <HelpTOCNode Id="5ee686fe-7c5e-4546-b239-b2b50180daa3" Title="ILink Interface" Url="html/T_NForza_Transit_ILink.htm">
+        <HelpTOCNode Id="d7561f88-c4ae-461a-8019-a5e5d2a8a0fd" Title="ILink Properties" Url="html/Properties_T_NForza_Transit_ILink.htm">
+          <HelpTOCNode Title="Href Property " Url="html/P_NForza_Transit_ILink_Href.htm" />
+          <HelpTOCNode Title="Name Property " Url="html/P_NForza_Transit_ILink_Name.htm" />
+          <HelpTOCNode Title="Prompt Property " Url="html/P_NForza_Transit_ILink_Prompt.htm" />
+          <HelpTOCNode Title="Rel Property " Url="html/P_NForza_Transit_ILink_Rel.htm" />
+          <HelpTOCNode Title="Render Property " Url="html/P_NForza_Transit_ILink_Render.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="82cdd29d-8c9d-402d-96a5-a303ff3a614a" Title="IListReader Interface" Url="html/T_NForza_Transit_IListReader.htm">
-        <HelpTOCNode Id="577b7b72-b659-48a5-b4da-f370fe952ec6" Title="IListReader Methods" Url="html/Methods_T_NForza_Transit_IListReader.htm">
+      <HelpTOCNode Id="664436f6-3474-44d2-b6f9-ecbd7368e79d" Title="IListReader Interface" Url="html/T_NForza_Transit_IListReader.htm">
+        <HelpTOCNode Id="a2f6ca4d-977e-47be-85ce-6a05f9affbaf" Title="IListReader Methods" Url="html/Methods_T_NForza_Transit_IListReader.htm">
           <HelpTOCNode Title="Add Method " Url="html/M_NForza_Transit_IListReader_Add.htm" />
           <HelpTOCNode Title="Complete Method " Url="html/M_NForza_Transit_IListReader_Complete.htm" />
           <HelpTOCNode Title="Init Method " Url="html/M_NForza_Transit_IListReader_Init.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="af6e869b-97d9-4553-a709-065c9938d3d9" Title="IListReadHandler Interface" Url="html/T_NForza_Transit_IListReadHandler.htm">
-        <HelpTOCNode Id="e18cc9e3-67c4-42f8-83da-b3229bc89662" Title="IListReadHandler Methods" Url="html/Methods_T_NForza_Transit_IListReadHandler.htm">
+      <HelpTOCNode Id="dbfadb7d-5c0c-4763-968e-c6f64ae2146e" Title="IListReadHandler Interface" Url="html/T_NForza_Transit_IListReadHandler.htm">
+        <HelpTOCNode Id="10be1b99-e2a7-4872-9356-1ef199211402" Title="IListReadHandler Methods" Url="html/Methods_T_NForza_Transit_IListReadHandler.htm">
           <HelpTOCNode Title="ListReader Method " Url="html/M_NForza_Transit_IListReadHandler_ListReader.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="68bbf32a-86fe-4041-8362-020423f01b77" Title="INamed Interface" Url="html/T_NForza_Transit_INamed.htm">
-        <HelpTOCNode Id="c9afa36a-289e-4929-b118-7b6af116a4f8" Title="INamed Methods" Url="html/Methods_T_NForza_Transit_INamed.htm">
-          <HelpTOCNode Title="GetName Method " Url="html/M_NForza_Transit_INamed_GetName.htm" />
-          <HelpTOCNode Title="GetNamespace Method " Url="html/M_NForza_Transit_INamed_GetNamespace.htm" />
+      <HelpTOCNode Id="4ab73c4f-1a32-4f1d-aada-4d0cb4ea1a86" Title="INamed Interface" Url="html/T_NForza_Transit_INamed.htm">
+        <HelpTOCNode Id="5c1a01d9-1478-4a2a-ac32-a2df2c4b321d" Title="INamed Properties" Url="html/Properties_T_NForza_Transit_INamed.htm">
+          <HelpTOCNode Title="Name Property " Url="html/P_NForza_Transit_INamed_Name.htm" />
+          <HelpTOCNode Title="Namespace Property " Url="html/P_NForza_Transit_INamed_Namespace.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="580cadb5-4190-4628-8bdf-516e5e8baba5" Title="IRatio Interface" Url="html/T_NForza_Transit_IRatio.htm">
-        <HelpTOCNode Id="c7671bf8-d23a-4f30-a0f5-426c1c4aa98e" Title="IRatio Methods" Url="html/Methods_T_NForza_Transit_IRatio.htm">
-          <HelpTOCNode Title="GetDenominator Method " Url="html/M_NForza_Transit_IRatio_GetDenominator.htm" />
-          <HelpTOCNode Title="GetNumerator Method " Url="html/M_NForza_Transit_IRatio_GetNumerator.htm" />
+      <HelpTOCNode Id="a522deed-cc6c-44ba-b9d2-8048843225a0" Title="IRatio Interface" Url="html/T_NForza_Transit_IRatio.htm">
+        <HelpTOCNode Id="7417e6b6-1435-4721-98bb-967db56fdfa4" Title="IRatio Methods" Url="html/Methods_T_NForza_Transit_IRatio.htm">
           <HelpTOCNode Title="GetValue Method " Url="html/M_NForza_Transit_IRatio_GetValue.htm" />
         </HelpTOCNode>
+        <HelpTOCNode Id="08d5ff0d-8deb-4c51-94aa-8a782027e167" Title="IRatio Properties" Url="html/Properties_T_NForza_Transit_IRatio.htm">
+          <HelpTOCNode Title="Denominator Property " Url="html/P_NForza_Transit_IRatio_Denominator.htm" />
+          <HelpTOCNode Title="Numerator Property " Url="html/P_NForza_Transit_IRatio_Numerator.htm" />
+        </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="4964d0d1-af63-421e-a17a-2f397afece75" Title="IReader Interface" Url="html/T_NForza_Transit_IReader.htm">
-        <HelpTOCNode Id="439756ad-28fc-4a7a-9b8a-2e0319f6378b" Title="IReader Methods" Url="html/Methods_T_NForza_Transit_IReader.htm">
+      <HelpTOCNode Id="30ba0202-b6f4-49fd-bbb3-a38ea227833b" Title="IReader Interface" Url="html/T_NForza_Transit_IReader.htm">
+        <HelpTOCNode Id="93534496-f74d-4784-a7cc-fcd40eeec8c8" Title="IReader Methods" Url="html/Methods_T_NForza_Transit_IReader.htm">
           <HelpTOCNode Title="Read(T) Method " Url="html/M_NForza_Transit_IReader_Read__1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="23338f8d-4488-4b50-abba-cc18278f4c06" Title="IReadHandler Interface" Url="html/T_NForza_Transit_IReadHandler.htm">
-        <HelpTOCNode Id="200d745c-bce3-4981-a5e2-0d34982ca051" Title="IReadHandler Methods" Url="html/Methods_T_NForza_Transit_IReadHandler.htm">
+      <HelpTOCNode Id="eba008f1-6695-4cd2-8f4d-779835aac9fd" Title="IReadHandler Interface" Url="html/T_NForza_Transit_IReadHandler.htm">
+        <HelpTOCNode Id="1abf30af-beaa-4973-b8b4-e6e384f9c505" Title="IReadHandler Methods" Url="html/Methods_T_NForza_Transit_IReadHandler.htm">
           <HelpTOCNode Title="FromRepresentation Method " Url="html/M_NForza_Transit_IReadHandler_FromRepresentation.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="ad309cf6-1870-4f68-929b-0d7e01d53a62" Title="ISymbol Interface" Url="html/T_NForza_Transit_ISymbol.htm">
-        <HelpTOCNode Id="cefe19c0-2c8d-438f-be6d-c6ade9bd19d3" Title="ISymbol Methods" Url="html/Methods_T_NForza_Transit_ISymbol.htm">
-          <HelpTOCNode Title="GetValue Method " Url="html/M_NForza_Transit_ISymbol_GetValue.htm" />
+      <HelpTOCNode Id="030d77e4-90cd-4b6a-b454-1f9a49249b3a" Title="ISymbol Interface" Url="html/T_NForza_Transit_ISymbol.htm">
+        <HelpTOCNode Title="ISymbol Methods" Url="html/Methods_T_NForza_Transit_ISymbol.htm" />
+        <HelpTOCNode Id="0e115e55-a19e-48af-8e52-229aa10d8782" Title="ISymbol Properties" Url="html/Properties_T_NForza_Transit_ISymbol.htm">
+          <HelpTOCNode Title="Value Property " Url="html/P_NForza_Transit_ISymbol_Value.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="c4a014d9-3ed6-48fa-944d-177436d257fb" Title="ITaggedValue Interface" Url="html/T_NForza_Transit_ITaggedValue.htm">
-        <HelpTOCNode Id="c5a8557d-a4f3-40c7-ac1d-771fc40b1d16" Title="ITaggedValue Methods" Url="html/Methods_T_NForza_Transit_ITaggedValue.htm">
-          <HelpTOCNode Title="GetRepresentation Method " Url="html/M_NForza_Transit_ITaggedValue_GetRepresentation.htm" />
-          <HelpTOCNode Title="GetTag Method " Url="html/M_NForza_Transit_ITaggedValue_GetTag.htm" />
+      <HelpTOCNode Id="c37cc425-6b14-4746-a6b8-557fc981c6bd" Title="ITaggedValue Interface" Url="html/T_NForza_Transit_ITaggedValue.htm">
+        <HelpTOCNode Id="437f73b0-b2bc-4e8c-9909-0869d2e675df" Title="ITaggedValue Properties" Url="html/Properties_T_NForza_Transit_ITaggedValue.htm">
+          <HelpTOCNode Title="Representation Property " Url="html/P_NForza_Transit_ITaggedValue_Representation.htm" />
+          <HelpTOCNode Title="Tag Property " Url="html/P_NForza_Transit_ITaggedValue_Tag.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="47bc91e5-5f44-4887-9d8f-bfba1dbf8801" Title="TransitException Class" Url="html/T_NForza_Transit_TransitException.htm">
-        <HelpTOCNode Id="4f09c8ba-e237-47f3-9812-d9f59118baa3" Title="TransitException Constructor " Url="html/Overload_NForza_Transit_TransitException__ctor.htm">
+      <HelpTOCNode Id="dde44977-76c3-4801-abe7-c4e423589550" Title="TransitException Class" Url="html/T_NForza_Transit_TransitException.htm">
+        <HelpTOCNode Id="ac548324-b655-4a78-bb27-48c27c6f9699" Title="TransitException Constructor " Url="html/Overload_NForza_Transit_TransitException__ctor.htm">
           <HelpTOCNode Title="TransitException Constructor " Url="html/M_NForza_Transit_TransitException__ctor.htm" />
           <HelpTOCNode Title="TransitException Constructor (String)" Url="html/M_NForza_Transit_TransitException__ctor_1.htm" />
           <HelpTOCNode Title="TransitException Constructor (String, Exception)" Url="html/M_NForza_Transit_TransitException__ctor_2.htm" />
         </HelpTOCNode>
+        <HelpTOCNode Title="TransitException Methods" Url="html/Methods_T_NForza_Transit_TransitException.htm" />
+        <HelpTOCNode Title="TransitException Properties" Url="html/Properties_T_NForza_Transit_TransitException.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="e516c660-3f75-4e38-a11f-59b9011f4f36" Title="TransitFactory Class" Url="html/T_NForza_Transit_TransitFactory.htm">
+      <HelpTOCNode Id="b5a9dd88-5e15-4b08-978b-cb69a3216885" Title="TransitFactory Class" Url="html/T_NForza_Transit_TransitFactory.htm">
         <HelpTOCNode Title="TransitFactory Constructor " Url="html/M_NForza_Transit_TransitFactory__ctor.htm" />
-        <HelpTOCNode Id="35f7cdae-4ffd-43c8-822d-350ebd159101" Title="TransitFactory Methods" Url="html/Methods_T_NForza_Transit_TransitFactory.htm">
+        <HelpTOCNode Id="115a6e17-04b3-4866-849e-8dabb9907a61" Title="TransitFactory Methods" Url="html/Methods_T_NForza_Transit_TransitFactory.htm">
           <HelpTOCNode Title="DefaultDefaultReadHandler Method " Url="html/M_NForza_Transit_TransitFactory_DefaultDefaultReadHandler.htm" />
+          <HelpTOCNode Title="DefaultReadHandlers Method " Url="html/M_NForza_Transit_TransitFactory_DefaultReadHandlers.htm" />
           <HelpTOCNode Title="Keyword Method " Url="html/M_NForza_Transit_TransitFactory_Keyword.htm" />
-          <HelpTOCNode Id="939bb04b-de59-4aef-b5ce-cd2f92219853" Title="Reader Method " Url="html/Overload_NForza_Transit_TransitFactory_Reader.htm">
+          <HelpTOCNode Id="f286129d-d0ef-42e1-b456-e1197b7f60b7" Title="Link Method " Url="html/Overload_NForza_Transit_TransitFactory_Link.htm">
+            <HelpTOCNode Title="Link Method (String, String)" Url="html/M_NForza_Transit_TransitFactory_Link.htm" />
+            <HelpTOCNode Title="Link Method (Uri, String)" Url="html/M_NForza_Transit_TransitFactory_Link_2.htm" />
+            <HelpTOCNode Title="Link Method (String, String, String, String, String)" Url="html/M_NForza_Transit_TransitFactory_Link_1.htm" />
+            <HelpTOCNode Title="Link Method (Uri, String, String, String, String)" Url="html/M_NForza_Transit_TransitFactory_Link_3.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="Ratio Method " Url="html/M_NForza_Transit_TransitFactory_Ratio.htm" />
+          <HelpTOCNode Id="e63306ab-3ece-41f6-93b3-1274b4611eef" Title="Reader Method " Url="html/Overload_NForza_Transit_TransitFactory_Reader.htm">
             <HelpTOCNode Title="Reader Method (TransitFactory.Format, Stream)" Url="html/M_NForza_Transit_TransitFactory_Reader.htm" />
             <HelpTOCNode Title="Reader Method (TransitFactory.Format, Stream, IDefaultReadHandler(Object))" Url="html/M_NForza_Transit_TransitFactory_Reader_1.htm" />
             <HelpTOCNode Title="Reader Method (TransitFactory.Format, Stream, IImmutableDictionary`2(String, IReadHandler), IDefaultReadHandler(Object))" Url="html/M_NForza_Transit_TransitFactory_Reader_2.htm" />
@@ -103,101 +117,23 @@
       </HelpTOCNode>
       <HelpTOCNode Title="TransitFactory.Format Enumeration" Url="html/T_NForza_Transit_TransitFactory_Format.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="bf004148-585f-4d5a-b6a3-8b1122955f48" Title="NForza.Transit.Impl" Url="html/N_NForza_Transit_Impl.htm">
-      <HelpTOCNode Id="9f101c54-9c21-494d-b184-327cf08ed741" Title="Keyword Class" Url="html/T_NForza_Transit_Impl_Keyword.htm">
-        <HelpTOCNode Title="Keyword Constructor " Url="html/M_NForza_Transit_Impl_Keyword__ctor.htm" />
-        <HelpTOCNode Id="3d62551e-7fd1-41fd-bd6a-e24732b1529e" Title="Keyword Methods" Url="html/Methods_T_NForza_Transit_Impl_Keyword.htm">
-          <HelpTOCNode Id="b3eb1d93-cc0b-4589-b841-911866b113f5" Title="CompareTo Method " Url="html/Overload_NForza_Transit_Impl_Keyword_CompareTo.htm">
-            <HelpTOCNode Title="CompareTo Method (Object)" Url="html/M_NForza_Transit_Impl_Keyword_CompareTo_1.htm" />
-            <HelpTOCNode Title="CompareTo Method (IKeyword)" Url="html/M_NForza_Transit_Impl_Keyword_CompareTo.htm" />
-          </HelpTOCNode>
-          <HelpTOCNode Id="3064e89c-fa4c-4aa8-b117-59dc368b9b88" Title="Equals Method " Url="html/Overload_NForza_Transit_Impl_Keyword_Equals.htm">
-            <HelpTOCNode Title="Equals Method (Object)" Url="html/M_NForza_Transit_Impl_Keyword_Equals_1.htm" />
-            <HelpTOCNode Title="Equals Method (IKeyword)" Url="html/M_NForza_Transit_Impl_Keyword_Equals.htm" />
-          </HelpTOCNode>
-          <HelpTOCNode Title="GetHashCode Method " Url="html/M_NForza_Transit_Impl_Keyword_GetHashCode.htm" />
-          <HelpTOCNode Title="GetName Method " Url="html/M_NForza_Transit_Impl_Keyword_GetName.htm" />
-          <HelpTOCNode Title="GetNamespace Method " Url="html/M_NForza_Transit_Impl_Keyword_GetNamespace.htm" />
-          <HelpTOCNode Title="GetValue Method " Url="html/M_NForza_Transit_Impl_Keyword_GetValue.htm" />
-          <HelpTOCNode Title="ToString Method " Url="html/M_NForza_Transit_Impl_Keyword_ToString.htm" />
-        </HelpTOCNode>
-      </HelpTOCNode>
-      <HelpTOCNode Id="7df61546-267a-49c5-980f-d4bfe33ef585" Title="Link Class" Url="html/T_NForza_Transit_Impl_Link.htm">
-        <HelpTOCNode Id="77334fc1-4f7e-4753-90a2-3039dc1c77f5" Title="Link Constructor " Url="html/Overload_NForza_Transit_Impl_Link__ctor.htm">
-          <HelpTOCNode Title="Link Constructor (IImmutableDictionary`2(String, Object))" Url="html/M_NForza_Transit_Impl_Link__ctor.htm" />
-          <HelpTOCNode Title="Link Constructor (Uri, String, String, String, String)" Url="html/M_NForza_Transit_Impl_Link__ctor_1.htm" />
-        </HelpTOCNode>
-        <HelpTOCNode Id="33f5cd77-7176-4ad4-9330-8529095aaa49" Title="Link Methods" Url="html/Methods_T_NForza_Transit_Impl_Link.htm">
-          <HelpTOCNode Title="GetHref Method " Url="html/M_NForza_Transit_Impl_Link_GetHref.htm" />
-          <HelpTOCNode Title="GetName Method " Url="html/M_NForza_Transit_Impl_Link_GetName.htm" />
-          <HelpTOCNode Title="GetPrompt Method " Url="html/M_NForza_Transit_Impl_Link_GetPrompt.htm" />
-          <HelpTOCNode Title="GetRel Method " Url="html/M_NForza_Transit_Impl_Link_GetRel.htm" />
-          <HelpTOCNode Title="GetRender Method " Url="html/M_NForza_Transit_Impl_Link_GetRender.htm" />
-          <HelpTOCNode Title="ToDictionary Method " Url="html/M_NForza_Transit_Impl_Link_ToDictionary.htm" />
-        </HelpTOCNode>
-      </HelpTOCNode>
-      <HelpTOCNode Id="55779174-04ae-4c9c-806f-64a75daf63fa" Title="Ratio Class" Url="html/T_NForza_Transit_Impl_Ratio.htm">
-        <HelpTOCNode Title="Ratio Constructor " Url="html/M_NForza_Transit_Impl_Ratio__ctor.htm" />
-        <HelpTOCNode Id="b5162b62-e24d-4c5a-b3e8-52d1b1452284" Title="Ratio Methods" Url="html/Methods_T_NForza_Transit_Impl_Ratio.htm">
-          <HelpTOCNode Id="f9a10927-8ce9-420e-b084-f2d480f5fd0d" Title="CompareTo Method " Url="html/Overload_NForza_Transit_Impl_Ratio_CompareTo.htm">
-            <HelpTOCNode Title="CompareTo Method (Object)" Url="html/M_NForza_Transit_Impl_Ratio_CompareTo_1.htm" />
-            <HelpTOCNode Title="CompareTo Method (IRatio)" Url="html/M_NForza_Transit_Impl_Ratio_CompareTo.htm" />
-          </HelpTOCNode>
-          <HelpTOCNode Id="43d39f49-ed42-48af-9193-9ba7c96f1e57" Title="Equals Method " Url="html/Overload_NForza_Transit_Impl_Ratio_Equals.htm">
-            <HelpTOCNode Title="Equals Method (Object)" Url="html/M_NForza_Transit_Impl_Ratio_Equals_1.htm" />
-            <HelpTOCNode Title="Equals Method (IRatio)" Url="html/M_NForza_Transit_Impl_Ratio_Equals.htm" />
-          </HelpTOCNode>
-          <HelpTOCNode Title="GetDenominator Method " Url="html/M_NForza_Transit_Impl_Ratio_GetDenominator.htm" />
-          <HelpTOCNode Title="GetHashCode Method " Url="html/M_NForza_Transit_Impl_Ratio_GetHashCode.htm" />
-          <HelpTOCNode Title="GetNumerator Method " Url="html/M_NForza_Transit_Impl_Ratio_GetNumerator.htm" />
-          <HelpTOCNode Title="GetValue Method " Url="html/M_NForza_Transit_Impl_Ratio_GetValue.htm" />
-        </HelpTOCNode>
-      </HelpTOCNode>
-      <HelpTOCNode Id="d66488c0-fa2c-4ee5-9b91-4a3d16aabbcc" Title="Symbol Class" Url="html/T_NForza_Transit_Impl_Symbol.htm">
-        <HelpTOCNode Title="Symbol Constructor " Url="html/M_NForza_Transit_Impl_Symbol__ctor.htm" />
-        <HelpTOCNode Id="34ce2cbf-f8f4-4c47-b16d-e053ddc3d3ee" Title="Symbol Methods" Url="html/Methods_T_NForza_Transit_Impl_Symbol.htm">
-          <HelpTOCNode Id="269a16e2-1bad-407d-9f02-1199a2380c6d" Title="CompareTo Method " Url="html/Overload_NForza_Transit_Impl_Symbol_CompareTo.htm">
-            <HelpTOCNode Title="CompareTo Method (Object)" Url="html/M_NForza_Transit_Impl_Symbol_CompareTo_1.htm" />
-            <HelpTOCNode Title="CompareTo Method (ISymbol)" Url="html/M_NForza_Transit_Impl_Symbol_CompareTo.htm" />
-          </HelpTOCNode>
-          <HelpTOCNode Id="4731a5f1-2afe-4e51-9d3f-f84fe2efe659" Title="Equals Method " Url="html/Overload_NForza_Transit_Impl_Symbol_Equals.htm">
-            <HelpTOCNode Title="Equals Method (Object)" Url="html/M_NForza_Transit_Impl_Symbol_Equals_1.htm" />
-            <HelpTOCNode Title="Equals Method (ISymbol)" Url="html/M_NForza_Transit_Impl_Symbol_Equals.htm" />
-          </HelpTOCNode>
-          <HelpTOCNode Title="GetHashCode Method " Url="html/M_NForza_Transit_Impl_Symbol_GetHashCode.htm" />
-          <HelpTOCNode Title="GetName Method " Url="html/M_NForza_Transit_Impl_Symbol_GetName.htm" />
-          <HelpTOCNode Title="GetNamespace Method " Url="html/M_NForza_Transit_Impl_Symbol_GetNamespace.htm" />
-          <HelpTOCNode Title="GetValue Method " Url="html/M_NForza_Transit_Impl_Symbol_GetValue.htm" />
-          <HelpTOCNode Title="ToString Method " Url="html/M_NForza_Transit_Impl_Symbol_ToString.htm" />
-        </HelpTOCNode>
-      </HelpTOCNode>
-      <HelpTOCNode Id="7f5e1b21-9f76-42c9-9d02-c08d16e03416" Title="TaggedValue Class" Url="html/T_NForza_Transit_Impl_TaggedValue.htm">
-        <HelpTOCNode Title="TaggedValue Constructor " Url="html/M_NForza_Transit_Impl_TaggedValue__ctor.htm" />
-        <HelpTOCNode Id="d2dd5540-d34d-471b-bdf8-5551dc974972" Title="TaggedValue Methods" Url="html/Methods_T_NForza_Transit_Impl_TaggedValue.htm">
-          <HelpTOCNode Title="Equals Method " Url="html/M_NForza_Transit_Impl_TaggedValue_Equals.htm" />
-          <HelpTOCNode Title="GetHashCode Method " Url="html/M_NForza_Transit_Impl_TaggedValue_GetHashCode.htm" />
-          <HelpTOCNode Title="GetRepresentation Method " Url="html/M_NForza_Transit_Impl_TaggedValue_GetRepresentation.htm" />
-          <HelpTOCNode Title="GetTag Method " Url="html/M_NForza_Transit_Impl_TaggedValue_GetTag.htm" />
-        </HelpTOCNode>
-      </HelpTOCNode>
-    </HelpTOCNode>
-    <HelpTOCNode Id="766fc343-71ba-4000-a59b-1beecb103d2c" Title="NForza.Transit.Numerics" Url="html/N_NForza_Transit_Numerics.htm">
-      <HelpTOCNode Id="8314306d-0725-48a7-91c7-71b702ebc877" Title="BigRational Structure" Url="html/T_NForza_Transit_Numerics_BigRational.htm">
-        <HelpTOCNode Id="2c92b13c-9713-44f5-9357-a74d7ff1e1d4" Title="BigRational Constructor " Url="html/Overload_NForza_Transit_Numerics_BigRational__ctor.htm">
+    <HelpTOCNode Id="e35b6706-d59f-45bc-8545-9bbd6cbbd6dc" Title="NForza.Transit.Numerics" Url="html/N_NForza_Transit_Numerics.htm">
+      <HelpTOCNode Id="89a71cb4-dcb8-44e6-8953-5e1f038dd9a6" Title="BigRational Structure" Url="html/T_NForza_Transit_Numerics_BigRational.htm">
+        <HelpTOCNode Id="7b2fad18-1743-49b7-9f03-2b71eea051ae" Title="BigRational Constructor " Url="html/Overload_NForza_Transit_Numerics_BigRational__ctor.htm">
           <HelpTOCNode Title="BigRational Constructor (Decimal)" Url="html/M_NForza_Transit_Numerics_BigRational__ctor.htm" />
           <HelpTOCNode Title="BigRational Constructor (Double)" Url="html/M_NForza_Transit_Numerics_BigRational__ctor_1.htm" />
           <HelpTOCNode Title="BigRational Constructor (BigInteger)" Url="html/M_NForza_Transit_Numerics_BigRational__ctor_2.htm" />
           <HelpTOCNode Title="BigRational Constructor (BigInteger, BigInteger)" Url="html/M_NForza_Transit_Numerics_BigRational__ctor_3.htm" />
           <HelpTOCNode Title="BigRational Constructor (BigInteger, BigInteger, BigInteger)" Url="html/M_NForza_Transit_Numerics_BigRational__ctor_4.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="1709d528-2193-43cd-b94d-865b4edc45d8" Title="BigRational Methods" Url="html/Methods_T_NForza_Transit_Numerics_BigRational.htm">
+        <HelpTOCNode Id="7d8357d5-2171-42de-9c0d-a7119edcf719" Title="BigRational Methods" Url="html/Methods_T_NForza_Transit_Numerics_BigRational.htm">
           <HelpTOCNode Title="Abs Method " Url="html/M_NForza_Transit_Numerics_BigRational_Abs.htm" />
           <HelpTOCNode Title="Add Method " Url="html/M_NForza_Transit_Numerics_BigRational_Add.htm" />
           <HelpTOCNode Title="Compare Method " Url="html/M_NForza_Transit_Numerics_BigRational_Compare.htm" />
           <HelpTOCNode Title="CompareTo Method " Url="html/M_NForza_Transit_Numerics_BigRational_CompareTo.htm" />
           <HelpTOCNode Title="Divide Method " Url="html/M_NForza_Transit_Numerics_BigRational_Divide.htm" />
           <HelpTOCNode Title="DivRem Method " Url="html/M_NForza_Transit_Numerics_BigRational_DivRem.htm" />
-          <HelpTOCNode Id="b4065064-3dba-499e-a4a5-c295f50f4280" Title="Equals Method " Url="html/Overload_NForza_Transit_Numerics_BigRational_Equals.htm">
+          <HelpTOCNode Id="7f6a2a2e-0fe2-4076-ab50-7c36a563c11d" Title="Equals Method " Url="html/Overload_NForza_Transit_Numerics_BigRational_Equals.htm">
             <HelpTOCNode Title="Equals Method (Object)" Url="html/M_NForza_Transit_Numerics_BigRational_Equals_1.htm" />
             <HelpTOCNode Title="Equals Method (BigRational)" Url="html/M_NForza_Transit_Numerics_BigRational_Equals.htm" />
           </HelpTOCNode>
@@ -214,12 +150,12 @@
           <HelpTOCNode Title="ToString Method " Url="html/M_NForza_Transit_Numerics_BigRational_ToString.htm" />
           <HelpTOCNode Title="TryParse Method " Url="html/M_NForza_Transit_Numerics_BigRational_TryParse.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="4c6af749-346d-48f5-97b6-3407bd265927" Title="BigRational Operators and Type Conversions" Url="html/Operators_T_NForza_Transit_Numerics_BigRational.htm">
+        <HelpTOCNode Id="97d649e8-a806-4be7-811c-1361bc19d206" Title="BigRational Operators and Type Conversions" Url="html/Operators_T_NForza_Transit_Numerics_BigRational.htm">
           <HelpTOCNode Title="Addition Operator " Url="html/M_NForza_Transit_Numerics_BigRational_op_Addition.htm" />
           <HelpTOCNode Title="Decrement Operator " Url="html/M_NForza_Transit_Numerics_BigRational_op_Decrement.htm" />
           <HelpTOCNode Title="Division Operator " Url="html/M_NForza_Transit_Numerics_BigRational_op_Division.htm" />
           <HelpTOCNode Title="Equality Operator " Url="html/M_NForza_Transit_Numerics_BigRational_op_Equality.htm" />
-          <HelpTOCNode Id="7ae9d74d-7a5a-4c15-9b3e-4c5855b0279a" Title="Explicit Conversion Operators" Url="html/Overload_NForza_Transit_Numerics_BigRational_op_Explicit.htm">
+          <HelpTOCNode Id="bc923b2b-fc98-4578-bef1-3f49cb81edda" Title="Explicit Conversion Operators" Url="html/Overload_NForza_Transit_Numerics_BigRational_op_Explicit.htm">
             <HelpTOCNode Title="Explicit Conversion (BigRational to SByte)" Url="html/M_NForza_Transit_Numerics_BigRational_op_Explicit.htm" />
             <HelpTOCNode Title="Explicit Conversion (BigRational to UInt16)" Url="html/M_NForza_Transit_Numerics_BigRational_op_Explicit_1.htm" />
             <HelpTOCNode Title="Explicit Conversion (BigRational to UInt32)" Url="html/M_NForza_Transit_Numerics_BigRational_op_Explicit_2.htm" />
@@ -235,7 +171,7 @@
           </HelpTOCNode>
           <HelpTOCNode Title="GreaterThan Operator " Url="html/M_NForza_Transit_Numerics_BigRational_op_GreaterThan.htm" />
           <HelpTOCNode Title="GreaterThanOrEqual Operator " Url="html/M_NForza_Transit_Numerics_BigRational_op_GreaterThanOrEqual.htm" />
-          <HelpTOCNode Id="be0dc59d-e1a0-46d6-8b7b-c1beb0092fa1" Title="Implicit Conversion Operators" Url="html/Overload_NForza_Transit_Numerics_BigRational_op_Implicit.htm">
+          <HelpTOCNode Id="966f8de5-1008-45c2-bf32-7dfb0b5a328f" Title="Implicit Conversion Operators" Url="html/Overload_NForza_Transit_Numerics_BigRational_op_Implicit.htm">
             <HelpTOCNode Title="Implicit Conversion (Byte to BigRational)" Url="html/M_NForza_Transit_Numerics_BigRational_op_Implicit.htm" />
             <HelpTOCNode Title="Implicit Conversion (Decimal to BigRational)" Url="html/M_NForza_Transit_Numerics_BigRational_op_Implicit_1.htm" />
             <HelpTOCNode Title="Implicit Conversion (Double to BigRational)" Url="html/M_NForza_Transit_Numerics_BigRational_op_Implicit_2.htm" />
@@ -259,7 +195,7 @@
           <HelpTOCNode Title="UnaryNegation Operator " Url="html/M_NForza_Transit_Numerics_BigRational_op_UnaryNegation.htm" />
           <HelpTOCNode Title="UnaryPlus Operator " Url="html/M_NForza_Transit_Numerics_BigRational_op_UnaryPlus.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="73d46bd6-b42c-42df-8940-53924b7b4e92" Title="BigRational Properties" Url="html/Properties_T_NForza_Transit_Numerics_BigRational.htm">
+        <HelpTOCNode Id="2d44f5fe-b0c8-4b78-8a00-079f88123d75" Title="BigRational Properties" Url="html/Properties_T_NForza_Transit_Numerics_BigRational.htm">
           <HelpTOCNode Title="Denominator Property " Url="html/P_NForza_Transit_Numerics_BigRational_Denominator.htm" />
           <HelpTOCNode Title="MinusOne Property " Url="html/P_NForza_Transit_Numerics_BigRational_MinusOne.htm" />
           <HelpTOCNode Title="Numerator Property " Url="html/P_NForza_Transit_Numerics_BigRational_Numerator.htm" />
@@ -269,9 +205,9 @@
         </HelpTOCNode>
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="f87c7ac5-76d0-4757-b041-7033185f2e5c" Title="NForza.Transit.Spi" Url="html/N_NForza_Transit_Spi.htm">
-      <HelpTOCNode Id="1855a853-2ca7-435c-a1c1-11b3c2ea6aea" Title="IReaderSpi Interface" Url="html/T_NForza_Transit_Spi_IReaderSpi.htm">
-        <HelpTOCNode Id="caa0a9c3-7763-442b-b4dd-a6a2573c3145" Title="IReaderSpi Methods" Url="html/Methods_T_NForza_Transit_Spi_IReaderSpi.htm">
+    <HelpTOCNode Id="bf5232b4-823f-4ecf-ad1a-7ddb7810364b" Title="NForza.Transit.Spi" Url="html/N_NForza_Transit_Spi.htm">
+      <HelpTOCNode Id="a37d9865-f782-42c1-b6be-38c3b14a4722" Title="IReaderSpi Interface" Url="html/T_NForza_Transit_Spi_IReaderSpi.htm">
+        <HelpTOCNode Id="c4c6687f-dc42-4c3d-8df6-829bdc56f32c" Title="IReaderSpi Methods" Url="html/Methods_T_NForza_Transit_Spi_IReaderSpi.htm">
           <HelpTOCNode Title="SetBuilders Method " Url="html/M_NForza_Transit_Spi_IReaderSpi_SetBuilders.htm" />
         </HelpTOCNode>
       </HelpTOCNode>

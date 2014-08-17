@@ -71,12 +71,7 @@
   <HelpKINode Title="BigRational.Zero property" Url="html/P_NForza_Transit_Numerics_BigRational_Zero.htm" />
   <HelpKINode Title="Byte to BigRational conversion" Url="html/M_NForza_Transit_Numerics_BigRational_op_Implicit.htm" />
   <HelpKINode Title="Compare method" Url="html/M_NForza_Transit_Numerics_BigRational_Compare.htm" />
-  <HelpKINode Title="CompareTo method">
-    <HelpKINode Title="BigRational.CompareTo Method " Url="html/M_NForza_Transit_Numerics_BigRational_CompareTo.htm" />
-    <HelpKINode Title="Keyword.CompareTo Method " Url="html/Overload_NForza_Transit_Impl_Keyword_CompareTo.htm" />
-    <HelpKINode Title="Ratio.CompareTo Method " Url="html/Overload_NForza_Transit_Impl_Ratio_CompareTo.htm" />
-    <HelpKINode Title="Symbol.CompareTo Method " Url="html/Overload_NForza_Transit_Impl_Symbol_CompareTo.htm" />
-  </HelpKINode>
+  <HelpKINode Title="CompareTo method" Url="html/M_NForza_Transit_Numerics_BigRational_CompareTo.htm" />
   <HelpKINode Title="Complete method">
     <HelpKINode Title="IDictionaryReader.Complete Method " Url="html/M_NForza_Transit_IDictionaryReader_Complete.htm" />
     <HelpKINode Title="IListReader.Complete Method " Url="html/M_NForza_Transit_IListReader_Complete.htm" />
@@ -84,87 +79,29 @@
   <HelpKINode Title="Decimal to BigRational conversion" Url="html/M_NForza_Transit_Numerics_BigRational_op_Implicit_1.htm" />
   <HelpKINode Title="Decrement operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_Decrement.htm" />
   <HelpKINode Title="DefaultDefaultReadHandler method" Url="html/M_NForza_Transit_TransitFactory_DefaultDefaultReadHandler.htm" />
-  <HelpKINode Title="Denominator property" Url="html/P_NForza_Transit_Numerics_BigRational_Denominator.htm" />
+  <HelpKINode Title="DefaultReadHandlers method" Url="html/M_NForza_Transit_TransitFactory_DefaultReadHandlers.htm" />
+  <HelpKINode Title="Denominator property">
+    <HelpKINode Title="BigRational.Denominator Property " Url="html/P_NForza_Transit_Numerics_BigRational_Denominator.htm" />
+    <HelpKINode Title="IRatio.Denominator Property " Url="html/P_NForza_Transit_IRatio_Denominator.htm" />
+  </HelpKINode>
   <HelpKINode Title="DictionaryReader method" Url="html/M_NForza_Transit_IDictionaryReadHandler_DictionaryReader.htm" />
   <HelpKINode Title="Divide method" Url="html/M_NForza_Transit_Numerics_BigRational_Divide.htm" />
   <HelpKINode Title="Division operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_Division.htm" />
   <HelpKINode Title="DivRem method" Url="html/M_NForza_Transit_Numerics_BigRational_DivRem.htm" />
   <HelpKINode Title="Double to BigRational conversion" Url="html/M_NForza_Transit_Numerics_BigRational_op_Implicit_2.htm" />
   <HelpKINode Title="Equality operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_Equality.htm" />
-  <HelpKINode Title="Equals method">
-    <HelpKINode Title="BigRational.Equals Method " Url="html/Overload_NForza_Transit_Numerics_BigRational_Equals.htm" />
-    <HelpKINode Title="Keyword.Equals Method " Url="html/Overload_NForza_Transit_Impl_Keyword_Equals.htm" />
-    <HelpKINode Title="Ratio.Equals Method " Url="html/Overload_NForza_Transit_Impl_Ratio_Equals.htm" />
-    <HelpKINode Title="Symbol.Equals Method " Url="html/Overload_NForza_Transit_Impl_Symbol_Equals.htm" />
-    <HelpKINode Title="TaggedValue.Equals Method " Url="html/M_NForza_Transit_Impl_TaggedValue_Equals.htm" />
-  </HelpKINode>
+  <HelpKINode Title="Equals method" Url="html/Overload_NForza_Transit_Numerics_BigRational_Equals.htm" />
   <HelpKINode Title="FromRepresentation method">
     <HelpKINode Title="IDefaultReadHandler(T).FromRepresentation Method " Url="html/M_NForza_Transit_IDefaultReadHandler_1_FromRepresentation.htm" />
     <HelpKINode Title="IReadHandler.FromRepresentation Method " Url="html/M_NForza_Transit_IReadHandler_FromRepresentation.htm" />
   </HelpKINode>
-  <HelpKINode Title="GetDenominator method">
-    <HelpKINode Title="IRatio.GetDenominator Method " Url="html/M_NForza_Transit_IRatio_GetDenominator.htm" />
-    <HelpKINode Title="Ratio.GetDenominator Method " Url="html/M_NForza_Transit_Impl_Ratio_GetDenominator.htm" />
-  </HelpKINode>
   <HelpKINode Title="GetFractionPart method" Url="html/M_NForza_Transit_Numerics_BigRational_GetFractionPart.htm" />
-  <HelpKINode Title="GetHashCode method">
-    <HelpKINode Title="BigRational.GetHashCode Method " Url="html/M_NForza_Transit_Numerics_BigRational_GetHashCode.htm" />
-    <HelpKINode Title="Keyword.GetHashCode Method " Url="html/M_NForza_Transit_Impl_Keyword_GetHashCode.htm" />
-    <HelpKINode Title="Ratio.GetHashCode Method " Url="html/M_NForza_Transit_Impl_Ratio_GetHashCode.htm" />
-    <HelpKINode Title="Symbol.GetHashCode Method " Url="html/M_NForza_Transit_Impl_Symbol_GetHashCode.htm" />
-    <HelpKINode Title="TaggedValue.GetHashCode Method " Url="html/M_NForza_Transit_Impl_TaggedValue_GetHashCode.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetHref method">
-    <HelpKINode Title="ILink.GetHref Method " Url="html/M_NForza_Transit_ILink_GetHref.htm" />
-    <HelpKINode Title="Link.GetHref Method " Url="html/M_NForza_Transit_Impl_Link_GetHref.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetName method">
-    <HelpKINode Title="ILink.GetName Method " Url="html/M_NForza_Transit_ILink_GetName.htm" />
-    <HelpKINode Title="INamed.GetName Method " Url="html/M_NForza_Transit_INamed_GetName.htm" />
-    <HelpKINode Title="Keyword.GetName Method " Url="html/M_NForza_Transit_Impl_Keyword_GetName.htm" />
-    <HelpKINode Title="Link.GetName Method " Url="html/M_NForza_Transit_Impl_Link_GetName.htm" />
-    <HelpKINode Title="Symbol.GetName Method " Url="html/M_NForza_Transit_Impl_Symbol_GetName.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetNamespace method">
-    <HelpKINode Title="INamed.GetNamespace Method " Url="html/M_NForza_Transit_INamed_GetNamespace.htm" />
-    <HelpKINode Title="Keyword.GetNamespace Method " Url="html/M_NForza_Transit_Impl_Keyword_GetNamespace.htm" />
-    <HelpKINode Title="Symbol.GetNamespace Method " Url="html/M_NForza_Transit_Impl_Symbol_GetNamespace.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetNumerator method">
-    <HelpKINode Title="IRatio.GetNumerator Method " Url="html/M_NForza_Transit_IRatio_GetNumerator.htm" />
-    <HelpKINode Title="Ratio.GetNumerator Method " Url="html/M_NForza_Transit_Impl_Ratio_GetNumerator.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetPrompt method">
-    <HelpKINode Title="ILink.GetPrompt Method " Url="html/M_NForza_Transit_ILink_GetPrompt.htm" />
-    <HelpKINode Title="Link.GetPrompt Method " Url="html/M_NForza_Transit_Impl_Link_GetPrompt.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetRel method">
-    <HelpKINode Title="ILink.GetRel Method " Url="html/M_NForza_Transit_ILink_GetRel.htm" />
-    <HelpKINode Title="Link.GetRel Method " Url="html/M_NForza_Transit_Impl_Link_GetRel.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetRender method">
-    <HelpKINode Title="ILink.GetRender Method " Url="html/M_NForza_Transit_ILink_GetRender.htm" />
-    <HelpKINode Title="Link.GetRender Method " Url="html/M_NForza_Transit_Impl_Link_GetRender.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetRepresentation method">
-    <HelpKINode Title="ITaggedValue.GetRepresentation Method " Url="html/M_NForza_Transit_ITaggedValue_GetRepresentation.htm" />
-    <HelpKINode Title="TaggedValue.GetRepresentation Method " Url="html/M_NForza_Transit_Impl_TaggedValue_GetRepresentation.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetTag method">
-    <HelpKINode Title="ITaggedValue.GetTag Method " Url="html/M_NForza_Transit_ITaggedValue_GetTag.htm" />
-    <HelpKINode Title="TaggedValue.GetTag Method " Url="html/M_NForza_Transit_Impl_TaggedValue_GetTag.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetValue method">
-    <HelpKINode Title="IKeyword.GetValue Method " Url="html/M_NForza_Transit_IKeyword_GetValue.htm" />
-    <HelpKINode Title="IRatio.GetValue Method " Url="html/M_NForza_Transit_IRatio_GetValue.htm" />
-    <HelpKINode Title="ISymbol.GetValue Method " Url="html/M_NForza_Transit_ISymbol_GetValue.htm" />
-    <HelpKINode Title="Keyword.GetValue Method " Url="html/M_NForza_Transit_Impl_Keyword_GetValue.htm" />
-    <HelpKINode Title="Ratio.GetValue Method " Url="html/M_NForza_Transit_Impl_Ratio_GetValue.htm" />
-    <HelpKINode Title="Symbol.GetValue Method " Url="html/M_NForza_Transit_Impl_Symbol_GetValue.htm" />
-  </HelpKINode>
+  <HelpKINode Title="GetHashCode method" Url="html/M_NForza_Transit_Numerics_BigRational_GetHashCode.htm" />
+  <HelpKINode Title="GetValue method" Url="html/M_NForza_Transit_IRatio_GetValue.htm" />
   <HelpKINode Title="GetWholePart method" Url="html/M_NForza_Transit_Numerics_BigRational_GetWholePart.htm" />
   <HelpKINode Title="GreaterThan operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_GreaterThan.htm" />
   <HelpKINode Title="GreaterThanOrEqual operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_GreaterThanOrEqual.htm" />
+  <HelpKINode Title="Href property" Url="html/P_NForza_Transit_ILink_Href.htm" />
   <HelpKINode Title="IDefaultReadHandler(Of T) interface">
     <HelpKINode Title="IDefaultReadHandler(T) Interface" Url="html/T_NForza_Transit_IDefaultReadHandler_1.htm" />
     <HelpKINode Title="about IDefaultReadHandler(Of T) interface" Url="html/T_NForza_Transit_IDefaultReadHandler_1.htm" />
@@ -195,18 +132,19 @@
     <HelpKINode Title="IKeyword Interface" Url="html/T_NForza_Transit_IKeyword.htm" />
     <HelpKINode Title="about IKeyword interface" Url="html/T_NForza_Transit_IKeyword.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_IKeyword.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_NForza_Transit_IKeyword.htm" />
   </HelpKINode>
-  <HelpKINode Title="IKeyword.GetValue method" Url="html/M_NForza_Transit_IKeyword_GetValue.htm" />
+  <HelpKINode Title="IKeyword.Value property" Url="html/P_NForza_Transit_IKeyword_Value.htm" />
   <HelpKINode Title="ILink interface">
     <HelpKINode Title="ILink Interface" Url="html/T_NForza_Transit_ILink.htm" />
     <HelpKINode Title="about ILink interface" Url="html/T_NForza_Transit_ILink.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_ILink.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_NForza_Transit_ILink.htm" />
   </HelpKINode>
-  <HelpKINode Title="ILink.GetHref method" Url="html/M_NForza_Transit_ILink_GetHref.htm" />
-  <HelpKINode Title="ILink.GetName method" Url="html/M_NForza_Transit_ILink_GetName.htm" />
-  <HelpKINode Title="ILink.GetPrompt method" Url="html/M_NForza_Transit_ILink_GetPrompt.htm" />
-  <HelpKINode Title="ILink.GetRel method" Url="html/M_NForza_Transit_ILink_GetRel.htm" />
-  <HelpKINode Title="ILink.GetRender method" Url="html/M_NForza_Transit_ILink_GetRender.htm" />
+  <HelpKINode Title="ILink.Href property" Url="html/P_NForza_Transit_ILink_Href.htm" />
+  <HelpKINode Title="ILink.Name property" Url="html/P_NForza_Transit_ILink_Name.htm" />
+  <HelpKINode Title="ILink.Prompt property" Url="html/P_NForza_Transit_ILink_Prompt.htm" />
+  <HelpKINode Title="ILink.Rel property" Url="html/P_NForza_Transit_ILink_Rel.htm" />
+  <HelpKINode Title="ILink.Render property" Url="html/P_NForza_Transit_ILink_Render.htm" />
   <HelpKINode Title="IListReader interface">
     <HelpKINode Title="IListReader Interface" Url="html/T_NForza_Transit_IListReader.htm" />
     <HelpKINode Title="about IListReader interface" Url="html/T_NForza_Transit_IListReader.htm" />
@@ -224,10 +162,10 @@
   <HelpKINode Title="INamed interface">
     <HelpKINode Title="INamed Interface" Url="html/T_NForza_Transit_INamed.htm" />
     <HelpKINode Title="about INamed interface" Url="html/T_NForza_Transit_INamed.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_INamed.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_NForza_Transit_INamed.htm" />
   </HelpKINode>
-  <HelpKINode Title="INamed.GetName method" Url="html/M_NForza_Transit_INamed_GetName.htm" />
-  <HelpKINode Title="INamed.GetNamespace method" Url="html/M_NForza_Transit_INamed_GetNamespace.htm" />
+  <HelpKINode Title="INamed.Name property" Url="html/P_NForza_Transit_INamed_Name.htm" />
+  <HelpKINode Title="INamed.Namespace property" Url="html/P_NForza_Transit_INamed_Namespace.htm" />
   <HelpKINode Title="Increment operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_Increment.htm" />
   <HelpKINode Title="Inequality operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_Inequality.htm" />
   <HelpKINode Title="Init method">
@@ -242,10 +180,11 @@
     <HelpKINode Title="IRatio Interface" Url="html/T_NForza_Transit_IRatio.htm" />
     <HelpKINode Title="about IRatio interface" Url="html/T_NForza_Transit_IRatio.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_IRatio.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_NForza_Transit_IRatio.htm" />
   </HelpKINode>
-  <HelpKINode Title="IRatio.GetDenominator method" Url="html/M_NForza_Transit_IRatio_GetDenominator.htm" />
-  <HelpKINode Title="IRatio.GetNumerator method" Url="html/M_NForza_Transit_IRatio_GetNumerator.htm" />
+  <HelpKINode Title="IRatio.Denominator property" Url="html/P_NForza_Transit_IRatio_Denominator.htm" />
   <HelpKINode Title="IRatio.GetValue method" Url="html/M_NForza_Transit_IRatio_GetValue.htm" />
+  <HelpKINode Title="IRatio.Numerator property" Url="html/P_NForza_Transit_IRatio_Numerator.htm" />
   <HelpKINode Title="IReader interface">
     <HelpKINode Title="IReader Interface" Url="html/T_NForza_Transit_IReader.htm" />
     <HelpKINode Title="about IReader interface" Url="html/T_NForza_Transit_IReader.htm" />
@@ -269,54 +208,34 @@
     <HelpKINode Title="ISymbol Interface" Url="html/T_NForza_Transit_ISymbol.htm" />
     <HelpKINode Title="about ISymbol interface" Url="html/T_NForza_Transit_ISymbol.htm" />
     <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_ISymbol.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_NForza_Transit_ISymbol.htm" />
   </HelpKINode>
-  <HelpKINode Title="ISymbol.GetValue method" Url="html/M_NForza_Transit_ISymbol_GetValue.htm" />
+  <HelpKINode Title="ISymbol.Value property" Url="html/P_NForza_Transit_ISymbol_Value.htm" />
   <HelpKINode Title="ITaggedValue interface">
     <HelpKINode Title="ITaggedValue Interface" Url="html/T_NForza_Transit_ITaggedValue.htm" />
     <HelpKINode Title="about ITaggedValue interface" Url="html/T_NForza_Transit_ITaggedValue.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_ITaggedValue.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_NForza_Transit_ITaggedValue.htm" />
   </HelpKINode>
-  <HelpKINode Title="ITaggedValue.GetRepresentation method" Url="html/M_NForza_Transit_ITaggedValue_GetRepresentation.htm" />
-  <HelpKINode Title="ITaggedValue.GetTag method" Url="html/M_NForza_Transit_ITaggedValue_GetTag.htm" />
+  <HelpKINode Title="ITaggedValue.Representation property" Url="html/P_NForza_Transit_ITaggedValue_Representation.htm" />
+  <HelpKINode Title="ITaggedValue.Tag property" Url="html/P_NForza_Transit_ITaggedValue_Tag.htm" />
   <HelpKINode Title="Json enumeration member" Url="html/T_NForza_Transit_TransitFactory_Format.htm" />
   <HelpKINode Title="JsonVerbose enumeration member" Url="html/T_NForza_Transit_TransitFactory_Format.htm" />
-  <HelpKINode Title="Keyword class">
-    <HelpKINode Title="Keyword Class" Url="html/T_NForza_Transit_Impl_Keyword.htm" />
-    <HelpKINode Title="about Keyword class" Url="html/T_NForza_Transit_Impl_Keyword.htm" />
-    <HelpKINode Title="constructor" Url="html/M_NForza_Transit_Impl_Keyword__ctor.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_Impl_Keyword.htm" />
-  </HelpKINode>
   <HelpKINode Title="Keyword method" Url="html/M_NForza_Transit_TransitFactory_Keyword.htm" />
-  <HelpKINode Title="Keyword.CompareTo method" Url="html/Overload_NForza_Transit_Impl_Keyword_CompareTo.htm" />
-  <HelpKINode Title="Keyword.Equals method" Url="html/Overload_NForza_Transit_Impl_Keyword_Equals.htm" />
-  <HelpKINode Title="Keyword.GetHashCode method" Url="html/M_NForza_Transit_Impl_Keyword_GetHashCode.htm" />
-  <HelpKINode Title="Keyword.GetName method" Url="html/M_NForza_Transit_Impl_Keyword_GetName.htm" />
-  <HelpKINode Title="Keyword.GetNamespace method" Url="html/M_NForza_Transit_Impl_Keyword_GetNamespace.htm" />
-  <HelpKINode Title="Keyword.GetValue method" Url="html/M_NForza_Transit_Impl_Keyword_GetValue.htm" />
-  <HelpKINode Title="Keyword.Keyword constructor" Url="html/M_NForza_Transit_Impl_Keyword__ctor.htm" />
-  <HelpKINode Title="Keyword.ToString method" Url="html/M_NForza_Transit_Impl_Keyword_ToString.htm" />
   <HelpKINode Title="LeastCommonDenominator method" Url="html/M_NForza_Transit_Numerics_BigRational_LeastCommonDenominator.htm" />
   <HelpKINode Title="LessThan operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_LessThan.htm" />
   <HelpKINode Title="LessThanOrEqual operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_LessThanOrEqual.htm" />
-  <HelpKINode Title="Link class">
-    <HelpKINode Title="Link Class" Url="html/T_NForza_Transit_Impl_Link.htm" />
-    <HelpKINode Title="about Link class" Url="html/T_NForza_Transit_Impl_Link.htm" />
-    <HelpKINode Title="constructor" Url="html/Overload_NForza_Transit_Impl_Link__ctor.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_Impl_Link.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Link.GetHref method" Url="html/M_NForza_Transit_Impl_Link_GetHref.htm" />
-  <HelpKINode Title="Link.GetName method" Url="html/M_NForza_Transit_Impl_Link_GetName.htm" />
-  <HelpKINode Title="Link.GetPrompt method" Url="html/M_NForza_Transit_Impl_Link_GetPrompt.htm" />
-  <HelpKINode Title="Link.GetRel method" Url="html/M_NForza_Transit_Impl_Link_GetRel.htm" />
-  <HelpKINode Title="Link.GetRender method" Url="html/M_NForza_Transit_Impl_Link_GetRender.htm" />
-  <HelpKINode Title="Link.Link constructor" Url="html/Overload_NForza_Transit_Impl_Link__ctor.htm" />
-  <HelpKINode Title="Link.ToDictionary method" Url="html/M_NForza_Transit_Impl_Link_ToDictionary.htm" />
+  <HelpKINode Title="Link method" Url="html/Overload_NForza_Transit_TransitFactory_Link.htm" />
   <HelpKINode Title="ListReader method" Url="html/M_NForza_Transit_IListReadHandler_ListReader.htm" />
   <HelpKINode Title="MinusOne property" Url="html/P_NForza_Transit_Numerics_BigRational_MinusOne.htm" />
   <HelpKINode Title="Modulus operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_Modulus.htm" />
   <HelpKINode Title="MsgPack enumeration member" Url="html/T_NForza_Transit_TransitFactory_Format.htm" />
   <HelpKINode Title="Multiply method" Url="html/M_NForza_Transit_Numerics_BigRational_Multiply.htm" />
   <HelpKINode Title="Multiply operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_Multiply.htm" />
+  <HelpKINode Title="Name property">
+    <HelpKINode Title="ILink.Name Property " Url="html/P_NForza_Transit_ILink_Name.htm" />
+    <HelpKINode Title="INamed.Name Property " Url="html/P_NForza_Transit_INamed_Name.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Namespace property" Url="html/P_NForza_Transit_INamed_Namespace.htm" />
   <HelpKINode Title="Negate method" Url="html/M_NForza_Transit_Numerics_BigRational_Negate.htm" />
   <HelpKINode Title="NForza.Transit namespace" Url="html/N_NForza_Transit.htm" />
   <HelpKINode Title="NForza.Transit.IDefaultReadHandler(Of T) interface" Url="html/T_NForza_Transit_IDefaultReadHandler_1.htm" />
@@ -327,12 +246,6 @@
   <HelpKINode Title="NForza.Transit.ILink interface" Url="html/T_NForza_Transit_ILink.htm" />
   <HelpKINode Title="NForza.Transit.IListReader interface" Url="html/T_NForza_Transit_IListReader.htm" />
   <HelpKINode Title="NForza.Transit.IListReadHandler interface" Url="html/T_NForza_Transit_IListReadHandler.htm" />
-  <HelpKINode Title="NForza.Transit.Impl namespace" Url="html/N_NForza_Transit_Impl.htm" />
-  <HelpKINode Title="NForza.Transit.Impl.Keyword class" Url="html/T_NForza_Transit_Impl_Keyword.htm" />
-  <HelpKINode Title="NForza.Transit.Impl.Link class" Url="html/T_NForza_Transit_Impl_Link.htm" />
-  <HelpKINode Title="NForza.Transit.Impl.Ratio class" Url="html/T_NForza_Transit_Impl_Ratio.htm" />
-  <HelpKINode Title="NForza.Transit.Impl.Symbol class" Url="html/T_NForza_Transit_Impl_Symbol.htm" />
-  <HelpKINode Title="NForza.Transit.Impl.TaggedValue class" Url="html/T_NForza_Transit_Impl_TaggedValue.htm" />
   <HelpKINode Title="NForza.Transit.INamed interface" Url="html/T_NForza_Transit_INamed.htm" />
   <HelpKINode Title="NForza.Transit.IRatio interface" Url="html/T_NForza_Transit_IRatio.htm" />
   <HelpKINode Title="NForza.Transit.IReader interface" Url="html/T_NForza_Transit_IReader.htm" />
@@ -346,69 +259,37 @@
   <HelpKINode Title="NForza.Transit.TransitException class" Url="html/T_NForza_Transit_TransitException.htm" />
   <HelpKINode Title="NForza.Transit.TransitFactory class" Url="html/T_NForza_Transit_TransitFactory.htm" />
   <HelpKINode Title="NForza.Transit.TransitFactory.Format enumeration" Url="html/T_NForza_Transit_TransitFactory_Format.htm" />
-  <HelpKINode Title="Numerator property" Url="html/P_NForza_Transit_Numerics_BigRational_Numerator.htm" />
+  <HelpKINode Title="Numerator property">
+    <HelpKINode Title="BigRational.Numerator Property " Url="html/P_NForza_Transit_Numerics_BigRational_Numerator.htm" />
+    <HelpKINode Title="IRatio.Numerator Property " Url="html/P_NForza_Transit_IRatio_Numerator.htm" />
+  </HelpKINode>
   <HelpKINode Title="One property" Url="html/P_NForza_Transit_Numerics_BigRational_One.htm" />
   <HelpKINode Title="Pow method" Url="html/M_NForza_Transit_Numerics_BigRational_Pow.htm" />
-  <HelpKINode Title="Ratio class">
-    <HelpKINode Title="Ratio Class" Url="html/T_NForza_Transit_Impl_Ratio.htm" />
-    <HelpKINode Title="about Ratio class" Url="html/T_NForza_Transit_Impl_Ratio.htm" />
-    <HelpKINode Title="constructor" Url="html/M_NForza_Transit_Impl_Ratio__ctor.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_Impl_Ratio.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Ratio.CompareTo method" Url="html/Overload_NForza_Transit_Impl_Ratio_CompareTo.htm" />
-  <HelpKINode Title="Ratio.Equals method" Url="html/Overload_NForza_Transit_Impl_Ratio_Equals.htm" />
-  <HelpKINode Title="Ratio.GetDenominator method" Url="html/M_NForza_Transit_Impl_Ratio_GetDenominator.htm" />
-  <HelpKINode Title="Ratio.GetHashCode method" Url="html/M_NForza_Transit_Impl_Ratio_GetHashCode.htm" />
-  <HelpKINode Title="Ratio.GetNumerator method" Url="html/M_NForza_Transit_Impl_Ratio_GetNumerator.htm" />
-  <HelpKINode Title="Ratio.GetValue method" Url="html/M_NForza_Transit_Impl_Ratio_GetValue.htm" />
-  <HelpKINode Title="Ratio.Ratio constructor" Url="html/M_NForza_Transit_Impl_Ratio__ctor.htm" />
+  <HelpKINode Title="Prompt property" Url="html/P_NForza_Transit_ILink_Prompt.htm" />
+  <HelpKINode Title="Ratio method" Url="html/M_NForza_Transit_TransitFactory_Ratio.htm" />
   <HelpKINode Title="Read(Of T) method" Url="html/M_NForza_Transit_IReader_Read__1.htm" />
   <HelpKINode Title="Read&lt;T&gt; method" Url="html/M_NForza_Transit_IReader_Read__1.htm" />
   <HelpKINode Title="Reader method" Url="html/Overload_NForza_Transit_TransitFactory_Reader.htm" />
+  <HelpKINode Title="Rel property" Url="html/P_NForza_Transit_ILink_Rel.htm" />
   <HelpKINode Title="Remainder method" Url="html/M_NForza_Transit_Numerics_BigRational_Remainder.htm" />
+  <HelpKINode Title="Render property" Url="html/P_NForza_Transit_ILink_Render.htm" />
+  <HelpKINode Title="Representation property" Url="html/P_NForza_Transit_ITaggedValue_Representation.htm" />
   <HelpKINode Title="SByte to BigRational conversion" Url="html/M_NForza_Transit_Numerics_BigRational_op_Implicit_7.htm" />
   <HelpKINode Title="SetBuilders method" Url="html/M_NForza_Transit_Spi_IReaderSpi_SetBuilders.htm" />
   <HelpKINode Title="Sign property" Url="html/P_NForza_Transit_Numerics_BigRational_Sign.htm" />
   <HelpKINode Title="Single to BigRational conversion" Url="html/M_NForza_Transit_Numerics_BigRational_op_Implicit_8.htm" />
   <HelpKINode Title="Subtract method" Url="html/M_NForza_Transit_Numerics_BigRational_Subtract.htm" />
   <HelpKINode Title="Subtraction operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_Subtraction.htm" />
-  <HelpKINode Title="Symbol class">
-    <HelpKINode Title="Symbol Class" Url="html/T_NForza_Transit_Impl_Symbol.htm" />
-    <HelpKINode Title="about Symbol class" Url="html/T_NForza_Transit_Impl_Symbol.htm" />
-    <HelpKINode Title="constructor" Url="html/M_NForza_Transit_Impl_Symbol__ctor.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_Impl_Symbol.htm" />
-  </HelpKINode>
   <HelpKINode Title="Symbol method" Url="html/M_NForza_Transit_TransitFactory_Symbol.htm" />
-  <HelpKINode Title="Symbol.CompareTo method" Url="html/Overload_NForza_Transit_Impl_Symbol_CompareTo.htm" />
-  <HelpKINode Title="Symbol.Equals method" Url="html/Overload_NForza_Transit_Impl_Symbol_Equals.htm" />
-  <HelpKINode Title="Symbol.GetHashCode method" Url="html/M_NForza_Transit_Impl_Symbol_GetHashCode.htm" />
-  <HelpKINode Title="Symbol.GetName method" Url="html/M_NForza_Transit_Impl_Symbol_GetName.htm" />
-  <HelpKINode Title="Symbol.GetNamespace method" Url="html/M_NForza_Transit_Impl_Symbol_GetNamespace.htm" />
-  <HelpKINode Title="Symbol.GetValue method" Url="html/M_NForza_Transit_Impl_Symbol_GetValue.htm" />
-  <HelpKINode Title="Symbol.Symbol constructor" Url="html/M_NForza_Transit_Impl_Symbol__ctor.htm" />
-  <HelpKINode Title="Symbol.ToString method" Url="html/M_NForza_Transit_Impl_Symbol_ToString.htm" />
-  <HelpKINode Title="TaggedValue class">
-    <HelpKINode Title="TaggedValue Class" Url="html/T_NForza_Transit_Impl_TaggedValue.htm" />
-    <HelpKINode Title="about TaggedValue class" Url="html/T_NForza_Transit_Impl_TaggedValue.htm" />
-    <HelpKINode Title="constructor" Url="html/M_NForza_Transit_Impl_TaggedValue__ctor.htm" />
-    <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_Impl_TaggedValue.htm" />
-  </HelpKINode>
+  <HelpKINode Title="Tag property" Url="html/P_NForza_Transit_ITaggedValue_Tag.htm" />
   <HelpKINode Title="TaggedValue method" Url="html/M_NForza_Transit_TransitFactory_TaggedValue.htm" />
-  <HelpKINode Title="TaggedValue.Equals method" Url="html/M_NForza_Transit_Impl_TaggedValue_Equals.htm" />
-  <HelpKINode Title="TaggedValue.GetHashCode method" Url="html/M_NForza_Transit_Impl_TaggedValue_GetHashCode.htm" />
-  <HelpKINode Title="TaggedValue.GetRepresentation method" Url="html/M_NForza_Transit_Impl_TaggedValue_GetRepresentation.htm" />
-  <HelpKINode Title="TaggedValue.GetTag method" Url="html/M_NForza_Transit_Impl_TaggedValue_GetTag.htm" />
-  <HelpKINode Title="TaggedValue.TaggedValue constructor" Url="html/M_NForza_Transit_Impl_TaggedValue__ctor.htm" />
-  <HelpKINode Title="ToDictionary method" Url="html/M_NForza_Transit_Impl_Link_ToDictionary.htm" />
-  <HelpKINode Title="ToString method">
-    <HelpKINode Title="BigRational.ToString Method " Url="html/M_NForza_Transit_Numerics_BigRational_ToString.htm" />
-    <HelpKINode Title="Keyword.ToString Method " Url="html/M_NForza_Transit_Impl_Keyword_ToString.htm" />
-    <HelpKINode Title="Symbol.ToString Method " Url="html/M_NForza_Transit_Impl_Symbol_ToString.htm" />
-  </HelpKINode>
+  <HelpKINode Title="ToString method" Url="html/M_NForza_Transit_Numerics_BigRational_ToString.htm" />
   <HelpKINode Title="TransitException class">
     <HelpKINode Title="TransitException Class" Url="html/T_NForza_Transit_TransitException.htm" />
     <HelpKINode Title="about TransitException class" Url="html/T_NForza_Transit_TransitException.htm" />
     <HelpKINode Title="constructor" Url="html/Overload_NForza_Transit_TransitException__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_TransitException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_NForza_Transit_TransitException.htm" />
   </HelpKINode>
   <HelpKINode Title="TransitException.TransitException constructor" Url="html/Overload_NForza_Transit_TransitException__ctor.htm" />
   <HelpKINode Title="TransitFactory class">
@@ -418,8 +299,11 @@
     <HelpKINode Title="methods" Url="html/Methods_T_NForza_Transit_TransitFactory.htm" />
   </HelpKINode>
   <HelpKINode Title="TransitFactory.DefaultDefaultReadHandler method" Url="html/M_NForza_Transit_TransitFactory_DefaultDefaultReadHandler.htm" />
+  <HelpKINode Title="TransitFactory.DefaultReadHandlers method" Url="html/M_NForza_Transit_TransitFactory_DefaultReadHandlers.htm" />
   <HelpKINode Title="TransitFactory.Format enumeration" Url="html/T_NForza_Transit_TransitFactory_Format.htm" />
   <HelpKINode Title="TransitFactory.Keyword method" Url="html/M_NForza_Transit_TransitFactory_Keyword.htm" />
+  <HelpKINode Title="TransitFactory.Link method" Url="html/Overload_NForza_Transit_TransitFactory_Link.htm" />
+  <HelpKINode Title="TransitFactory.Ratio method" Url="html/M_NForza_Transit_TransitFactory_Ratio.htm" />
   <HelpKINode Title="TransitFactory.Reader method" Url="html/Overload_NForza_Transit_TransitFactory_Reader.htm" />
   <HelpKINode Title="TransitFactory.Symbol method" Url="html/M_NForza_Transit_TransitFactory_Symbol.htm" />
   <HelpKINode Title="TransitFactory.TaggedValue method" Url="html/M_NForza_Transit_TransitFactory_TaggedValue.htm" />
@@ -430,5 +314,9 @@
   <HelpKINode Title="UInt64 to BigRational conversion" Url="html/M_NForza_Transit_Numerics_BigRational_op_Implicit_11.htm" />
   <HelpKINode Title="UnaryNegation operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_UnaryNegation.htm" />
   <HelpKINode Title="UnaryPlus operator" Url="html/M_NForza_Transit_Numerics_BigRational_op_UnaryPlus.htm" />
+  <HelpKINode Title="Value property">
+    <HelpKINode Title="IKeyword.Value Property " Url="html/P_NForza_Transit_IKeyword_Value.htm" />
+    <HelpKINode Title="ISymbol.Value Property " Url="html/P_NForza_Transit_ISymbol_Value.htm" />
+  </HelpKINode>
   <HelpKINode Title="Zero property" Url="html/P_NForza_Transit_Numerics_BigRational_Zero.htm" />
 </HelpKI>
