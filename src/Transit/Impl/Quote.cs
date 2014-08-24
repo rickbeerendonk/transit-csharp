@@ -1,8 +1,8 @@
-// Copyright © 2014 NForza. All Rights Reserved.
+ï»¿// Copyright Â© 2014 NForza. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
-// Copyright © 2014 Cognitect. All Rights Reserved.
+// Copyright Â© 2014 Cognitect. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,18 +16,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace NForza.Transit
+namespace NForza.Transit.Impl
 {
     /// <summary>
-    /// Interface for reading values in transit format.
+    /// Represents a Quote.
     /// </summary>
-    public interface IReader
+    internal class Quote
     {
         /// <summary>
-        /// Reads a single value from an input source.
+        /// Initializes a new instance of the <see cref="Quote"/> class.
         /// </summary>
-        /// <typeparam name="T">The type of the value.</typeparam>
-        /// <returns>The value.</returns>
-        T Read<T>();
+        /// <param name="obj">The object.</param>
+        public Quote(object obj) {
+            Obj = obj;
+        }
+
+        /// <summary>
+        /// Gets the object.
+        /// </summary>
+        /// <value>
+        /// The object.
+        /// </value>
+        public object Obj { get; private set; }
     }
 }

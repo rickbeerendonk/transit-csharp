@@ -19,6 +19,7 @@
 using NForza.Transit.Impl;
 using NForza.Transit.Spi;
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Numerics;
@@ -50,6 +51,43 @@ namespace NForza.Transit
             /// JSON Verbose
             /// </summary>
             JsonVerbose 
+        }
+
+        /// <summary>
+        /// Creates a writer instance.
+        /// </summary>
+        /// <param name="type">The format to write in.</param>
+        /// <param name="output">The output stream to write to.</param>
+        /// <returns>A writer.</returns>
+        public static IWriter<T> Writer<T>(Format type, Stream output)
+        {
+            return Writer<T>(type, output, null);
+        }
+        
+        /// <summary>
+        /// Creates a writer instance.
+        /// </summary>
+        /// <param name="type">The format to write in.</param>
+        /// <param name="output">The output stream to write to.</param>
+        /// <param name="customHandlers">Additional IWriteHandlers to use in addition 
+        /// to or in place of the default IWriteHandlers.</param>
+        /// <returns>A writer</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        /// <exception cref="System.ArgumentException">Unknown Writer type:  + type.ToString()</exception>
+        public static IWriter<T> Writer<T>(Format type, Stream output, IEnumerable<IWriteHandler> customHandlers)
+        {
+            switch (type) {
+                case Format.MsgPack:
+                    // TODO:
+                    throw new NotImplementedException();
+                    //return WriterFactory.GetMsgpackInstance(output, customHandlers);
+                case Format.Json:
+                    return WriterFactory.GetJsonInstance<T>(output, customHandlers, false);
+                case Format.JsonVerbose:
+                    return WriterFactory.GetJsonInstance<T>(output, customHandlers, true);
+                default:
+                    throw new ArgumentException("Unknown Writer type: " + type.ToString());
+            }
         }
 
         /// <summary>
@@ -285,16 +323,14 @@ namespace NForza.Transit
             return ReaderFactory.DefaultHandlers(); 
         }
 
-        /*
         /// <summary>
         /// Returns a directory of classes to write handlers that is used by default.
         /// </summary>
         /// <returns>Class to write handler directory.</returns>
-        public static IImmutableDictionary<string, IWriteHandler> DefaultWriteHandlers() 
+        public static IImmutableList<IWriteHandler> DefaultWriteHandlers() 
         {
-            return WriterFactory.defaultHandlers(); 
+            return WriterFactory.DefaultHandlers(); 
         }
-        */ 
 
         /// <summary>
         /// Returns the <see cref="IDefaultReadHandler{T}"/> of <see cref="ITaggedValue"/> that is used by default.

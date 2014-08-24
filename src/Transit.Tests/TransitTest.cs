@@ -33,6 +33,8 @@ namespace NForza.Transit.Tests
     [TestClass]
     public class TransitTest
     {
+        #region Reading
+
         public IReader Reader(string s)
         {
             Stream input = new MemoryStream(Encoding.Default.GetBytes(s));
@@ -393,7 +395,104 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("link or image", v.Render);
         }
 
+        #endregion
 
+        #region Writing
+
+        public string Write(object obj, TransitFactory.Format format) 
+        {
+            using (Stream output = new MemoryStream())
+            {
+                IWriter<object> w = TransitFactory.Writer<object>(format, output);
+                w.Write(obj);
+
+                output.Position = 0;
+                var sr = new StreamReader(output);
+                return sr.ReadToEnd();
+            }
+        }
+
+        public string WriteJsonVerbose(object obj)
+        {
+            return Write(obj, TransitFactory.Format.JsonVerbose);
+        }
+
+        public string WriteJson(object obj)
+        {
+            return Write(obj, TransitFactory.Format.Json);
+        }
+
+        /*
+        // TODO
+
+        public bool IsEqual(object o1, object o2)
+        {
+            if (o1 is bool)
+                return o1 == o2;
+            else
+                return false;
+        }
+
+        public void testRoundTrip()
+        {
+            object inObject = true;
+
+            OutputStream outStream = new ByteArrayOutputStream();
+            IWriter w = TransitFactory.Writer(TransitFactory.Format.JsonVerbose, outStream);
+            w.Write(inObject);
+            string s = outStream.toString();
+            InputStream inStream = new ByteArrayInputStream(s.getBytes());
+            IReader reader = TransitFactory.Reader(TransitFactory.Format.Json, inStream);
+            object outObject = reader.Read();
+
+            Assert.IsTrue(IsEqual(inObject, outObject));
+        }
+        */
+
+        public string Scalar(string value)
+        {
+            return "[\"~#'\"," + value + "]";
+        }
+
+        public string ScalarVerbose(string value)
+        {
+            return "{\"~#'\":" + value + "}";
+        }
+
+        [TestMethod]
+        public void TestWriteNull()
+        {
+            Assert.AreEqual(ScalarVerbose("null"), WriteJsonVerbose(null));
+            Assert.AreEqual(Scalar("null"), WriteJson(null));
+        }
+
+        [TestMethod]
+        public void TestWriteKeyword()
+        {
+            Assert.AreEqual(ScalarVerbose("\"~:foo\""), WriteJsonVerbose(TransitFactory.Keyword("foo")));
+            Assert.AreEqual(Scalar("\"~:foo\""), WriteJson(TransitFactory.Keyword("foo")));
+
+            IList l = new IKeyword[] 
+            {
+                TransitFactory.Keyword("foo"),
+                TransitFactory.Keyword("foo"),
+                TransitFactory.Keyword("foo")
+            };
+            Assert.AreEqual("[\"~:foo\",\"~:foo\",\"~:foo\"]", WriteJsonVerbose(l));
+            Assert.AreEqual("[\"~:foo\",\"^0\",\"^0\"]", WriteJson(l));
+        }
+
+        [TestMethod]
+        public void TestWriteString()
+        {
+            Assert.AreEqual(ScalarVerbose("\"foo\""), WriteJsonVerbose("foo"));
+            Assert.AreEqual(Scalar("\"foo\""), WriteJson("foo"));
+            Assert.AreEqual(ScalarVerbose("\"~~foo\""), WriteJsonVerbose("~foo"));
+            Assert.AreEqual(Scalar("\"~~foo\""), WriteJson("~foo"));
+        }
+
+
+        #endregion
 
 
 

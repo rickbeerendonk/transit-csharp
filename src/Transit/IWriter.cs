@@ -1,8 +1,8 @@
-// Copyright © 2014 NForza. All Rights Reserved.
+ï»¿// Copyright Â© 2014 NForza. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
-// Copyright © 2014 Cognitect. All Rights Reserved.
+// Copyright Â© 2014 Cognitect. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,15 +19,15 @@
 namespace NForza.Transit
 {
     /// <summary>
-    /// Interface for reading values in transit format.
+    /// Interface for writing values in transit format.
     /// </summary>
-    public interface IReader
+    /// <typeparam name="T">The type of the values.</typeparam>
+    public interface IWriter<T>
     {
         /// <summary>
-        /// Reads a single value from an input source.
+        /// Writes a single value to an output target.
         /// </summary>
-        /// <typeparam name="T">The type of the value.</typeparam>
-        /// <returns>The value.</returns>
-        T Read<T>();
+        /// <param name="value">The value to write.</param>
+        void Write(T value);
     }
 }

@@ -1,8 +1,8 @@
-// Copyright © 2014 NForza. All Rights Reserved.
+ï»¿// Copyright Â© 2014 NForza. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
-// Copyright © 2014 Cognitect. All Rights Reserved.
+// Copyright Â© 2014 Cognitect. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,18 +16,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace NForza.Transit
+namespace NForza.Transit.Impl.WriteHandlers
 {
-    /// <summary>
-    /// Interface for reading values in transit format.
-    /// </summary>
-    public interface IReader
+    internal abstract class AbstractWriteHandler : IWriteHandler
     {
-        /// <summary>
-        /// Reads a single value from an input source.
-        /// </summary>
-        /// <typeparam name="T">The type of the value.</typeparam>
-        /// <returns>The value.</returns>
-        T Read<T>();
+        public abstract bool CanWrite(object obj);
+
+        public abstract string Tag(object obj);
+
+        public abstract object Representation(object obj);
+
+        public virtual string StringRepresentation(object ignored)
+        {
+            return null;
+        }
+
+        public virtual IWriteHandler GetVerboseHandler()
+        {
+            return null;
+        }
     }
 }

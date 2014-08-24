@@ -59,7 +59,7 @@ namespace NForza.Transit.Impl
             builder.Add("cmap", new CDictionaryReadHandler());
             builder.Add("link", new LinkReadHandler());
 
-            return builder.ToImmutableDictionary<string, IReadHandler>();
+            return builder.ToImmutable();
         }
 
         /// <summary>

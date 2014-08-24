@@ -38,10 +38,28 @@
     <DocumentationFile>..\..\target\Transit\bin\Release\Transit.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Impl\IAbstractEmitterAware.cs" />
+    <Compile Include="Impl\IEmitter.cs" />
+    <Compile Include="Impl\JsonVerboseEmitter.cs" />
+    <Compile Include="Impl\JsonEmitter.cs" />
+    <Compile Include="Impl\AbstractEmitter.cs" />
+    <Compile Include="Impl\Quote.cs" />
     <Compile Include="Impl\ReadHandlers\BinaryReadHandler.cs" />
     <Compile Include="Impl\ReadHandlers\IdentityReadHandler.cs" />
     <Compile Include="Impl\ReadHandlers\CDictionaryReadHandler.cs" />
     <Compile Include="Impl\ReadHandlers\SetReadHandler.cs" />
+    <Compile Include="Impl\Util.cs" />
+    <Compile Include="Impl\WriteHandlers\AbstractWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\StringWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\KeywordWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\ListWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\NullWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\QuoteWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\TaggedValueWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\ToStringWriteHandler.cs" />
+    <Compile Include="Impl\WriterFactory.cs" />
+    <Compile Include="IWriteHandler.cs" />
+    <Compile Include="IWriter.cs" />
     <Compile Include="Java\Convert.cs" />
     <Compile Include="Extensions\JsonTextReaderExtensions.cs" />
     <Compile Include="IDictionaryReadHandler.cs" />
