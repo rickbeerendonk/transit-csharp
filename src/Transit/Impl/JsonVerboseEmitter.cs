@@ -18,7 +18,9 @@
 
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace NForza.Transit.Impl
 {
@@ -46,6 +48,20 @@ namespace NForza.Transit.Impl
             EmitDictionaryStart(1L);
             EmitString(Constants.EscTag, t, "", true, cache);
             Marshal(obj, false, cache);
+            EmitDictionaryEnd();
+        }
+
+        public override void EmitDictionary(IEnumerable<KeyValuePair<object, object>> i, bool ignored, WriteCache cache)
+        {
+
+            long sz = i.Count();
+
+            EmitDictionaryStart(sz);
+            foreach (KeyValuePair<object, object> kvp in i)
+            {
+                Marshal(kvp.Key, true, cache);
+                Marshal(kvp.Value, false, cache);
+            }
             EmitDictionaryEnd();
         }
 

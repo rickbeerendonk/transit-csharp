@@ -18,7 +18,10 @@
 
 using Newtonsoft.Json;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Numerics;
 
 namespace NForza.Transit.Impl
@@ -93,8 +96,6 @@ namespace NForza.Transit.Impl
                 EmitDouble((double)d, asDictionaryKey, cache);
             else if (d is float)
                 EmitDouble((float)d, asDictionaryKey, cache);
-            else
-                throw new TransitException("Unknown double type: " + d.GetType());
         }
 
         public override void EmitDouble(float d, bool asDictionaryKey, WriteCache cache)
@@ -148,23 +149,23 @@ namespace NForza.Transit.Impl
             return true;
         }
 
+        public override void EmitDictionary(IEnumerable<KeyValuePair<object, object>> i, bool ignored, WriteCache cache) {
+
+            long sz = i.Count();
+
+            EmitListStart(sz);
+            EmitString(null, null, Constants.DirectoryAsList, false, cache);
+
+            foreach (KeyValuePair<object, object> e in i) {
+                Marshal(e.Key, false, cache);
+                Marshal(e.Value, false, cache);
+            }
+            EmitListEnd();
+        }
+
         /*
         // TODO: More code
-
-        @Override
-        protected void emitMap(Iterable<Map.Entry<Object, Object>> i, boolean ignored, WriteCache cache) throws Exception {
-
-            long sz = Util.mapSize(i);
-
-            emitArrayStart(sz);
-            emitString(null, null, Constants.MAP_AS_ARRAY, false, cache);
-
-            for (Map.Entry e : i) {
-                marshal(e.getKey(), true, cache);
-                marshal(e.getValue(), false, cache);
-            }
-            emitArrayEnd();
-        }
         */
+
     }
 }
