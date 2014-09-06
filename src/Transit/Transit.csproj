@@ -50,11 +50,13 @@
     <Compile Include="Impl\ReadHandlers\SetReadHandler.cs" />
     <Compile Include="Impl\Util.cs" />
     <Compile Include="Impl\WriteHandlers\AbstractWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\DictionaryWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\StringWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\KeywordWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\ListWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\NullWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\QuoteWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\BooleanWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\TaggedValueWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\ToStringWriteHandler.cs" />
     <Compile Include="Impl\WriterFactory.cs" />

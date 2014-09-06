@@ -42,6 +42,7 @@ namespace NForza.Transit.Impl
             builder.Add(new NullWriteHandler());
 
             // First single types
+            builder.Add(new BooleanWriteHandler());
             builder.Add(new KeywordWriteHandler());
             builder.Add(new QuoteWriteHandler());
             builder.Add(new StringWriteHandler());
@@ -49,6 +50,7 @@ namespace NForza.Transit.Impl
 
             // Second enumerables (since string is both single and enumerable of char)
             builder.Add(new ListWriteHandler());
+            builder.Add(new DictionaryWriteHandler());
 
             return builder.ToImmutable();
         }

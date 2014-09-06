@@ -491,6 +491,24 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(Scalar("\"~~foo\""), WriteJson("~foo"));
         }
 
+        [TestMethod]
+        public void TestWriteBoolean()
+        {
+            Assert.AreEqual(ScalarVerbose("true"), WriteJsonVerbose(true));
+            Assert.AreEqual(Scalar("true"), WriteJson(true));
+            Assert.AreEqual(Scalar("false"), WriteJson(false));
+
+            var d = new Dictionary<bool, int>();
+            d[true] = 1;
+            Assert.AreEqual("{\"~?t\":1}", WriteJsonVerbose(d));
+            Assert.AreEqual("[\"^ \",\"~?t\",1]", WriteJson(d));
+            var d2 = new Dictionary<bool, int>();
+            d[false] = 1;
+            Assert.AreEqual("{\"~?f\":1}", WriteJsonVerbose(d2));
+            Assert.AreEqual("[\"^ \",\"~?f\",1]", WriteJson(d2));
+        }
+
+
 
         #endregion
 
