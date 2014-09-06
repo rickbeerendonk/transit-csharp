@@ -189,8 +189,31 @@ namespace NForza.Transit.Impl
             }
         }
 
-        // TODO
-        //abstract protected void EmitDictionary(IEnumerable<KeyValuePair<object, object>> i, bool ignored, WriteCache cache);
+        protected void EmitDictionary(object obj, bool ignored, WriteCache cache)
+        {
+            IEnumerable<KeyValuePair<object, object>> entries = null;
+
+            IDictionary dictionary = (obj as IDictionary);
+            if (null != dictionary)
+            {
+                IDictionary<object, object> d = new Dictionary<object, object>();
+
+                foreach (DictionaryEntry e in dictionary)
+                {
+                    d.Add((object)e.Key, (object)e.Value);
+                }
+
+                entries = d.AsEnumerable();
+            }
+            else
+            {
+                entries = (IEnumerable<KeyValuePair<object, object>>)obj;
+            }
+
+            EmitDictionary(entries, ignored, cache);
+        }
+
+        public abstract void EmitDictionary(IEnumerable<KeyValuePair<object, object>> i, bool ignored, WriteCache cache);
 
         protected void EmitList(object o, bool ignored, WriteCache cache)
         {
@@ -294,8 +317,7 @@ namespace NForza.Transit.Impl
                         else
                             if (t.Equals("map"))
                             {
-                                // TODO
-                                //EmitDictionary((Iterable<Map.Entry<Object, Object>>)h.Representation(o), asDictionaryKey, cache);
+                                EmitDictionary(h.Representation(o), asDictionaryKey, cache);
                             }
                             else
                             {

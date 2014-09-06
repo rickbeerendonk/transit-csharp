@@ -491,10 +491,69 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(Scalar("\"~~foo\""), WriteJson("~foo"));
         }
 
+        [TestMethod]
+        public void TestWriteInteger()
+        {
+            short s = System.Convert.ToInt16("42");
+
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(42));
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(42L));
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(System.Convert.ToByte("42")));
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(System.Convert.ToInt16("42")));
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(System.Convert.ToInt32("42")));
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(System.Convert.ToInt64("42")));
+            Assert.AreEqual(ScalarVerbose("\"~n42\""), WriteJsonVerbose(BigInteger.Parse("42")));
+            Assert.AreEqual(ScalarVerbose("\"~n4256768765123454321897654321234567\""), WriteJsonVerbose(BigInteger.Parse("4256768765123454321897654321234567")));
+        }
+
+        [TestMethod]
+        public void TestWriteFloatDouble()
+        {
+            Assert.AreEqual(ScalarVerbose("42.5"), WriteJsonVerbose(42.5));
+            Assert.AreEqual(ScalarVerbose("42.5"), WriteJsonVerbose(System.Convert.ToSingle("42.5")));
+            Assert.AreEqual(ScalarVerbose("42.5"), WriteJsonVerbose(System.Convert.ToDouble("42.5")));
+        }
+
+        [TestMethod]
+        public void TestSpecialNumbers()
+        {
+            Assert.AreEqual(Scalar("\"~zNaN\""), WriteJson(Double.NaN));
+            Assert.AreEqual(Scalar("\"~zINF\""), WriteJson(Double.PositiveInfinity));
+            Assert.AreEqual(Scalar("\"~z-INF\""), WriteJson(Double.NegativeInfinity));
+
+            Assert.AreEqual(Scalar("\"~zNaN\""), WriteJson(Single.NaN));
+            Assert.AreEqual(Scalar("\"~zINF\""), WriteJson(Single.PositiveInfinity));
+            Assert.AreEqual(Scalar("\"~z-INF\""), WriteJson(Single.NegativeInfinity));
+
+            Assert.AreEqual(ScalarVerbose("\"~zNaN\""), WriteJsonVerbose(Double.NaN));
+            Assert.AreEqual(ScalarVerbose("\"~zINF\""), WriteJsonVerbose(Double.PositiveInfinity));
+            Assert.AreEqual(ScalarVerbose("\"~z-INF\""), WriteJsonVerbose(Double.NegativeInfinity));
+
+            Assert.AreEqual(ScalarVerbose("\"~zNaN\""), WriteJsonVerbose(Single.NaN));
+            Assert.AreEqual(ScalarVerbose("\"~zINF\""), WriteJsonVerbose(Single.PositiveInfinity));
+            Assert.AreEqual(ScalarVerbose("\"~z-INF\""), WriteJsonVerbose(Single.NegativeInfinity));
+        }
+
+        [TestMethod]
+        public void TestWriteDictionary()
+        {
+            IDictionary<string, int> d = new Dictionary<string, int>();
+            d.Add("foo", 1);
+            d.Add("bar", 2);
+
+            Assert.AreEqual("{\"foo\":1,\"bar\":2}", WriteJsonVerbose(d));
+            Assert.AreEqual("[\"^ \",\"foo\",1,\"bar\",2]", WriteJson(d));
+        }
+
+        [TestMethod]
+        public void TestWriteEmptyDictionary()
+        {
+            IDictionary<object, object> d = new Dictionary<object, object>();
+            Assert.AreEqual("{}", WriteJsonVerbose(d));
+            Assert.AreEqual("[\"^ \"]", WriteJson(d));
+        }
 
         #endregion
-
-
 
     }
 }

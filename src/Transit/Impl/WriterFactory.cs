@@ -42,12 +42,21 @@ namespace NForza.Transit.Impl
             builder.Add(new NullWriteHandler());
 
             // First single types
+            var integerHandler = new IntegerWriteHandler();
+
             builder.Add(new KeywordWriteHandler());
             builder.Add(new QuoteWriteHandler());
             builder.Add(new StringWriteHandler());
+            builder.Add(integerHandler);
+            builder.Add(new BigIntegerWriteHandler());
+            builder.Add(new SingleWriteHandler());
+            builder.Add(new DoubleWriteHandler());
             builder.Add(new TaggedValueWriteHandler());
+            builder.Add(new BigIntegerWriteHandler());
+
 
             // Second enumerables (since string is both single and enumerable of char)
+            builder.Add(new DictionaryWriteHandler());
             builder.Add(new ListWriteHandler());
 
             return builder.ToImmutable();
