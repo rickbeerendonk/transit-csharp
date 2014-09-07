@@ -573,6 +573,11 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(ScalarVerbose("\"~b" + encoded + "\""), WriteJsonVerbose(bytes));
         }
 
+        [TestMethod]
+        public void testWriteSymbol()
+        {
+            Assert.AreEqual(ScalarVerbose("\"~$foo\""), WriteJsonVerbose(TransitFactory.Symbol("foo")));
+        }
 
 
 
