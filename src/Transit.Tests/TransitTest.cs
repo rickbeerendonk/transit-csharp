@@ -735,6 +735,22 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("{\"~#point\":[1,2]}", WriteJsonVerbose(TransitFactory.TaggedValue("point", l2)));
         }
 
+        [TestMethod]
+        public void TestUseIKeywordAsDictionaryKey()
+        {
+            IDictionary<object, object> d = new Dictionary<object, object>();
+            d.Add(TransitFactory.Keyword("foo"), 1);
+            d.Add("foo", 2);
+            d.Add(TransitFactory.Keyword("bar"), 3);
+            d.Add("bar", 4);
+
+            Assert.AreEqual(1, d[TransitFactory.Keyword("foo")]);
+            Assert.AreEqual(2, d["foo"]);
+            Assert.AreEqual(3, d[TransitFactory.Keyword("bar")]);
+            Assert.AreEqual(4, d["bar"]);
+        }
+
+
 
 
         #endregion
