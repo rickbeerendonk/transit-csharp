@@ -750,6 +750,21 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(4, d["bar"]);
         }
 
+        [TestMethod]
+        public void TestUseISymbolAsDictionaryKey()
+        {
+            IDictionary<object, object> d = new Dictionary<object, object>();
+            d.Add(TransitFactory.Symbol("foo"), 1);
+            d.Add("foo", 2);
+            d.Add(TransitFactory.Symbol("bar"), 3);
+            d.Add("bar", 4);
+
+            Assert.AreEqual(1, d[TransitFactory.Symbol("foo")]);
+            Assert.AreEqual(2, d["foo"]);
+            Assert.AreEqual(3, d[TransitFactory.Symbol("bar")]);
+            Assert.AreEqual(4, d["bar"]);
+        }
+
 
 
 
