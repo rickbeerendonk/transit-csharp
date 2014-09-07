@@ -691,7 +691,35 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("[\"~#cmap\",[[\"~#ratio\",[\"~n1\",\"~n2\"]],1]]", WriteJson(d));
         }
 
+        [TestMethod]
+        public void TestWriteCache()
+        {
+            WriteCache wc = new WriteCache(true);
+            Assert.AreEqual("~:foo", wc.CacheWrite("~:foo", false));
+            Assert.AreEqual("^" + (char)WriteCache.BaseCharIdx, wc.CacheWrite("~:foo", false));
+            Assert.AreEqual("~$bar", wc.CacheWrite("~$bar", false));
+            Assert.AreEqual("^" + (char)(WriteCache.BaseCharIdx + 1), wc.CacheWrite("~$bar", false));
+            Assert.AreEqual("~#baz", wc.CacheWrite("~#baz", false));
+            Assert.AreEqual("^" + (char)(WriteCache.BaseCharIdx + 2), wc.CacheWrite("~#baz", false));
+            Assert.AreEqual("foobar", wc.CacheWrite("foobar", false));
+            Assert.AreEqual("foobar", wc.CacheWrite("foobar", false));
+            Assert.AreEqual("foobar", wc.CacheWrite("foobar", true));
+            Assert.AreEqual("^" + (char)(WriteCache.BaseCharIdx + 3), wc.CacheWrite("foobar", true));
+            Assert.AreEqual("abc", wc.CacheWrite("abc", false));
+            Assert.AreEqual("abc", wc.CacheWrite("abc", false));
+            Assert.AreEqual("abc", wc.CacheWrite("abc", true));
+            Assert.AreEqual("abc", wc.CacheWrite("abc", true));
+        }
 
+        [TestMethod]
+        public void TestWriteCacheDisabled()
+        {
+            WriteCache wc = new WriteCache(false);
+            Assert.AreEqual("foobar", wc.CacheWrite("foobar", false));
+            Assert.AreEqual("foobar", wc.CacheWrite("foobar", false));
+            Assert.AreEqual("foobar", wc.CacheWrite("foobar", true));
+            Assert.AreEqual("foobar", wc.CacheWrite("foobar", true));
+        }
 
 
 
