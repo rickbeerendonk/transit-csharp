@@ -616,9 +616,7 @@ namespace NForza.Transit.Tests
         [TestMethod]
         public void TestWriteDictionary()
         {
-            IDictionary<string, int> d = new Dictionary<string, int>();
-            d.Add("foo", 1);
-            d.Add("bar", 2);
+            IDictionary<string, int> d = new Dictionary<string, int> { {"foo", 1}, {"bar", 2} };
 
             Assert.AreEqual("{\"foo\":1,\"bar\":2}", WriteJsonVerbose(d));
             Assert.AreEqual("[\"^ \",\"foo\",1,\"bar\",2]", WriteJson(d));
@@ -630,6 +628,23 @@ namespace NForza.Transit.Tests
             IDictionary<object, object> d = new Dictionary<object, object>();
             Assert.AreEqual("{}", WriteJsonVerbose(d));
             Assert.AreEqual("[\"^ \"]", WriteJson(d));
+        }
+
+        [TestMethod]
+        public void TestWriteSet()
+        {
+            ISet<string> s = new HashSet<string> { "foo", "bar" };
+
+            Assert.AreEqual("{\"~#set\":[\"foo\",\"bar\"]}", WriteJsonVerbose(s));
+            Assert.AreEqual("[\"~#set\",[\"foo\",\"bar\"]]", WriteJson(s));
+        }
+
+        [TestMethod]
+        public void TestWriteEmptySet()
+        {
+            ISet<object> s = new HashSet<object>();
+            Assert.AreEqual("{\"~#set\":[]}", WriteJsonVerbose(s));
+            Assert.AreEqual("[\"~#set\",[]]", WriteJson(s));
         }
 
 
