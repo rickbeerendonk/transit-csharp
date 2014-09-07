@@ -613,6 +613,24 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("[\"~c5\",\"~c/\"]", WriteJsonVerbose(chars));
         }
 
+        [TestMethod]
+        public void TestWriteDictionary()
+        {
+            IDictionary<string, int> d = new Dictionary<string, int>();
+            d.Add("foo", 1);
+            d.Add("bar", 2);
+
+            Assert.AreEqual("{\"foo\":1,\"bar\":2}", WriteJsonVerbose(d));
+            Assert.AreEqual("[\"^ \",\"foo\",1,\"bar\",2]", WriteJson(d));
+        }
+
+        [TestMethod]
+        public void TestWriteEmptyDictionary()
+        {
+            IDictionary<object, object> d = new Dictionary<object, object>();
+            Assert.AreEqual("{}", WriteJsonVerbose(d));
+            Assert.AreEqual("[\"^ \"]", WriteJson(d));
+        }
 
 
 
