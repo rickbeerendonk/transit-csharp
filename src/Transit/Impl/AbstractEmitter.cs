@@ -21,6 +21,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Reflection;
 
 namespace NForza.Transit.Impl
 {
@@ -29,91 +30,96 @@ namespace NForza.Transit.Impl
     /// </summary>
     internal abstract class AbstractEmitter : IEmitter
     {
-        private IImmutableList<IWriteHandler> handlers;
+        private IImmutableDictionary<Type, IWriteHandler> handlers;
 
-        public AbstractEmitter(IImmutableList<IWriteHandler> handlers)
+        public AbstractEmitter(IImmutableDictionary<Type, IWriteHandler> handlers)
         {
             this.handlers = handlers;
         }
 
-        /*
-         
-        // BaseType property not available in Windows Store and Windows Phone 8.1
-        
         private IWriteHandler CheckBaseClasses(Type type)
         {
-            Type baseType = type.BaseType;
+            Type baseType = type.GetTypeInfo().BaseType;
             while (baseType != typeof(object))
             {
-                IWriteHandler handler = handlers[baseType];
-                if (handler != null)
+                IWriteHandler handler;
+                if (handlers.TryGetValue(baseType, out handler))
                 {
                     handlers = handlers.Add(type, handler);
                     return handler;
                 }
 
-                baseType = baseType.BaseType;
+                baseType = baseType.GetTypeInfo().BaseType;
             }
 
             return null;
         }
 
-        private IWriteHandler CheckBaseInterfaces(Type c)
+        private IWriteHandler CheckBaseTypes(Type type, IEnumerable<Type> baseTypes)
         {
-            //IImmutableDictionary<Type, IWriteHandler> possibles = ImmutableDictionary.Create<Type, IWriteHandler>();
+            IDictionary<Type, IWriteHandler> possibles = new Dictionary<Type, IWriteHandler>();
 
-            for (Class base = c; base != Object.class; base = base.getSuperclass()) {
-                for (Class itf : base.getInterfaces()) {
-                    WriteHandler<?, ?> h = handlers.get(itf);
-                    if (h != null) possibles.put(itf, h);
+            foreach (Type item in baseTypes)
+            {
+                IWriteHandler h;
+                if (handlers.TryGetValue(item, out h))
+                {
+                    possibles.Add(item, h);
                 }
             }
-            switch (possibles.size()) {
+
+            switch (possibles.Count)
+            {
                 case 0: return null;
-                case 1: {
-                    IWriteHandler h = possibles.values().iterator().next();
-                    handlers = handlers.Add(c, h);
-                    return h;
-                }
+                case 1:
+                    {
+                        IWriteHandler h = possibles.First().Value;
+                        handlers = handlers.Add(type, h);
+                        return h;
+                    }
                 default:
-                    throw new TransitException("More thane one match for " + c);
+                    throw new TransitException("More thane one match for " + type);
             }
         }
-        */
+
+        private IWriteHandler CheckBaseInterfaces(Type type)
+        {
+            IEnumerable<Type> implementedInterfaces = type.GetTypeInfo().ImplementedInterfaces;
+            return CheckBaseTypes(type, implementedInterfaces);
+        }
+
+        private IWriteHandler CheckBaseGenericInterfaces(Type type)
+        {
+            IEnumerable<Type> genericImplementedInterfaces =
+                type.GetTypeInfo().ImplementedInterfaces
+                .Select(x => x.GetTypeInfo())
+                .Where(x => x.IsGenericType)
+                .Select(x => x.GetGenericTypeDefinition());
+
+            return CheckBaseTypes(type, genericImplementedInterfaces);
+        }
 
         private IWriteHandler GetHandler(object obj)
         {
-            var handler = handlers.FirstOrDefault(h => h.CanWrite(obj));
-            if (handler == default(IWriteHandler))
+            Type type = (obj != null) ? obj.GetType() : typeof(NullType);
+            IWriteHandler handler = null;
+
+            if (!handlers.TryGetValue(type, out handler))
             {
-                throw new TransitException("No write handler found for: " + (obj == null ? "null" : obj.GetType().ToString()));
+                handler = CheckBaseClasses(type);
+
+                if (handler == null)
+                {
+                    handler = CheckBaseInterfaces(type);
+
+                    if (handler == null)
+                    {
+                        handler = CheckBaseGenericInterfaces(type);
+                    }
+                }
             }
 
             return handler;
-
-            /*
-            // TODO Remove if the above solution works correctly for Portable Class Libraries
-            
-            Type type = (obj != null) ? obj.GetType() : null;
-            IWriteHandler handler = null;
-
-            if (handler == null) 
-            {
-                handler = handlers[type];
-            }
-
-            if (handler == null)
-            {
-                handler = CheckBaseClasses(type);
-            }
-
-            if (handler == null)
-            {
-                handler = CheckBaseInterfaces(type);
-            }
-
-            return (IWriteHandler)handler;
-            */
         }
 
         public string GetTag(object obj)
@@ -189,8 +195,20 @@ namespace NForza.Transit.Impl
             }
         }
 
-        // TODO
-        //abstract protected void EmitDictionary(IEnumerable<KeyValuePair<object, object>> i, bool ignored, WriteCache cache);
+        private void EmitDictionary(dynamic keyValuePairEnumerable, bool ignored, WriteCache cache)
+        {
+            var d = new Dictionary<object, object>();
+
+            foreach (var item in keyValuePairEnumerable)
+            {
+                d.Add(item.Key, item.Value);
+            }
+
+            EmitDictionary(d, ignored, cache);
+        }
+
+        abstract protected void EmitDictionary(IEnumerable<KeyValuePair<object, object>> keyValuePairs, 
+            bool ignored, WriteCache cache);
 
         protected void EmitList(object o, bool ignored, WriteCache cache)
         {
@@ -294,8 +312,7 @@ namespace NForza.Transit.Impl
                         else
                             if (t.Equals("map"))
                             {
-                                // TODO
-                                //EmitDictionary((Iterable<Map.Entry<Object, Object>>)h.Representation(o), asDictionaryKey, cache);
+                                EmitDictionary(h.Representation(o), asDictionaryKey, cache);
                             }
                             else
                             {

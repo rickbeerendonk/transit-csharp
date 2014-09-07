@@ -30,12 +30,7 @@ namespace NForza.Transit.Impl.WriteHandlers
             this.abstractEmitter = abstractEmitter;
         }
 
-        public override bool CanWrite(object obj)
-        {
-            return obj is IDictionary<object, object>;
-        }
-
-        private bool StringableKeys(IDictionary<object, object> d)
+        private bool StringableKeys(dynamic d)
         {
             foreach (var key in d.Keys)
 	        {
@@ -56,19 +51,23 @@ namespace NForza.Transit.Impl.WriteHandlers
 
         public override string Tag(object obj)
         {
-            if (StringableKeys((IDictionary<object, object>)obj))
+            if (StringableKeys(obj))
+            {
                 return "map";
+            }
             else
+            {
                 return "cmap";
+            }
         }
 
         public override object Representation(object obj)
         {
-            var o = (IDictionary<object, object>)obj;
+            dynamic o = obj;
 
             if (StringableKeys(o))
             {
-                return o.ToList();
+                return Enumerable.ToList(o);
             }
             else
             {

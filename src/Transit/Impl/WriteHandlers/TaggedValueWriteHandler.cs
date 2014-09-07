@@ -20,11 +20,6 @@ namespace NForza.Transit.Impl.WriteHandlers
 {
     internal class TaggedValueWriteHandler : AbstractWriteHandler
     {
-        public override bool CanWrite(object obj)
-        {
-            return obj is ITaggedValue;
-        }
-
         public override string Tag(object obj)
         {
             return ((ITaggedValue)obj).Tag;

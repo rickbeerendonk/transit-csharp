@@ -74,7 +74,7 @@ namespace NForza.Transit
         /// <returns>A writer</returns>
         /// <exception cref="System.NotImplementedException"></exception>
         /// <exception cref="System.ArgumentException">Unknown Writer type:  + type.ToString()</exception>
-        public static IWriter<T> Writer<T>(Format type, Stream output, IEnumerable<IWriteHandler> customHandlers)
+        public static IWriter<T> Writer<T>(Format type, Stream output, IDictionary<Type, IWriteHandler> customHandlers)
         {
             switch (type) {
                 case Format.MsgPack:
@@ -327,7 +327,7 @@ namespace NForza.Transit
         /// Returns a directory of classes to write handlers that is used by default.
         /// </summary>
         /// <returns>Class to write handler directory.</returns>
-        public static IImmutableList<IWriteHandler> DefaultWriteHandlers() 
+        public static IImmutableDictionary<Type, IWriteHandler> DefaultWriteHandlers() 
         {
             return WriterFactory.DefaultHandlers(); 
         }

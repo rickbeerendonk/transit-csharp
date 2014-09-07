@@ -23,11 +23,6 @@ namespace NForza.Transit.Impl.WriteHandlers
 {
     internal class ListWriteHandler : AbstractWriteHandler
     {
-        public override bool CanWrite(object obj)
-        {
-            return obj is IEnumerable;
-        }
-
         public override string Tag(object obj)
         {
             if ((obj is IList) || (obj is IList<object>))

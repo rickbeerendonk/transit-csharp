@@ -20,8 +20,6 @@ namespace NForza.Transit.Impl.WriteHandlers
 {
     internal abstract class AbstractWriteHandler : IWriteHandler
     {
-        public abstract bool CanWrite(object obj);
-
         public abstract string Tag(object obj);
 
         public abstract object Representation(object obj);

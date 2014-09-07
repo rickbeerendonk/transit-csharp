@@ -502,8 +502,9 @@ namespace NForza.Transit.Tests
             d[true] = 1;
             Assert.AreEqual("{\"~?t\":1}", WriteJsonVerbose(d));
             Assert.AreEqual("[\"^ \",\"~?t\",1]", WriteJson(d));
+
             var d2 = new Dictionary<bool, int>();
-            d[false] = 1;
+            d2[false] = 1;
             Assert.AreEqual("{\"~?f\":1}", WriteJsonVerbose(d2));
             Assert.AreEqual("[\"^ \",\"~?f\",1]", WriteJson(d2));
         }

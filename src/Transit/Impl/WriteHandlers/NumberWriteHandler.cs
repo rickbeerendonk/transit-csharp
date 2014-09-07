@@ -18,16 +18,28 @@
 
 namespace NForza.Transit.Impl.WriteHandlers
 {
-    internal class KeywordWriteHandler : ToStringWriteHandler
+    internal class NumberWriteHandler : AbstractWriteHandler
     {
-        public override bool CanWrite(object obj)
+        private readonly string t;
+
+        public NumberWriteHandler(string t)
         {
-            return obj is IKeyword;
+            this.t = t;
         }
 
-        public override string Tag(object obj)
+        public override string Tag(object ignored)
         {
-            return ":";
+            return t;
+        }
+
+        public override object Representation(object obj)
+        {
+            return obj;
+        }
+
+        public override string StringRepresentation(object obj)
+        {
+            return obj.ToString();
         }
     }
 }

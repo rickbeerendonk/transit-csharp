@@ -18,8 +18,20 @@
 
 namespace NForza.Transit.Impl.WriteHandlers
 {
-    internal abstract class ToStringWriteHandler : AbstractWriteHandler
+    internal class ToStringWriteHandler : AbstractWriteHandler
     {
+        private readonly string t;
+
+        public ToStringWriteHandler(string t)
+        {
+            this.t = t;
+        }
+
+        public override string Tag(object ignored)
+        {
+            return t;
+        }
+
         public override object Representation(object obj)
         {
             return obj.ToString();

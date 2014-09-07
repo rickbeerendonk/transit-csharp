@@ -20,11 +20,6 @@ namespace NForza.Transit.Impl.WriteHandlers
 {
     internal class NullWriteHandler : AbstractWriteHandler
     {
-        public override bool CanWrite(object obj)
-        {
-            return obj == null;
-        }
-
         public override string Tag(object ignored)
         {
             return "_";

@@ -20,11 +20,6 @@ namespace NForza.Transit.Impl.WriteHandlers
 {
     internal class BooleanWriteHandler : AbstractWriteHandler
     {
-        public override bool CanWrite(object obj)
-        {
-            return obj is bool;
-        }
-
         public override string Tag(object ignored)
         {
             return "?";

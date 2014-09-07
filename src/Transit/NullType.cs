@@ -1,9 +1,5 @@
 ﻿// Copyright © 2014 NForza. All Rights Reserved.
 //
-// This code is a C# port of the Java version created and maintained by Cognitect, therefore
-//
-// Copyright © 2014 Cognitect. All Rights Reserved.
-//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -16,18 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace NForza.Transit.Impl.WriteHandlers
+namespace NForza.Transit
 {
-    internal class StringWriteHandler : ToStringWriteHandler
+    /// <summary>
+    /// Represents a typeof(null) to use in dictionaries, 
+    /// because dictionaries don't accept null as a key.
+    /// </summary>
+    public class NullType
     {
-        public override bool CanWrite(object obj)
-        {
-            return obj is string;
-        }
-
-        public override string Tag(object obj)
-        {
-            return "s";
-        }
     }
 }

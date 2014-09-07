@@ -18,7 +18,9 @@
 
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace NForza.Transit.Impl
 {
@@ -27,7 +29,7 @@ namespace NForza.Transit.Impl
     /// </summary>
     internal class JsonVerboseEmitter : JsonEmitter
     {
-        public JsonVerboseEmitter(JsonWriter jsonWriter, IImmutableList<IWriteHandler> handlers)
+        public JsonVerboseEmitter(JsonWriter jsonWriter, IImmutableDictionary<Type, IWriteHandler> handlers)
             : base(jsonWriter, handlers)
         {
         }
@@ -49,6 +51,18 @@ namespace NForza.Transit.Impl
             EmitDictionaryEnd();
         }
 
-        // TODO: More code
+        protected override void EmitDictionary(IEnumerable<KeyValuePair<object, object>> keyValuePairs, 
+            bool ignored, WriteCache cache)
+        {
+            long sz = keyValuePairs.Count();
+
+            EmitDictionaryStart(sz);
+            foreach (KeyValuePair<object, object> item in keyValuePairs)
+            {
+                Marshal(item.Key, true, cache);
+                Marshal(item.Value, false, cache);
+            }
+            EmitDictionaryEnd();
+        }
     }
 }

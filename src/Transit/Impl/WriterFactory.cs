@@ -20,6 +20,7 @@ using Newtonsoft.Json;
 using NForza.Transit;
 using NForza.Transit.Impl.WriteHandlers;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
@@ -35,29 +36,36 @@ namespace NForza.Transit.Impl
         /// Get the default handlers.
         /// </summary>
         /// <returns>The default handlers.</returns>
-        public static IImmutableList<IWriteHandler> DefaultHandlers()
+        public static IImmutableDictionary<Type, IWriteHandler> DefaultHandlers()
         {
-            var builder = ImmutableList.Create<IWriteHandler>().ToBuilder();
+            var builder = ImmutableDictionary.Create<Type, IWriteHandler>().ToBuilder();
 
-            builder.Add(new NullWriteHandler());
+            var integerHandler = new NumberWriteHandler("i");
+            var doubleHandler = new NumberWriteHandler("d");
 
-            // First single types
-            builder.Add(new BooleanWriteHandler());
-            builder.Add(new KeywordWriteHandler());
-            builder.Add(new QuoteWriteHandler());
-            builder.Add(new StringWriteHandler());
-            builder.Add(new TaggedValueWriteHandler());
+            builder.Add(typeof(bool), new BooleanWriteHandler());
+            builder.Add(typeof(NullType), new NullWriteHandler());
+            builder.Add(typeof(string), new ToStringWriteHandler("s"));
+            builder.Add(typeof(int), integerHandler);
+            builder.Add(typeof(long), integerHandler);
+            builder.Add(typeof(short), integerHandler);
+            builder.Add(typeof(byte), integerHandler);
 
-            // Second enumerables (since string is both single and enumerable of char)
-            builder.Add(new ListWriteHandler());
-            builder.Add(new DictionaryWriteHandler());
+            builder.Add(typeof(Quote), new QuoteWriteHandler());
+
+            builder.Add(typeof(IKeyword), new ToStringWriteHandler(":"));
+            builder.Add(typeof(ITaggedValue), new TaggedValueWriteHandler());
+
+            builder.Add(typeof(IList), new ListWriteHandler());
+            builder.Add(typeof(IList<>), new ListWriteHandler());
+            builder.Add(typeof(IDictionary<, >), new DictionaryWriteHandler());
 
             return builder.ToImmutable();
         }
 
-        private static IImmutableList<IWriteHandler> Handlers(IEnumerable<IWriteHandler> customHandlers) 
+        private static IImmutableDictionary<Type, IWriteHandler> Handlers(IDictionary<Type, IWriteHandler> customHandlers) 
         {
-            IImmutableList<IWriteHandler> handlers = DefaultHandlers();
+            IImmutableDictionary<Type, IWriteHandler> handlers = DefaultHandlers();
 
             if (customHandlers != null)
             {
@@ -67,34 +75,34 @@ namespace NForza.Transit.Impl
             return handlers;
         }
 
-        private static void SetSubHandler(IImmutableList<IWriteHandler> handlers, AbstractEmitter abstractEmitter) 
+        private static void SetSubHandler(IImmutableDictionary<Type, IWriteHandler> handlers, AbstractEmitter abstractEmitter) 
         {
-            foreach (IWriteHandler handler in handlers)
+            foreach (var handler in handlers)
         	{
-		        if (handler is IAbstractEmitterAware)
+		        if (handler.Value is IAbstractEmitterAware)
                 {
-                    ((IAbstractEmitterAware)handler).SetEmitter(abstractEmitter);
+                    ((IAbstractEmitterAware)handler.Value).SetEmitter(abstractEmitter);
                 }
         	}
         }
 
-        private static IImmutableList<IWriteHandler> GetVerboseHandlers(IEnumerable<IWriteHandler> handlers) 
+        private static IImmutableDictionary<Type, IWriteHandler> GetVerboseHandlers(IImmutableDictionary<Type, IWriteHandler> handlers) 
         {
-            var verboseHandlersBuilder = ImmutableList.Create<IWriteHandler>().ToBuilder();
+            var verboseHandlersBuilder = ImmutableDictionary.Create<Type, IWriteHandler>().ToBuilder();
 
             foreach (var item in handlers)
 	        {
-                verboseHandlersBuilder.Add(item.GetVerboseHandler() ?? item);
+                verboseHandlersBuilder.Add(item.Key, item.Value.GetVerboseHandler() ?? item.Value);
 	        }
 
             return verboseHandlersBuilder.ToImmutable();
         }
 
-        public static IWriter<T> GetJsonInstance<T>(Stream output, IEnumerable<IWriteHandler> customHandlers, bool verboseMode)
+        public static IWriter<T> GetJsonInstance<T>(Stream output, IDictionary<Type, IWriteHandler> customHandlers, bool verboseMode)
         {
             TextWriter textWriter = new StreamWriter(output);
             JsonWriter jsonWriter = new JsonTextWriter(textWriter);
-            IImmutableList<IWriteHandler> handlers = Handlers(customHandlers);
+            IImmutableDictionary<Type, IWriteHandler> handlers = Handlers(customHandlers);
             JsonEmitter emitter;
             if (verboseMode) 
             {

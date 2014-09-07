@@ -24,13 +24,6 @@ namespace NForza.Transit
     public interface IWriteHandler
     {
         /// <summary>
-        /// Determines whether this instance can write the specified object.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns><c>true</c> if this handler can write this object; otherwise <c>false</c>.</returns>
-        bool CanWrite(object obj);
-
-        /// <summary>
         /// The tag to use for the object.
         /// </summary>
         /// <param name="obj">The object.</param>

@@ -18,7 +18,9 @@
 
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Numerics;
 
 namespace NForza.Transit.Impl
@@ -33,7 +35,7 @@ namespace NForza.Transit.Impl
 
         protected readonly JsonWriter jsonWriter;
 
-        public JsonEmitter(JsonWriter jsonWriter, IImmutableList<IWriteHandler> handlers)
+        public JsonEmitter(JsonWriter jsonWriter, IImmutableDictionary<Type, IWriteHandler> handlers)
             : base(handlers)
         {
             this.jsonWriter = jsonWriter;
@@ -148,23 +150,21 @@ namespace NForza.Transit.Impl
             return true;
         }
 
-        /*
-        // TODO: More code
+        protected override void EmitDictionary(IEnumerable<KeyValuePair<object, object>> keyValuePairs, 
+            bool ignored, WriteCache cache)
+        {
+            long sz = Enumerable.Count(keyValuePairs);
 
-        @Override
-        protected void emitMap(Iterable<Map.Entry<Object, Object>> i, boolean ignored, WriteCache cache) throws Exception {
+            EmitListStart(sz);
+            EmitString(null, null, Constants.DirectoryAsList, false, cache);
 
-            long sz = Util.mapSize(i);
-
-            emitArrayStart(sz);
-            emitString(null, null, Constants.MAP_AS_ARRAY, false, cache);
-
-            for (Map.Entry e : i) {
-                marshal(e.getKey(), true, cache);
-                marshal(e.getValue(), false, cache);
+            foreach (var kvp in keyValuePairs)
+        	{
+                Marshal(kvp.Key, true, cache);
+                Marshal(kvp.Value, false, cache);
             }
-            emitArrayEnd();
+
+            EmitListEnd();
         }
-        */
     }
 }
