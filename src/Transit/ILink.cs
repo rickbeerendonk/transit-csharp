@@ -17,6 +17,7 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 
 namespace NForza.Transit
 {
@@ -64,5 +65,11 @@ namespace NForza.Transit
         /// The render.
         /// </value>
         string Render { get; }
+
+        /// <summary>
+        /// Converts the link to a dictionary.
+        /// </summary>
+        /// <returns>The dictionary.</returns>
+        IDictionary<string, object> ToDictionary();
     }
 }

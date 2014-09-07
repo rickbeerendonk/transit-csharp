@@ -17,7 +17,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Immutable;
+using System.Collections.Generic;
 
 namespace NForza.Transit.Impl
 {
@@ -35,7 +35,7 @@ namespace NForza.Transit.Impl
         private const string NAME = "name";
         private const string RENDER = "render";
 
-        private IImmutableDictionary<string, object> dictionary;
+        private IDictionary<string, object> dictionary;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Link"/> class.
@@ -53,35 +53,35 @@ namespace NForza.Transit.Impl
         /// <exception cref="System.ArgumentException">Value of render must be "link" or "image".</exception>
         public Link(Uri href, string rel, string name, string render, string prompt)
         {
-            var dictionary = ImmutableDictionary.Create<string, object>();
+            var dictionary = new Dictionary<string, object>();
 
             if (href == null)
             {
                 throw new ArgumentNullException("href");
             }
-            dictionary = dictionary.Add(HREF, href);
+            dictionary.Add(HREF, href);
 
             if (rel == null)
             {
                 throw new ArgumentNullException("rel");
             }
-            dictionary = dictionary.Add(REL, rel);
+            dictionary.Add(REL, rel);
             
             if (name != null)
             {
-                dictionary = dictionary.Add(NAME, name);
+                dictionary.Add(NAME, name);
             }
 
             if (prompt != null)
             {
-                dictionary = dictionary.Add(PROMPT, prompt);
+                dictionary.Add(PROMPT, prompt);
             }
 
             if (render != null)
             {
                 if ((render == LINK) || (render == IMAGE))
                 {
-                    dictionary = dictionary.Add(RENDER, render);
+                    dictionary.Add(RENDER, render);
                 }
                 else
                 {
@@ -96,7 +96,7 @@ namespace NForza.Transit.Impl
         /// Initializes a new instance of the <see cref="Link"/> class.
         /// </summary>
         /// <param name="dictionary">The dictionary.</param>
-        public Link(IImmutableDictionary<string, object> dictionary)
+        public Link(IDictionary<string, object> dictionary)
         {
             this.dictionary = dictionary;
         }
@@ -105,7 +105,7 @@ namespace NForza.Transit.Impl
         /// Converts the link to a dictionary.
         /// </summary>
         /// <returns>The dictionary.</returns>
-        public IImmutableDictionary<string, object> ToDictionary()
+        public IDictionary<string, object> ToDictionary()
         {
             return dictionary;
         }

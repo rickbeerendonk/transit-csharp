@@ -40,7 +40,7 @@ namespace NForza.Transit.Impl
         private IWriteHandler CheckBaseClasses(Type type)
         {
             Type baseType = type.GetTypeInfo().BaseType;
-            while (baseType != typeof(object))
+            while (baseType != null && baseType != typeof(object))
             {
                 IWriteHandler handler;
                 if (handlers.TryGetValue(baseType, out handler))
@@ -339,14 +339,14 @@ namespace NForza.Transit.Impl
             if (handler == null) 
             {
                 throw new NotSupportedException(
-                    string.Format("Cannot marshal: {0} ({1})", obj != null ? obj.GetType() : null, obj));
+                    string.Format("Cannot marshal type {0} ({1})", obj != null ? obj.GetType() : null, obj));
             }
 
             string tag = handler.Tag(obj);
             if (tag == null) 
             {
                 throw new NotSupportedException(
-                    string.Format("Cannot marshal: {0} ({1})", obj != null ? obj.GetType() : null, obj));
+                    string.Format("Cannot marshal type {0} ({1})", obj != null ? obj.GetType() : null, obj));
             }
 
             if (tag.Length == 1)

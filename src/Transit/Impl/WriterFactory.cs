@@ -66,7 +66,7 @@ namespace NForza.Transit.Impl
             builder.Add(typeof(Uri), uriWriteHandler);
             builder.Add(typeof(DateTime), new DateTimeWriteHandler());
             builder.Add(typeof(IRatio), new RatioWriteHandler());
-
+            builder.Add(typeof(ILink), new LinkWriteHandler());
             builder.Add(typeof(Quote), new QuoteWriteHandler());
             builder.Add(typeof(ITaggedValue), new TaggedValueWriteHandler());
 

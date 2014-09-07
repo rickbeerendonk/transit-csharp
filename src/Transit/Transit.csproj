@@ -53,6 +53,7 @@
     <Compile Include="Impl\WriteHandlers\BinaryWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\RatioWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\ListWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\LinkWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\SetWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\GuidWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\DateTimeWriteHandler.cs" />

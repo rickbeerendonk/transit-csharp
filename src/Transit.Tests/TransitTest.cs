@@ -484,6 +484,20 @@ namespace NForza.Transit.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void TestWriteObjectJson()
+        {
+            WriteJson(new object());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void TestWriteObjectJsonVerbose()
+        {
+            WriteJsonVerbose(new object());
+        }
+
+        [TestMethod]
         public void TestWriteString()
         {
             Assert.AreEqual(ScalarVerbose("\"foo\""), WriteJsonVerbose("foo"));
@@ -735,6 +749,8 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("{\"~#point\":[1,2]}", WriteJsonVerbose(TransitFactory.TaggedValue("point", l2)));
         }
 
+        #endregion
+
         [TestMethod]
         public void TestUseIKeywordAsDictionaryKey()
         {
@@ -867,11 +883,30 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("dab", l[3].ToString());
         }
 
+        [TestMethod]
+        public void TestDictionaryWithEscapedKey()
+        {
+            var d1 = new Dictionary<object, object> { { "~Gfoo", 20L } };
+            string str = WriteJson(d1);
 
+            IDictionary d2 = Reader(str).Read<IDictionary>();
+            Assert.IsTrue(d2.Contains("~Gfoo"));
+            Assert.IsTrue(d2["~Gfoo"].Equals(20L));
+        }
 
-        #endregion
+        [TestMethod]
+        public void TestLink()
+        {
+            ILink l1 = TransitFactory.Link("http://google.com/", "search", "name", "link", "prompt");
+            String str = WriteJson(l1);
+            ILink l2 = Reader(str).Read<ILink>();
+            Assert.AreEqual("http://google.com/", l2.Href.AbsoluteUri);
+            Assert.AreEqual("search", l2.Rel);
+            Assert.AreEqual("name", l2.Name);
+            Assert.AreEqual("link", l2.Render);
+            Assert.AreEqual("prompt", l2.Prompt);
+        }
 
-
-
+        // TODO More tests.
     }
 }
