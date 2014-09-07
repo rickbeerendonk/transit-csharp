@@ -58,6 +58,7 @@ namespace NForza.Transit.Impl
             // TODO
             //builder.Add(typeof(BigRational), new ToStringWriteHandler("f"));
             builder.Add(typeof(IKeyword), new ToStringWriteHandler(":"));
+            builder.Add(typeof(Guid), new GuidWriteHandler());
             builder.Add(typeof(DateTime), new DateTimeWriteHandler());
 
             builder.Add(typeof(Quote), new QuoteWriteHandler());

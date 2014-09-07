@@ -549,6 +549,14 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(Scalar("\"~m" + dateLong + "\""), WriteJson(d));
         }
 
+        [TestMethod]
+        public void TestWriteUUID()
+        {
+            Guid guid = Guid.NewGuid();
+            Assert.AreEqual(ScalarVerbose("\"~u" + guid.ToString() + "\""), WriteJsonVerbose(guid));
+        }
+
+
 
 
 
