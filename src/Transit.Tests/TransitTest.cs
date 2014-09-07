@@ -667,6 +667,13 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("[\"~#list\",[]]", WriteJson(c));
         }
 
+        [TestMethod]
+        public void TestWriteCharacter()
+        {
+            Assert.AreEqual(ScalarVerbose("\"~cf\""), WriteJsonVerbose('f'));
+        }
+
+
 
 
         #endregion
