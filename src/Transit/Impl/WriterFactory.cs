@@ -19,6 +19,7 @@
 using Newtonsoft.Json;
 using NForza.Transit;
 using NForza.Transit.Impl.WriteHandlers;
+using NForza.Transit.Numerics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,10 +55,12 @@ namespace NForza.Transit.Impl
             builder.Add(typeof(BigInteger), new ToStringWriteHandler("n"));
             builder.Add(typeof(float), doubleHandler);
             builder.Add(typeof(double), doubleHandler);
+            // TODO
+            //builder.Add(typeof(BigRational), new ToStringWriteHandler("f"));
+            builder.Add(typeof(IKeyword), new ToStringWriteHandler(":"));
+            builder.Add(typeof(DateTime), new DateTimeWriteHandler());
 
             builder.Add(typeof(Quote), new QuoteWriteHandler());
-
-            builder.Add(typeof(IKeyword), new ToStringWriteHandler(":"));
             builder.Add(typeof(ITaggedValue), new TaggedValueWriteHandler());
 
             builder.Add(typeof(IList), new ListWriteHandler());

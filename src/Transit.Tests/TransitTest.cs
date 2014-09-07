@@ -530,6 +530,26 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(ScalarVerbose("42.5"), WriteJsonVerbose(42.5D));
         }
 
+        [TestMethod]
+        public void TestWriteBigDecimal()
+        {
+            Assert.Inconclusive();
+            
+            // TODO
+            //Assert.AreEqual(ScalarVerbose("\"~f42.5\""), WriteJsonVerbose(new BigRational(42.5)));
+        }
+
+        [TestMethod]
+        public void TestWriteDateTime()
+        {
+            var d = DateTime.Now;
+            String dateString = AbstractParser.FormatDateTime(d);
+            long dateLong = NForza.Transit.Java.Convert.ToJavaTime(d);
+            Assert.AreEqual(ScalarVerbose("\"~t" + dateString + "\""), WriteJsonVerbose(d));
+            Assert.AreEqual(Scalar("\"~m" + dateLong + "\""), WriteJson(d));
+        }
+
+
 
 
         #endregion
