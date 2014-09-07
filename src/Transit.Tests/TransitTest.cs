@@ -816,6 +816,58 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("dab", l[3].ToString());
         }
 
+        [TestMethod]
+        public void TestSymbolEquality()
+        {
+            string s = "foo";
+
+            ISymbol sym1 = TransitFactory.Symbol("foo");
+            ISymbol sym2 = TransitFactory.Symbol("!foo".Substring(1));
+            ISymbol sym3 = TransitFactory.Symbol("bar");
+
+            Assert.AreEqual(sym1, sym2);
+            Assert.AreEqual(sym2, sym1);
+            Assert.IsFalse(sym1.Equals(sym3));
+            Assert.IsFalse(sym3.Equals(sym1));
+            Assert.IsFalse(s.Equals(sym1));
+            Assert.IsFalse(sym1.Equals(s));
+        }
+
+        [TestMethod]
+        public void TestSymbolHashCode()
+        {
+            string s = "foo";
+
+            ISymbol sym1 = TransitFactory.Symbol("foo");
+            ISymbol sym2 = TransitFactory.Symbol("!foo".Substring(1));
+            ISymbol sym3 = TransitFactory.Symbol("bar");
+            IKeyword keyword = TransitFactory.Keyword("bar");
+
+            Assert.AreEqual(sym1.GetHashCode(), sym2.GetHashCode());
+            Assert.IsFalse(sym3.GetHashCode() == sym1.GetHashCode());
+            Assert.IsFalse(keyword.GetHashCode() == sym1.GetHashCode());
+            Assert.IsFalse(s.GetHashCode() == sym1.GetHashCode());
+        }
+
+        [TestMethod]
+        public void TestSymbolComparator()
+        {
+
+            List<ISymbol> l = new List<ISymbol> {
+                { TransitFactory.Symbol("bbb") },
+                { TransitFactory.Symbol("ccc") },
+                { TransitFactory.Symbol("abc") },
+                { TransitFactory.Symbol("dab") } };
+
+            l.Sort();
+
+            Assert.AreEqual("abc", l[0].ToString());
+            Assert.AreEqual("bbb", l[1].ToString());
+            Assert.AreEqual("ccc", l[2].ToString());
+            Assert.AreEqual("dab", l[3].ToString());
+        }
+
+
 
         #endregion
 
