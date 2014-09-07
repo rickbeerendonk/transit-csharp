@@ -564,6 +564,16 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(ScalarVerbose("\"~rhttp://www.foo.com/\""), WriteJsonVerbose(uri));
         }
 
+        [TestMethod]
+        public void TestWriteBinary()
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes("foobarbaz");
+            string encoded = System.Convert.ToBase64String(bytes);
+
+            Assert.AreEqual(ScalarVerbose("\"~b" + encoded + "\""), WriteJsonVerbose(bytes));
+        }
+
+
 
 
 

@@ -50,6 +50,7 @@
     <Compile Include="Impl\ReadHandlers\SetReadHandler.cs" />
     <Compile Include="Impl\Util.cs" />
     <Compile Include="Impl\WriteHandlers\AbstractWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\BinaryWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\GuidWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\DateTimeWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\NumberWriteHandler.cs" />
