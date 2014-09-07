@@ -556,6 +556,14 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(ScalarVerbose("\"~u" + guid.ToString() + "\""), WriteJsonVerbose(guid));
         }
 
+        [TestMethod]
+        public void TestWriteURI()
+        {
+            Uri uri = new Uri("http://www.foo.com/");
+
+            Assert.AreEqual(ScalarVerbose("\"~rhttp://www.foo.com/\""), WriteJsonVerbose(uri));
+        }
+
 
 
 

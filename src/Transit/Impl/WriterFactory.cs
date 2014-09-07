@@ -44,6 +44,7 @@ namespace NForza.Transit.Impl
 
             var integerHandler = new NumberWriteHandler("i");
             var doubleHandler = new NumberWriteHandler("d");
+            var uriWriteHandler = new NumberWriteHandler("r");
 
             builder.Add(typeof(bool), new BooleanWriteHandler());
             builder.Add(typeof(NullType), new NullWriteHandler());
@@ -59,6 +60,7 @@ namespace NForza.Transit.Impl
             //builder.Add(typeof(BigRational), new ToStringWriteHandler("f"));
             builder.Add(typeof(IKeyword), new ToStringWriteHandler(":"));
             builder.Add(typeof(Guid), new GuidWriteHandler());
+            builder.Add(typeof(Uri), uriWriteHandler);
             builder.Add(typeof(DateTime), new DateTimeWriteHandler());
 
             builder.Add(typeof(Quote), new QuoteWriteHandler());
