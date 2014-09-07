@@ -335,14 +335,14 @@ namespace NForza.Transit.Impl
             if (handler == null) 
             {
                 throw new NotSupportedException(
-                    string.Format("Cannot marshal: {0} ({1})", obj, obj != null ? obj.GetType() : null));
+                    string.Format("Cannot marshal: {0} ({1})", obj != null ? obj.GetType() : null, obj));
             }
 
             string tag = handler.Tag(obj);
             if (tag == null) 
             {
                 throw new NotSupportedException(
-                    string.Format("Cannot marshal: {0} ({1})", obj, obj != null ? obj.GetType() : null));
+                    string.Format("Cannot marshal: {0} ({1})", obj != null ? obj.GetType() : null, obj));
             }
 
             if (tag.Length == 1)
