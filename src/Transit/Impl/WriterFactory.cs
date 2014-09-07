@@ -73,7 +73,7 @@ namespace NForza.Transit.Impl
             builder.Add(typeof(ISet<>), new SetWriteHandler());
             builder.Add(typeof(IEnumerable), new EnumerableWriteHandler());
             builder.Add(typeof(IList<>), new ListWriteHandler());
-            builder.Add(typeof(IDictionary<, >), new DictionaryWriteHandler());
+            builder.Add(typeof(IDictionary<,>), new DictionaryWriteHandler());
 
             return builder.ToImmutable();
         }

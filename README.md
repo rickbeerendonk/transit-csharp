@@ -12,11 +12,14 @@ Transit is a data format and a set of libraries for conveying values between app
 
 This implementation's major.minor version number corresponds to the version of the Transit specification it supports.
 
+JSON and JSON-Verbose are implemented, but more tests need to be written.
+MessagePack is **not** implemented yet. 
+
 _NOTE: Transit is a work in progress and may evolve based on feedback. As a result, while Transit is a great option for transferring data between applications, it should not yet be used for storing data durably over time. This recommendation will change when the specification is complete._
 
 ## Releases and Dependency Information
 
-* Latest release: 0.8.???
+* Latest release: [![NuGet version](http://img.shields.io/nuget/v/Transit.svg)](https://www.nuget.org/packages/Transit)
 
 This is a Portable Class Library with the following targets:
 
@@ -25,6 +28,34 @@ This is a Portable Class Library with the following targets:
 * Windows Phone 8.1
 
 ## Usage
+
+## Default Type Mapping
+
+|Transit type|Write accepts|Read returns|
+|------------|-------------|------------|
+|null|null|null|
+|string|System.String|System.String|
+|boolean|System.Boolean|System.Boolean|
+|integer|System.Byte, System.Int16, System.Int32, System.Int64|System.Int64|
+|decimal|System.Single, System.Double|System.Double|
+|keyword|NForza.Transit.IKeyword|NForza.Transit.IKeyword|
+|symbol|NForza.Transit.ISymbol|NForza.Transit.ISymbol|
+|big decimal|_not implemented_|NForza.Transit.Numerics.BigRational|
+|big integer|System.Numerics.BigInteger|System.Numerics.BigInteger|
+|time|System.DateTime|System.DateTime|
+|uri|System.Uri|System.Uri|
+|uuid|System.Guid|System.Guid|
+|char|System.Char|System.Char|
+|array|T[], System.Collections.Generic.IList<>|System.Collections.Generic.IList<>|
+|list|System.Collections.Generic.IEnumerable<>|System.Collections.Generic.IEnumerable<>|
+|set|System.Collections.Generic.ISet<>|System.Collections.Generic.ISet<>|
+|map|System.Collections.Generic.IDictionary<,>|System.Collections.Immutable.IImmutableDictionary<object, object>|
+|link|NForza.Transit.ILink|NForza.Transit.ILink|
+|ratio +|NForza.Transit.IRatio|NForza.Transit.IRatio|
+
+\+ Extension type
+
+## Layered Implementations
 
 ## Copyright and License
 Copyright © 2014 NForza.
