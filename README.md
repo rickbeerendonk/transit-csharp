@@ -46,9 +46,9 @@ This is a Portable Class Library with the following targets:
 |uri|System.Uri|System.Uri|
 |uuid|System.Guid|System.Guid|
 |char|System.Char|System.Char|
-|array|T[], System.Collections.Generic.IList<>|System.Collections.Generic.IList<>|
-|list|System.Collections.Generic.IEnumerable<>|System.Collections.Generic.IEnumerable<>|
-|set|System.Collections.Generic.ISet<>|System.Collections.Generic.ISet<>|
+|array|T[], System.Collections.Generic.IList<>|System.Collections.Generic.IList<object>|
+|list|System.Collections.Generic.IEnumerable<>|System.Collections.Generic.IEnumerable<object>|
+|set|System.Collections.Generic.ISet<>|System.Collections.Generic.ISet<object>|
 |map|System.Collections.Generic.IDictionary<,>|System.Collections.Immutable.IImmutableDictionary<object, object>|
 |link|NForza.Transit.ILink|NForza.Transit.ILink|
 |ratio +|NForza.Transit.IRatio|NForza.Transit.IRatio|
