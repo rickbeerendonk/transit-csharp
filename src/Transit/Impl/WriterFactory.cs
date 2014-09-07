@@ -24,6 +24,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
+using System.Numerics;
 
 namespace NForza.Transit.Impl
 {
@@ -50,6 +51,7 @@ namespace NForza.Transit.Impl
             builder.Add(typeof(long), integerHandler);
             builder.Add(typeof(short), integerHandler);
             builder.Add(typeof(byte), integerHandler);
+            builder.Add(typeof(BigInteger), new ToStringWriteHandler("n"));
 
             builder.Add(typeof(Quote), new QuoteWriteHandler());
 

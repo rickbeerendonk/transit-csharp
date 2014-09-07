@@ -509,6 +509,19 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("[\"^ \",\"~?f\",1]", WriteJson(d2));
         }
 
+        [TestMethod]
+        public void testWriteInteger()
+        {
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(42));
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(42L));
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose((byte)42));
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose((short)42));
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose((int)42));
+            Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(42L));
+            Assert.AreEqual(ScalarVerbose("\"~n42\""), WriteJsonVerbose(BigInteger.Parse("42")));
+            Assert.AreEqual(ScalarVerbose("\"~n4256768765123454321897654321234567\""), WriteJsonVerbose(BigInteger.Parse("4256768765123454321897654321234567")));
+        }
+
 
 
         #endregion
