@@ -18,11 +18,11 @@
 
 namespace NForza.Transit.Impl.WriteHandlers
 {
-    internal class NumberWriteHandler : AbstractWriteHandler
+    internal class IntegerWriteHandler : AbstractWriteHandler
     {
         private readonly string t;
 
-        public NumberWriteHandler(string t)
+        public IntegerWriteHandler(string t)
         {
             this.t = t;
         }

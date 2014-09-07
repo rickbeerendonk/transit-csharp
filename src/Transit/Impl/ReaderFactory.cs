@@ -46,6 +46,7 @@ namespace NForza.Transit.Impl
             builder.Add("f", new BigRationalReadHandler());
             builder.Add("n", new BigIntegerReadHandler());
             builder.Add("d", new DoubleReadHandler());
+            builder.Add("z", new SpecialNumberReadHandler());
             builder.Add("c", new CharacterReadHandler());
             builder.Add("t", new VerboseDateTimeReadHandler());
             builder.Add("m", new DateTimeReadHandler());

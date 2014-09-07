@@ -104,11 +104,14 @@ namespace NForza.Transit.Tests
         public void TestReadDouble()
         {
             Assert.AreEqual<double>(42.5D, Reader("\"~d42.5\"").Read<double>());
+        }
 
-            // TODO Pending: https://github.com/cognitect/transit-format/issues/20
-            Assert.AreEqual<double>(double.NaN, Reader("\"~dNaN\"").Read<double>());
-            Assert.AreEqual<double>(double.NegativeInfinity, Reader("\"~d-Infinity\"").Read<double>());
-            Assert.AreEqual<double>(double.PositiveInfinity, Reader("\"~dInfinity\"").Read<double>());
+        [TestMethod]
+        public void TestReadSpecialNumbers()
+        {
+            Assert.AreEqual<double>(double.NaN, Reader("\"~zNaN\"").Read<double>());
+            Assert.AreEqual<double>(double.PositiveInfinity, Reader("\"~zINF\"").Read<double>());
+            Assert.AreEqual<double>(double.NegativeInfinity, Reader("\"~z-INF\"").Read<double>());
         }
 
         [TestMethod]
@@ -553,6 +556,26 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(ScalarVerbose("42.5"), WriteJsonVerbose(42.5));
             Assert.AreEqual(ScalarVerbose("42.5"), WriteJsonVerbose(42.5F));
             Assert.AreEqual(ScalarVerbose("42.5"), WriteJsonVerbose(42.5D));
+        }
+
+        [TestMethod]
+        public void TestSpecialNumbers()
+        {
+            Assert.AreEqual(Scalar("\"~zNaN\""), WriteJson(double.NaN));
+            Assert.AreEqual(Scalar("\"~zINF\""), WriteJson(double.PositiveInfinity));
+            Assert.AreEqual(Scalar("\"~z-INF\""), WriteJson(double.NegativeInfinity));
+
+            Assert.AreEqual(Scalar("\"~zNaN\""), WriteJson(float.NaN));
+            Assert.AreEqual(Scalar("\"~zINF\""), WriteJson(float.PositiveInfinity));
+            Assert.AreEqual(Scalar("\"~z-INF\""), WriteJson(float.NegativeInfinity));
+
+            Assert.AreEqual(ScalarVerbose("\"~zNaN\""), WriteJsonVerbose(double.NaN));
+            Assert.AreEqual(ScalarVerbose("\"~zINF\""), WriteJsonVerbose(double.PositiveInfinity));
+            Assert.AreEqual(ScalarVerbose("\"~z-INF\""), WriteJsonVerbose(double.NegativeInfinity));
+
+            Assert.AreEqual(ScalarVerbose("\"~zNaN\""), WriteJsonVerbose(float.NaN));
+            Assert.AreEqual(ScalarVerbose("\"~zINF\""), WriteJsonVerbose(float.PositiveInfinity));
+            Assert.AreEqual(ScalarVerbose("\"~z-INF\""), WriteJsonVerbose(float.NegativeInfinity));
         }
 
         [TestMethod]

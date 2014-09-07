@@ -42,9 +42,7 @@ namespace NForza.Transit.Impl
         {
             var builder = ImmutableDictionary.Create<Type, IWriteHandler>().ToBuilder();
 
-            var integerHandler = new NumberWriteHandler("i");
-            var doubleHandler = new NumberWriteHandler("d");
-            var uriWriteHandler = new NumberWriteHandler("r");
+            var integerHandler = new IntegerWriteHandler("i");
 
             builder.Add(typeof(bool), new BooleanWriteHandler());
             builder.Add(typeof(NullType), new NullWriteHandler());
@@ -54,8 +52,8 @@ namespace NForza.Transit.Impl
             builder.Add(typeof(short), integerHandler);
             builder.Add(typeof(byte), integerHandler);
             builder.Add(typeof(BigInteger), new ToStringWriteHandler("n"));
-            builder.Add(typeof(float), doubleHandler);
-            builder.Add(typeof(double), doubleHandler);
+            builder.Add(typeof(float), new FloatWriteHandler());
+            builder.Add(typeof(double), new DoubleWriteHandler());
             // TODO
             //builder.Add(typeof(BigRational), new ToStringWriteHandler("f"));
             builder.Add(typeof(char), new ToStringWriteHandler("c"));
@@ -63,7 +61,7 @@ namespace NForza.Transit.Impl
             builder.Add(typeof(ISymbol), new ToStringWriteHandler("$"));
             builder.Add(typeof(byte[]), new BinaryWriteHandler());
             builder.Add(typeof(Guid), new GuidWriteHandler());
-            builder.Add(typeof(Uri), uriWriteHandler);
+            builder.Add(typeof(Uri), new ToStringWriteHandler("r"));
             builder.Add(typeof(DateTime), new DateTimeWriteHandler());
             builder.Add(typeof(IRatio), new RatioWriteHandler());
             builder.Add(typeof(ILink), new LinkWriteHandler());
