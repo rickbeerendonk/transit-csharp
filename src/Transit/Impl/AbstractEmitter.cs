@@ -61,10 +61,13 @@ namespace NForza.Transit.Impl
 
             foreach (Type item in baseTypes)
             {
-                IWriteHandler h;
-                if (handlers.TryGetValue(item, out h))
+                if (possibles.Count < 1)
                 {
-                    possibles.Add(item, h);
+                    IWriteHandler h;
+                    if (handlers.TryGetValue(item, out h))
+                    {
+                        possibles.Add(item, h);
+                    }
                 }
             }
 
@@ -110,11 +113,11 @@ namespace NForza.Transit.Impl
 
                 if (handler == null)
                 {
-                    handler = CheckBaseInterfaces(type);
+                    handler = CheckBaseGenericInterfaces(type);
 
                     if (handler == null)
                     {
-                        handler = CheckBaseGenericInterfaces(type);
+                        handler = CheckBaseInterfaces(type);
                     }
                 }
             }

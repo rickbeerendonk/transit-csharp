@@ -214,7 +214,7 @@ namespace NForza.Transit.Tests
         }
 
         [TestMethod]
-        public void TestReadArray()
+        public void TestReadList()
         {
             IList l = Reader("[1, 2, 3]").Read<IList>();
 
@@ -227,7 +227,7 @@ namespace NForza.Transit.Tests
         }
 
         [TestMethod]
-        public void TestReadArrayWithNested()
+        public void TestReadListWithNested()
         {
             var d = new DateTime(2014, 8, 10, 13, 34, 35);
             String t = JsonParser.FormatDateTime(d);
@@ -278,16 +278,17 @@ namespace NForza.Transit.Tests
         }
 
         [TestMethod]
-        public void TestReadList()
+        public void TestReadEnumerable()
         {
-            IList l = Reader("{\"~#list\": [1, 2, 3]}").Read<IList>();
+            IEnumerable l = Reader("{\"~#list\": [1, 2, 3]}").Read<IEnumerable>();
+            IEnumerable<object> lo = l.OfType<object>();
 
-            Assert.IsTrue(l is IList<object>);
-            Assert.AreEqual(3, l.Count);
+            Assert.IsTrue(l is IEnumerable);
+            Assert.AreEqual(3, lo.Count());
 
-            Assert.AreEqual(1L, l[0]);
-            Assert.AreEqual(2L, l[1]);
-            Assert.AreEqual(3L, l[2]);
+            Assert.AreEqual(1L, lo.First());
+            Assert.AreEqual(2L, lo.Skip(1).First());
+            Assert.AreEqual(3L, lo.Skip(2).First());
         }
 
         [TestMethod]
@@ -582,14 +583,14 @@ namespace NForza.Transit.Tests
         [TestMethod]
         public void TestWriteList()
         {
-            IList l = new ArrayList { 1, 2, 3 };
+            IList<int> l = new List<int> { 1, 2, 3 };
 
             Assert.AreEqual("[1,2,3]", WriteJsonVerbose(l));
             Assert.AreEqual("[1,2,3]", WriteJson(l));
         }
 
         [TestMethod]
-        public void TestWritePrimitiveLists()
+        public void TestWritePrimitiveArrays()
         {
             int[] ints = { 1, 2 };
             Assert.AreEqual("[1,2]", WriteJsonVerbose(ints));
@@ -647,7 +648,24 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("[\"~#set\",[]]", WriteJson(s));
         }
 
+        [TestMethod]
+        public void TestWriteEnumerable()
+        {
+            ICollection<string> c = new LinkedList<string>();
+            c.Add("foo");
+            c.Add("bar");
+            IEnumerable<string> e = c;
+            Assert.AreEqual("{\"~#list\":[\"foo\",\"bar\"]}", WriteJsonVerbose(e));
+            Assert.AreEqual("[\"~#list\",[\"foo\",\"bar\"]]", WriteJson(e));
+        }
 
+        [TestMethod]
+        public void TestWriteEmptyEnumerable()
+        {
+            IEnumerable<string> c = new LinkedList<string>();
+            Assert.AreEqual("{\"~#list\":[]}", WriteJsonVerbose(c));
+            Assert.AreEqual("[\"~#list\",[]]", WriteJson(c));
+        }
 
 
 

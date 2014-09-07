@@ -51,12 +51,13 @@
     <Compile Include="Impl\Util.cs" />
     <Compile Include="Impl\WriteHandlers\AbstractWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\BinaryWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\ListWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\SetWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\GuidWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\DateTimeWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\NumberWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\DictionaryWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\ListWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\EnumerableWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\NullWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\QuoteWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\BooleanWriteHandler.cs" />

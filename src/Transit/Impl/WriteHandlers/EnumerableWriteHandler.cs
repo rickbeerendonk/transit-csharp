@@ -21,16 +21,16 @@ using System.Collections.Generic;
 
 namespace NForza.Transit.Impl.WriteHandlers
 {
-    internal class ListWriteHandler : AbstractWriteHandler
+    internal class EnumerableWriteHandler : AbstractWriteHandler
     {
         public override string Tag(object ignored)
         {
-            return "array";
+            return "list";
         }
 
         public override object Representation(object obj)
         {
-            return obj;
+            return TransitFactory.TaggedValue("array", obj);
         }
     }
 }
