@@ -51,6 +51,7 @@
     <Compile Include="Impl\Util.cs" />
     <Compile Include="Impl\WriteHandlers\AbstractWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\BinaryWriteHandler.cs" />
+    <Compile Include="Impl\WriteHandlers\RatioWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\ListWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\SetWriteHandler.cs" />
     <Compile Include="Impl\WriteHandlers\GuidWriteHandler.cs" />

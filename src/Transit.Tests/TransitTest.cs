@@ -673,6 +673,15 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(ScalarVerbose("\"~cf\""), WriteJsonVerbose('f'));
         }
 
+        [TestMethod]
+        public void TestWriteRatio()
+        {
+            IRatio r = new Ratio(BigInteger.One, new BigInteger(2));
+            Assert.AreEqual("{\"~#ratio\":[\"~n1\",\"~n2\"]}", WriteJsonVerbose(r));
+            Assert.AreEqual("[\"~#ratio\",[\"~n1\",\"~n2\"]]", WriteJson(r));
+        }
+
+
 
 
 
