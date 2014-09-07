@@ -340,6 +340,7 @@ namespace NForza.Transit.Tests
         [TestMethod]
         public void TestReadMany()
         {
+            // TODO
             /*
             BigInteger expected = BigInteger.Parse("4256768765123454321897654321234567");
             IReader r = Reader("4256768765123454321897654321234567");
@@ -423,32 +424,41 @@ namespace NForza.Transit.Tests
             return Write(obj, TransitFactory.Format.Json);
         }
 
-        /*
-        // TODO
-
         public bool IsEqual(object o1, object o2)
         {
-            if (o1 is bool)
-                return o1 == o2;
+            if (o1 is bool && o2 is bool)
+                return (bool)o1 == (bool)o2;
             else
                 return false;
         }
 
-        public void testRoundTrip()
+        [TestMethod]
+        public void TestRoundTrip()
         {
             object inObject = true;
+            object outObject;
 
-            OutputStream outStream = new ByteArrayOutputStream();
-            IWriter w = TransitFactory.Writer(TransitFactory.Format.JsonVerbose, outStream);
-            w.Write(inObject);
-            string s = outStream.toString();
-            InputStream inStream = new ByteArrayInputStream(s.getBytes());
-            IReader reader = TransitFactory.Reader(TransitFactory.Format.Json, inStream);
-            object outObject = reader.Read();
+            string s;
+
+            using (Stream output = new MemoryStream())
+            {
+                IWriter<object> w = TransitFactory.Writer<object>(TransitFactory.Format.JsonVerbose, output);
+                w.Write(inObject);
+
+                output.Position = 0;
+                var sr = new StreamReader(output);
+                s = sr.ReadToEnd();
+            }
+
+            byte[] buffer = Encoding.ASCII.GetBytes(s);
+            using (Stream input = new MemoryStream(buffer))
+            {
+                IReader reader = TransitFactory.Reader(TransitFactory.Format.Json, input);
+                outObject = reader.Read<object>();
+            }
 
             Assert.IsTrue(IsEqual(inObject, outObject));
         }
-        */
 
         public string Scalar(string value)
         {
@@ -906,7 +916,5 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("link", l2.Render);
             Assert.AreEqual("prompt", l2.Prompt);
         }
-
-        // TODO More tests.
     }
 }
