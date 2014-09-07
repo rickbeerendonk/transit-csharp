@@ -334,13 +334,15 @@ namespace NForza.Transit.Impl
             IWriteHandler handler = GetHandler(obj);
             if (handler == null) 
             {
-                throw new NotSupportedException("Cannot marshal: " + obj);
+                throw new NotSupportedException(
+                    string.Format("Cannot marshal: {0} ({1})", obj, obj != null ? obj.GetType() : null));
             }
 
             string tag = handler.Tag(obj);
             if (tag == null) 
             {
-                throw new NotSupportedException("Cannot marshal: " + obj);
+                throw new NotSupportedException(
+                    string.Format("Cannot marshal: {0} ({1})", obj, obj != null ? obj.GetType() : null));
             }
 
             if (tag.Length == 1)
