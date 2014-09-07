@@ -765,7 +765,56 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(4, d["bar"]);
         }
 
+        [TestMethod]
+        public void TestKeywordEquality()
+        {
+            string s = "foo";
 
+            IKeyword k1 = TransitFactory.Keyword("foo");
+            IKeyword k2 = TransitFactory.Keyword("!foo".Substring(1));
+            IKeyword k3 = TransitFactory.Keyword("bar");
+
+            Assert.AreEqual(k1, k2);
+            Assert.AreEqual(k2, k1);
+            Assert.IsFalse(k1.Equals(k3));
+            Assert.IsFalse(k3.Equals(k1));
+            Assert.IsFalse(s.Equals(k1));
+            Assert.IsFalse(k1.Equals(s));
+        }
+
+        [TestMethod]
+        public void TestKeywordHashCode()
+        {
+            string s = "foo";
+
+            IKeyword k1 = TransitFactory.Keyword("foo");
+            IKeyword k2 = TransitFactory.Keyword("!foo".Substring(1));
+            IKeyword k3 = TransitFactory.Keyword("bar");
+            ISymbol symbol = TransitFactory.Symbol("bar");
+
+            Assert.AreEqual(k1.GetHashCode(), k2.GetHashCode());
+            Assert.IsFalse(k3.GetHashCode() == k1.GetHashCode());
+            Assert.IsFalse(symbol.GetHashCode() == k1.GetHashCode());
+            Assert.IsFalse(s.GetHashCode() == k1.GetHashCode());
+        }
+
+        [TestMethod]
+        public void TestKeywordComparator()
+        {
+
+            List<IKeyword> l = new List<IKeyword> {
+                { TransitFactory.Keyword("bbb") },
+                { TransitFactory.Keyword("ccc") },
+                { TransitFactory.Keyword("abc") },
+                { TransitFactory.Keyword("dab") } };
+
+            l.Sort();
+
+            Assert.AreEqual("abc", l[0].ToString());
+            Assert.AreEqual("bbb", l[1].ToString());
+            Assert.AreEqual("ccc", l[2].ToString());
+            Assert.AreEqual("dab", l[3].ToString());
+        }
 
 
         #endregion
