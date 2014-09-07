@@ -721,6 +721,20 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("foobar", wc.CacheWrite("foobar", true));
         }
 
+        [TestMethod]
+        public void TestWriteUnknown()
+        {
+            var l = new List<object>();
+            l.Add("`jfoo");
+            Assert.AreEqual("[\"~`jfoo\"]", WriteJsonVerbose(l));
+            Assert.AreEqual(ScalarVerbose("\"~`jfoo\""), WriteJsonVerbose("`jfoo"));
+
+            var l2 = new List<object>();
+            l2.Add(1L);
+            l2.Add(2L);
+            Assert.AreEqual("{\"~#point\":[1,2]}", WriteJsonVerbose(TransitFactory.TaggedValue("point", l2)));
+        }
+
 
 
         #endregion
