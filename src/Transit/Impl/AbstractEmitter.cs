@@ -61,6 +61,7 @@ namespace NForza.Transit.Impl
 
             foreach (Type item in baseTypes)
             {
+                // TODO Better way to decide the most appropriate possibility
                 if (possibles.Count < 1)
                 {
                     IWriteHandler h;

@@ -71,7 +71,7 @@ namespace NForza.Transit.Impl.WriteHandlers
             }
             else
             {
-                IList<object> l = new List<object>();
+                var l = new List<object>();
 
                 foreach (var item in o)
                 {
@@ -81,7 +81,6 @@ namespace NForza.Transit.Impl.WriteHandlers
 
                 return TransitFactory.TaggedValue("array", l);
             }
-
         }
     }
 }

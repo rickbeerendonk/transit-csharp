@@ -681,6 +681,16 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("[\"~#ratio\",[\"~n1\",\"~n2\"]]", WriteJson(r));
         }
 
+        [TestMethod]
+        public void TestWriteCDictionary()
+        {
+            IRatio r = new Ratio(BigInteger.One, new BigInteger(2));
+            IDictionary<object, object> d = new Dictionary<object, object>();
+            d.Add(r, 1);
+            Assert.AreEqual("{\"~#cmap\":[{\"~#ratio\":[\"~n1\",\"~n2\"]},1]}", WriteJsonVerbose(d));
+            Assert.AreEqual("[\"~#cmap\",[[\"~#ratio\",[\"~n1\",\"~n2\"]],1]]", WriteJson(d));
+        }
+
 
 
 
