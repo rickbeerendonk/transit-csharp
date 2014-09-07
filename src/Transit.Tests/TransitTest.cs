@@ -510,7 +510,7 @@ namespace NForza.Transit.Tests
         }
 
         [TestMethod]
-        public void testWriteInteger()
+        public void TestWriteInteger()
         {
             Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(42));
             Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(42L));
@@ -520,6 +520,14 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(ScalarVerbose("42"), WriteJsonVerbose(42L));
             Assert.AreEqual(ScalarVerbose("\"~n42\""), WriteJsonVerbose(BigInteger.Parse("42")));
             Assert.AreEqual(ScalarVerbose("\"~n4256768765123454321897654321234567\""), WriteJsonVerbose(BigInteger.Parse("4256768765123454321897654321234567")));
+        }
+
+        [TestMethod]
+        public void TestWriteFloatDouble()
+        {
+            Assert.AreEqual(ScalarVerbose("42.5"), WriteJsonVerbose(42.5));
+            Assert.AreEqual(ScalarVerbose("42.5"), WriteJsonVerbose(42.5F));
+            Assert.AreEqual(ScalarVerbose("42.5"), WriteJsonVerbose(42.5D));
         }
 
 

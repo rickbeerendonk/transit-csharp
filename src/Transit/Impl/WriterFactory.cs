@@ -52,6 +52,8 @@ namespace NForza.Transit.Impl
             builder.Add(typeof(short), integerHandler);
             builder.Add(typeof(byte), integerHandler);
             builder.Add(typeof(BigInteger), new ToStringWriteHandler("n"));
+            builder.Add(typeof(float), doubleHandler);
+            builder.Add(typeof(double), doubleHandler);
 
             builder.Add(typeof(Quote), new QuoteWriteHandler());
 
