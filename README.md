@@ -49,7 +49,7 @@ This is a Portable Class Library with the following targets:
 |array|T[], System.Collections.Generic.IList<>|System.Collections.Generic.IList<object>|
 |list|System.Collections.Generic.IEnumerable<>|System.Collections.Generic.IEnumerable<object>|
 |set|System.Collections.Generic.ISet<>|System.Collections.Generic.ISet<object>|
-|map|System.Collections.Generic.IDictionary<,>|System.Collections.Immutable.IImmutableDictionary<object, object>|
+|map|System.Collections.Generic.IDictionary<,>|System.Collections.Generic.IDictionary<object, object>|
 |link|NForza.Transit.ILink|NForza.Transit.ILink|
 |ratio +|NForza.Transit.IRatio|NForza.Transit.IRatio|
 

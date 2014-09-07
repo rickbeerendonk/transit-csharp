@@ -17,7 +17,7 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Immutable;
+using System.Collections.Generic;
 
 namespace NForza.Transit.Impl.ReadHandlers
 {
@@ -54,12 +54,12 @@ namespace NForza.Transit.Impl.ReadHandlers
 
         private class ListReaderImpl : IListReader
         {
-            IImmutableDictionary<object, object> d = null;
+            Dictionary<object, object> d = null;
             object nextKey = null;
 
             public object Init()
             {
-                d = ImmutableDictionary.Create<Object, Object>();
+                d = new Dictionary<object, object>();
                 return this;
             }
 
@@ -67,7 +67,7 @@ namespace NForza.Transit.Impl.ReadHandlers
             {
                 if (nextKey != null)
                 {
-                    d = d.Add(nextKey, item);
+                    d.Add(nextKey, item);
                     nextKey = null;
                 }
                 else
