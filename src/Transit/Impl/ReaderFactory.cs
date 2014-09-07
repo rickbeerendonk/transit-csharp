@@ -121,6 +121,20 @@ namespace NForza.Transit.Impl
             return new JsonReader(input, Handlers(customHandlers), DefaultHandler(customDefaultHandler));
         }
 
+        /// <summary>
+        /// Gets the MessagePack instance.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="customHandlers">The custom handlers.</param>
+        /// <param name="customDefaultHandler">The custom default handler.</param>
+        /// <returns>A reader.</returns>
+        public static IReader GetMsgPackInstance(Stream input,
+            IImmutableDictionary<string, IReadHandler> customHandlers,
+            IDefaultReadHandler<object> customDefaultHandler)
+        {
+            throw new NotImplementedException();
+        }
+
         private class DefaultReadHandler : IDefaultReadHandler<ITaggedValue>
         {
             public ITaggedValue FromRepresentation(string tag, object representation)

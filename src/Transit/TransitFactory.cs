@@ -78,9 +78,7 @@ namespace NForza.Transit
         {
             switch (type) {
                 case Format.MsgPack:
-                    // TODO:
-                    throw new NotImplementedException();
-                    //return WriterFactory.GetMsgpackInstance(output, customHandlers);
+                    return WriterFactory.GetMsgPackInstance<T>(output, customHandlers);
                 case Format.Json:
                     return WriterFactory.GetJsonInstance<T>(output, customHandlers, false);
                 case Format.JsonVerbose:
@@ -172,14 +170,13 @@ namespace NForza.Transit
             switch (type) {
                 case Format.Json:
                 case Format.JsonVerbose:
+                    // TODO: Check if this is true in C# too.
                     // JSON parser creation blocks on input stream until 4 bytes
                     // are available to determine character encoding - this is
                     // unexpected, so defer creation until first read
                     return new DeferredJsonReader(input, customHandlers, customDefaultHandler);
                 case Format.MsgPack:
-                    // TODO:
-                    throw new NotImplementedException();
-                    //return ReaderFactory.GetMsgPackInstance(input, customHandlers, customDefaultHandler);
+                    return ReaderFactory.GetMsgPackInstance(input, customHandlers, customDefaultHandler);
                 default:
                     throw new ArgumentException("Unknown Reader type: " + type.ToString());
             }

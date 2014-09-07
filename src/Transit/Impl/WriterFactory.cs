@@ -117,11 +117,11 @@ namespace NForza.Transit.Impl
             JsonWriter jsonWriter = new JsonTextWriter(textWriter);
             IImmutableDictionary<Type, IWriteHandler> handlers = Handlers(customHandlers);
             JsonEmitter emitter;
-            if (verboseMode) 
+            if (verboseMode)
             {
                 emitter = new JsonVerboseEmitter(jsonWriter, GetVerboseHandlers(handlers));
-            } 
-            else 
+            }
+            else
             {
                 emitter = new JsonEmitter(jsonWriter, handlers);
             }
@@ -130,6 +130,12 @@ namespace NForza.Transit.Impl
             WriteCache wc = new WriteCache(!verboseMode);
 
             return new Writer<T>(output, emitter, wc);
+        }
+
+        public static IWriter<T> GetMsgPackInstance<T>(Stream output, IDictionary<Type, IWriteHandler> customHandlers)
+        {
+            // TODO
+            throw new NotImplementedException();
         }
 
         private class Writer<T> : IWriter<T>

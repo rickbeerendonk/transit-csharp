@@ -343,15 +343,17 @@ namespace NForza.Transit.Tests
         [TestMethod]
         public void TestReadMany()
         {
-            // TODO
+            IReader r;
+
+            // TODO Make sure JSON parser can parse number larger than Int64
             /*
             BigInteger expected = BigInteger.Parse("4256768765123454321897654321234567");
-            IReader r = Reader("4256768765123454321897654321234567");
+            r = Reader("4256768765123454321897654321234567");
             BigInteger v = r.Read<BigInteger>();
             Assert.AreEqual<BigInteger>(expected, v);
             */
 
-            IReader r = Reader("true null false \"foo\" 42.2 42");
+            r = Reader("true null false \"foo\" 42.2 42");
             Assert.IsTrue(Reader("true").Read<bool>());
             Assert.IsNull(Reader("null").Read<object>());
             Assert.IsFalse(Reader("false").Read<bool>());

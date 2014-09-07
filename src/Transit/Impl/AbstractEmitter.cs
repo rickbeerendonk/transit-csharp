@@ -285,7 +285,6 @@ namespace NForza.Transit.Impl
         {
             bool supported = false;
 
-            // TODO: Maybe remove GetWriteHandler call and this check and just call tag.
             IWriteHandler h = GetHandler(o);
             if (h != null) 
             { 
