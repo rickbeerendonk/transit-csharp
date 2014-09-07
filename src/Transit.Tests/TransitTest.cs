@@ -202,7 +202,7 @@ namespace NForza.Transit.Tests
         }
 
         [TestMethod]
-        public void TestReadUnknown() 
+        public void TestReadUnknown()
         {
             Assert.AreEqual(TransitFactory.TaggedValue("j", "foo"), Reader("\"~jfoo\"").Read<ITaggedValue>());
             IList<object> l = new List<object> { 1L, 2L };
@@ -242,7 +242,7 @@ namespace NForza.Transit.Tests
         }
 
         [TestMethod]
-        public void TestReadDictionary() 
+        public void TestReadDictionary()
         {
             IDictionary m = Reader("{\"a\": 2, \"b\": 4}").Read<IDictionary>();
 
@@ -308,16 +308,16 @@ namespace NForza.Transit.Tests
             Assert.AreEqual(2, m.Count);
 
             foreach (DictionaryEntry e in m)
-        	{
-                if ((long)e.Value == 1L) 
+            {
+                if ((long)e.Value == 1L)
                 {
                     Ratio r = (Ratio)e.Key;
                     Assert.AreEqual(new BigInteger(1), r.Numerator);
                     Assert.AreEqual(new BigInteger(2), r.Denominator);
                 }
-                else 
+                else
                 {
-                    if ((long)e.Value == 2L) 
+                    if ((long)e.Value == 2L)
                     {
                         IList l = (IList)e.Key;
                         Assert.AreEqual(1L, l[0]);
@@ -399,7 +399,7 @@ namespace NForza.Transit.Tests
 
         #region Writing
 
-        public string Write(object obj, TransitFactory.Format format) 
+        public string Write(object obj, TransitFactory.Format format)
         {
             using (Stream output = new MemoryStream())
             {
@@ -534,7 +534,7 @@ namespace NForza.Transit.Tests
         public void TestWriteBigDecimal()
         {
             Assert.Inconclusive();
-            
+
             // TODO
             //Assert.AreEqual(ScalarVerbose("\"~f42.5\""), WriteJsonVerbose(new BigRational(42.5)));
         }
@@ -574,10 +574,45 @@ namespace NForza.Transit.Tests
         }
 
         [TestMethod]
-        public void testWriteSymbol()
+        public void TestWriteSymbol()
         {
             Assert.AreEqual(ScalarVerbose("\"~$foo\""), WriteJsonVerbose(TransitFactory.Symbol("foo")));
         }
+
+        [TestMethod]
+        public void TestWriteList()
+        {
+            IList l = new ArrayList { 1, 2, 3 };
+
+            Assert.AreEqual("[1,2,3]", WriteJsonVerbose(l));
+            Assert.AreEqual("[1,2,3]", WriteJson(l));
+        }
+
+        [TestMethod]
+        public void TestWritePrimitiveLists()
+        {
+            int[] ints = { 1, 2 };
+            Assert.AreEqual("[1,2]", WriteJsonVerbose(ints));
+
+            long[] longs = { 1L, 2L };
+            Assert.AreEqual("[1,2]", WriteJsonVerbose(longs));
+
+            float[] floats = { 1.5f, 2.78f };
+            Assert.AreEqual("[1.5,2.78]", WriteJsonVerbose(floats));
+
+            bool[] bools = { true, false };
+            Assert.AreEqual("[true,false]", WriteJsonVerbose(bools));
+
+            double[] doubles = { 1.654d, 2.8765d };
+            Assert.AreEqual("[1.654,2.8765]", WriteJsonVerbose(doubles));
+
+            short[] shorts = { 1, 2 };
+            Assert.AreEqual("[1,2]", WriteJsonVerbose(shorts));
+
+            char[] chars = { '5', '/' };
+            Assert.AreEqual("[\"~c5\",\"~c/\"]", WriteJsonVerbose(chars));
+        }
+
 
 
 

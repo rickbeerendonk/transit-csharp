@@ -58,6 +58,7 @@ namespace NForza.Transit.Impl
             builder.Add(typeof(double), doubleHandler);
             // TODO
             //builder.Add(typeof(BigRational), new ToStringWriteHandler("f"));
+            builder.Add(typeof(char), new ToStringWriteHandler("c"));
             builder.Add(typeof(IKeyword), new ToStringWriteHandler(":"));
             builder.Add(typeof(ISymbol), new ToStringWriteHandler("$"));
             builder.Add(typeof(byte[]), new BinaryWriteHandler());
