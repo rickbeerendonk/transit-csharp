@@ -406,11 +406,11 @@ namespace NForza.Transit.Tests
 
         #region Writing
 
-        public string Write(object obj, TransitFactory.Format format)
+        public string Write(object obj, TransitFactory.Format format, IDictionary<Type, IWriteHandler> customHandlers)
         {
             using (Stream output = new MemoryStream())
             {
-                IWriter<object> w = TransitFactory.Writer<object>(format, output);
+                IWriter<object> w = TransitFactory.Writer<object>(format, output, customHandlers);
                 w.Write(obj);
 
                 output.Position = 0;
@@ -421,12 +421,22 @@ namespace NForza.Transit.Tests
 
         public string WriteJsonVerbose(object obj)
         {
-            return Write(obj, TransitFactory.Format.JsonVerbose);
+            return Write(obj, TransitFactory.Format.JsonVerbose, null);
+        }
+
+        public string WriteJsonVerbose(object obj, IDictionary<Type, IWriteHandler> customHandlers)
+        {
+            return Write(obj, TransitFactory.Format.JsonVerbose, customHandlers);
         }
 
         public string WriteJson(object obj)
         {
-            return Write(obj, TransitFactory.Format.Json);
+            return Write(obj, TransitFactory.Format.Json, null);
+        }
+
+        public string WriteJson(object obj, IDictionary<Type, IWriteHandler> customHandlers)
+        {
+            return Write(obj, TransitFactory.Format.Json, customHandlers);
         }
 
         public bool IsEqual(object o1, object o2)
@@ -473,6 +483,30 @@ namespace NForza.Transit.Tests
         public string ScalarVerbose(string value)
         {
             return "{\"~#'\":" + value + "}";
+        }
+
+        class FooWriteHandler : IWriteHandler
+        {
+            public string Tag(object ignored)
+            {
+                return "s";
+            }
+
+            public object Representation(object ignored)
+            {
+                return "NULL";
+            }
+
+            public string StringRepresentation(object ignored)
+            {
+                return null;
+            }
+
+            public IWriteHandler GetVerboseHandler()
+            {
+                return null;
+            }
+
         }
 
         [TestMethod]
@@ -782,6 +816,16 @@ namespace NForza.Transit.Tests
             l2.Add(1L);
             l2.Add(2L);
             Assert.AreEqual("{\"~#point\":[1,2]}", WriteJsonVerbose(TransitFactory.TaggedValue("point", l2)));
+        }
+
+        [TestMethod]
+        public void TestWriteWithCustomHandler()
+        {
+            IDictionary<Type, IWriteHandler> customHandlers = new Dictionary<Type, IWriteHandler>();
+            customHandlers.Add(typeof(NullType), new FooWriteHandler());
+
+            Assert.AreEqual(ScalarVerbose("\"NULL\""), WriteJsonVerbose(null, customHandlers));
+            Assert.AreEqual(Scalar("\"NULL\""), WriteJson(null, customHandlers));
         }
 
         #endregion

@@ -82,7 +82,7 @@ namespace NForza.Transit.Impl
 
             if (customHandlers != null)
             {
-                handlers.AddRange(customHandlers);
+                handlers = handlers.RemoveRange(customHandlers.Keys).AddRange(customHandlers);
             }
 
             return handlers;
