@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.8.*")]
 [assembly: AssemblyFileVersion("0.8.0.0")]
-[assembly: AssemblyInformationalVersion("0.8.2-beta")]
+[assembly: AssemblyInformationalVersion("0.8.3-beta")]
 
 // For tests:
 [assembly: InternalsVisibleTo("Transit.Tests")]
