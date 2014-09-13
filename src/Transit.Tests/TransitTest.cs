@@ -17,6 +17,7 @@
 // limitations under the License.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using NForza.Transit.Impl;
 using NForza.Transit.Java;
 using NForza.Transit.Numerics;
@@ -485,30 +486,6 @@ namespace NForza.Transit.Tests
             return "{\"~#'\":" + value + "}";
         }
 
-        class FooWriteHandler : IWriteHandler
-        {
-            public string Tag(object ignored)
-            {
-                return "s";
-            }
-
-            public object Representation(object ignored)
-            {
-                return "NULL";
-            }
-
-            public string StringRepresentation(object ignored)
-            {
-                return null;
-            }
-
-            public IWriteHandler GetVerboseHandler()
-            {
-                return null;
-            }
-
-        }
-
         [TestMethod]
         public void TestWriteNull()
         {
@@ -821,11 +798,24 @@ namespace NForza.Transit.Tests
         [TestMethod]
         public void TestWriteWithCustomHandler()
         {
-            IDictionary<Type, IWriteHandler> customHandlers = new Dictionary<Type, IWriteHandler>();
-            customHandlers.Add(typeof(NullType), new FooWriteHandler());
+            Mock<IWriteHandler> mock = new Mock<IWriteHandler>();
+            mock.Setup(m => m.Tag(It.IsAny<object>())).Returns("s");
+            mock.Setup(m => m.Representation(It.IsAny<object>())).Returns("NULL");
+            mock.Setup(m => m.StringRepresentation(It.IsAny<object>())).Returns<string>(null);
+            mock.Setup(m => m.GetVerboseHandler()).Returns<IWriteHandler>(null);
 
+            IDictionary<Type, IWriteHandler> customHandlers = new Dictionary<Type, IWriteHandler>();
+            customHandlers.Add(typeof(NullType), mock.Object);
+
+            // JSON-Verbose
             Assert.AreEqual(ScalarVerbose("\"NULL\""), WriteJsonVerbose(null, customHandlers));
+            mock.Verify(m => m.Representation(null));
+            mock.Verify(m => m.GetVerboseHandler());
+
+            // JSON
+            mock.ResetCalls();
             Assert.AreEqual(Scalar("\"NULL\""), WriteJson(null, customHandlers));
+            mock.Verify(m => m.Representation(null));
         }
 
         #endregion

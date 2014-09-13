@@ -157,7 +157,5 @@ namespace NForza.Transit.Impl
                 output.Flush();
             }
         }
-
-
     }
 }
