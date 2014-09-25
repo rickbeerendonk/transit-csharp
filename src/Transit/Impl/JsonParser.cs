@@ -247,6 +247,7 @@ namespace NForza.Transit.Impl
                         }
                 }
 
+                // Process list w/o special decoding or interpretation
                 IListReader lr = (handler != null) ? handler.ListReader() : listBuilder;
                 object l = lr.Init();
                 l = lr.Add(l, firstVal);
@@ -256,8 +257,9 @@ namespace NForza.Transit.Impl
                 return lr.Complete(l);
             }
 
-            // array is empty
-            return listBuilder.Complete(listBuilder.Init());            
+            // Make an empty collection, honoring handler's ListReader, if present
+            IListReader lr2 = (handler != null) ? handler.ListReader() : listBuilder;
+            return lr2.Complete(lr2.Init());
         }
     }
 }
