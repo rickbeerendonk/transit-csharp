@@ -975,5 +975,12 @@ namespace NForza.Transit.Tests
             Assert.AreEqual("link", l2.Render);
             Assert.AreEqual("prompt", l2.Prompt);
         }
+
+        [TestMethod]
+        public void TestEmptySet()
+        {
+            string str = WriteJson(new HashSet<object>());
+            Assert.IsInstanceOfType(Reader(str).Read<ISet<object>>(), typeof(ISet<object>));
+        }
     }
 }
