@@ -41,6 +41,9 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1408.0717\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="MsgPack">
+      <HintPath>..\packages\MsgPack.Cli.0.5.4\lib\net45\MsgPack.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.0.34.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -63,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Java\ConvertTest.cs" />
     <Compile Include="Java\UuidTest.cs" />
+    <Compile Include="TransitMPTest.cs" />
     <Compile Include="TransitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

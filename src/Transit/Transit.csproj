@@ -43,6 +43,7 @@
     <Compile Include="Impl\JsonVerboseEmitter.cs" />
     <Compile Include="Impl\JsonEmitter.cs" />
     <Compile Include="Impl\AbstractEmitter.cs" />
+    <Compile Include="Impl\MsgPackParser.cs" />
     <Compile Include="Impl\Quote.cs" />
     <Compile Include="Impl\ReadHandlers\BinaryReadHandler.cs" />
     <Compile Include="Impl\ReadHandlers\SpecialNumberReadHandler.cs" />
@@ -126,6 +127,9 @@
     <Compile Include="TransitFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="MsgPack">
+      <HintPath>..\packages\MsgPack.Cli.0.5.4\lib\portable-net45+win+wpa81\MsgPack.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>

@@ -16,6 +16,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using MsgPack;
 using Newtonsoft.Json;
 using NForza.Transit.Impl.ReadHandlers;
 using NForza.Transit.Spi;
@@ -132,7 +133,7 @@ namespace NForza.Transit.Impl
             IImmutableDictionary<string, IReadHandler> customHandlers,
             IDefaultReadHandler<object> customDefaultHandler)
         {
-            throw new NotImplementedException();
+            return new MsgPackReader(input, Handlers(customHandlers), DefaultHandler(customDefaultHandler));
         }
 
         private class DefaultReadHandler : IDefaultReadHandler<ITaggedValue>
@@ -220,6 +221,22 @@ namespace NForza.Transit.Impl
                 var streamReader = new StreamReader(input);
                 var jsonTextReader = new JsonTextReader(streamReader);
                 return new JsonParser(jsonTextReader, handlers, defaultHandler, 
+                    dictionaryBuilder, listBuilder);
+            }
+        }
+
+        private class MsgPackReader : Reader
+        {
+            public MsgPackReader(Stream input, IImmutableDictionary<string, IReadHandler> handlers, IDefaultReadHandler<object> defaultHandler)
+                : base(input, handlers, defaultHandler)
+            {
+            }
+
+            protected override IParser CreateParser()
+            {
+                var streamReader = new StreamReader(input);
+                var unpacker = Unpacker.Create(input);
+                return new MsgPackParser(unpacker, handlers, defaultHandler,
                     dictionaryBuilder, listBuilder);
             }
         }
