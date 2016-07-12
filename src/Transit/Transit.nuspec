@@ -6,12 +6,12 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>https://github.com/NForza/transit-csharp/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/NForza/transit-csharp</projectUrl>
+    <licenseUrl>https://github.com/Beerendonk/transit-csharp/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Beerendonk/transit-csharp</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
-    <copyright>Copyright © NForza 2014</copyright>
+    <copyright>Copyright ï¿½ Beerendonk 2014</copyright>
     <tags>Transit</tags>
   </metadata>
 </package>

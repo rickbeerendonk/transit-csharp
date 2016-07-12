@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Transit.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("NForza")]
+[assembly: AssemblyCompany("Beerendonk")]
 [assembly: AssemblyProduct("Transit.Tests")]
-[assembly: AssemblyCopyright("Copyright © NForza 2014")]
+[assembly: AssemblyCopyright("Copyright © Beerendonk 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

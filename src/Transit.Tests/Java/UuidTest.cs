@@ -1,4 +1,4 @@
-﻿// Copyright © 2014 NForza. All Rights Reserved.
+﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@
 // limitations under the License.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NForza.Transit.Java;
+using Beerendonk.Transit.Java;
 using System;
 
-namespace NForza.Transit.Tests.Java
+namespace Beerendonk.Transit.Tests.Java
 {
     [TestClass]
     public class UuidTest

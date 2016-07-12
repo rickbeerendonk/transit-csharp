@@ -1,4 +1,4 @@
-﻿// Copyright © 2014 NForza. All Rights Reserved.
+﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
@@ -16,9 +16,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using NForza.Transit.Numerics;
+using Beerendonk.Transit.Numerics;
 
-namespace NForza.Transit.Impl.ReadHandlers
+namespace Beerendonk.Transit.Impl.ReadHandlers
 {
     /// <summary>
     /// Represents a <see cref="BigRational"/> read handler.
@@ -32,7 +32,7 @@ namespace NForza.Transit.Impl.ReadHandlers
         /// <returns>
         /// The converted object.
         /// </returns>
-        /// <exception cref="NForza.Transit.TransitException">Cannot parse representation as a BigRational.</exception>
+        /// <exception cref="Beerendonk.Transit.TransitException">Cannot parse representation as a BigRational.</exception>
         public object FromRepresentation(object representation)
         {
             BigRational result;

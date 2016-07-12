@@ -1,4 +1,4 @@
-﻿// Copyright © 2014 NForza. All Rights Reserved.
+﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
@@ -17,9 +17,9 @@
 // limitations under the License.
 
 using Newtonsoft.Json;
-using NForza.Transit;
-using NForza.Transit.Impl.WriteHandlers;
-using NForza.Transit.Numerics;
+using Beerendonk.Transit;
+using Beerendonk.Transit.Impl.WriteHandlers;
+using Beerendonk.Transit.Numerics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,7 +27,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Numerics;
 
-namespace NForza.Transit.Impl
+namespace Beerendonk.Transit.Impl
 {
     /// <summary>
     /// Implements a writer factory.

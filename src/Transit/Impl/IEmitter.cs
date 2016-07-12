@@ -1,4 +1,4 @@
-﻿// Copyright © 2014 NForza. All Rights Reserved.
+﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
@@ -16,7 +16,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace NForza.Transit.Impl
+namespace Beerendonk.Transit.Impl
 {
     internal interface IEmitter
     {

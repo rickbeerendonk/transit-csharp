@@ -1,4 +1,4 @@
-﻿// Copyright © 2014 NForza. All Rights Reserved.
+﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
@@ -18,7 +18,7 @@
 
 using System.Numerics;
 
-namespace NForza.Transit.Impl.ReadHandlers
+namespace Beerendonk.Transit.Impl.ReadHandlers
 {
     /// <summary>
     /// Represents a <see cref="BigInteger"/> read handler.
@@ -32,7 +32,7 @@ namespace NForza.Transit.Impl.ReadHandlers
         /// <returns>
         /// The converted object.
         /// </returns>
-        /// <exception cref="NForza.Transit.TransitException">Cannot parse representation as a BigInteger:  + representation</exception>
+        /// <exception cref="Beerendonk.Transit.TransitException">Cannot parse representation as a BigInteger:  + representation</exception>
         public object FromRepresentation(object representation)
         {
             BigInteger result;

@@ -1,4 +1,4 @@
-﻿// Copyright © 2014 NForza. All Rights Reserved.
+﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
@@ -17,7 +17,7 @@
 // limitations under the License.
 
 using System.Text;
-namespace NForza.Transit.Impl
+namespace Beerendonk.Transit.Impl
 {
     internal static class Util
     {

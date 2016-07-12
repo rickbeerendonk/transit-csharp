@@ -1,4 +1,4 @@
-// Copyright © 2014 NForza. All Rights Reserved.
+// Copyright ï¿½ 2014 Rick Beerendonk. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 
 using System;
 
-namespace NForza.Transit
+namespace Beerendonk.Transit
 {
     /// <summary>
     /// Class for Transit exceptions.

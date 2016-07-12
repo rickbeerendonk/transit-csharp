@@ -1,4 +1,4 @@
-﻿// Copyright © 2014 NForza. All Rights Reserved.
+﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
@@ -18,9 +18,9 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using NForza.Transit.Impl;
-using NForza.Transit.Java;
-using NForza.Transit.Numerics;
+using Beerendonk.Transit.Impl;
+using Beerendonk.Transit.Java;
+using Beerendonk.Transit.Numerics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +29,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 
-namespace NForza.Transit.Tests
+namespace Beerendonk.Transit.Tests
 {
     [TestClass]
     public class TransitTest
@@ -133,7 +133,7 @@ namespace NForza.Transit.Tests
         {
             var d = new DateTime(2014, 8, 9, 10, 6, 21, 497, DateTimeKind.Local);
             var expected = new DateTimeOffset(d).LocalDateTime;
-            long javaTime = NForza.Transit.Java.Convert.ToJavaTime(d);
+            long javaTime = Beerendonk.Transit.Java.Convert.ToJavaTime(d);
 
             string timeString = JsonParser.FormatDateTime(d);
             Assert.AreEqual(expected, Reader("\"~t" + timeString + "\"").Read<DateTime>());
@@ -394,9 +394,9 @@ namespace NForza.Transit.Tests
         [TestMethod]
         public void TestReadLink()
         {
-            IReader r = Reader("[\"~#link\" , {\"href\": \"~rhttp://www.nforza.nl\", \"rel\": \"a-rel\", \"name\": \"a-name\", \"prompt\": \"a-prompt\", \"render\": \"link or image\"}]");
+            IReader r = Reader("[\"~#link\" , {\"href\": \"~rhttp://www.Beerendonk.nl\", \"rel\": \"a-rel\", \"name\": \"a-name\", \"prompt\": \"a-prompt\", \"render\": \"link or image\"}]");
             ILink v = r.Read<ILink>();
-            Assert.AreEqual(new Uri("http://www.nforza.nl"), v.Href);
+            Assert.AreEqual(new Uri("http://www.Beerendonk.nl"), v.Href);
             Assert.AreEqual("a-rel", v.Rel);
             Assert.AreEqual("a-name", v.Name);
             Assert.AreEqual("a-prompt", v.Prompt);
@@ -605,7 +605,7 @@ namespace NForza.Transit.Tests
         {
             var d = DateTime.Now;
             String dateString = AbstractParser.FormatDateTime(d);
-            long dateLong = NForza.Transit.Java.Convert.ToJavaTime(d);
+            long dateLong = Beerendonk.Transit.Java.Convert.ToJavaTime(d);
             Assert.AreEqual(ScalarVerbose("\"~t" + dateString + "\""), WriteJsonVerbose(d));
             Assert.AreEqual(Scalar("\"~m" + dateLong + "\""), WriteJson(d));
         }

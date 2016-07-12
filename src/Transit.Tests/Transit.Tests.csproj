@@ -6,7 +6,7 @@
     <ProjectGuid>{0A95E77B-6676-42A4-9BEB-C90295E1079D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NForza.Transit.Tests</RootNamespace>
+    <RootNamespace>Beerendonk.Transit.Tests</RootNamespace>
     <AssemblyName>Transit.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -42,7 +42,7 @@
     <Preliminary>True</Preliminary>
     <NamingMethod>MemberName</NamingMethod>
     <HelpTitle>Transit C# developer API</HelpTitle>
-    <CopyrightText>Copyright &amp;#169%3b 2014 NForza. All Rights Reserved.</CopyrightText>
+    <CopyrightText>Copyright &amp;#169%3b 2014 Rick Beerendonk. All Rights Reserved.</CopyrightText>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <ComponentConfigurations>
       <ComponentConfig id="API Token Resolution" enabled="True">
@@ -61,24 +61,24 @@
     </ComponentConfigurations>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter, AutoDocumentDispose</MissingTags>
     <ApiFilter>
-      <Filter entryType="Namespace" fullName="NForza.Transit.Impl" isExposed="False">
-  <Filter entryType="Class" fullName="NForza.Transit.Impl.Keyword" filterName="Keyword" isExposed="True" />
-  <Filter entryType="Class" fullName="NForza.Transit.Impl.Link" filterName="Link" isExposed="True" />
-  <Filter entryType="Class" fullName="NForza.Transit.Impl.Ratio" filterName="Ratio" isExposed="True" />
-  <Filter entryType="Class" fullName="NForza.Transit.Impl.Symbol" filterName="Symbol" isExposed="True" />
-  <Filter entryType="Class" fullName="NForza.Transit.Impl.TaggedValue" filterName="TaggedValue" isExposed="True" />
+      <Filter entryType="Namespace" fullName="Beerendonk.Transit.Impl" isExposed="False">
+  <Filter entryType="Class" fullName="Beerendonk.Transit.Impl.Keyword" filterName="Keyword" isExposed="True" />
+  <Filter entryType="Class" fullName="Beerendonk.Transit.Impl.Link" filterName="Link" isExposed="True" />
+  <Filter entryType="Class" fullName="Beerendonk.Transit.Impl.Ratio" filterName="Ratio" isExposed="True" />
+  <Filter entryType="Class" fullName="Beerendonk.Transit.Impl.Symbol" filterName="Symbol" isExposed="True" />
+  <Filter entryType="Class" fullName="Beerendonk.Transit.Impl.TaggedValue" filterName="TaggedValue" isExposed="True" />
 </Filter>
-<Filter entryType="Namespace" fullName="NForza.Transit.Impl.ReadHandlers" isExposed="False" />
-<Filter entryType="Namespace" fullName="NForza.Transit.Java" isExposed="False" /></ApiFilter>
+<Filter entryType="Namespace" fullName="Beerendonk.Transit.Impl.ReadHandlers" isExposed="False" />
+<Filter entryType="Namespace" fullName="Beerendonk.Transit.Java" isExposed="False" /></ApiFilter>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected</VisibleItems>
     <NamespaceSummaries>
-      <NamespaceSummaryItem name="NForza.Transit" isDocumented="True">Contains the main transit interfaces and classes.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="NForza.Transit.Impl" isDocumented="False">Contains the interface implementations.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="NForza.Transit.Impl.ReadHandlers" isDocumented="False">Contains the read handlers</NamespaceSummaryItem>
-<NamespaceSummaryItem name="NForza.Transit.Java" isDocumented="False">Contains .NET versions of Java types.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="NForza.Transit.Numerics" isDocumented="True">Contains numerics that are not part of the .NET Framework.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Beerendonk.Transit" isDocumented="True">Contains the main transit interfaces and classes.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Beerendonk.Transit.Impl" isDocumented="False">Contains the interface implementations.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Beerendonk.Transit.Impl.ReadHandlers" isDocumented="False">Contains the read handlers</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Beerendonk.Transit.Java" isDocumented="False">Contains .NET versions of Java types.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Beerendonk.Transit.Numerics" isDocumented="True">Contains numerics that are not part of the .NET Framework.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="NForza.Transit.Spi" isDocumented="True">Provides extension points for other .NET languages.</NamespaceSummaryItem></NamespaceSummaries>
+<NamespaceSummaryItem name="Beerendonk.Transit.Spi" isDocumented="True">Provides extension points for other .NET languages.</NamespaceSummaryItem></NamespaceSummaries>
     <WebsiteSdkLinkType>Msdn</WebsiteSdkLinkType>
     <HtmlSdkLinkType>Msdn</HtmlSdkLinkType>
     <IncludeFavorites>False</IncludeFavorites>

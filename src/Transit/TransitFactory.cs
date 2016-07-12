@@ -1,4 +1,4 @@
-﻿// Copyright © 2014 NForza. All Rights Reserved.
+﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
@@ -16,15 +16,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using NForza.Transit.Impl;
-using NForza.Transit.Spi;
+using Beerendonk.Transit.Impl;
+using Beerendonk.Transit.Spi;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Numerics;
 
-namespace NForza.Transit
+namespace Beerendonk.Transit
 {
     /// <summary>
     /// Main entry point for using transit-java library. Provides methods to construct

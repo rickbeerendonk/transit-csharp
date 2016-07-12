@@ -8,7 +8,7 @@
     <ProjectGuid>{E4858DF4-50A2-476E-AB3D-2C901D6ED24D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NForza.Transit</RootNamespace>
+    <RootNamespace>Beerendonk.Transit</RootNamespace>
     <AssemblyName>Transit</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>

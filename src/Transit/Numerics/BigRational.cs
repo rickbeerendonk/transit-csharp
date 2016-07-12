@@ -41,7 +41,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace NForza.Transit.Numerics
+namespace Beerendonk.Transit.Numerics
 {
     /// <summary>
     /// Represents a rational with infinite precision.

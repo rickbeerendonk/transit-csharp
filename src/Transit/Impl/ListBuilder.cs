@@ -1,4 +1,4 @@
-﻿// Copyright © 2014 NForza. All Rights Reserved.
+﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
@@ -19,7 +19,7 @@
 using System.Collections;
 using System.Collections.Immutable;
 
-namespace NForza.Transit.Impl
+namespace Beerendonk.Transit.Impl
 {
     /// <summary>
     /// Represents a list builder.

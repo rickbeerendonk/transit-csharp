@@ -6,7 +6,7 @@
 Transit is a data format and a set of libraries for conveying values between applications written in different languages. This library provides support for marshalling Transit data to/from C#.
 
 * [Rationale](http://blog.cognitect.com/blog/2014/7/22/transit)
-* [API docs](http://nforza.github.io/transit-csharp/)
+* [API docs](http://rickbeerendonk.github.io/transit-csharp/)
 * [Specification](http://github.com/cognitect/transit-format)
 
 This implementation's major.minor version number corresponds to the version of the Transit specification it supports.
@@ -37,9 +37,9 @@ This is a Portable Class Library with the following targets:
 |boolean|System.Boolean|System.Boolean|
 |integer|System.Byte, System.Int16, System.Int32, System.Int64|System.Int64|
 |decimal|System.Single, System.Double|System.Double|
-|keyword|NForza.Transit.IKeyword|NForza.Transit.IKeyword|
-|symbol|NForza.Transit.ISymbol|NForza.Transit.ISymbol|
-|big decimal|_not implemented_|NForza.Transit.Numerics.BigRational|
+|keyword|Beerendonk.Transit.IKeyword|Beerendonk.Transit.IKeyword|
+|symbol|Beerendonk.Transit.ISymbol|Beerendonk.Transit.ISymbol|
+|big decimal|_not implemented_|Beerendonk.Transit.Numerics.BigRational|
 |big integer|System.Numerics.BigInteger|System.Numerics.BigInteger|
 |time|System.DateTime|System.DateTime|
 |uri|System.Uri|System.Uri|
@@ -49,15 +49,15 @@ This is a Portable Class Library with the following targets:
 |list|System.Collections.Generic.IEnumerable<>|System.Collections.Generic.IEnumerable<object>|
 |set|System.Collections.Generic.ISet<>|System.Collections.Generic.ISet<object>|
 |map|System.Collections.Generic.IDictionary<,>|System.Collections.Generic.IDictionary<object, object>|
-|link|NForza.Transit.ILink|NForza.Transit.ILink|
-|ratio +|NForza.Transit.IRatio|NForza.Transit.IRatio|
+|link|Beerendonk.Transit.ILink|Beerendonk.Transit.ILink|
+|ratio +|Beerendonk.Transit.IRatio|Beerendonk.Transit.IRatio|
 
 \+ Extension type
 
 ## Layered Implementations
 
 ## Copyright and License
-Copyright © 2014 NForza.
+Copyright © 2014 Rick Beerendonk.
 
 This library is a C# port of the Java version created and maintained by Cognitect, therefore
 

@@ -1,4 +1,4 @@
-﻿// Copyright © 2014 NForza. All Rights Reserved.
+﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
@@ -19,7 +19,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NForza.Transit.Impl.WriteHandlers
+namespace Beerendonk.Transit.Impl.WriteHandlers
 {
     internal class DictionaryWriteHandler : AbstractWriteHandler, IAbstractEmitterAware
     {
