@@ -37,13 +37,13 @@ internal class JsonVerboseEmitter : JsonEmitter
     public JsonVerboseEmitter(
         JsonWriter jsonWriter,
         IImmutableDictionary<Type, IWriteHandler> handlers,
-        IWriteHandler defaultWriteHandler,
-        Func<object, object> transform)
+        IWriteHandler? defaultWriteHandler,
+        Func<object, object>? transform)
         : base(jsonWriter, handlers, defaultWriteHandler, transform)
     {
     }
 
-    public override void EmitString(string prefix, string tag, string s, bool asDictionaryKey, WriteCache cache)
+    public override void EmitString(string? prefix, string? tag, string s, bool asDictionaryKey, WriteCache cache)
     {
         string outString = cache.CacheWrite(Util.MaybePrefix(prefix, tag, s), asDictionaryKey);
         if (asDictionaryKey)
@@ -52,7 +52,7 @@ internal class JsonVerboseEmitter : JsonEmitter
             jsonWriter.WriteValue(outString);
     }
 
-    protected override void EmitTagged(string t, object obj, bool ignored, WriteCache cache)
+    protected override void EmitTagged(string t, object? obj, bool ignored, WriteCache cache)
     {
         EmitDictionaryStart(1L);
         EmitString(Constants.EscTag, t, "", true, cache);

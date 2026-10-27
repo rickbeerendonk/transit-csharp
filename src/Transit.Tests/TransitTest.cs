@@ -46,20 +46,20 @@ public class TransitTest
     [TestMethod]
     public void TestReadString()
     {
-        Assert.AreEqual("foo", Reader("\"foo\"").Read<string>());
-        Assert.AreEqual("~foo", Reader("\"~~foo\"").Read<string>());
-        Assert.AreEqual("`foo", Reader("\"~`foo\"").Read<string>());
-        Assert.AreEqual("foo", Reader("\"~#foo\"").Read<Tag>().GetValue());
-        Assert.AreEqual("^foo", Reader("\"~^foo\"").Read<string>());
+        Assert.AreEqual("foo", Reader("\"foo\"").Read<string>()!);
+        Assert.AreEqual("~foo", Reader("\"~~foo\"").Read<string>()!);
+        Assert.AreEqual("`foo", Reader("\"~`foo\"").Read<string>()!);
+        Assert.AreEqual("foo", Reader("\"~#foo\"").Read<Tag>()!.GetValue());
+        Assert.AreEqual("^foo", Reader("\"~^foo\"").Read<string>()!);
     }
 
     [TestMethod]
     public void TestReadBoolean()
     {
-        Assert.IsTrue(Reader("\"~?t\"").Read<bool>());
-        Assert.IsFalse(Reader("\"~?f\"").Read<bool>());
+        Assert.IsTrue(Reader("\"~?t\"").Read<bool>()!);
+        Assert.IsFalse(Reader("\"~?f\"").Read<bool>()!);
 
-        IDictionary d = Reader("{\"~?t\":1,\"~?f\":2}").Read<IDictionary>();
+        IDictionary d = Reader("{\"~?t\":1,\"~?f\":2}").Read<IDictionary>()!;
         Assert.AreEqual(1L, d[true]);
         Assert.AreEqual(2L, d[false]);
     }
@@ -68,28 +68,28 @@ public class TransitTest
     public void TestReadNull()
     {
         IReader r = Reader("\"~_\"");
-        object v = r.Read<object>();
+        object? v = r.Read<object>();
         Assert.IsNull(v);
     }
 
     [TestMethod]
     public void TestReadKeyword()
     {
-        IKeyword v = Reader("\"~:foo\"").Read<IKeyword>();
+        IKeyword v = Reader("\"~:foo\"").Read<IKeyword>()!;
         Assert.AreEqual("foo", v.ToString());
 
         IReader r = Reader("[\"~:foo\",\"^" + (char)WriteCache.BaseCharIdx + "\",\"^" + (char)WriteCache.BaseCharIdx + "\"]");
-        IList v2 = r.Read<IList>();
-        Assert.AreEqual("foo", v2[0].ToString());
-        Assert.AreEqual("foo", v2[1].ToString());
-        Assert.AreEqual("foo", v2[2].ToString());
+        IList v2 = r.Read<IList>()!;
+        Assert.AreEqual("foo", v2[0]!.ToString());
+        Assert.AreEqual("foo", v2[1]!.ToString());
+        Assert.AreEqual("foo", v2[2]!.ToString());
     }
 
     [TestMethod]
     public void TestReadInteger()
     {
         IReader r = Reader("\"~i42\"");
-        long v = r.Read<long>();
+        long v = r.Read<long>()!;
         Assert.AreEqual<long>(42L, v);
     }
 
@@ -98,35 +98,35 @@ public class TransitTest
     {
         BigInteger expected = BigInteger.Parse("4256768765123454321897654321234567");
         IReader r = Reader("\"~n4256768765123454321897654321234567\"");
-        BigInteger v = r.Read<BigInteger>();
+        BigInteger v = r.Read<BigInteger>()!;
         Assert.AreEqual<BigInteger>(expected, v);
     }
 
     [TestMethod]
     public void TestReadDouble()
     {
-        Assert.AreEqual<double>(42.5D, Reader("\"~d42.5\"").Read<double>());
+        Assert.AreEqual<double>(42.5D, Reader("\"~d42.5\"").Read<double>()!);
     }
 
     [TestMethod]
     public void TestReadSpecialNumbers()
     {
-        Assert.AreEqual<double>(double.NaN, Reader("\"~zNaN\"").Read<double>());
-        Assert.AreEqual<double>(double.PositiveInfinity, Reader("\"~zINF\"").Read<double>());
-        Assert.AreEqual<double>(double.NegativeInfinity, Reader("\"~z-INF\"").Read<double>());
+        Assert.AreEqual<double>(double.NaN, Reader("\"~zNaN\"").Read<double>()!);
+        Assert.AreEqual<double>(double.PositiveInfinity, Reader("\"~zINF\"").Read<double>()!);
+        Assert.AreEqual<double>(double.NegativeInfinity, Reader("\"~z-INF\"").Read<double>()!);
     }
 
     [TestMethod]
     public void TestReadBigRational()
     {
-        Assert.AreEqual(new BigRational(12.345M), Reader("\"~f12.345\"").Read<BigRational>());
-        Assert.AreEqual(new BigRational(-12.345M), Reader("\"~f-12.345\"").Read<BigRational>());
-        Assert.AreEqual(new BigRational(0.1001M), Reader("\"~f0.1001\"").Read<BigRational>());
-        Assert.AreEqual(new BigRational(0.01M), Reader("\"~f0.01\"").Read<BigRational>());
-        Assert.AreEqual(new BigRational(0.1M), Reader("\"~f0.1\"").Read<BigRational>());
-        Assert.AreEqual(new BigRational(1M), Reader("\"~f1\"").Read<BigRational>());
-        Assert.AreEqual(new BigRational(10M), Reader("\"~f10\"").Read<BigRational>());
-        Assert.AreEqual(new BigRational(420.0057M), Reader("\"~f420.0057\"").Read<BigRational>());
+        Assert.AreEqual(new BigRational(12.345M), Reader("\"~f12.345\"").Read<BigRational>()!);
+        Assert.AreEqual(new BigRational(-12.345M), Reader("\"~f-12.345\"").Read<BigRational>()!);
+        Assert.AreEqual(new BigRational(0.1001M), Reader("\"~f0.1001\"").Read<BigRational>()!);
+        Assert.AreEqual(new BigRational(0.01M), Reader("\"~f0.01\"").Read<BigRational>()!);
+        Assert.AreEqual(new BigRational(0.1M), Reader("\"~f0.1\"").Read<BigRational>()!);
+        Assert.AreEqual(new BigRational(1M), Reader("\"~f1\"").Read<BigRational>()!);
+        Assert.AreEqual(new BigRational(10M), Reader("\"~f10\"").Read<BigRational>()!);
+        Assert.AreEqual(new BigRational(420.0057M), Reader("\"~f420.0057\"").Read<BigRational>()!);
     }
 
     [TestMethod]
@@ -137,18 +137,18 @@ public class TransitTest
         long javaTime = Beerendonk.Transit.Java.Convert.ToJavaTime(d);
 
         string timeString = JsonParser.FormatDateTime(d);
-        Assert.AreEqual(expected, Reader("\"~t" + timeString + "\"").Read<DateTime>());
+        Assert.AreEqual(expected, Reader("\"~t" + timeString + "\"").Read<DateTime>()!);
 
-        Assert.AreEqual(expected, Reader("{\"~#m\": " + javaTime + "}").Read<DateTime>());
+        Assert.AreEqual(expected, Reader("{\"~#m\": " + javaTime + "}").Read<DateTime>()!);
 
         timeString = new DateTimeOffset(d).UtcDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'");
-        Assert.AreEqual(expected, Reader("\"~t" + timeString + "\"").Read<DateTime>());
+        Assert.AreEqual(expected, Reader("\"~t" + timeString + "\"").Read<DateTime>()!);
 
         timeString = new DateTimeOffset(d).UtcDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        Assert.AreEqual(expected.AddMilliseconds(-497D), Reader("\"~t" + timeString + "\"").Read<DateTime>());
+        Assert.AreEqual(expected.AddMilliseconds(-497D), Reader("\"~t" + timeString + "\"").Read<DateTime>()!);
 
         timeString = new DateTimeOffset(d).UtcDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.fff-00:00");
-        Assert.AreEqual(expected, Reader("\"~t" + timeString + "\"").Read<DateTime>());
+        Assert.AreEqual(expected, Reader("\"~t" + timeString + "\"").Read<DateTime>()!);
     }
 
     [TestMethod]
@@ -158,8 +158,8 @@ public class TransitTest
         long hi64 = ((Uuid)guid).MostSignificantBits;
         long lo64 = ((Uuid)guid).LeastSignificantBits;
 
-        Assert.AreEqual(guid, Reader("\"~u" + guid.ToString() + "\"").Read<Guid>());
-        Assert.AreEqual(guid, Reader("{\"~#u\": [" + hi64 + ", " + lo64 + "]}").Read<Guid>());
+        Assert.AreEqual(guid, Reader("\"~u" + guid.ToString() + "\"").Read<Guid>()!);
+        Assert.AreEqual(guid, Reader("{\"~#u\": [" + hi64 + ", " + lo64 + "]}").Read<Guid>()!);
     }
 
     [TestMethod]
@@ -167,7 +167,7 @@ public class TransitTest
     {
         Uri expected = new Uri("http://www.foo.com");
         IReader r = Reader("\"~rhttp://www.foo.com\"");
-        Uri v = r.Read<Uri>();
+        Uri v = r.Read<Uri>()!;
         Assert.AreEqual(expected, v);
     }
 
@@ -175,7 +175,7 @@ public class TransitTest
     public void TestReadSymbol()
     {
         IReader r = Reader("\"~$foo\"");
-        ISymbol v = r.Read<ISymbol>();
+        ISymbol v = r.Read<ISymbol>()!;
         Assert.AreEqual("foo", v.ToString());
     }
 
@@ -183,7 +183,7 @@ public class TransitTest
     public void TestReadCharacter()
     {
         IReader r = Reader("\"~cf\"");
-        char v = r.Read<char>();
+        char v = r.Read<char>()!;
         Assert.AreEqual('f', v);
     }
 
@@ -192,7 +192,7 @@ public class TransitTest
     {
         byte[] bytes = Encoding.ASCII.GetBytes("foobarbaz");
         string encoded = System.Convert.ToBase64String(bytes);
-        byte[] decoded = Reader("\"~b" + encoded + "\"").Read<byte[]>();
+        byte[] decoded = Reader("\"~b" + encoded + "\"").Read<byte[]>()!;
 
         Assert.AreEqual(bytes.Length, decoded.Length);
 
@@ -209,19 +209,19 @@ public class TransitTest
     [TestMethod]
     public void TestReadUnknown()
     {
-        Assert.AreEqual(TransitFactory.TaggedValue("j", "foo"), Reader("\"~jfoo\"").Read<ITaggedValue>());
+        Assert.AreEqual(TransitFactory.TaggedValue("j", "foo"), Reader("\"~jfoo\"").Read<ITaggedValue>()!);
         IList<object> l = new List<object> { 1L, 2L };
 
         ITaggedValue expected = TransitFactory.TaggedValue("point", l);
-        ITaggedValue result = Reader("{\"~#point\":[1,2]}").Read<ITaggedValue>();
+        ITaggedValue result = Reader("{\"~#point\":[1,2]}").Read<ITaggedValue>()!;
         Assert.AreEqual(expected.Tag, result.Tag);
-        CollectionAssert.AreEqual(((IList<object>)expected.Representation).ToArray(), ((IList<object>)result.Representation).ToArray());
+        CollectionAssert.AreEqual(((IList<object>)expected.Representation!).ToArray(), ((IList<object>)result.Representation!).ToArray());
     }
 
     [TestMethod]
     public void TestReadList()
     {
-        IList l = Reader("[1, 2, 3]").Read<IList>();
+        IList l = Reader("[1, 2, 3]").Read<IList>()!;
 
         Assert.IsTrue(l is IList<object>);
         Assert.AreEqual(3, l.Count);
@@ -237,19 +237,19 @@ public class TransitTest
         var d = new DateTime(2014, 8, 10, 13, 34, 35);
         String t = JsonParser.FormatDateTime(d);
 
-        IList l = Reader("[\"~:foo\", \"~t" + t + "\", \"~?t\"]").Read<IList>();
+        IList l = Reader("[\"~:foo\", \"~t" + t + "\", \"~?t\"]").Read<IList>()!;
 
         Assert.AreEqual(3, l.Count);
 
-        Assert.AreEqual("foo", l[0].ToString());
-        Assert.AreEqual(d, (DateTime)l[1]);
-        Assert.IsTrue((bool)l[2]);
+        Assert.AreEqual("foo", l[0]!.ToString());
+        Assert.AreEqual(d, (DateTime)l[1]!);
+        Assert.IsTrue((bool)l[2]!);
     }
 
     [TestMethod]
     public void TestReadDictionary()
     {
-        IDictionary m = Reader("{\"a\": 2, \"b\": 4}").Read<IDictionary>();
+        IDictionary m = Reader("{\"a\": 2, \"b\": 4}").Read<IDictionary>()!;
 
         Assert.AreEqual(2, m.Count);
 
@@ -262,18 +262,18 @@ public class TransitTest
     {
         Guid guid = Guid.NewGuid();
 
-        IDictionary m = Reader("{\"a\": \"~:foo\", \"b\": \"~u" + (Uuid)guid + "\"}").Read<IDictionary>();
+        IDictionary m = Reader("{\"a\": \"~:foo\", \"b\": \"~u" + (Uuid)guid + "\"}").Read<IDictionary>()!;
 
         Assert.AreEqual(2, m.Count);
 
-        Assert.AreEqual("foo", m["a"].ToString());
+        Assert.AreEqual("foo", m["a"]!.ToString());
         Assert.AreEqual(guid, m["b"]);
     }
 
     [TestMethod]
     public void TestReadSet()
     {
-        ISet<object> s = Reader("{\"~#set\": [1, 2, 3]}").Read<ISet<object>>();
+        ISet<object> s = Reader("{\"~#set\": [1, 2, 3]}").Read<ISet<object>>()!;
 
         Assert.AreEqual(3, s.Count);
 
@@ -285,7 +285,7 @@ public class TransitTest
     [TestMethod]
     public void TestReadEnumerable()
     {
-        IEnumerable l = Reader("{\"~#list\": [1, 2, 3]}").Read<IEnumerable>();
+        IEnumerable l = Reader("{\"~#list\": [1, 2, 3]}").Read<IEnumerable>()!;
         IEnumerable<object> lo = l.OfType<object>();
 
         Assert.IsTrue(l is IEnumerable);
@@ -299,7 +299,7 @@ public class TransitTest
     [TestMethod]
     public void TestReadRatio()
     {
-        IRatio r = Reader("{\"~#ratio\": [\"~n1\",\"~n2\"]}").Read<IRatio>();
+        IRatio r = Reader("{\"~#ratio\": [\"~n1\",\"~n2\"]}").Read<IRatio>()!;
 
         Assert.AreEqual(BigInteger.One, r.Numerator);
         Assert.AreEqual(BigInteger.One + 1, r.Denominator);
@@ -309,13 +309,13 @@ public class TransitTest
     [TestMethod]
     public void TestReadCDictionary()
     {
-        IDictionary m = Reader("{\"~#cmap\": [{\"~#ratio\":[\"~n1\",\"~n2\"]},1,{\"~#list\":[1,2,3]},2]}").Read<IDictionary>();
+        IDictionary m = Reader("{\"~#cmap\": [{\"~#ratio\":[\"~n1\",\"~n2\"]},1,{\"~#list\":[1,2,3]},2]}").Read<IDictionary>()!;
 
         Assert.AreEqual(2, m.Count);
 
         foreach (DictionaryEntry e in m)
         {
-            if ((long)e.Value == 1L)
+            if ((long)e.Value! == 1L)
             {
                 Ratio r = (Ratio)e.Key;
                 Assert.AreEqual(new BigInteger(1), r.Numerator);
@@ -337,7 +337,7 @@ public class TransitTest
     [TestMethod]
     public void TestReadSetTagAsString()
     {
-        object o = Reader("{\"~~#set\": [1, 2, 3]}").Read<object>();
+        object o = Reader("{\"~~#set\": [1, 2, 3]}").Read<object>()!;
         Assert.IsFalse(o is ISet<object>);
         Assert.IsTrue(o is IDictionary);
     }
@@ -351,17 +351,17 @@ public class TransitTest
         /*
         BigInteger expected = BigInteger.Parse("4256768765123454321897654321234567");
         r = Reader("4256768765123454321897654321234567");
-        BigInteger v = r.Read<BigInteger>();
+        BigInteger v = r.Read<BigInteger>()!;
         Assert.AreEqual<BigInteger>(expected, v);
         */
 
         r = Reader("true null false \"foo\" 42.2 42");
-        Assert.IsTrue(r.Read<bool>());
-        Assert.IsNull(r.Read<object>());
-        Assert.IsFalse(r.Read<bool>());
-        Assert.AreEqual("foo", r.Read<string>());
-        Assert.AreEqual(42.2, r.Read<double>());
-        Assert.AreEqual(42L, r.Read<long>());
+        Assert.IsTrue(r.Read<bool>()!);
+        Assert.IsNull(r.Read<object>()!);
+        Assert.IsFalse(r.Read<bool>()!);
+        Assert.AreEqual("foo", r.Read<string>()!);
+        Assert.AreEqual(42.2, r.Read<double>()!);
+        Assert.AreEqual(42L, r.Read<long>()!);
     }
 
     [TestMethod]
@@ -388,7 +388,7 @@ public class TransitTest
     public void TestReadIdentity()
     {
         IReader r = Reader("\"~\\'42\"");
-        string v = r.Read<string>();
+        string v = r.Read<string>()!;
         Assert.AreEqual<string>("42", v);
     }
 
@@ -396,7 +396,7 @@ public class TransitTest
     public void TestReadLink()
     {
         IReader r = Reader("[\"~#link\" , {\"href\": \"~rhttp://www.Beerendonk.nl\", \"rel\": \"a-rel\", \"name\": \"a-name\", \"prompt\": \"a-prompt\", \"render\": \"link or image\"}]");
-        ILink v = r.Read<ILink>();
+        ILink v = r.Read<ILink>()!;
         Assert.AreEqual(new Uri("http://www.Beerendonk.nl"), v.Href);
         Assert.AreEqual("a-rel", v.Rel);
         Assert.AreEqual("a-name", v.Name);
@@ -408,7 +408,7 @@ public class TransitTest
 
     #region Writing
 
-    public string Write(object obj, TransitFactory.Format format, IDictionary<Type, IWriteHandler> customHandlers)
+    public string Write(object? obj, TransitFactory.Format format, IDictionary<Type, IWriteHandler>? customHandlers)
     {
         using (Stream output = new MemoryStream())
         {
@@ -421,22 +421,22 @@ public class TransitTest
         }
     }
 
-    public string WriteJsonVerbose(object obj)
+    public string WriteJsonVerbose(object? obj)
     {
         return Write(obj, TransitFactory.Format.JsonVerbose, null);
     }
 
-    public string WriteJsonVerbose(object obj, IDictionary<Type, IWriteHandler> customHandlers)
+    public string WriteJsonVerbose(object? obj, IDictionary<Type, IWriteHandler>? customHandlers)
     {
         return Write(obj, TransitFactory.Format.JsonVerbose, customHandlers);
     }
 
-    public string WriteJson(object obj)
+    public string WriteJson(object? obj)
     {
         return Write(obj, TransitFactory.Format.Json, null);
     }
 
-    public string WriteJson(object obj, IDictionary<Type, IWriteHandler> customHandlers)
+    public string WriteJson(object? obj, IDictionary<Type, IWriteHandler>? customHandlers)
     {
         return Write(obj, TransitFactory.Format.Json, customHandlers);
     }
@@ -453,7 +453,7 @@ public class TransitTest
     public void TestRoundTrip()
     {
         object inObject = true;
-        object outObject;
+        object? outObject;
 
         string s;
 
@@ -471,7 +471,7 @@ public class TransitTest
         using (Stream input = new MemoryStream(buffer))
         {
             IReader reader = TransitFactory.Reader(TransitFactory.Format.Json, input);
-            outObject = reader.Read<object>();
+            outObject = reader.Read<object>()!;
         }
 
         Assert.IsTrue(IsEqual(inObject, outObject));
@@ -502,7 +502,7 @@ public class TransitTest
         {
             ["message"] = "repeated value",
             ["alias"] = "repeated value",
-            ["items"] = new List<object>
+            ["items"] = new List<object?>
             {
                 42,
                 true,
@@ -523,20 +523,20 @@ public class TransitTest
         output.Position = 0;
 
         IReader messagePackReader = TransitFactory.Reader(TransitFactory.Format.MsgPack, output);
-        IDictionary decoded = messagePackReader.Read<IDictionary>();
+        IDictionary decoded = messagePackReader.Read<IDictionary>()!;
         Assert.AreEqual("repeated value", decoded["message"]);
         Assert.AreEqual("repeated value", decoded["alias"]);
-        IList items = (IList)decoded["items"];
+        IList items = (IList)decoded["items"]!;
         Assert.AreEqual(42L, items[0]);
         Assert.AreEqual(true, items[1]);
         Assert.AreEqual(TransitFactory.Keyword("foo"), items[2]);
-        CollectionAssert.AreEqual(new byte[] { 1, 2, 3 }, (byte[])items[3]);
+        CollectionAssert.AreEqual(new byte[] { 1, 2, 3 }, (byte[])items[3]!);
         Assert.IsNull(items[4]);
-        IDictionary composite = (IDictionary)decoded["composite"];
+        IDictionary composite = (IDictionary)decoded["composite"]!;
         ITaggedValue compositeKey = (ITaggedValue)composite.Keys.Cast<object>().Single();
         Assert.AreEqual("complex-key", compositeKey.Tag);
         Assert.AreEqual("value", composite[compositeKey]);
-        Assert.AreEqual("following value", messagePackReader.Read<string>());
+        Assert.AreEqual("following value", messagePackReader.Read<string>()!);
     }
 
     [TestMethod]
@@ -545,13 +545,13 @@ public class TransitTest
         var value = new BigRational(new BigInteger(1234567890123456789L), new BigInteger(100));
 
         Assert.AreEqual(Scalar("\"~f12345678901234567.89\""), WriteJson(value));
-        Assert.AreEqual(value, Reader(WriteJson(value)).Read<BigRational>());
+        Assert.AreEqual(value, Reader(WriteJson(value)).Read<BigRational>()!);
         Assert.ThrowsExactly<TransitException>(() => WriteJson(new BigRational(BigInteger.One, new BigInteger(3))));
 
         var messagePack = new MemoryStream();
         TransitFactory.Writer<BigRational>(TransitFactory.Format.MsgPack, messagePack).Write(value);
         messagePack.Position = 0;
-        Assert.AreEqual(value, TransitFactory.Reader(TransitFactory.Format.MsgPack, messagePack).Read<BigRational>());
+        Assert.AreEqual(value, TransitFactory.Reader(TransitFactory.Format.MsgPack, messagePack).Read<BigRational>()!);
     }
 
     [TestMethod]
@@ -566,7 +566,7 @@ public class TransitTest
             .Write(new object());
         fallbackOutput.Position = 0;
         string fallbackJson = new StreamReader(fallbackOutput).ReadToEnd();
-        ITaggedValue fallback = Reader(fallbackJson).Read<ITaggedValue>();
+        ITaggedValue fallback = Reader(fallbackJson).Read<ITaggedValue>()!;
         Assert.AreEqual("fallback", fallback.Tag);
         Assert.AreEqual("fallback value", fallback.Representation);
 
@@ -580,7 +580,7 @@ public class TransitTest
             .Write("hello");
         transformedOutput.Position = 0;
         string transformedJson = new StreamReader(transformedOutput).ReadToEnd();
-        Assert.AreEqual("HELLO", Reader(transformedJson).Read<string>());
+        Assert.AreEqual("HELLO", Reader(transformedJson).Read<string>()!);
     }
 
     [TestMethod]
@@ -705,7 +705,7 @@ public class TransitTest
         Assert.AreEqual(ScalarVerbose("\"~f42.5\""), WriteJsonVerbose(value));
         Assert.AreEqual(Scalar("\"~f42.5\""), WriteJson(value));
         Assert.AreEqual(Scalar("\"~f42.5\""), WriteJson(42.5M));
-        Assert.AreEqual(new BigRational(42.5M), Reader(WriteJson(42.5M)).Read<BigRational>());
+        Assert.AreEqual(new BigRational(42.5M), Reader(WriteJson(42.5M)).Read<BigRational>()!);
     }
 
     [TestMethod]
@@ -909,21 +909,21 @@ public class TransitTest
         Mock<IWriteHandler> mock = new Mock<IWriteHandler>();
         mock.Setup(m => m.Tag(It.IsAny<object>())).Returns("s");
         mock.Setup(m => m.Representation(It.IsAny<object>())).Returns("NULL");
-        mock.Setup(m => m.StringRepresentation(It.IsAny<object>())).Returns<string>(null);
-        mock.Setup(m => m.GetVerboseHandler()).Returns<IWriteHandler>(null);
+        mock.Setup(m => m.StringRepresentation(It.IsAny<object>())).Returns((string?)null);
+        mock.Setup(m => m.GetVerboseHandler()).Returns((IWriteHandler?)null);
 
         IDictionary<Type, IWriteHandler> customHandlers = new Dictionary<Type, IWriteHandler>();
         customHandlers.Add(typeof(NullType), mock.Object);
 
         // JSON-Verbose
         Assert.AreEqual(ScalarVerbose("\"NULL\""), WriteJsonVerbose(null, customHandlers));
-        mock.Verify(m => m.Representation(null));
+        mock.Verify(m => m.Representation((object)null!));
         mock.Verify(m => m.GetVerboseHandler());
 
         // JSON
         mock.Invocations.Clear();
         Assert.AreEqual(Scalar("\"NULL\""), WriteJson(null, customHandlers));
-        mock.Verify(m => m.Representation(null));
+        mock.Verify(m => m.Representation((object)null!));
     }
 
     #endregion
@@ -1066,9 +1066,9 @@ public class TransitTest
         var d1 = new Dictionary<object, object> { { "~Gfoo", 20L } };
         string str = WriteJson(d1);
 
-        IDictionary d2 = Reader(str).Read<IDictionary>();
+        IDictionary d2 = Reader(str).Read<IDictionary>()!;
         Assert.IsTrue(d2.Contains("~Gfoo"));
-        Assert.IsTrue(d2["~Gfoo"].Equals(20L));
+        Assert.IsTrue(d2["~Gfoo"]!.Equals(20L));
     }
 
     [TestMethod]
@@ -1076,8 +1076,8 @@ public class TransitTest
     {
         ILink l1 = TransitFactory.Link("http://google.com/", "search", "name", "link", "prompt");
         String str = WriteJson(l1);
-        ILink l2 = Reader(str).Read<ILink>();
-        Assert.AreEqual("http://google.com/", l2.Href.AbsoluteUri);
+        ILink l2 = Reader(str).Read<ILink>()!;
+        Assert.AreEqual("http://google.com/", l2.Href!.AbsoluteUri);
         Assert.AreEqual("search", l2.Rel);
         Assert.AreEqual("name", l2.Name);
         Assert.AreEqual("link", l2.Render);
@@ -1088,7 +1088,7 @@ public class TransitTest
     public void TestEmptySet()
     {
         string str = WriteJson(new HashSet<object>());
-        Assert.IsInstanceOfType(Reader(str).Read<ISet<object>>(), typeof(ISet<object>));
+        Assert.IsInstanceOfType(Reader(str).Read<ISet<object>>()!, typeof(ISet<object>));
     }
 
     [TestMethod]
@@ -1100,7 +1100,7 @@ public class TransitTest
             TransitFactory.ReadHandlerMap(null),
             TransitFactory.DefaultDefaultReadHandler());
 
-        Assert.AreEqual("foo", reader.Read<string>());
+        Assert.AreEqual("foo", reader.Read<string>()!);
     }
 
     [TestMethod]
@@ -1115,7 +1115,7 @@ public class TransitTest
             new MemoryStream(Encoding.UTF8.GetBytes("[\"~#point\",[37,42]]")),
             customHandlers);
 
-        ParityPoint point = reader.Read<ParityPoint>();
+        ParityPoint point = reader.Read<ParityPoint>()!;
         Assert.AreEqual(37, point.X);
         Assert.AreEqual(42, point.Y);
     }
@@ -1129,7 +1129,7 @@ public class TransitTest
             TransitFactory.ReadHandlerMap(null),
             new FormattingDefaultReadHandler());
 
-        Assert.AreEqual("unknown: [37, 42]", reader.Read<string>());
+        Assert.AreEqual("unknown: [37, 42]", reader.Read<string>()!);
     }
 
     [TestMethod]
@@ -1168,14 +1168,14 @@ public class TransitTest
     [TestMethod]
     public void TestReadDirectoryAsMapAndNestedMap()
     {
-        IDictionary map = Reader("[\"^ \",\"foo\",1,\"bar\",2]").Read<IDictionary>();
+        IDictionary map = Reader("[\"^ \",\"foo\",1,\"bar\",2]").Read<IDictionary>()!;
         Assert.AreEqual(2, map.Count);
         Assert.AreEqual(1L, map["foo"]);
         Assert.AreEqual(2L, map["bar"]);
 
-        IDictionary nested = Reader("[\"^ \",\"foo\",1,\"bar\",[\"^ \",\"baz\",3]]").Read<IDictionary>();
+        IDictionary nested = Reader("[\"^ \",\"foo\",1,\"bar\",[\"^ \",\"baz\",3]]").Read<IDictionary>()!;
         Assert.AreEqual(1L, nested["foo"]);
-        IDictionary nestedValue = (IDictionary)nested["bar"];
+        IDictionary nestedValue = (IDictionary)nested["bar"]!;
         Assert.AreEqual(3L, nestedValue["baz"]);
     }
 
@@ -1188,10 +1188,10 @@ public class TransitTest
         Assert.AreEqual("[\"~#'\",\"~rrelative/a%2Fb\"]", WriteJson(uri));
         Assert.AreEqual(
             "relative/a%2Fb",
-            Reader("\"~rrelative/a%2Fb\"").Read<Uri>().OriginalString);
+            Reader("\"~rrelative/a%2Fb\"").Read<Uri>()!.OriginalString);
         Assert.AreEqual(
             "relative/path",
-            TransitFactory.Link("relative/path", "next").Href.OriginalString);
+            TransitFactory.Link("relative/path", "next").Href!.OriginalString);
     }
 
     [TestMethod]
@@ -1208,7 +1208,7 @@ public class TransitTest
             "[\"~#cmap\",[[1,2],\"Array as key to force cmap\"]]",
             json);
 
-        IDictionary decoded = Reader(json).Read<IDictionary>();
+        IDictionary decoded = Reader(json).Read<IDictionary>()!;
         Assert.AreEqual(1, decoded.Count);
         IDictionaryEnumerator enumerator = decoded.GetEnumerator();
         Assert.IsTrue(enumerator.MoveNext());
@@ -1234,9 +1234,9 @@ public class TransitTest
             "[\"~#cmap\",[null,\"null as map key\",[\"1\",\"2\"],\"Array as key to force cmap\"]]",
             json);
 
-        IDictionary decoded = Reader(json).Read<IDictionary>();
+        IDictionary decoded = Reader(json).Read<IDictionary>()!;
         Assert.AreEqual(2, decoded.Count);
-        Assert.AreEqual("null as map key", decoded[null]);
+        Assert.AreEqual("null as map key", decoded[null!]);
 
         IDictionaryEnumerator enumerator = decoded.GetEnumerator();
         while (enumerator.MoveNext())
@@ -1272,7 +1272,7 @@ public class TransitTest
             TransitFactory.Writer<object>(format, output).Write(expected);
             output.Position = 0;
 
-            IList actual = TransitFactory.Reader(format, output).Read<IList>();
+            IList actual = TransitFactory.Reader(format, output).Read<IList>()!;
             CollectionAssert.AreEqual(expected, actual.Cast<object>().ToArray());
         }
     }
@@ -1296,22 +1296,22 @@ public class TransitTest
 
     private sealed class ParityPointReadHandler : IReadHandler
     {
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
-            IList coordinates = (IList)representation;
+            IList coordinates = (IList)representation!;
             return new ParityPoint(
-                checked((int)(long)coordinates[0]),
-                checked((int)(long)coordinates[1]));
+                checked((int)(long)coordinates[0]!),
+                checked((int)(long)coordinates[1]!));
         }
     }
 
     private sealed class FormattingDefaultReadHandler : IDefaultReadHandler<object>
     {
-        public object FromRepresentation(string tag, object representation)
+        public object? FromRepresentation(string tag, object? representation)
         {
             string values = string.Join(
                 ", ",
-                ((IEnumerable)representation).Cast<object>().Select(value => value.ToString()));
+                ((IEnumerable)representation!).Cast<object>().Select(value => value.ToString()));
             return tag + ": [" + values + "]";
         }
     }

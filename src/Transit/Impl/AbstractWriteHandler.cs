@@ -22,14 +22,14 @@ internal abstract class AbstractWriteHandler : IWriteHandler
 {
     public abstract string Tag(object obj);
 
-    public abstract object Representation(object obj);
+    public abstract object? Representation(object obj);
 
-    public virtual string StringRepresentation(object ignored)
+    public virtual string? StringRepresentation(object ignored)
     {
         return null;
     }
 
-    public virtual IWriteHandler GetVerboseHandler()
+    public virtual IWriteHandler? GetVerboseHandler()
     {
         return null;
     }

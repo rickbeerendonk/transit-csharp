@@ -1,4 +1,4 @@
-// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
+﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
@@ -81,18 +81,18 @@ public class TransitJSONMachineModeTest
         IList human = Reader(
             "[\"~t1776-07-04T12:00:00.000Z\",\"~t1970-01-01T00:00:00.000Z\","
             + "\"~t2000-01-01T12:00:00.000Z\",\"~t2014-04-07T22:17:17.000Z\"]")
-            .Read<IList>();
+            .Read<IList>()!;
         IList machine = Reader(
             "[\"~m-6106017600000\",\"~m0\",\"~m946728000000\",\"~m1396909037000\"]")
-            .Read<IList>();
+            .Read<IList>()!;
 
         Assert.AreEqual(4, human.Count);
         Assert.AreEqual(4, machine.Count);
         for (int i = 0; i < human.Count; i++)
         {
             Assert.AreEqual(
-                Beerendonk.Transit.Java.Convert.ToJavaTime((DateTime)human[i]),
-                Beerendonk.Transit.Java.Convert.ToJavaTime((DateTime)machine[i]));
+                Beerendonk.Transit.Java.Convert.ToJavaTime((DateTime)human[i]!),
+                Beerendonk.Transit.Java.Convert.ToJavaTime((DateTime)machine[i]!));
         }
     }
 
@@ -109,12 +109,12 @@ public class TransitJSONMachineModeTest
             "[\"~m-6106017600000\",\"~m0\",\"~m946728000000\",\"~m1396909037000\"]",
             json);
 
-        IList decoded = Reader(json).Read<IList>();
+        IList decoded = Reader(json).Read<IList>()!;
         for (int i = 0; i < timestamps.Length; i++)
         {
             Assert.AreEqual(
                 timestamps[i],
-                Beerendonk.Transit.Java.Convert.ToJavaTime((DateTime)decoded[i]));
+                Beerendonk.Transit.Java.Convert.ToJavaTime((DateTime)decoded[i]!));
         }
     }
 
@@ -125,6 +125,6 @@ public class TransitJSONMachineModeTest
         string json = WriteJson(values);
 
         Assert.AreEqual("[\"~^ \"]", json);
-        Assert.AreEqual("^ ", ((IList)Reader(json).Read<IList>())[0]);
+        Assert.AreEqual("^ ", ((IList)Reader(json).Read<IList>()!)[0]);
     }
 }

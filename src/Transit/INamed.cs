@@ -27,7 +27,7 @@ public interface INamed
     /// Gets the namespace.
     /// </summary>
     /// <returns>Namespace.</returns>
-    string Namespace { get; }
+    string? Namespace { get; }
 
     /// <summary>
     /// Gets the name.

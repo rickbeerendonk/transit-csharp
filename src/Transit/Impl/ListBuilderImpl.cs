@@ -34,7 +34,7 @@ internal class ListBuilderImpl : IListReader
     /// </returns>
     public object Init()
     {
-        return ImmutableList.Create<object>();
+        return ImmutableList.Create<object?>();
     }
 
     /// <summary>
@@ -46,9 +46,9 @@ internal class ListBuilderImpl : IListReader
     /// <returns>
     /// A new gestational list.
     /// </returns>
-    public object Add(object list, object item)
+    public object Add(object list, object? item)
     {
-        return ((IImmutableList<object>)list).Add(item);
+        return ((IImmutableList<object?>)list).Add(item);
     }
 
     /// <summary>

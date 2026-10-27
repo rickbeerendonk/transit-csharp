@@ -28,5 +28,5 @@ public interface IWriter<T>
     /// Writes a single value to an output target.
     /// </summary>
     /// <param name="value">The value to write.</param>
-    void Write(T value);
+    void Write(T? value);
 }

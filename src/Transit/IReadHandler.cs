@@ -31,5 +31,5 @@ public interface IReadHandler
     /// </summary>
     /// <param name="representation">The transit value.</param>
     /// <returns>The converted object.</returns>
-    object FromRepresentation(object representation);
+    object? FromRepresentation(object? representation);
 }

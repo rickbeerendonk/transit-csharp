@@ -73,7 +73,7 @@ internal class ReaderFactory
     }
 
     private static void DisallowOverridingGroundTypes(
-        IEnumerable<KeyValuePair<string, IReadHandler>> handlers)
+        IEnumerable<KeyValuePair<string, IReadHandler>>? handlers)
     {
         if (handlers != null)
         {
@@ -85,7 +85,7 @@ internal class ReaderFactory
                 {
                     if (handler.Key == tag)
                     {
-                        IReadHandler defaultHandler;
+                        IReadHandler? defaultHandler;
                         if (!defaultHandlers.TryGetValue(tag, out defaultHandler)
                             || handler.Value == null
                             || handler.Value.GetType() != defaultHandler.GetType())
@@ -99,7 +99,7 @@ internal class ReaderFactory
     }
 
     public static IImmutableDictionary<string, IReadHandler> HandlerMap(
-        IEnumerable<KeyValuePair<string, IReadHandler>> customHandlers)
+        IEnumerable<KeyValuePair<string, IReadHandler>>? customHandlers)
     {
         DisallowOverridingGroundTypes(customHandlers);
         IImmutableDictionary<string, IReadHandler> handlers = DefaultHandlers();
@@ -115,12 +115,12 @@ internal class ReaderFactory
     }
 
     private static IImmutableDictionary<string, IReadHandler> Handlers(
-        IImmutableDictionary<string, IReadHandler> customHandlers)
+        IImmutableDictionary<string, IReadHandler>? customHandlers)
     {
         return HandlerMap(customHandlers);
     }
 
-    private static IDefaultReadHandler<object> DefaultHandler(IDefaultReadHandler<object> customDefaultHandler)
+    private static IDefaultReadHandler<object> DefaultHandler(IDefaultReadHandler<object>? customDefaultHandler)
     {
         return customDefaultHandler != null ? customDefaultHandler : DefaultDefaultHandler();
     }
@@ -134,7 +134,7 @@ internal class ReaderFactory
     /// <returns>A reader.</returns>
     public static IReader GetJsonInstance(Stream input,
         IImmutableDictionary<string, IReadHandler> customHandlers,
-        IDefaultReadHandler<object> customDefaultHandler)
+        IDefaultReadHandler<object>? customDefaultHandler)
     {
         return new JsonReader(input, Handlers(customHandlers), DefaultHandler(customDefaultHandler));
     }
@@ -148,14 +148,14 @@ internal class ReaderFactory
     /// <returns>A reader.</returns>
     public static IReader GetMsgPackInstance(Stream input,
         IImmutableDictionary<string, IReadHandler> customHandlers,
-        IDefaultReadHandler<object> customDefaultHandler)
+        IDefaultReadHandler<object>? customDefaultHandler)
     {
         return new MessagePackReader(input, Handlers(customHandlers), DefaultHandler(customDefaultHandler));
     }
 
     private class DefaultReadHandler : IDefaultReadHandler<ITaggedValue>
     {
-        public ITaggedValue FromRepresentation(string tag, object representation)
+        public ITaggedValue? FromRepresentation(string tag, object? representation)
         {
             return TransitFactory.TaggedValue(tag, representation);
         }
@@ -169,23 +169,23 @@ internal class ReaderFactory
         protected Stream Input { get; } = input;
         protected IImmutableDictionary<string, IReadHandler> Handlers { get; } = handlers;
         protected IDefaultReadHandler<object> DefaultHandler { get; } = defaultHandler;
-        protected IDictionaryReader dictionaryBuilder;
-        protected IListReader listBuilder;
+        protected IDictionaryReader? dictionaryBuilder;
+        protected IListReader? listBuilder;
         private ReadCache cache = new();
-        private IParser parser;
+        private IParser? parser;
         private bool initialized;
 
-        public T Read<T>()
+        public T? Read<T>()
         {
             if (!initialized)
             {
                 Initialize();
             }
 
-            return (T)parser.Parse(cache.Init());
+            return (T?)parser!.Parse(cache.Init());
         }
 
-        public IReader SetBuilders(IDictionaryReader dictionaryBuilder, IListReader listBuilder)
+        public IReader SetBuilders(IDictionaryReader? dictionaryBuilder, IListReader? listBuilder)
         {
             if (initialized)
             {
@@ -231,7 +231,7 @@ internal class ReaderFactory
             var jsonTextReader = new JsonTextReader(streamReader);
             jsonTextReader.SupportMultipleContent = true;
             return new JsonParser(jsonTextReader, Handlers, DefaultHandler,
-                dictionaryBuilder, listBuilder);
+                dictionaryBuilder!, listBuilder!);
         }
     }
 
@@ -242,7 +242,7 @@ internal class ReaderFactory
     {
         protected override IParser CreateParser()
         {
-            return new MessagePackParser(Input, Handlers, DefaultHandler, dictionaryBuilder, listBuilder);
+            return new MessagePackParser(Input, Handlers, DefaultHandler, dictionaryBuilder!, listBuilder!);
         }
     }
 }

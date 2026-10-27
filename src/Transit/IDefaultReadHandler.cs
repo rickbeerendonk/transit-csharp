@@ -30,5 +30,5 @@ public interface IDefaultReadHandler<out T>
     /// <param name="tag">The transit value's tag.</param>
     /// <param name="representation">The transit value's representation.</param>
     /// <returns>The resulting generic object.</returns>
-    T FromRepresentation(string tag, object representation);
+    T? FromRepresentation(string tag, object? representation);
 }

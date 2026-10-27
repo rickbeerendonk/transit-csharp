@@ -42,7 +42,7 @@ internal abstract class AbstractParser : IParser
     /// </summary>
     protected readonly IImmutableDictionary<string, IReadHandler> handlers;
 
-    private readonly IDefaultReadHandler<object> defaultHandler;
+    private readonly IDefaultReadHandler<object>? defaultHandler;
 
     /// <summary>
     /// The dictionary builder.
@@ -62,7 +62,7 @@ internal abstract class AbstractParser : IParser
     /// <param name="dictionaryBuilder">The dictionary builder.</param>
     /// <param name="listBuilder">The list builder.</param>
     protected AbstractParser(IImmutableDictionary<string, IReadHandler> handlers,
-        IDefaultReadHandler<object> defaultHandler,
+        IDefaultReadHandler<object>? defaultHandler,
         IDictionaryReader dictionaryBuilder,
         IListReader listBuilder)
     {
@@ -78,7 +78,7 @@ internal abstract class AbstractParser : IParser
     /// <param name="tag">The tag.</param>
     /// <param name="readHandler">The read handler.</param>
     /// <returns><c>true</c> if the handler is returned; <c>false</c> otherwise.</returns>
-    protected bool TryGetHandler(string tag, out IReadHandler readHandler)
+    protected bool TryGetHandler(string tag, out IReadHandler? readHandler)
     {
         return handlers.TryGetValue(tag, out readHandler);
     }
@@ -90,24 +90,19 @@ internal abstract class AbstractParser : IParser
     /// <param name="representation">The representation.</param>
     /// <returns></returns>
     /// <exception cref="TransitException">Cannot FromRepresentation  + tag + :  + representation.ToString()</exception>
-    protected object Decode(string tag, object representation)
+    protected object? Decode(string tag, object? representation)
     {
-        IReadHandler d;
-        if (TryGetHandler(tag, out d))
+        if (TryGetHandler(tag, out IReadHandler? handler) && handler is not null)
         {
-            return d.FromRepresentation(representation);
+            return handler.FromRepresentation(representation);
         }
-        else
+
+        if (defaultHandler != null)
         {
-            if (defaultHandler != null)
-            {
-                return defaultHandler.FromRepresentation(tag, representation);
-            }
-            else
-            {
-                throw new TransitException("Cannot FromRepresentation " + tag + ": " + representation.ToString());
-            }
+            return defaultHandler.FromRepresentation(tag, representation);
         }
+
+        throw new TransitException("Cannot FromRepresentation " + tag + ": " + representation?.ToString());
     }
 
     /// <summary>
@@ -115,7 +110,7 @@ internal abstract class AbstractParser : IParser
     /// </summary>
     /// <param name="obj">The object.</param>
     /// <returns></returns>
-    protected internal object ParseString(object obj)
+    protected internal object? ParseString(object? obj)
     {
         if (obj is not string s || s.Length <= 1)
         {
@@ -140,7 +135,7 @@ internal abstract class AbstractParser : IParser
     /// </summary>
     /// <param name="cache">The cache.</param>
     /// <returns></returns>
-    public abstract object Parse(ReadCache cache);
+    public abstract object? Parse(ReadCache cache);
 
     /// <summary>
     /// Parses the value.
@@ -150,7 +145,7 @@ internal abstract class AbstractParser : IParser
     /// <returns>
     /// The parsed value.
     /// </returns>
-    public abstract object ParseVal(bool asDictionaryKey, ReadCache cache);
+    public abstract object? ParseVal(bool asDictionaryKey, ReadCache cache);
 
     /// <summary>
     /// Parses the dictionary.
@@ -161,7 +156,7 @@ internal abstract class AbstractParser : IParser
     /// <returns>
     /// The parced dictionary
     /// </returns>
-    public abstract object ParseDictionary(bool asDictionaryKey, ReadCache cache, IDictionaryReadHandler handler);
+    public abstract object? ParseDictionary(bool asDictionaryKey, ReadCache cache, IDictionaryReadHandler? handler);
 
     /// <summary>
     /// Parses the list.
@@ -172,5 +167,5 @@ internal abstract class AbstractParser : IParser
     /// <returns>
     /// The parsed list.
     /// </returns>
-    public abstract object ParseList(bool asDictionaryKey, ReadCache cache, IListReadHandler handler);
+    public abstract object? ParseList(bool asDictionaryKey, ReadCache cache, IListReadHandler? handler);
 }

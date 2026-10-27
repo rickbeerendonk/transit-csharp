@@ -48,7 +48,7 @@ internal class Ratio : IRatio, IComparable, IComparable<IRatio>, IEquatable<IRat
     /// <returns>
     ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
     /// </returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return obj is Ratio && ((Ratio)obj).Numerator == numerator && ((Ratio)obj).Denominator == denominator;
     }
@@ -104,9 +104,9 @@ internal class Ratio : IRatio, IComparable, IComparable<IRatio>, IEquatable<IRat
     /// <returns>
     /// A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other" /> parameter.Zero This object is equal to <paramref name="other" />. Greater than zero This object is greater than <paramref name="other" />.
     /// </returns>
-    public int CompareTo(IRatio other)
+    public int CompareTo(IRatio? other)
     {
-        return GetValue().CompareTo(other.GetValue());
+        return other is null ? 1 : GetValue().CompareTo(other.GetValue());
     }
 
     /// <summary>
@@ -117,19 +117,19 @@ internal class Ratio : IRatio, IComparable, IComparable<IRatio>, IEquatable<IRat
     /// A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes <paramref name="obj" /> in the sort order. Zero This instance occurs in the same position in the sort order as <paramref name="obj" />. Greater than zero This instance follows <paramref name="obj" /> in the sort order.
     /// </returns>
     /// <exception cref="System.ArgumentException">obj must be an IRatio.</exception>
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj == null)
         {
             return 1;
         }
 
-        if (!(obj is IRatio))
+        if (obj is not IRatio ratio)
         {
             throw new ArgumentException("obj must be an IRatio.");
         }
 
-        return CompareTo((IRatio)obj);
+        return CompareTo(ratio);
     }
 
     /// <summary>
@@ -139,8 +139,8 @@ internal class Ratio : IRatio, IComparable, IComparable<IRatio>, IEquatable<IRat
     /// <returns>
     /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
     /// </returns>
-    public bool Equals(IRatio other)
+    public bool Equals(IRatio? other)
     {
-        return CompareTo(other) == 0;
+        return other is not null && CompareTo(other) == 0;
     }
 }

@@ -42,5 +42,5 @@ public interface ITaggedValue
     /// <value>
     /// The representation.
     /// </value>
-    object Representation { get; }
+    object? Representation { get; }
 }

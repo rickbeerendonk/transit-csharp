@@ -36,7 +36,7 @@ public interface IListReader
     /// <param name="list">A gestational list.</param>
     /// <param name="item">An item.</param>
     /// <returns>A new gestational list.</returns>
-    object Add(object list, object item);
+    object Add(object list, object? item);
 
     /// <summary>
     /// Completes building of a list from a gestational list.

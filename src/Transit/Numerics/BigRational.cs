@@ -227,7 +227,7 @@ public struct BigRational : IComparable, IComparable<BigRational>, IEquatable<Bi
     /// <returns>
     /// true if <paramref name="obj" /> and this instance are the same type and represent the same value; otherwise, false.
     /// </returns>
-    public override bool Equals(Object obj)
+    public override bool Equals(Object? obj)
     {
         if (obj == null)
             return false;
@@ -249,7 +249,7 @@ public struct BigRational : IComparable, IComparable<BigRational>, IEquatable<Bi
     }
 
     // IComparable
-    int IComparable.CompareTo(Object obj)
+    int IComparable.CompareTo(Object? obj)
     {
         if (obj == null)
             return 1;

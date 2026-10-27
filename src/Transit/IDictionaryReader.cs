@@ -37,7 +37,7 @@ public interface IDictionaryReader
     /// <param name="key">A key.</param>
     /// <param name="value">A value.</param>
     /// <returns>A new gestational dictionary.</returns>
-    object Add(object dictionary, object key, object value);
+    object Add(object dictionary, object? key, object? value);
 
     /// <summary>
     /// Completes building of a dictionary from a gestational dictionary.

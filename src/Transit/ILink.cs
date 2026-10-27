@@ -32,7 +32,7 @@ public interface ILink
     /// <value>
     /// The href.
     /// </value>
-    Uri Href { get; }
+    Uri? Href { get; }
 
     /// <summary>
     /// Gets the rel.
@@ -40,7 +40,7 @@ public interface ILink
     /// <value>
     /// The rel.
     /// </value>
-    string Rel { get; }
+    string? Rel { get; }
 
     /// <summary>
     /// Gets the name.
@@ -48,7 +48,7 @@ public interface ILink
     /// <value>
     /// The name.
     /// </value>
-    string Name { get; }
+    string? Name { get; }
 
     /// <summary>
     /// Gets the prompt.
@@ -56,7 +56,7 @@ public interface ILink
     /// <value>
     /// The prompt.
     /// </value>
-    string Prompt { get; }
+    string? Prompt { get; }
 
     /// <summary>
     /// Gets the render semantic
@@ -64,11 +64,11 @@ public interface ILink
     /// <value>
     /// The render.
     /// </value>
-    string Render { get; }
+    string? Render { get; }
 
     /// <summary>
     /// Converts the link to a dictionary.
     /// </summary>
     /// <returns>The dictionary.</returns>
-    IDictionary<string, object> ToDictionary();
+    IDictionary<string, object?> ToDictionary();
 }

@@ -74,7 +74,7 @@ public class TransitFactory
     /// <returns>A writer</returns>
     /// <exception cref="System.NotImplementedException"></exception>
     /// <exception cref="System.ArgumentException">Unknown Writer type:  + type.ToString()</exception>
-    public static IWriter<T> Writer<T>(Format type, Stream output, IDictionary<Type, IWriteHandler> customHandlers)
+    public static IWriter<T> Writer<T>(Format type, Stream output, IDictionary<Type, IWriteHandler>? customHandlers)
     {
         return Writer<T>(type, output, customHandlers, null, null);
     }
@@ -82,7 +82,7 @@ public class TransitFactory
     /// <summary>
     /// Creates a writer with a default handler for values not handled by the built-in or custom handlers.
     /// </summary>
-    public static IWriter<T> Writer<T>(Format type, Stream output, IWriteHandler defaultWriteHandler)
+    public static IWriter<T> Writer<T>(Format type, Stream output, IWriteHandler? defaultWriteHandler)
     {
         return Writer<T>(type, output, null, defaultWriteHandler, null);
     }
@@ -93,8 +93,8 @@ public class TransitFactory
     public static IWriter<T> Writer<T>(
         Format type,
         Stream output,
-        IDictionary<Type, IWriteHandler> customHandlers,
-        IWriteHandler defaultWriteHandler)
+        IDictionary<Type, IWriteHandler>? customHandlers,
+        IWriteHandler? defaultWriteHandler)
     {
         return Writer<T>(type, output, customHandlers, defaultWriteHandler, null);
     }
@@ -105,9 +105,9 @@ public class TransitFactory
     public static IWriter<T> Writer<T>(
         Format type,
         Stream output,
-        IDictionary<Type, IWriteHandler> customHandlers,
-        IWriteHandler defaultWriteHandler,
-        Func<object, object> transform)
+        IDictionary<Type, IWriteHandler>? customHandlers,
+        IWriteHandler? defaultWriteHandler,
+        Func<object, object>? transform)
     {
         return type switch
         {
@@ -138,7 +138,7 @@ public class TransitFactory
     /// A DefaultReadHandler to use for processing encoded values for which there is no read handler
     /// </param>
     /// <returns>A reader</returns>
-    public static IReader Reader(Format type, Stream input, IDefaultReadHandler<object> customDefaultHandler)
+    public static IReader Reader(Format type, Stream input, IDefaultReadHandler<object>? customDefaultHandler)
     {
         return Reader(type, input, null, customDefaultHandler);
     }
@@ -153,7 +153,7 @@ public class TransitFactory
     public static IReader Reader(
         Format type,
         Stream input,
-        IEnumerable<KeyValuePair<string, IReadHandler>> customHandlers)
+        IEnumerable<KeyValuePair<string, IReadHandler>>? customHandlers)
     {
         return Reader(type, input, customHandlers, null);
     }
@@ -161,13 +161,13 @@ public class TransitFactory
     private sealed class DeferredJsonReader(
         Stream input,
         IImmutableDictionary<string, IReadHandler> customHandlers,
-        IDefaultReadHandler<object> customDefaultHandler) : IReader, IReaderSpi
+        IDefaultReadHandler<object>? customDefaultHandler) : IReader, IReaderSpi
     {
-        private IReader reader;
-        private IDictionaryReader dictionaryBuilder;
-        private IListReader listBuilder;
+        private IReader? reader;
+        private IDictionaryReader? dictionaryBuilder;
+        private IListReader? listBuilder;
 
-        public T Read<T>()
+        public T? Read<T>()
         {
             if (reader == null)
             {
@@ -177,12 +177,12 @@ public class TransitFactory
                     ((IReaderSpi)reader).SetBuilders(dictionaryBuilder, listBuilder);
                 }
             }
-            return reader.Read<T>();
+            return reader!.Read<T>();
         }
 
         public IReader SetBuilders(
-            IDictionaryReader dictionaryBuilder,
-            IListReader listBuilder)
+            IDictionaryReader? dictionaryBuilder,
+            IListReader? listBuilder)
         {
             this.dictionaryBuilder = dictionaryBuilder;
             this.listBuilder = listBuilder;
@@ -203,8 +203,8 @@ public class TransitFactory
     /// </param>
     /// <returns>A reader.</returns>
     public static IReader Reader(Format type, Stream input,
-                                IEnumerable<KeyValuePair<string, IReadHandler>> customHandlers,
-                                IDefaultReadHandler<object> customDefaultHandler)
+                                IEnumerable<KeyValuePair<string, IReadHandler>>? customHandlers,
+                                IDefaultReadHandler<object>? customDefaultHandler)
     {
         IImmutableDictionary<string, IReadHandler> mergedHandlers =
             ReaderFactory.HandlerMap(customHandlers);
@@ -262,7 +262,7 @@ public class TransitFactory
     /// <param name="tag">Tag string.</param>
     /// <param name="representation">Value representation.</param>
     /// <returns>A tagged value.</returns>
-    public static ITaggedValue TaggedValue(string tag, object representation) {
+    public static ITaggedValue TaggedValue(string tag, object? representation) {
         return new TaggedValue(tag, representation);
     }
 
@@ -297,7 +297,7 @@ public class TransitFactory
     /// <param name="prompt">The optional prompt.</param>
     /// <param name="render">The optional render.</param>
     /// <returns>An <see cref="ILink"/> instance.</returns>
-    public static ILink Link(string href, string rel, string name, string prompt, string render)
+    public static ILink Link(string href, string rel, string? name, string? prompt, string? render)
     {
         return Link(Uri(href), rel, name, prompt, render);
     }
@@ -311,7 +311,7 @@ public class TransitFactory
     /// <param name="prompt">The optional prompt.</param>
     /// <param name="render">The optional render.</param>
     /// <returns>An <see cref="ILink"/> instance.</returns>
-    public static ILink Link(Uri href, string rel, string name, string prompt, string render)
+    public static ILink Link(Uri href, string rel, string? name, string? prompt, string? render)
     {
         return new Link(href, rel, name, prompt, render);
     }
@@ -366,7 +366,7 @@ public class TransitFactory
     /// Creates an immutable map of default read handlers merged with custom handlers.
     /// </summary>
     public static IImmutableDictionary<string, IReadHandler> ReadHandlerMap(
-        IDictionary<string, IReadHandler> customHandlers)
+        IDictionary<string, IReadHandler>? customHandlers)
     {
         return ReaderFactory.HandlerMap(customHandlers);
     }

@@ -31,8 +31,8 @@ namespace Beerendonk.Transit.Impl;
 internal abstract class AbstractEmitter : IEmitter
 {
     private IImmutableDictionary<Type, IWriteHandler> handlers;
-    private readonly IWriteHandler defaultWriteHandler;
-    private readonly Func<object, object> transform;
+    private readonly IWriteHandler? defaultWriteHandler;
+    private readonly Func<object, object>? transform;
 
     public AbstractEmitter(IImmutableDictionary<Type, IWriteHandler> handlers)
         : this(handlers, null, null)
@@ -41,24 +41,23 @@ internal abstract class AbstractEmitter : IEmitter
 
     protected AbstractEmitter(
         IImmutableDictionary<Type, IWriteHandler> handlers,
-        IWriteHandler defaultWriteHandler,
-        Func<object, object> transform)
+        IWriteHandler? defaultWriteHandler,
+        Func<object, object>? transform)
     {
         this.handlers = handlers;
         this.defaultWriteHandler = defaultWriteHandler;
         this.transform = transform;
     }
 
-    private IWriteHandler CheckBaseClasses(Type type)
+    private IWriteHandler? CheckBaseClasses(Type type)
     {
-        Type baseType = type.GetTypeInfo().BaseType;
+        Type? baseType = type.GetTypeInfo().BaseType;
         while (baseType != null && baseType != typeof(object))
         {
-            IWriteHandler handler;
-            if (handlers.TryGetValue(baseType, out handler))
+            if (handlers.TryGetValue(baseType, out IWriteHandler? handler))
             {
-                handlers = handlers.Add(type, handler);
-                return handler;
+                handlers = handlers.Add(type, handler!);
+                return handler!;
             }
 
             baseType = baseType.GetTypeInfo().BaseType;
@@ -67,16 +66,15 @@ internal abstract class AbstractEmitter : IEmitter
         return null;
     }
 
-    private IWriteHandler CheckBaseTypes(Type type, IEnumerable<Type> baseTypes)
+    private IWriteHandler? CheckBaseTypes(Type type, IEnumerable<Type> baseTypes)
     {
         IDictionary<Type, IWriteHandler> possibles = new Dictionary<Type, IWriteHandler>();
 
         foreach (Type item in baseTypes)
         {
-            IWriteHandler baseTypeHandler;
-            if (handlers.TryGetValue(item, out baseTypeHandler))
+            if (handlers.TryGetValue(item, out IWriteHandler? baseTypeHandler))
             {
-                possibles[item] = baseTypeHandler;
+                possibles[item] = baseTypeHandler!;
             }
         }
 
@@ -95,7 +93,7 @@ internal abstract class AbstractEmitter : IEmitter
         return h;
     }
 
-    private IWriteHandler CheckBaseInterfaces(Type type)
+    private IWriteHandler? CheckBaseInterfaces(Type type)
     {
         Type[] matches = type.GetTypeInfo().ImplementedInterfaces
             .Where(item => !item.GetTypeInfo().IsGenericType && handlers.ContainsKey(item))
@@ -118,10 +116,10 @@ internal abstract class AbstractEmitter : IEmitter
 
         IWriteHandler handler = handlers[mostSpecificMatches[0]];
         handlers = handlers.Add(type, handler);
-        return handler;
+        return handler!;
     }
 
-    private IWriteHandler CheckBaseGenericInterfaces(Type type)
+    private IWriteHandler? CheckBaseGenericInterfaces(Type type)
     {
         IEnumerable<Type> genericImplementedInterfaces =
             type.GetTypeInfo().ImplementedInterfaces
@@ -132,10 +130,10 @@ internal abstract class AbstractEmitter : IEmitter
         return CheckBaseTypes(type, genericImplementedInterfaces);
     }
 
-    private IWriteHandler GetHandler(object obj)
+    private IWriteHandler? GetHandler(object? obj)
     {
-        Type type = (obj != null) ? obj.GetType() : typeof(NullType);
-        IWriteHandler handler = null;
+        Type type = obj?.GetType() ?? typeof(NullType);
+        IWriteHandler? handler = null;
 
         if (!handlers.TryGetValue(type, out handler))
         {
@@ -155,14 +153,14 @@ internal abstract class AbstractEmitter : IEmitter
         return handler;
     }
 
-    public string GetTag(object obj)
+    public string? GetTag(object? obj)
     {
         if (transform != null)
         {
-            obj = transform(obj);
+            obj = transform(obj!);
         }
 
-        IWriteHandler handler = GetHandler(obj);
+        IWriteHandler? handler = GetHandler(obj);
         if (handler == null)
         {
             handler = defaultWriteHandler;
@@ -173,7 +171,7 @@ internal abstract class AbstractEmitter : IEmitter
             return null;
         }
 
-        return handler.Tag(obj);
+        return handler.Tag(obj!);
     }
 
     protected string Escape(string s)
@@ -190,7 +188,7 @@ internal abstract class AbstractEmitter : IEmitter
         return s;
     }
 
-    protected virtual void EmitTagged(string t, object obj, bool ignored, WriteCache cache)
+    protected virtual void EmitTagged(string t, object? obj, bool ignored, WriteCache cache)
     {
         EmitListStart(2L);
         EmitString(Constants.EscTag, t, "", false, cache);
@@ -202,7 +200,7 @@ internal abstract class AbstractEmitter : IEmitter
     {
         if (t.Length == 1)
         {
-            object r = handler.Representation(obj);
+            object? r = handler.Representation(obj);
             if (r is string)
             {
                 EmitString(Constants.EscStr, t, (string)r, asDictionaryKey, cache);
@@ -210,7 +208,7 @@ internal abstract class AbstractEmitter : IEmitter
             else
                 if (PrefersStrings() || asDictionaryKey)
                 {
-                    string sr = handler.StringRepresentation(obj);
+                    string? sr = handler.StringRepresentation(obj);
                     if (sr != null)
                     {
                         EmitString(Constants.EscStr, t, sr, asDictionaryKey, cache);
@@ -256,7 +254,7 @@ internal abstract class AbstractEmitter : IEmitter
     protected void EmitList(object o, bool ignored, WriteCache cache)
     {
         var enumerable = o as IEnumerable;
-        var length = enumerable.Cast<object>().Count();
+        var length = enumerable!.Cast<object?>().Count();
 
         EmitListStart(length);
 
@@ -311,7 +309,7 @@ internal abstract class AbstractEmitter : IEmitter
         }
         else
         {
-            foreach (var n in enumerable)
+            foreach (var n in enumerable!)
 	            {
 		            Marshal(n, false, cache);
 	            }
@@ -320,16 +318,16 @@ internal abstract class AbstractEmitter : IEmitter
         EmitListEnd();
     }
 
-    protected void Marshal(object o, bool asDictionaryKey, WriteCache cache)
+    protected void Marshal(object? o, bool asDictionaryKey, WriteCache cache)
     {
         if (transform != null)
         {
-            o = transform(o);
+            o = transform(o!);
         }
 
         bool supported = false;
 
-        IWriteHandler h = GetHandler(o);
+        IWriteHandler? h = GetHandler(o);
         if (h == null)
         {
             h = defaultWriteHandler;
@@ -337,7 +335,7 @@ internal abstract class AbstractEmitter : IEmitter
 
         if (h != null)
         {
-            string t = h.Tag(o);
+            string? t = h.Tag(o!);
             if (t != null)
             {
                 supported = true;
@@ -346,29 +344,28 @@ internal abstract class AbstractEmitter : IEmitter
                     switch (t[0])
                     {
                         case '_': EmitNull(asDictionaryKey, cache); break;
-                        case 's': EmitString(null, null, Escape((string)h.Representation(o)), asDictionaryKey, cache); break;
-                        case '?': EmitBoolean((bool)h.Representation(o), asDictionaryKey, cache); break;
-                        case 'i': EmitInteger(h.Representation(o), asDictionaryKey, cache); break;
-                        case 'd': EmitDouble(h.Representation(o), asDictionaryKey, cache); break;
-                        case 'b': EmitBinary(h.Representation(o), asDictionaryKey, cache); break;
-                        case '\'': EmitTagged(t, h.Representation(o), false, cache); break;
-                        default: EmitEncoded(t, h, o, asDictionaryKey, cache); break;
+                        case 's': EmitString(null, null, Escape((string)h.Representation(o!)!), asDictionaryKey, cache); break;
+                        case '?': EmitBoolean((bool)h.Representation(o!)!, asDictionaryKey, cache); break;
+                        case 'i': EmitInteger(h.Representation(o!)!, asDictionaryKey, cache); break;
+                        case 'd': EmitDouble(h.Representation(o!)!, asDictionaryKey, cache); break;
+                        case 'b': EmitBinary(h.Representation(o!)!, asDictionaryKey, cache); break;
+                        case '\'': EmitTagged(t, h.Representation(o!), false, cache); break;
+                        default: EmitEncoded(t, h, o!, asDictionaryKey, cache); break;
                     }
                 }
                 else
                 {
-                    if (t.Equals("array"))
+                    if (t!.Equals("array"))
                     {
-                        EmitList(h.Representation(o), asDictionaryKey, cache);
+                        EmitList(h.Representation(o!)!, asDictionaryKey, cache);
                     }
-                    else
-                        if (t.Equals("map"))
+                    else if (t.Equals("map"))
                         {
-                            EmitDictionary(h.Representation(o), asDictionaryKey, cache);
+                            EmitDictionary(h.Representation(o!)!, asDictionaryKey, cache);
                         }
                         else
                         {
-                            EmitEncoded(t, h, o, asDictionaryKey, cache);
+                            EmitEncoded(t, h, o!, asDictionaryKey, cache);
                         }
                 }
                 FlushWriter();
@@ -377,13 +374,13 @@ internal abstract class AbstractEmitter : IEmitter
 
         if (!supported)
         {
-            throw new NotSupportedException("Not supported: " + o.GetType());
+            throw new NotSupportedException("Not supported: " + o?.GetType());
         }
     }
 
-    protected void MarshalTop(object obj, WriteCache cache)
+    protected void MarshalTop(object? obj, WriteCache cache)
     {
-        IWriteHandler handler = GetHandler(obj);
+        IWriteHandler? handler = GetHandler(obj);
         if (handler == null)
         {
             handler = defaultWriteHandler;
@@ -392,10 +389,10 @@ internal abstract class AbstractEmitter : IEmitter
         if (handler == null)
         {
             throw new NotSupportedException(
-                string.Format("Cannot marshal type {0} ({1})", obj != null ? obj.GetType() : null, obj));
+                string.Format("Cannot marshal type {0} ({1})", obj?.GetType(), obj));
         }
 
-        string tag = handler.Tag(obj);
+        string? tag = handler.Tag(obj!);
         if (tag == null)
         {
             throw new NotSupportedException(
@@ -403,16 +400,16 @@ internal abstract class AbstractEmitter : IEmitter
         }
 
         if (tag.Length == 1)
-            obj = new Quote(obj);
+            obj = new Quote(obj!);
 
         Marshal(obj, false, cache);
     }
 
-    public abstract void Emit(object obj, bool asDictionaryKey, WriteCache cache);
+    public abstract void Emit(object? obj, bool asDictionaryKey, WriteCache cache);
 
     public abstract void EmitNull(bool asDictionaryKey, WriteCache cache);
 
-    public abstract void EmitString(string prefix, string tag, string s, bool asDictionaryKey, WriteCache cache);
+    public abstract void EmitString(string? prefix, string? tag, string s, bool asDictionaryKey, WriteCache cache);
 
     public abstract void EmitBoolean(bool b, bool asDictionaryKey, WriteCache cache);
 

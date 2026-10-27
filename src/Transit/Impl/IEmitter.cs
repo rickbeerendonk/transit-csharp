@@ -20,9 +20,9 @@ namespace Beerendonk.Transit.Impl;
 
 internal interface IEmitter
 {
-    void Emit(object obj, bool asDictionaryKey, WriteCache cache);
+    void Emit(object? obj, bool asDictionaryKey, WriteCache cache);
     void EmitNull(bool asDictionaryKey, WriteCache cache);
-    void EmitString(string prefix, string tag, string s, bool asDictionaryKey, WriteCache cache);
+    void EmitString(string? prefix, string? tag, string s, bool asDictionaryKey, WriteCache cache);
     void EmitBoolean(bool b, bool asDictionaryKey, WriteCache cache);
     void EmitInteger(object i, bool asDictionaryKey, WriteCache cache);
     void EmitInteger(long i, bool asDictionaryKey, WriteCache cache);

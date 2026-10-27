@@ -35,7 +35,7 @@ internal class MapBuilderImpl : IDictionaryReader
     /// </returns>
     public object Init()
     {
-        return ImmutableDictionary.Create<object, object>();
+        return ImmutableDictionary.Create<object, object?>();
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ internal class MapBuilderImpl : IDictionaryReader
     /// <returns>
     /// A new gestational dictionary.
     /// </returns>
-    public object Add(object dictionary, object key, object value)
+    public object Add(object dictionary, object? key, object? value)
     {
         if (dictionary is TransitDictionary nullableKeyDictionary)
         {
@@ -59,7 +59,7 @@ internal class MapBuilderImpl : IDictionaryReader
         if (key == null)
         {
             var mapWithNullKey = new TransitDictionary();
-            foreach (KeyValuePair<object, object> item in (IImmutableDictionary<object, object>)dictionary)
+            foreach (KeyValuePair<object, object?> item in (IImmutableDictionary<object, object?>)dictionary)
             {
                 mapWithNullKey.Add(item.Key, item.Value);
             }
@@ -68,7 +68,7 @@ internal class MapBuilderImpl : IDictionaryReader
             return mapWithNullKey;
         }
 
-        return ((IImmutableDictionary<object, object>)dictionary).Add(key, value);
+        return ((IImmutableDictionary<object, object?>)dictionary).Add(key, value);
     }
 
     /// <summary>

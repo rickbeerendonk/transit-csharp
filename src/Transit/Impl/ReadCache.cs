@@ -23,7 +23,7 @@ namespace Beerendonk.Transit.Impl;
 /// </summary>
 internal class ReadCache
 {
-    private object[] cache;
+    private object?[] cache;
     private int index;
 
     /// <summary>
@@ -31,7 +31,7 @@ internal class ReadCache
     /// </summary>
     public ReadCache()
     {
-        cache = new object[WriteCache.MaxCacheEntries];
+        cache = new object?[WriteCache.MaxCacheEntries];
         index = 0;
     }
 
@@ -60,7 +60,7 @@ internal class ReadCache
     /// <param name="s">The s.</param>
     /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
     /// <returns></returns>
-    public object CacheRead(string s, bool asDictionaryKey)
+    public object? CacheRead(string? s, bool asDictionaryKey)
     {
         return CacheRead(s, asDictionaryKey, null);
     }
@@ -72,8 +72,13 @@ internal class ReadCache
     /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
     /// <param name="p">The p.</param>
     /// <returns></returns>
-    public object CacheRead(string s, bool asDictionaryKey, AbstractParser p)
+    public object? CacheRead(string? s, bool asDictionaryKey, AbstractParser? p)
     {
+        if (s is null)
+        {
+            return null;
+        }
+
         if (s.Length != 0)
         {
             if (CacheCode(s))

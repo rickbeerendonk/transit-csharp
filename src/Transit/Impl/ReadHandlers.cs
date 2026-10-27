@@ -42,10 +42,10 @@ internal static class ReadHandlers
         /// The converted object.
         /// </returns>
         /// <exception cref="Beerendonk.Transit.TransitException">Cannot parse representation as a BigInteger:  + representation</exception>
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
             BigInteger result;
-            if (!BigInteger.TryParse((string)representation, out result))
+            if (!BigInteger.TryParse((string)representation!, out result))
             {
                 throw new TransitException("Cannot parse representation as a BigInteger: " + representation);
             }
@@ -68,10 +68,10 @@ internal static class ReadHandlers
         /// The converted object.
         /// </returns>
         /// <exception cref="Beerendonk.Transit.TransitException">Cannot parse representation as a BigRational.</exception>
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
             BigRational result;
-            if (!BigRational.TryParse((string)representation, out result))
+            if (!BigRational.TryParse((string)representation!, out result))
             {
                 throw new TransitException("Cannot parse representation as a BigRational: " + representation);
             }
@@ -93,9 +93,9 @@ internal static class ReadHandlers
         /// <returns>
         /// The converted object.
         /// </returns>
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
-            return System.Convert.FromBase64String((string)representation);
+            return System.Convert.FromBase64String((string)representation!);
         }
     }
 
@@ -112,9 +112,9 @@ internal static class ReadHandlers
         /// <returns>
         /// The converted object.
         /// </returns>
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
-            return ((string)representation).Equals("t");
+            return ((string)representation!).Equals("t");
         }
     }
 
@@ -145,7 +145,7 @@ internal static class ReadHandlers
         /// The converted object.
         /// </returns>
         /// <exception cref="System.NotSupportedException">This method is not supported.</exception>
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
             throw new NotSupportedException();
         }
@@ -153,8 +153,8 @@ internal static class ReadHandlers
         private class ListReaderImpl : IListReader
         {
             private readonly object noPendingKey = new object();
-            private TransitDictionary dictionary;
-            private object nextKey;
+            private TransitDictionary? dictionary;
+            private object? nextKey;
 
             public object Init()
             {
@@ -163,11 +163,11 @@ internal static class ReadHandlers
                 return this;
             }
 
-            public object Add(object list, object item)
+            public object Add(object list, object? item)
             {
                 if (!ReferenceEquals(nextKey, noPendingKey))
                 {
-                    dictionary.Add(nextKey, item);
+                    dictionary!.Add(nextKey, item);
                     nextKey = noPendingKey;
                 }
                 else
@@ -184,7 +184,7 @@ internal static class ReadHandlers
                     throw new TransitException("A composite map representation must contain key/value pairs.");
                 }
 
-                return dictionary;
+                return dictionary!;
             }
         }
     }
@@ -202,9 +202,9 @@ internal static class ReadHandlers
         /// <returns>
         /// The converted object.
         /// </returns>
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
-            return ((string)representation)[0];
+            return ((string)representation!)[0];
         }
     }
 
@@ -222,16 +222,16 @@ internal static class ReadHandlers
         /// The converted object.
         /// </returns>
         /// <exception cref="TransitException">Cannot parse representation as a long (DateTime):  + representation</exception>
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
             long n;
             if (representation is long)
             {
-                n = (long)representation;
+                n = (long)representation!;
             }
             else
             {
-                if (!long.TryParse((string)representation, out n))
+                if (!long.TryParse((string)representation!, out n))
                 {
                     throw new TransitException("Cannot parse representation as a long (DateTime): " + representation);
                 }
@@ -255,11 +255,11 @@ internal static class ReadHandlers
         /// The converted object.
         /// </returns>
         /// <exception cref="TransitException">Cannot parse representation as a double:  + representation</exception>
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
             double result;
 
-            if (!double.TryParse((string)representation, NumberStyles.Number, CultureInfo.InvariantCulture, out result))
+            if (!double.TryParse((string)representation!, NumberStyles.Number, CultureInfo.InvariantCulture, out result))
             {
                 throw new TransitException("Cannot parse representation as a double: " + representation);
             }
@@ -271,16 +271,16 @@ internal static class ReadHandlers
 
     internal class GuidReadHandler : IReadHandler
     {
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
             if (representation is string)
             {
-                return new Guid((string)representation);
+                return new Guid((string)representation!);
             }
             else
             {
-                IImmutableList<object> l = (IImmutableList<object>)representation;
-                return (Guid)new Uuid((long)l[0], (long)l[1]);
+                IImmutableList<object?> l = (IImmutableList<object?>)representation!;
+                return (Guid)new Uuid((long)l[0]!, (long)l[1]!);
             }
         }
     }
@@ -288,7 +288,7 @@ internal static class ReadHandlers
 
     internal class IdentityReadHandler : IReadHandler
     {
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
             return representation;
         }
@@ -297,10 +297,10 @@ internal static class ReadHandlers
 
     internal class IntegerReadHandler : IReadHandler
     {
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
             long result;
-            if (!long.TryParse((string)representation, out result))
+            if (!long.TryParse((string)representation!, out result))
             {
                 throw new TransitException("Cannot parse representation as an integer: " + representation);
             }
@@ -312,20 +312,20 @@ internal static class ReadHandlers
 
     internal class KeywordReadHandler : IReadHandler
     {
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
-            return TransitFactory.Keyword((string)representation);
+            return TransitFactory.Keyword((string)representation!);
         }
     }
 
 
     internal class LinkReadHandler : IReadHandler
     {
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
-            var dictionaryRepresentation = (IImmutableDictionary<object, object>)representation;
+            var dictionaryRepresentation = (IImmutableDictionary<object, object?>)representation!;
 
-            var dic = ImmutableDictionary.Create<string, object>();
+            var dic = ImmutableDictionary.Create<string, object?>();
 
             foreach (var item in dictionaryRepresentation)
             {
@@ -363,7 +363,7 @@ internal static class ReadHandlers
         /// The converted object.
         /// </returns>
         /// <exception cref="System.NotSupportedException"></exception>
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
             throw new NotSupportedException();
         }
@@ -372,12 +372,12 @@ internal static class ReadHandlers
         {
             public object Init()
             {
-                return ImmutableList.Create<Object>();
+                return ImmutableList.Create<object?>();
             }
 
-            public object Add(object list, object item)
+            public object Add(object list, object? item)
             {
-                return ((IImmutableList<object>)list).Add(item);
+                return ((IImmutableList<object?>)list).Add(item);
             }
 
             public object Complete(object list)
@@ -390,7 +390,7 @@ internal static class ReadHandlers
 
     internal class NullReadHandler : IReadHandler
     {
-        public object FromRepresentation(object ignored)
+        public object? FromRepresentation(object? ignored)
         {
             return null;
         }
@@ -409,10 +409,10 @@ internal static class ReadHandlers
         /// <returns>
         /// The converted object.
         /// </returns>
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
-            var rep = (IImmutableList<object>)representation;
-            return new Ratio((BigInteger)rep[0], (BigInteger)rep[1]);
+            var rep = (IImmutableList<object?>)representation!;
+            return new Ratio((BigInteger)rep[0]!, (BigInteger)rep[1]!);
         }
     }
 
@@ -443,7 +443,7 @@ internal static class ReadHandlers
         /// The converted object.
         /// </returns>
         /// <exception cref="System.NotSupportedException"></exception>
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
             throw new NotSupportedException();
         }
@@ -452,12 +452,12 @@ internal static class ReadHandlers
         {
             public object Init()
             {
-                return ImmutableHashSet.Create<Object>();
+                return ImmutableHashSet.Create<object?>();
             }
 
-            public object Add(object list, object item)
+            public object Add(object list, object? item)
             {
-                return ((IImmutableSet<object>)list).Add(item);
+                return ((IImmutableSet<object?>)list).Add(item);
             }
 
             public object Complete(object list)
@@ -470,9 +470,9 @@ internal static class ReadHandlers
 
     internal class SpecialNumberReadHandler : IReadHandler
     {
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
-            if (representation.Equals("NaN"))
+            if (representation!.Equals("NaN"))
             {
                 return double.NaN;
             }
@@ -492,28 +492,28 @@ internal static class ReadHandlers
 
     internal class SymbolReadHandler : IReadHandler
     {
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
-            return TransitFactory.Symbol((string)representation);
+            return TransitFactory.Symbol((string)representation!);
         }
     }
 
 
     internal class UriReadHandler : IReadHandler
     {
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
-            return new Uri((string)representation, UriKind.RelativeOrAbsolute);
+            return new Uri((string)representation!, UriKind.RelativeOrAbsolute);
         }
     }
 
 
     internal class VerboseDateTimeReadHandler : IReadHandler
     {
-        public object FromRepresentation(object representation)
+        public object? FromRepresentation(object? representation)
         {
             DateTime result;
-            if (!DateTime.TryParse((string)representation, out result))
+            if (!DateTime.TryParse((string)representation!, out result))
             {
                 throw new TransitException("Cannot parse representation as a DateTime: " + representation);
             }

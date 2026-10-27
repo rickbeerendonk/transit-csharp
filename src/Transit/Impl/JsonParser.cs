@@ -36,10 +36,10 @@ internal class JsonParser(
 {
     private readonly JsonTextReader jp = jsonTextReader;
 
-    private object ParseLong()
+    private object? ParseLong()
     {
         // TODO Use BigInteger just in case (write test, see for example TestReadBooleanDictionary where short numbers are used):
-        object val;
+        object? val;
         //try {
             val = jp.Value;
         //} catch(IOException e) {
@@ -54,7 +54,7 @@ internal class JsonParser(
     /// </summary>
     /// <param name="cache">The cache.</param>
     /// <returns></returns>
-    public override object Parse(ReadCache cache)
+    public override object? Parse(ReadCache cache)
     {
         if (jp.Read())
         {
@@ -74,13 +74,13 @@ internal class JsonParser(
     /// <returns>
     /// The parsed value.
     /// </returns>
-    public override object ParseVal(bool asDictionaryKey, ReadCache cache) =>
+    public override object? ParseVal(bool asDictionaryKey, ReadCache cache) =>
         jp.TokenType switch
         {
             JsonToken.Integer => ParseLong(),
             JsonToken.StartArray => ParseList(asDictionaryKey, cache, null),
             JsonToken.StartObject => ParseDictionary(asDictionaryKey, cache, null),
-            JsonToken.PropertyName or JsonToken.String => cache.CacheRead((string)jp.Value, asDictionaryKey, this),
+            JsonToken.PropertyName or JsonToken.String => cache.CacheRead(jp.Value as string, asDictionaryKey, this),
             JsonToken.Float or JsonToken.Boolean => jp.Value,
             _ => null
         };
@@ -92,7 +92,7 @@ internal class JsonParser(
     /// <param name="cache">The cache.</param>
     /// <param name="handler">The handler.</param>
     /// <returns></returns>
-    public override object ParseDictionary(bool ignored, ReadCache cache, IDictionaryReadHandler handler)
+    public override object? ParseDictionary(bool ignored, ReadCache cache, IDictionaryReadHandler? handler)
     {
         return ParseDictionary(ignored, cache, handler, JsonToken.EndObject);
     }
@@ -105,7 +105,7 @@ internal class JsonParser(
     /// <param name="handler">The handler.</param>
     /// <param name="endToken">The end token.</param>
     /// <returns></returns>
-    public object ParseDictionary(bool ignored, ReadCache cache, IDictionaryReadHandler handler, JsonToken endToken)
+    public object? ParseDictionary(bool ignored, ReadCache cache, IDictionaryReadHandler? handler, JsonToken endToken)
     {
         IDictionaryReader dr = (handler != null) ? handler.DictionaryReader() : dictionaryBuilder;
 
@@ -113,24 +113,23 @@ internal class JsonParser(
 
         while (jp.NextToken() != endToken)
         {
-            object key = ParseVal(true, cache);
-            if (key is Tag)
+            object? key = ParseVal(true, cache);
+            if (key is Tag taggedKey)
             {
-                object val;
+                object? val;
                 jp.Read(); // advance to read value
-                string tag = ((Tag)key).GetValue();
-                IReadHandler val_handler;
-                if (TryGetHandler(tag, out val_handler))
+                string tag = taggedKey.GetValue();
+                if (TryGetHandler(tag, out IReadHandler? valHandler) && valHandler is not null)
                 {
-                    if (this.jp.TokenType == JsonToken.StartObject && val_handler is IDictionaryReadHandler) {
+                    if (jp.TokenType == JsonToken.StartObject && valHandler is IDictionaryReadHandler mapHandler) {
                         // use map reader to decode value
-                        val = ParseDictionary(false, cache, (IDictionaryReadHandler)val_handler);
-                    } else if (this.jp.TokenType == JsonToken.StartArray && val_handler is IListReadHandler) {
+                        val = ParseDictionary(false, cache, mapHandler);
+                    } else if (jp.TokenType == JsonToken.StartArray && valHandler is IListReadHandler listHandler) {
                         // use array reader to decode value
-                        val = ParseList(false, cache, (IListReadHandler)val_handler);
+                        val = ParseList(false, cache, listHandler);
                     } else {
                         // read value and decode normally
-                        val = val_handler.FromRepresentation(ParseVal(false, cache));
+                        val = valHandler.FromRepresentation(ParseVal(false, cache)!);
                     }
                 } else {
                     // default decode
@@ -158,14 +157,14 @@ internal class JsonParser(
     /// <returns>
     /// The parsed list.
     /// </returns>
-    public override object ParseList(bool asDictionaryKey, ReadCache cache, IListReadHandler handler)
+    public override object? ParseList(bool asDictionaryKey, ReadCache cache, IListReadHandler? handler)
     {
         // if nextToken == JsonToken.EndArray
         if (jp.NextToken() != JsonToken.EndArray)
         {
             bool firstIsDirectoryAsList = jp.TokenType == JsonToken.String
-                && (string)jp.Value == Constants.DirectoryAsList;
-            object firstVal = ParseVal(false, cache);
+                && (jp.Value as string) == Constants.DirectoryAsList;
+            object? firstVal = ParseVal(false, cache);
             if (firstVal != null)
             {
                 if (firstIsDirectoryAsList)
@@ -178,27 +177,26 @@ internal class JsonParser(
                     {
                         if (firstVal is Tag)
                         {
-                            object val;
+                            object? val;
                             jp.Read(); // advance to value
                             string tag = ((Tag)firstVal).GetValue();
-                            IReadHandler val_handler;
-                            if (TryGetHandler(tag, out val_handler))
+                            if (TryGetHandler(tag, out IReadHandler? valHandler) && valHandler is not null)
                             {
-                                if (this.jp.TokenType == JsonToken.StartObject && val_handler is IDictionaryReadHandler)
+                                if (jp.TokenType == JsonToken.StartObject && valHandler is IDictionaryReadHandler mapHandler)
                                 {
                                     // use map reader to decode value
-                                    val = ParseDictionary(false, cache, (IDictionaryReadHandler)val_handler);
+                                    val = ParseDictionary(false, cache, mapHandler);
                                 }
                                 else
-                                    if (this.jp.TokenType == JsonToken.StartArray && val_handler is IListReadHandler)
+                                    if (jp.TokenType == JsonToken.StartArray && valHandler is IListReadHandler listHandler)
                                     {
                                         // use array reader to decode value
-                                        val = ParseList(false, cache, (IListReadHandler)val_handler);
+                                        val = ParseList(false, cache, listHandler);
                                     }
                                     else
                                     {
                                         // read value and decode normally
-                                        val = val_handler.FromRepresentation(ParseVal(false, cache));
+                                        val = valHandler.FromRepresentation(ParseVal(false, cache)!);
                                     }
                             }
                             else

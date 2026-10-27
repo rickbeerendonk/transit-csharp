@@ -121,7 +121,7 @@ internal static class WriteHandlers
             return (bool)obj;
         }
 
-        public override string StringRepresentation(object obj)
+        public override string? StringRepresentation(object obj)
         {
             return ((bool)obj).ToString();
         }
@@ -140,9 +140,9 @@ internal static class WriteHandlers
             return Java.Convert.ToJavaTime((DateTime)obj);
         }
 
-        public override string StringRepresentation(object obj)
+        public override string? StringRepresentation(object obj)
         {
-            return Representation(obj).ToString();
+            return Representation(obj)?.ToString();
         }
 
         public override IWriteHandler GetVerboseHandler()
@@ -162,9 +162,9 @@ internal static class WriteHandlers
                 return AbstractParser.FormatDateTime((DateTime)obj);
             }
 
-            public string StringRepresentation(object obj)
+            public string? StringRepresentation(object obj)
             {
-                return Representation(obj).ToString();
+                return Representation(obj)?.ToString();
             }
 
             public IWriteHandler GetVerboseHandler()
@@ -191,7 +191,7 @@ internal static class WriteHandlers
 
     internal class DictionaryWriteHandler : AbstractWriteHandler, IAbstractEmitterAware
     {
-        private AbstractEmitter abstractEmitter;
+        private AbstractEmitter? abstractEmitter;
 
         public void SetEmitter(AbstractEmitter abstractEmitter)
         {
@@ -202,7 +202,7 @@ internal static class WriteHandlers
         {
             foreach (var key in d.Keys)
 	        {
-                string tag = abstractEmitter.GetTag(key);
+                string? tag = abstractEmitter!.GetTag(key);
 
                 if (tag != null && tag.Length > 1)
                 {
@@ -295,9 +295,9 @@ internal static class WriteHandlers
             return d;
         }
 
-        public override string StringRepresentation(object obj)
+        public override string? StringRepresentation(object obj)
         {
-            return Representation(obj).ToString();
+            return Representation(obj)?.ToString();
         }
     }
 
@@ -352,9 +352,9 @@ internal static class WriteHandlers
             return f;
         }
 
-        public override string StringRepresentation(object obj)
+        public override string? StringRepresentation(object obj)
         {
-            return Representation(obj).ToString();
+            return Representation(obj)?.ToString();
         }
     }
 
@@ -376,7 +376,7 @@ internal static class WriteHandlers
             return l;
         }
 
-        public override string StringRepresentation(object obj)
+        public override string? StringRepresentation(object obj)
         {
             return obj.ToString();
         }
@@ -395,7 +395,7 @@ internal static class WriteHandlers
             return obj;
         }
 
-        public override string StringRepresentation(object obj)
+        public override string? StringRepresentation(object obj)
         {
             return obj.ToString();
         }
@@ -437,7 +437,7 @@ internal static class WriteHandlers
             return "_";
         }
 
-        public override object Representation(object ignored)
+        public override object? Representation(object ignored)
         {
             return null;
         }
@@ -508,7 +508,7 @@ internal static class WriteHandlers
             return ((ITaggedValue)obj).Tag;
         }
 
-        public override object Representation(object obj)
+        public override object? Representation(object obj)
         {
             return ((ITaggedValue)obj).Representation;
         }
@@ -522,14 +522,14 @@ internal static class WriteHandlers
             return t;
         }
 
-        public override object Representation(object obj)
+        public override object? Representation(object obj)
         {
             return obj.ToString();
         }
 
-        public override string StringRepresentation(object obj)
+        public override string? StringRepresentation(object obj)
         {
-            return (string)Representation(obj);
+            return (string?)Representation(obj);
         }
     }
 

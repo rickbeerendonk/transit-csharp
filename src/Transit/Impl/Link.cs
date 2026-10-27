@@ -35,7 +35,7 @@ internal class Link : ILink
     private const string NAME = "name";
     private const string RENDER = "render";
 
-    private IDictionary<string, object> dictionary;
+    private IDictionary<string, object?> dictionary;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Link"/> class.
@@ -51,9 +51,9 @@ internal class Link : ILink
     /// rel
     /// </exception>
     /// <exception cref="System.ArgumentException">Value of render must be "link" or "image".</exception>
-    public Link(Uri href, string rel, string name, string render, string prompt)
+    public Link(Uri href, string rel, string? name, string? render, string? prompt)
     {
-        var dictionary = new Dictionary<string, object>();
+        var dictionary = new Dictionary<string, object?>();
 
         if (href == null)
         {
@@ -96,7 +96,7 @@ internal class Link : ILink
     /// Initializes a new instance of the <see cref="Link"/> class.
     /// </summary>
     /// <param name="dictionary">The dictionary.</param>
-    public Link(IDictionary<string, object> dictionary)
+    public Link(IDictionary<string, object?> dictionary)
     {
         this.dictionary = dictionary;
     }
@@ -105,7 +105,7 @@ internal class Link : ILink
     /// Converts the link to a dictionary.
     /// </summary>
     /// <returns>The dictionary.</returns>
-    public IDictionary<string, object> ToDictionary()
+    public IDictionary<string, object?> ToDictionary()
     {
         return dictionary;
     }
@@ -116,9 +116,9 @@ internal class Link : ILink
     /// <value>
     /// The href.
     /// </value>
-    public Uri Href
+    public Uri? Href
     {
-        get => (Uri)dictionary[HREF];
+        get => (Uri?)dictionary[HREF];
     }
 
     /// <summary>
@@ -127,9 +127,9 @@ internal class Link : ILink
     /// <value>
     /// The rel.
     /// </value>
-    public string Rel
+    public string? Rel
     {
-        get => (string)dictionary[REL];
+        get => (string?)dictionary[REL];
     }
 
     /// <summary>
@@ -138,9 +138,9 @@ internal class Link : ILink
     /// <value>
     /// The name.
     /// </value>
-    public string Name
+    public string? Name
     {
-        get => (string)dictionary[NAME];
+        get => (string?)dictionary[NAME];
     }
 
     /// <summary>
@@ -149,9 +149,9 @@ internal class Link : ILink
     /// <value>
     /// The prompt.
     /// </value>
-    public string Prompt
+    public string? Prompt
     {
-        get => (string)dictionary[PROMPT];
+        get => (string?)dictionary[PROMPT];
     }
 
     /// <summary>
@@ -160,8 +160,8 @@ internal class Link : ILink
     /// <value>
     /// The render.
     /// </value>
-    public string Render
+    public string? Render
     {
-        get => (string)dictionary[RENDER];
+        get => (string?)dictionary[RENDER];
     }
 }

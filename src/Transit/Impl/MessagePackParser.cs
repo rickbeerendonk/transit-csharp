@@ -20,7 +20,7 @@ internal sealed class MessagePackParser(
     private ReadOnlySequence<byte> currentMessage;
     private long currentPosition;
 
-    public override object Parse(ReadCache cache)
+    public override object? Parse(ReadCache cache)
     {
         ReadOnlySequence<byte>? message = streamReader.ReadAsync(CancellationToken.None).AsTask().GetAwaiter().GetResult();
         if (!message.HasValue)
@@ -30,7 +30,7 @@ internal sealed class MessagePackParser(
 
         currentMessage = message.Value;
         currentPosition = 0;
-        object value = ParseVal(false, cache);
+        object? value = ParseVal(false, cache);
         if (currentPosition != currentMessage.Length)
         {
             throw new TransitException("MessagePack value contains trailing data.");
@@ -38,31 +38,31 @@ internal sealed class MessagePackParser(
         return value;
     }
 
-    public override object ParseVal(bool asDictionaryKey, ReadCache cache)
+    public override object? ParseVal(bool asDictionaryKey, ReadCache cache)
     {
         var reader = new MessagePackReader(currentMessage.Slice(currentPosition));
-        object value = ParseValue(ref reader, asDictionaryKey, cache);
+        object? value = ParseValue(ref reader, asDictionaryKey, cache);
         currentPosition += reader.Consumed;
         return value;
     }
 
-    public override object ParseDictionary(bool asDictionaryKey, ReadCache cache, IDictionaryReadHandler handler)
+    public override object? ParseDictionary(bool asDictionaryKey, ReadCache cache, IDictionaryReadHandler? handler)
     {
         var reader = new MessagePackReader(currentMessage.Slice(currentPosition));
-        object value = ParseDictionary(ref reader, cache, handler);
+        object? value = ParseDictionary(ref reader, cache, handler);
         currentPosition += reader.Consumed;
         return value;
     }
 
-    public override object ParseList(bool asDictionaryKey, ReadCache cache, IListReadHandler handler)
+    public override object? ParseList(bool asDictionaryKey, ReadCache cache, IListReadHandler? handler)
     {
         var reader = new MessagePackReader(currentMessage.Slice(currentPosition));
-        object value = ParseList(ref reader, cache, handler);
+        object? value = ParseList(ref reader, cache, handler);
         currentPosition += reader.Consumed;
         return value;
     }
 
-    private object ParseValue(ref MessagePackReader reader, bool asDictionaryKey, ReadCache cache) =>
+    private object? ParseValue(ref MessagePackReader reader, bool asDictionaryKey, ReadCache cache) =>
         reader.NextMessagePackType switch
         {
             MessagePackType.Map => ParseDictionary(ref reader, cache, null),
@@ -75,16 +75,16 @@ internal sealed class MessagePackParser(
             var type => throw new TransitException("Unsupported MessagePack value type: " + type)
         };
 
-    private static object ReadNil(ref MessagePackReader reader)
+    private static object? ReadNil(ref MessagePackReader reader)
     {
         reader.ReadNil();
         return null;
     }
 
-    private object ParseDictionary(
+    private object? ParseDictionary(
         ref MessagePackReader reader,
         ReadCache cache,
-        IDictionaryReadHandler handler)
+        IDictionaryReadHandler? handler)
     {
         int size = reader.ReadMapHeader();
         IDictionaryReader builder = handler != null ? handler.DictionaryReader() : dictionaryBuilder;
@@ -92,23 +92,23 @@ internal sealed class MessagePackParser(
 
         for (int i = 0; i < size; i++)
         {
-            object key = ParseValue(ref reader, true, cache);
+            object? key = ParseValue(ref reader, true, cache);
             if (key is Tag tag)
             {
                 return ParseTaggedValue(ref reader, tag.GetValue(), cache);
             }
 
-            object value = ParseValue(ref reader, false, cache);
+            object? value = ParseValue(ref reader, false, cache);
             result = builder.Add(result, key, value);
         }
 
         return builder.Complete(result);
     }
 
-    private object ParseList(
+    private object? ParseList(
         ref MessagePackReader reader,
         ReadCache cache,
-        IListReadHandler handler)
+        IListReadHandler? handler)
     {
         int size = reader.ReadArrayHeader();
         IListReader builder = handler != null ? handler.ListReader() : listBuilder;
@@ -119,10 +119,10 @@ internal sealed class MessagePackParser(
         }
 
         bool firstIsDirectoryAsList = reader.NextMessagePackType == MessagePackType.String;
-        object first;
+        object? first;
         if (firstIsDirectoryAsList)
         {
-            string firstString = reader.ReadString();
+            string firstString = reader.ReadString()!;
             firstIsDirectoryAsList = firstString == Constants.DirectoryAsList;
             first = cache.CacheRead(firstString, false, this);
         }
@@ -160,18 +160,17 @@ internal sealed class MessagePackParser(
         object result = dictionaryBuilder.Init();
         for (int i = 0; i < itemCount; i += 2)
         {
-            object key = ParseValue(ref reader, true, cache);
-            object value = ParseValue(ref reader, false, cache);
+            object? key = ParseValue(ref reader, true, cache);
+            object? value = ParseValue(ref reader, false, cache);
             result = dictionaryBuilder.Add(result, key, value);
         }
 
         return dictionaryBuilder.Complete(result);
     }
 
-    private object ParseTaggedValue(ref MessagePackReader reader, string tag, ReadCache cache)
+    private object? ParseTaggedValue(ref MessagePackReader reader, string tag, ReadCache cache)
     {
-        IReadHandler handler;
-        if (TryGetHandler(tag, out handler))
+        if (TryGetHandler(tag, out IReadHandler? handler) && handler is not null)
         {
             if (reader.NextMessagePackType == MessagePackType.Map && handler is IDictionaryReadHandler mapHandler)
             {

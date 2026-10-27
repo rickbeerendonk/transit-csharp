@@ -79,7 +79,7 @@ internal class WriterFactory
         return builder.ToImmutable();
     }
 
-    private static IImmutableDictionary<Type, IWriteHandler> Handlers(IDictionary<Type, IWriteHandler> customHandlers)
+    private static IImmutableDictionary<Type, IWriteHandler> Handlers(IDictionary<Type, IWriteHandler>? customHandlers)
     {
         IImmutableDictionary<Type, IWriteHandler> handlers = DefaultHandlers();
 
@@ -92,7 +92,7 @@ internal class WriterFactory
     }
 
     public static IImmutableDictionary<Type, IWriteHandler> HandlerMap(
-        IDictionary<Type, IWriteHandler> customHandlers)
+        IDictionary<Type, IWriteHandler>? customHandlers)
     {
         return Handlers(customHandlers);
     }
@@ -130,10 +130,10 @@ internal class WriterFactory
 
     public static IWriter<T> GetJsonInstance<T>(
         Stream output,
-        IDictionary<Type, IWriteHandler> customHandlers,
-        IWriteHandler defaultWriteHandler,
+        IDictionary<Type, IWriteHandler>? customHandlers,
+        IWriteHandler? defaultWriteHandler,
         bool verboseMode,
-        Func<object, object> transform)
+        Func<object, object>? transform)
     {
         TextWriter textWriter = new StreamWriter(output);
         JsonWriter jsonWriter = new JsonTextWriter(textWriter);
@@ -156,16 +156,16 @@ internal class WriterFactory
 
     public static IWriter<T> GetMsgPackInstance<T>(
         Stream output,
-        IDictionary<Type, IWriteHandler> customHandlers)
+        IDictionary<Type, IWriteHandler>? customHandlers)
     {
         return GetMsgPackInstance<T>(output, customHandlers, null, null);
     }
 
     public static IWriter<T> GetMsgPackInstance<T>(
         Stream output,
-        IDictionary<Type, IWriteHandler> customHandlers,
-        IWriteHandler defaultWriteHandler,
-        Func<object, object> transform)
+        IDictionary<Type, IWriteHandler>? customHandlers,
+        IWriteHandler? defaultWriteHandler,
+        Func<object, object>? transform)
     {
         IImmutableDictionary<Type, IWriteHandler> handlers = Handlers(customHandlers);
         var emitter = new MessagePackEmitter(output, handlers, defaultWriteHandler, transform);
@@ -209,7 +209,7 @@ internal class WriterFactory
             this.wc = wc;
 	        }
 
-        public void Write(T value)
+        public void Write(T? value)
         {
             emitter.Emit(value, false, wc.Init());
             output.Flush();

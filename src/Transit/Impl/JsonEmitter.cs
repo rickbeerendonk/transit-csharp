@@ -44,14 +44,14 @@ internal class JsonEmitter : AbstractEmitter
     public JsonEmitter(
         JsonWriter jsonWriter,
         IImmutableDictionary<Type, IWriteHandler> handlers,
-        IWriteHandler defaultWriteHandler,
-        Func<object, object> transform)
+        IWriteHandler? defaultWriteHandler,
+        Func<object, object>? transform)
         : base(handlers, defaultWriteHandler, transform)
     {
         this.jsonWriter = jsonWriter;
     }
 
-    public override void Emit(object obj, bool asDictionaryKey, WriteCache cache)
+    public override void Emit(object? obj, bool asDictionaryKey, WriteCache cache)
     {
         MarshalTop(obj, cache);
     }
@@ -68,7 +68,7 @@ internal class JsonEmitter : AbstractEmitter
         }
     }
 
-    public override void EmitString(string prefix, string tag, string s, bool asDictionaryKey, WriteCache cache)
+    public override void EmitString(string? prefix, string? tag, string s, bool asDictionaryKey, WriteCache cache)
     {
         string outString = cache.CacheWrite(Util.MaybePrefix(prefix, tag, s), asDictionaryKey);
         jsonWriter.WriteValue(outString);

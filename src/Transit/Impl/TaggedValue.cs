@@ -21,7 +21,7 @@ namespace Beerendonk.Transit.Impl;
 /// <summary>
 /// Represents a tagged value.
 /// </summary>
-internal class TaggedValue(string tag, object representation) : ITaggedValue
+internal class TaggedValue(string tag, object? representation) : ITaggedValue
 {
     /// <summary>
     /// Gets the tag.
@@ -37,7 +37,7 @@ internal class TaggedValue(string tag, object representation) : ITaggedValue
     /// <value>
     /// The representation.
     /// </value>
-    public object Representation { get; } = representation;
+    public object? Representation { get; } = representation;
 
     /// <summary>
     /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
@@ -46,7 +46,7 @@ internal class TaggedValue(string tag, object representation) : ITaggedValue
     /// <returns>
     ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
     /// </returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (this == obj)
         {
@@ -59,8 +59,8 @@ internal class TaggedValue(string tag, object representation) : ITaggedValue
         }
 
         var other = (TaggedValue)obj;
-        return (        Tag.Equals(other.Tag) &&
-        Representation.Equals(other.Representation));
+        return Tag.Equals(other.Tag) &&
+            Equals(Representation, other.Representation);
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ internal class TaggedValue(string tag, object representation) : ITaggedValue
     {
         int result = 17;
         result = 31 * result * Tag.GetHashCode();
-        result = 31 * result * Representation.GetHashCode();
+        result = 31 * result * (Representation?.GetHashCode() ?? 0);
 
         return result;
     }

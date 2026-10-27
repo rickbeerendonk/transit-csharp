@@ -57,7 +57,7 @@ internal struct Uuid : IEquatable<Uuid>
     /// </summary>
     /// <param name="obj">The object to compare with this instance.</param>
     /// <returns>true if obj is a <see href="Uuid"/> that has the same value as this instance; otherwise, false.</returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (obj == null || !(obj is Uuid))
         {

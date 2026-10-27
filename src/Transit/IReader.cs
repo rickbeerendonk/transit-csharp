@@ -28,5 +28,5 @@ public interface IReader
     /// </summary>
     /// <typeparam name="T">The type of the value.</typeparam>
     /// <returns>The value.</returns>
-    T Read<T>();
+    T? Read<T>();
 }

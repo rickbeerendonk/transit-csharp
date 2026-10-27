@@ -44,5 +44,5 @@ public interface IReaderSpi
     /// A custom <see cref="IListReader"/> that yields a list of objects.
     /// </param>
     /// <returns>A reader</returns>
-    IReader SetBuilders(IDictionaryReader dictionaryBuilder, IListReader listBuilder);
+    IReader SetBuilders(IDictionaryReader? dictionaryBuilder, IListReader? listBuilder);
 }

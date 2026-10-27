@@ -23,56 +23,56 @@ using System.Linq;
 
 namespace Beerendonk.Transit.Impl;
 
-internal sealed class TransitDictionary : IDictionary<object, object>, IDictionary
+internal sealed class TransitDictionary : IDictionary<object?, object?>, IDictionary
 {
     private static readonly object NullKey = new object();
-    private readonly Dictionary<object, object> values = new Dictionary<object, object>();
+    private readonly Dictionary<object, object?> values = new Dictionary<object, object?>();
 
-    private static object NormalizeKey(object key)
+    private static object NormalizeKey(object? key)
     {
         return key ?? NullKey;
     }
 
-    private static object DenormalizeKey(object key)
+    private static object? DenormalizeKey(object key)
     {
         return ReferenceEquals(key, NullKey) ? null : key;
     }
 
-    public object this[object key]
+    public object? this[object? key]
     {
         get => values[NormalizeKey(key)];
         set => values[NormalizeKey(key)] = value;
     }
 
-    public ICollection<object> Keys => values.Keys.Select(DenormalizeKey).ToArray();
+    public ICollection<object?> Keys => values.Keys.Select(DenormalizeKey).ToArray();
 
-    public ICollection<object> Values => values.Values;
+    public ICollection<object?> Values => values.Values;
 
     public int Count => values.Count;
 
     public bool IsReadOnly => false;
 
-    public void Add(object key, object value)
+    public void Add(object? key, object? value)
     {
         values.Add(NormalizeKey(key), value);
     }
 
-    public bool ContainsKey(object key)
+    public bool ContainsKey(object? key)
     {
         return values.ContainsKey(NormalizeKey(key));
     }
 
-    public bool Remove(object key)
+    public bool Remove(object? key)
     {
         return values.Remove(NormalizeKey(key));
     }
 
-    public bool TryGetValue(object key, out object value)
+    public bool TryGetValue(object? key, out object? value)
     {
         return values.TryGetValue(NormalizeKey(key), out value);
     }
 
-    public void Add(KeyValuePair<object, object> item)
+    public void Add(KeyValuePair<object?, object?> item)
     {
         Add(item.Key, item.Value);
     }
@@ -82,31 +82,31 @@ internal sealed class TransitDictionary : IDictionary<object, object>, IDictiona
         values.Clear();
     }
 
-    public bool Contains(KeyValuePair<object, object> item)
+    public bool Contains(KeyValuePair<object?, object?> item)
     {
-        object value;
+        object? value;
         return TryGetValue(item.Key, out value)
-            && EqualityComparer<object>.Default.Equals(value, item.Value);
+            && EqualityComparer<object?>.Default.Equals(value, item.Value);
     }
 
-    public void CopyTo(KeyValuePair<object, object>[] array, int arrayIndex)
+    public void CopyTo(KeyValuePair<object?, object?>[] array, int arrayIndex)
     {
-        foreach (KeyValuePair<object, object> item in this)
+        foreach (KeyValuePair<object?, object?> item in this)
         {
             array[arrayIndex++] = item;
         }
     }
 
-    public bool Remove(KeyValuePair<object, object> item)
+    public bool Remove(KeyValuePair<object?, object?> item)
     {
         return Contains(item) && Remove(item.Key);
     }
 
-    public IEnumerator<KeyValuePair<object, object>> GetEnumerator()
+    public IEnumerator<KeyValuePair<object?, object?>> GetEnumerator()
     {
-        foreach (KeyValuePair<object, object> item in values)
+        foreach (KeyValuePair<object, object?> item in values)
         {
-            yield return new KeyValuePair<object, object>(
+            yield return new KeyValuePair<object?, object?>(
                 DenormalizeKey(item.Key),
                 item.Value);
         }
@@ -117,11 +117,11 @@ internal sealed class TransitDictionary : IDictionary<object, object>, IDictiona
         return ((IDictionary)this).GetEnumerator();
     }
 
-    object IDictionary.this[object key]
+    object? IDictionary.this[object key]
     {
         get
         {
-            object value;
+            object? value;
             return TryGetValue(key, out value) ? value : null;
         }
         set => this[key] = value;
@@ -135,7 +135,7 @@ internal sealed class TransitDictionary : IDictionary<object, object>, IDictiona
 
     bool IDictionary.IsFixedSize => false;
 
-    void IDictionary.Add(object key, object value)
+    void IDictionary.Add(object key, object? value)
     {
         Add(key, value);
     }
@@ -157,9 +157,9 @@ internal sealed class TransitDictionary : IDictionary<object, object>, IDictiona
 
     void ICollection.CopyTo(Array array, int index)
     {
-        foreach (KeyValuePair<object, object> item in this)
+        foreach (KeyValuePair<object?, object?> item in this)
         {
-            array.SetValue(new DictionaryEntry(item.Key, item.Value), index++);
+            array.SetValue(new DictionaryEntry(item.Key!, item.Value), index++);
         }
     }
 
@@ -169,13 +169,13 @@ internal sealed class TransitDictionary : IDictionary<object, object>, IDictiona
 
     object ICollection.SyncRoot => this;
 
-    private sealed class Enumerator(IEnumerator<KeyValuePair<object, object>> values) : IDictionaryEnumerator
+    private sealed class Enumerator(IEnumerator<KeyValuePair<object?, object?>> values) : IDictionaryEnumerator
     {
-        public DictionaryEntry Entry => new DictionaryEntry(Key, Value);
+        public DictionaryEntry Entry => new DictionaryEntry(Key!, Value);
 
-        public object Key => values.Current.Key;
+        public object Key => values.Current.Key!;
 
-        public object Value => values.Current.Value;
+        public object? Value => values.Current.Value;
 
         public object Current => Entry;
 

@@ -27,9 +27,9 @@ internal class Keyword : IKeyword, INamed, IComparable, IComparable<IKeyword>, I
 {
     private const char separator = '/';
 
-    private readonly string ns;
+    private readonly string? ns;
     private readonly string name;
-    private string str;
+    private string? str;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Keyword"/> class.
@@ -58,19 +58,7 @@ internal class Keyword : IKeyword, INamed, IComparable, IComparable<IKeyword>, I
     /// </returns>
     public override string ToString()
     {
-        if (str == null)
-        {
-            if (ns != null)
-            {
-                str = ns + separator + name;
-            }
-            else
-            {
-                str = name;
-            }
-        }
-
-        return str;
+        return str ??= ns is null ? name : ns + separator + name;
     }
 
     /// <summary>
@@ -84,7 +72,7 @@ internal class Keyword : IKeyword, INamed, IComparable, IComparable<IKeyword>, I
     /// <summary>
     /// Gets the namespace.
     /// </summary>
-    public string Namespace
+    public string? Namespace
     {
         get => ns;
     }
@@ -107,7 +95,7 @@ internal class Keyword : IKeyword, INamed, IComparable, IComparable<IKeyword>, I
     /// <returns>
     ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
     /// </returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (obj == this)
         {
@@ -135,9 +123,9 @@ internal class Keyword : IKeyword, INamed, IComparable, IComparable<IKeyword>, I
     /// <returns>
     /// A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other" /> parameter.Zero This object is equal to <paramref name="other" />. Greater than zero This object is greater than <paramref name="other" />.
     /// </returns>
-    public int CompareTo(IKeyword other)
+    public int CompareTo(IKeyword? other)
     {
-        return Value.CompareTo(((Keyword)other).Value);
+        return other is null ? 1 : Value.CompareTo(other.Value);
     }
 
     /// <summary>
@@ -148,19 +136,19 @@ internal class Keyword : IKeyword, INamed, IComparable, IComparable<IKeyword>, I
     /// A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes <paramref name="obj" /> in the sort order. Zero This instance occurs in the same position in the sort order as <paramref name="obj" />. Greater than zero This instance follows <paramref name="obj" /> in the sort order.
     /// </returns>
     /// <exception cref="System.ArgumentException">obj must be an IKeyword.</exception>
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj == null)
         {
             return 1;
         }
 
-        if (!(obj is IKeyword))
+        if (obj is not IKeyword keyword)
         {
             throw new ArgumentException("obj must be an IKeyword.");
         }
 
-        return CompareTo((IKeyword)obj);
+        return CompareTo(keyword);
     }
 
     /// <summary>
@@ -170,8 +158,8 @@ internal class Keyword : IKeyword, INamed, IComparable, IComparable<IKeyword>, I
     /// <returns>
     /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
     /// </returns>
-    public bool Equals(IKeyword other)
+    public bool Equals(IKeyword? other)
     {
-        return CompareTo(other) == 0;
+        return other is not null && CompareTo(other) == 0;
     }
 }

@@ -28,7 +28,7 @@ public interface IWriteHandler
     /// </summary>
     /// <param name="obj">The object.</param>
     /// <returns>The tag.</returns>
-    string Tag(object obj);
+    string? Tag(object obj);
 
     /// <summary>
     /// Gets the representation to use for the object, either an instance of transit ground type,
@@ -36,19 +36,19 @@ public interface IWriteHandler
     /// </summary>
     /// <param name="obj">The object.</param>
     /// <returns>The representation.</returns>
-    object Representation(object obj);
+    object? Representation(object obj);
 
     /// <summary>
     /// Gets the string representation to use for the object; can return null.
     /// </summary>
     /// <param name="obj">The object.</param>
     /// <returns>The representation.</returns>
-    string StringRepresentation(object obj);
+    string? StringRepresentation(object obj);
 
     /// <summary>
     /// Gets an alternative handler which provides more readable representations for use in
     /// verbose mode; can return null.
     /// </summary>
     /// <returns>A handler.</returns>
-    IWriteHandler GetVerboseHandler();
+    IWriteHandler? GetVerboseHandler();
 }

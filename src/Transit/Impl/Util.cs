@@ -39,7 +39,7 @@ internal static class Util
         return i;
     }
 
-	    public static string MaybePrefix(string prefix, string tag, string s)
+	    public static string MaybePrefix(string? prefix, string? tag, string s)
     {
         if (prefix == null && tag == null)
         {

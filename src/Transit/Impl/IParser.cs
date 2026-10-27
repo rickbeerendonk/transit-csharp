@@ -28,7 +28,7 @@ internal interface IParser
     /// </summary>
     /// <param name="cache">The cache.</param>
     /// <returns></returns>
-    object Parse(ReadCache cache);
+    object? Parse(ReadCache cache);
 
     /// <summary>
     /// Parses the value.
@@ -36,7 +36,7 @@ internal interface IParser
     /// <param name="asDictionaryKey">If set to <c>true</c> [as dictionary key].</param>
     /// <param name="cache">The cache.</param>
     /// <returns>The parsed value.</returns>
-    object ParseVal(bool asDictionaryKey, ReadCache cache);
+    object? ParseVal(bool asDictionaryKey, ReadCache cache);
 
     /// <summary>
     /// Parses the dictionary.
@@ -45,7 +45,7 @@ internal interface IParser
     /// <param name="cache">The cache.</param>
     /// <param name="handler">The handler.</param>
     /// <returns>The parced dictionary</returns>
-    object ParseDictionary(bool asDictionaryKey, ReadCache cache, IDictionaryReadHandler handler);
+    object? ParseDictionary(bool asDictionaryKey, ReadCache cache, IDictionaryReadHandler? handler);
 
     /// <summary>
     /// Parses the list.
@@ -54,5 +54,5 @@ internal interface IParser
     /// <param name="cache">The cache.</param>
     /// <param name="handler">The handler.</param>
     /// <returns>The parsed list.</returns>
-    object ParseList(bool asDictionaryKey, ReadCache cache, IListReadHandler handler);
+    object? ParseList(bool asDictionaryKey, ReadCache cache, IListReadHandler? handler);
 }

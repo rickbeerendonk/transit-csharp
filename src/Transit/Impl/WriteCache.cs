@@ -105,10 +105,10 @@ internal class WriteCache
     {
         if (enabled && IsCacheable(s, asDictionaryKey))
         {
-            string val;
+            string? val;
             if (cache.TryGetValue(s, out val))
             {
-                return val;
+                return val!;
             }
             else
             {

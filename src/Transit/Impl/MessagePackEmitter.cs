@@ -23,15 +23,15 @@ internal sealed class MessagePackEmitter : AbstractEmitter
     public MessagePackEmitter(
         Stream output,
         IImmutableDictionary<Type, IWriteHandler> handlers,
-        IWriteHandler defaultWriteHandler,
-        Func<object, object> transform)
+        IWriteHandler? defaultWriteHandler,
+        Func<object, object>? transform)
         : base(handlers, defaultWriteHandler, transform)
     {
         this.output = output;
         buffer = new ArrayBufferWriter<byte>();
     }
 
-    public override void Emit(object obj, bool asDictionaryKey, WriteCache cache)
+    public override void Emit(object? obj, bool asDictionaryKey, WriteCache cache)
     {
         MarshalTop(obj, cache);
     }
@@ -50,7 +50,7 @@ internal sealed class MessagePackEmitter : AbstractEmitter
         }
     }
 
-    public override void EmitString(string prefix, string tag, string value, bool asDictionaryKey, WriteCache cache)
+    public override void EmitString(string? prefix, string? tag, string value, bool asDictionaryKey, WriteCache cache)
     {
         var writer = new MessagePackWriter(buffer);
         writer.Write(cache.CacheWrite(Util.MaybePrefix(prefix, tag, value), asDictionaryKey));
