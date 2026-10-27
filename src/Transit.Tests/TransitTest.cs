@@ -510,17 +510,15 @@ namespace Beerendonk.Transit.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         public void TestWriteObjectJson()
         {
-            WriteJson(new object());
+            Assert.ThrowsExactly<NotSupportedException>(() => WriteJson(new object()));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         public void TestWriteObjectJsonVerbose()
         {
-            WriteJsonVerbose(new object());
+            Assert.ThrowsExactly<NotSupportedException>(() => WriteJsonVerbose(new object()));
         }
 
         [TestMethod]
@@ -813,7 +811,7 @@ namespace Beerendonk.Transit.Tests
             mock.Verify(m => m.GetVerboseHandler());
 
             // JSON
-            mock.ResetCalls();
+            mock.Invocations.Clear();
             Assert.AreEqual(Scalar("\"NULL\""), WriteJson(null, customHandlers));
             mock.Verify(m => m.Representation(null));
         }

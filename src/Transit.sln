@@ -1,20 +1,10 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transit", "Transit\Transit.csproj", "{E4858DF4-50A2-476E-AB3D-2C901D6ED24D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transit.Tests", "Transit.Tests\Transit.Tests.csproj", "{0A95E77B-6676-42A4-9BEB-C90295E1079D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B6A849E4-7023-4680-B15A-A08A5420B42A}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Transit.Api.Docs", "Transit.Api.Docs\Transit.Api.Docs.shfbproj", "{34E0DBEA-27BC-4956-A631-035AFF3E1EA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,10 +20,5 @@ Global
 		{0A95E77B-6676-42A4-9BEB-C90295E1079D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A95E77B-6676-42A4-9BEB-C90295E1079D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A95E77B-6676-42A4-9BEB-C90295E1079D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34E0DBEA-27BC-4956-A631-035AFF3E1EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34E0DBEA-27BC-4956-A631-035AFF3E1EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

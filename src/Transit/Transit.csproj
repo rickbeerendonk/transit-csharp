@@ -1,154 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E4858DF4-50A2-476E-AB3D-2C901D6ED24D}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
     <RootNamespace>Beerendonk.Transit</RootNamespace>
     <AssemblyName>Transit</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <BaseIntermediateOutputPath>..\..\target\Transit\obj\</BaseIntermediateOutputPath>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <Version>0.8.4-beta</Version>
+    <AssemblyVersion>0.8.0.0</AssemblyVersion>
+    <FileVersion>0.8.0.0</FileVersion>
+    <Company>Beerendonk</Company>
+    <Product>Transit</Product>
+    <Description>Transit is a data format and a set of libraries for conveying values between applications written in different programming languages. This library provides support for marshalling Transit data to/from .NET.</Description>
+    <Copyright>Beerendonk 2014</Copyright>
+    <PackageId>Transit</PackageId>
+    <PackageAuthors>Rick Beerendonk</PackageAuthors>
+    <PackageTags>Transit</PackageTags>
+    <PackageProjectUrl>https://github.com/rickbeerendonk/transit-csharp</PackageProjectUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\target\Transit\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\target\Transit\bin\Debug\Transit.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\target\Transit\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\target\Transit\bin\Release\Transit.XML</DocumentationFile>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="Impl\IAbstractEmitterAware.cs" />
-    <Compile Include="Impl\IEmitter.cs" />
-    <Compile Include="Impl\JsonVerboseEmitter.cs" />
-    <Compile Include="Impl\JsonEmitter.cs" />
-    <Compile Include="Impl\AbstractEmitter.cs" />
-    <Compile Include="Impl\Quote.cs" />
-    <Compile Include="Impl\ReadHandlers\BinaryReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\SpecialNumberReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\IdentityReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\CDictionaryReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\SetReadHandler.cs" />
-    <Compile Include="Impl\Util.cs" />
-    <Compile Include="Impl\WriteHandlers\AbstractWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\BinaryWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\FloatWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\DoubleWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\RatioWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\ListWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\LinkWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\SetWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\GuidWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\DateTimeWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\IntegerWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\DictionaryWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\EnumerableWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\NullWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\QuoteWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\BooleanWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\TaggedValueWriteHandler.cs" />
-    <Compile Include="Impl\WriteHandlers\ToStringWriteHandler.cs" />
-    <Compile Include="Impl\WriterFactory.cs" />
-    <Compile Include="IWriteHandler.cs" />
-    <Compile Include="IWriter.cs" />
-    <Compile Include="Java\Convert.cs" />
-    <Compile Include="Extensions\JsonTextReaderExtensions.cs" />
-    <Compile Include="IDictionaryReadHandler.cs" />
-    <Compile Include="ILink.cs" />
-    <Compile Include="Impl\JsonParser.cs" />
-    <Compile Include="Impl\Keyword.cs" />
-    <Compile Include="Impl\Ratio.cs" />
-    <Compile Include="Impl\ReadHandlers\BigIntegerReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\BigRationalReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\DateTimeReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\VerboseDateTimeReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\LinkReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\GuidReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\ListReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\RatioReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\UriReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\DoubleReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\CharacterReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\NullReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\BooleanReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\IntegerReadHandler.cs" />
-    <Compile Include="Impl\Symbol.cs" />
-    <Compile Include="Impl\Link.cs" />
-    <Compile Include="INamed.cs" />
-    <Compile Include="IRatio.cs" />
-    <Compile Include="ISymbol.cs" />
-    <Compile Include="IKeyword.cs" />
-    <Compile Include="IListReader.cs" />
-    <Compile Include="IDefaultReadHandler.cs" />
-    <Compile Include="IDictionaryReader.cs" />
-    <Compile Include="IListReadHandler.cs" />
-    <Compile Include="Impl\AbstractParser.cs" />
-    <Compile Include="Impl\Constants.cs" />
-    <Compile Include="Impl\DictionaryBuilder.cs" />
-    <Compile Include="Impl\IParser.cs" />
-    <Compile Include="Impl\ListBuilder.cs" />
-    <Compile Include="Impl\ReadCache.cs" />
-    <Compile Include="Impl\ReaderFactory.cs" />
-    <Compile Include="Impl\ReadHandlers\SymbolReadHandler.cs" />
-    <Compile Include="Impl\ReadHandlers\KeywordReadHandler.cs" />
-    <Compile Include="Impl\Tag.cs" />
-    <Compile Include="Impl\TaggedValue.cs" />
-    <Compile Include="Impl\WriteCache.cs" />
-    <Compile Include="IReader.cs" />
-    <Compile Include="IReadHandler.cs" />
-    <Compile Include="ITaggedValue.cs" />
-    <Compile Include="Java\Uuid.cs" />
-    <Compile Include="NullType.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Spi\IReaderSpi.cs" />
-    <Compile Include="Numerics\BigRational.cs" />
-    <Compile Include="TransitException.cs" />
-    <Compile Include="TransitFactory.cs" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="README.md" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections.Immutable">
-      <HintPath>..\packages\Microsoft.Bcl.Immutable.1.0.34\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

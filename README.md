@@ -5,58 +5,60 @@
 
 Transit is a data format and a set of libraries for conveying values between applications written in different languages. This library provides support for marshalling Transit data to/from C#.
 
-* [Rationale](http://blog.cognitect.com/blog/2014/7/22/transit)
-* [API docs](http://rickbeerendonk.github.io/transit-csharp/)
-* [Specification](http://github.com/cognitect/transit-format)
+- [Rationale](http://blog.cognitect.com/blog/2014/7/22/transit)
+- [API docs](http://rickbeerendonk.github.io/transit-csharp/)
+- [Specification](http://github.com/cognitect/transit-format)
 
-This implementation's major.minor version number corresponds to the version of the Transit specification it supports.
+This implementation's major.minor version number corresponds to the version of the Transit specification it supports. It implements Transit 0.8, as described by the [current upstream specification](https://github.com/cognitect/transit-format/tree/399ee1be1f03f406f3613f6b7e18e1dc21d1d6b9).
 
-JSON and JSON-Verbose are implemented, but more tests need to be written.
-MessagePack is **not** implemented yet. 
+JSON and JSON-Verbose are implemented.
+MessagePack is **not** implemented yet.
 
 _NOTE: Transit is a work in progress and may evolve based on feedback. As a result, while Transit is a great option for transferring data between applications, it should not yet be used for storing data durably over time. This recommendation will change when the specification is complete._
 
 ## Releases and Dependency Information
 
-* Latest release: [![NuGet version](http://img.shields.io/nuget/v/Transit.svg)](https://www.nuget.org/packages/Transit)
+- Latest release: [![NuGet version](http://img.shields.io/nuget/v/Transit.svg)](https://www.nuget.org/packages/Transit)
 
-This is a Portable Class Library with the following targets:
+This library targets .NET 10:
 
-* .NET Framework 4.5
-* Windows 8
-* Windows Phone 8.1
+```sh
+dotnet test src/Transit.sln
+dotnet build src/Transit.sln -c Release
+```
 
 ## Usage
 
 ## Default Type Mapping
 
-|Transit type|Write accepts|Read returns|
-|------------|-------------|------------|
-|null|null|null|
-|string|System.String|System.String|
-|boolean|System.Boolean|System.Boolean|
-|integer|System.Byte, System.Int16, System.Int32, System.Int64|System.Int64|
-|decimal|System.Single, System.Double|System.Double|
-|keyword|Beerendonk.Transit.IKeyword|Beerendonk.Transit.IKeyword|
-|symbol|Beerendonk.Transit.ISymbol|Beerendonk.Transit.ISymbol|
-|big decimal|_not implemented_|Beerendonk.Transit.Numerics.BigRational|
-|big integer|System.Numerics.BigInteger|System.Numerics.BigInteger|
-|time|System.DateTime|System.DateTime|
-|uri|System.Uri|System.Uri|
-|uuid|System.Guid|System.Guid|
-|char|System.Char|System.Char|
-|array|T[], System.Collections.Generic.IList<>|System.Collections.Generic.IList<object>|
-|list|System.Collections.Generic.IEnumerable<>|System.Collections.Generic.IEnumerable<object>|
-|set|System.Collections.Generic.ISet<>|System.Collections.Generic.ISet<object>|
-|map|System.Collections.Generic.IDictionary<,>|System.Collections.Generic.IDictionary<object, object>|
-|link|Beerendonk.Transit.ILink|Beerendonk.Transit.ILink|
-|ratio +|Beerendonk.Transit.IRatio|Beerendonk.Transit.IRatio|
+| Transit type | Write accepts                                         | Read returns                                           |
+| ------------ | ----------------------------------------------------- | ------------------------------------------------------ |
+| null         | null                                                  | null                                                   |
+| string       | System.String                                         | System.String                                          |
+| boolean      | System.Boolean                                        | System.Boolean                                         |
+| integer      | System.Byte, System.Int16, System.Int32, System.Int64 | System.Int64                                           |
+| decimal      | System.Single, System.Double                          | System.Double                                          |
+| keyword      | Beerendonk.Transit.IKeyword                           | Beerendonk.Transit.IKeyword                            |
+| symbol       | Beerendonk.Transit.ISymbol                            | Beerendonk.Transit.ISymbol                             |
+| big decimal  | _not implemented_                                     | Beerendonk.Transit.Numerics.BigRational                |
+| big integer  | System.Numerics.BigInteger                            | System.Numerics.BigInteger                             |
+| time         | System.DateTime                                       | System.DateTime                                        |
+| uri          | System.Uri                                            | System.Uri                                             |
+| uuid         | System.Guid                                           | System.Guid                                            |
+| char         | System.Char                                           | System.Char                                            |
+| array        | T[], System.Collections.Generic.IList<>               | System.Collections.Generic.IList<object>               |
+| list         | System.Collections.Generic.IEnumerable<>              | System.Collections.Generic.IEnumerable<object>         |
+| set          | System.Collections.Generic.ISet<>                     | System.Collections.Generic.ISet<object>                |
+| map          | System.Collections.Generic.IDictionary<,>             | System.Collections.Generic.IDictionary<object, object> |
+| link         | Beerendonk.Transit.ILink                              | Beerendonk.Transit.ILink                               |
+| ratio +      | Beerendonk.Transit.IRatio                             | Beerendonk.Transit.IRatio                              |
 
 \+ Extension type
 
 ## Layered Implementations
 
 ## Copyright and License
+
 Copyright © 2014 Rick Beerendonk.
 
 This library is a C# port of the Java version created and maintained by Cognitect, therefore
