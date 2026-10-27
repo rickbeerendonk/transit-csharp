@@ -18,161 +18,160 @@
 
 using System;
 
-namespace Beerendonk.Transit.Impl
+namespace Beerendonk.Transit.Impl;
+
+/// <summary>
+/// Represents a keyword.
+/// </summary>
+internal class Keyword : IKeyword, INamed, IComparable, IComparable<IKeyword>, IEquatable<IKeyword>
 {
+    private const char separator = '/';
+
+    private readonly string ns;
+    private readonly string name;
+    private string str;
+
     /// <summary>
-    /// Represents a keyword.
+    /// Initializes a new instance of the <see cref="Keyword"/> class.
     /// </summary>
-    internal class Keyword : IKeyword, INamed, IComparable, IComparable<IKeyword>, IEquatable<IKeyword>
+    /// <param name="nsname">The namespace name.</param>
+    public Keyword(string nsname)
     {
-        private const char separator = '/';
-
-        private readonly string ns;
-        private readonly string name;
-        private string str;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Keyword"/> class.
-        /// </summary>
-        /// <param name="nsname">The namespace name.</param>
-        public Keyword(string nsname) 
+        int i = nsname.IndexOf(separator);
+        if (i == -1 || nsname.Equals(separator))
         {
-            int i = nsname.IndexOf(separator);
-            if (i == -1 || nsname.Equals(separator)) 
+            ns = null;
+            name = nsname;
+        }
+        else
+        {
+            ns = nsname.Substring(0, i);
+            name = nsname.Substring(i + 1);
+        }
+    }
+
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>
+    /// A <see cref="System.String" /> that represents this instance.
+    /// </returns>
+    public override string ToString()
+    {
+        if (str == null)
+        {
+            if (ns != null)
             {
-                ns = null;
-                name = nsname;
-            } 
-            else 
+                str = ns + separator + name;
+            }
+            else
             {
-                ns = nsname.Substring(0, i);
-                name = nsname.Substring(i + 1);
+                str = name;
             }
         }
 
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
+        return str;
+    }
+
+    /// <summary>
+    /// Gets the name.
+    /// </summary>
+    public string Name
+    {
+        get => name;
+    }
+
+    /// <summary>
+    /// Gets the namespace.
+    /// </summary>
+    public string Namespace
+    {
+        get => ns;
+    }
+
+    /// <summary>
+    /// Gets the value.
+    /// </summary>
+    /// <value>
+    /// The value.
+    /// </value>
+    public string Value
+    {
+        get => ToString();
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+    /// </summary>
+    /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+    /// <returns>
+    ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+    /// </returns>
+    public override bool Equals(object obj)
+    {
+        if (obj == this)
         {
-            if (str == null)
-            {
-                if (ns != null)
-                {
-                    str = ns + separator + name;
-                }
-                else
-                {
-                    str = name;
-                }
-            }
-
-            return str;
+            return true;
         }
 
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        public string Name 
+        return obj is Keyword && ((Keyword)obj).Value.Equals(Value);
+    }
+
+    /// <summary>
+    /// Returns a hash code for this instance.
+    /// </summary>
+    /// <returns>
+    /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+    /// </returns>
+    public override int GetHashCode()
+    {
+        return 17 * Value.GetHashCode();
+    }
+
+    /// <summary>
+    /// Compares the current object with another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this object.</param>
+    /// <returns>
+    /// A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other" /> parameter.Zero This object is equal to <paramref name="other" />. Greater than zero This object is greater than <paramref name="other" />.
+    /// </returns>
+    public int CompareTo(IKeyword other)
+    {
+        return Value.CompareTo(((Keyword)other).Value);
+    }
+
+    /// <summary>
+    /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
+    /// </summary>
+    /// <param name="obj">An object to compare with this instance.</param>
+    /// <returns>
+    /// A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes <paramref name="obj" /> in the sort order. Zero This instance occurs in the same position in the sort order as <paramref name="obj" />. Greater than zero This instance follows <paramref name="obj" /> in the sort order.
+    /// </returns>
+    /// <exception cref="System.ArgumentException">obj must be an IKeyword.</exception>
+    public int CompareTo(object obj)
+    {
+        if (obj == null)
         {
-            get { return name; }
+            return 1;
         }
 
-        /// <summary>
-        /// Gets the namespace.
-        /// </summary>
-        public string Namespace 
+        if (!(obj is IKeyword))
         {
-            get { return ns; }
+            throw new ArgumentException("obj must be an IKeyword.");
         }
 
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        /// <value>
-        /// The value.
-        /// </value>
-        public string Value 
-        {
-            get { return ToString(); } 
-        }
+        return CompareTo((IKeyword)obj);
+    }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == this)
-            {
-                return true;
-            }
-
-            return obj is Keyword && ((Keyword)obj).Value.Equals(Value);
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-        /// </returns>
-        public override int GetHashCode()
-        { 
-            return 17 * Value.GetHashCode(); 
-        }
-
-        /// <summary>
-        /// Compares the current object with another object of the same type.
-        /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
-        /// <returns>
-        /// A value that indicates the relative order of the objects being compared. The return value has the following meanings: Value Meaning Less than zero This object is less than the <paramref name="other" /> parameter.Zero This object is equal to <paramref name="other" />. Greater than zero This object is greater than <paramref name="other" />.
-        /// </returns>
-        public int CompareTo(IKeyword other) 
-        { 
-            return Value.CompareTo(((Keyword)other).Value); 
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>
-        /// A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes <paramref name="obj" /> in the sort order. Zero This instance occurs in the same position in the sort order as <paramref name="obj" />. Greater than zero This instance follows <paramref name="obj" /> in the sort order.
-        /// </returns>
-        /// <exception cref="System.ArgumentException">obj must be an IKeyword.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            if (!(obj is IKeyword))
-            {
-                throw new ArgumentException("obj must be an IKeyword.");
-            }
-
-            return CompareTo((IKeyword)obj);
-        }
-
-        /// <summary>
-        /// Indicates whether the current object is equal to another object of the same type.
-        /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
-        /// <returns>
-        /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
-        /// </returns>
-        public bool Equals(IKeyword other)
-        {
-            return CompareTo(other) == 0;
-        }
+    /// <summary>
+    /// Indicates whether the current object is equal to another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this object.</param>
+    /// <returns>
+    /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+    /// </returns>
+    public bool Equals(IKeyword other)
+    {
+        return CompareTo(other) == 0;
     }
 }

@@ -18,19 +18,18 @@
 
 using System;
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Represents a keyword.
+/// </summary>
+public interface IKeyword : IComparable, IComparable<IKeyword>, IEquatable<IKeyword>
 {
     /// <summary>
-    /// Represents a keyword.
+    /// Gets the value.
     /// </summary>
-    public interface IKeyword : IComparable, IComparable<IKeyword>, IEquatable<IKeyword>
-    {
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        /// <value>
-        /// The value.
-        /// </value>
-        string Value { get; }
-    }
+    /// <value>
+    /// The value.
+    /// </value>
+    string Value { get; }
 }

@@ -16,10 +16,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit.Impl
+namespace Beerendonk.Transit.Impl;
+
+internal interface IAbstractEmitterAware
 {
-    internal interface IAbstractEmitterAware
-    {
-        void SetEmitter(AbstractEmitter abstractEmitter);
-    }
+    void SetEmitter(AbstractEmitter abstractEmitter);
 }

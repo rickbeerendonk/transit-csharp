@@ -16,27 +16,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit.Impl
+namespace Beerendonk.Transit.Impl;
+
+/// <summary>
+/// Represents a Quote.
+/// </summary>
+internal class Quote(object obj)
 {
     /// <summary>
-    /// Represents a Quote.
+    /// Gets the object.
     /// </summary>
-    internal class Quote
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Quote"/> class.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        public Quote(object obj) {
-            Obj = obj;
-        }
-
-        /// <summary>
-        /// Gets the object.
-        /// </summary>
-        /// <value>
-        /// The object.
-        /// </value>
-        public object Obj { get; private set; }
-    }
+    /// <value>
+    /// The object.
+    /// </value>
+    public object Obj { get; private set; } = obj;
 }

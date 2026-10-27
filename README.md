@@ -8,11 +8,11 @@ Transit is a data format and a set of libraries for conveying values between app
 - [Rationale](http://blog.cognitect.com/blog/2014/7/22/transit)
 - [API docs](http://rickbeerendonk.github.io/transit-csharp/)
 - [Specification](http://github.com/cognitect/transit-format)
+- [Java reference implementation](https://github.com/cognitect/transit-java/tree/master)
 
-This implementation's major.minor version number corresponds to the version of the Transit specification it supports. It implements Transit 0.8, as described by the [current upstream specification](https://github.com/cognitect/transit-format/tree/399ee1be1f03f406f3613f6b7e18e1dc21d1d6b9).
+This implementation's major.minor version number corresponds to the version of the Transit specification it supports. It implements Transit 0.8, as described by the [current upstream specification](https://github.com/cognitect/transit-java/tree/master).
 
-JSON and JSON-Verbose are implemented.
-MessagePack is **not** implemented yet.
+JSON, JSON-Verbose, and MessagePack are implemented.
 
 _NOTE: Transit is a work in progress and may evolve based on feedback. As a result, while Transit is a great option for transferring data between applications, it should not yet be used for storing data durably over time. This recommendation will change when the specification is complete._
 
@@ -31,27 +31,27 @@ dotnet build src/Transit.sln -c Release
 
 ## Default Type Mapping
 
-| Transit type | Write accepts                                         | Read returns                                           |
-| ------------ | ----------------------------------------------------- | ------------------------------------------------------ |
-| null         | null                                                  | null                                                   |
-| string       | System.String                                         | System.String                                          |
-| boolean      | System.Boolean                                        | System.Boolean                                         |
-| integer      | System.Byte, System.Int16, System.Int32, System.Int64 | System.Int64                                           |
-| decimal      | System.Single, System.Double                          | System.Double                                          |
-| keyword      | Beerendonk.Transit.IKeyword                           | Beerendonk.Transit.IKeyword                            |
-| symbol       | Beerendonk.Transit.ISymbol                            | Beerendonk.Transit.ISymbol                             |
-| big decimal  | _not implemented_                                     | Beerendonk.Transit.Numerics.BigRational                |
-| big integer  | System.Numerics.BigInteger                            | System.Numerics.BigInteger                             |
-| time         | System.DateTime                                       | System.DateTime                                        |
-| uri          | System.Uri                                            | System.Uri                                             |
-| uuid         | System.Guid                                           | System.Guid                                            |
-| char         | System.Char                                           | System.Char                                            |
-| array        | T[], System.Collections.Generic.IList<>               | System.Collections.Generic.IList<object>               |
-| list         | System.Collections.Generic.IEnumerable<>              | System.Collections.Generic.IEnumerable<object>         |
-| set          | System.Collections.Generic.ISet<>                     | System.Collections.Generic.ISet<object>                |
-| map          | System.Collections.Generic.IDictionary<,>             | System.Collections.Generic.IDictionary<object, object> |
-| link         | Beerendonk.Transit.ILink                              | Beerendonk.Transit.ILink                               |
-| ratio +      | Beerendonk.Transit.IRatio                             | Beerendonk.Transit.IRatio                              |
+| Transit type | Write accepts                                           | Read returns                                           |
+| ------------ | ------------------------------------------------------- | ------------------------------------------------------ |
+| null         | null                                                    | null                                                   |
+| string       | System.String                                           | System.String                                          |
+| boolean      | System.Boolean                                          | System.Boolean                                         |
+| integer      | System.Byte, System.Int16, System.Int32, System.Int64   | System.Int64                                           |
+| decimal      | System.Single, System.Double                            | System.Double                                          |
+| keyword      | Beerendonk.Transit.IKeyword                             | Beerendonk.Transit.IKeyword                            |
+| symbol       | Beerendonk.Transit.ISymbol                              | Beerendonk.Transit.ISymbol                             |
+| big decimal  | System.Decimal, Beerendonk.Transit.Numerics.BigRational | Beerendonk.Transit.Numerics.BigRational                |
+| big integer  | System.Numerics.BigInteger                              | System.Numerics.BigInteger                             |
+| time         | System.DateTime                                         | System.DateTime                                        |
+| uri          | System.Uri                                              | System.Uri                                             |
+| uuid         | System.Guid                                             | System.Guid                                            |
+| char         | System.Char                                             | System.Char                                            |
+| array        | T[], System.Collections.Generic.IList<>                 | System.Collections.Generic.IList<object>               |
+| list         | System.Collections.Generic.IEnumerable<>                | System.Collections.Generic.IEnumerable<object>         |
+| set          | System.Collections.Generic.ISet<>                       | System.Collections.Generic.ISet<object>                |
+| map          | System.Collections.Generic.IDictionary<,>               | System.Collections.Generic.IDictionary<object, object> |
+| link         | Beerendonk.Transit.ILink                                | Beerendonk.Transit.ILink                               |
+| ratio +      | Beerendonk.Transit.IRatio                               | Beerendonk.Transit.IRatio                              |
 
 \+ Extension type
 

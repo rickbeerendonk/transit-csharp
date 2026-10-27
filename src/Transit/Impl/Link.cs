@@ -19,150 +19,149 @@
 using System;
 using System.Collections.Generic;
 
-namespace Beerendonk.Transit.Impl
+namespace Beerendonk.Transit.Impl;
+
+/// <summary>
+/// Represents a link.
+/// </summary>
+internal class Link : ILink
 {
+    private const string LINK = "link";
+    private const string IMAGE = "image";
+
+    private const string HREF = "href";
+    private const string REL = "rel";
+    private const string PROMPT = "prompt";
+    private const string NAME = "name";
+    private const string RENDER = "render";
+
+    private IDictionary<string, object> dictionary;
+
     /// <summary>
-    /// Represents a link.
+    /// Initializes a new instance of the <see cref="Link"/> class.
     /// </summary>
-    internal class Link : ILink
+    /// <param name="href">The href.</param>
+    /// <param name="rel">The rel.</param>
+    /// <param name="name">The name.</param>
+    /// <param name="render">The render.</param>
+    /// <param name="prompt">The prompt.</param>
+    /// <exception cref="System.ArgumentNullException">
+    /// href
+    /// or
+    /// rel
+    /// </exception>
+    /// <exception cref="System.ArgumentException">Value of render must be "link" or "image".</exception>
+    public Link(Uri href, string rel, string name, string render, string prompt)
     {
-        private const string LINK = "link";
-        private const string IMAGE = "image";
+        var dictionary = new Dictionary<string, object>();
 
-        private const string HREF = "href";
-        private const string REL = "rel";
-        private const string PROMPT = "prompt";
-        private const string NAME = "name";
-        private const string RENDER = "render";
-
-        private IDictionary<string, object> dictionary;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Link"/> class.
-        /// </summary>
-        /// <param name="href">The href.</param>
-        /// <param name="rel">The rel.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="render">The render.</param>
-        /// <param name="prompt">The prompt.</param>
-        /// <exception cref="System.ArgumentNullException">
-        /// href
-        /// or
-        /// rel
-        /// </exception>
-        /// <exception cref="System.ArgumentException">Value of render must be "link" or "image".</exception>
-        public Link(Uri href, string rel, string name, string render, string prompt)
+        if (href == null)
         {
-            var dictionary = new Dictionary<string, object>();
+            throw new ArgumentNullException("href");
+        }
+        dictionary.Add(HREF, href);
 
-            if (href == null)
+        if (rel == null)
+        {
+            throw new ArgumentNullException("rel");
+        }
+        dictionary.Add(REL, rel);
+
+        if (name != null)
+        {
+            dictionary.Add(NAME, name);
+        }
+
+        if (prompt != null)
+        {
+            dictionary.Add(PROMPT, prompt);
+        }
+
+        if (render != null)
+        {
+            if ((render == LINK) || (render == IMAGE))
             {
-                throw new ArgumentNullException("href");
+                dictionary.Add(RENDER, render);
             }
-            dictionary.Add(HREF, href);
-
-            if (rel == null)
+            else
             {
-                throw new ArgumentNullException("rel");
+                throw new ArgumentException("Value of render must be \"link\" or \"image\".");
             }
-            dictionary.Add(REL, rel);
-            
-            if (name != null)
-            {
-                dictionary.Add(NAME, name);
-            }
-
-            if (prompt != null)
-            {
-                dictionary.Add(PROMPT, prompt);
-            }
-
-            if (render != null)
-            {
-                if ((render == LINK) || (render == IMAGE))
-                {
-                    dictionary.Add(RENDER, render);
-                }
-                else
-                {
-                    throw new ArgumentException("Value of render must be \"link\" or \"image\".");
-                }
-            }
-
-            this.dictionary = dictionary;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Link"/> class.
-        /// </summary>
-        /// <param name="dictionary">The dictionary.</param>
-        public Link(IDictionary<string, object> dictionary)
-        {
-            this.dictionary = dictionary;
-        }
+        this.dictionary = dictionary;
+    }
 
-        /// <summary>
-        /// Converts the link to a dictionary.
-        /// </summary>
-        /// <returns>The dictionary.</returns>
-        public IDictionary<string, object> ToDictionary()
-        {
-            return dictionary;
-        }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Link"/> class.
+    /// </summary>
+    /// <param name="dictionary">The dictionary.</param>
+    public Link(IDictionary<string, object> dictionary)
+    {
+        this.dictionary = dictionary;
+    }
 
-        /// <summary>
-        /// Gets the href.
-        /// </summary>
-        /// <value>
-        /// The href.
-        /// </value>
-        public Uri Href
-        {
-            get { return (Uri)dictionary[HREF]; }
-        }
+    /// <summary>
+    /// Converts the link to a dictionary.
+    /// </summary>
+    /// <returns>The dictionary.</returns>
+    public IDictionary<string, object> ToDictionary()
+    {
+        return dictionary;
+    }
 
-        /// <summary>
-        /// Gets the rel.
-        /// </summary>
-        /// <value>
-        /// The rel.
-        /// </value>
-        public string Rel
-        {
-            get { return (string)dictionary[REL]; }
-        }
+    /// <summary>
+    /// Gets the href.
+    /// </summary>
+    /// <value>
+    /// The href.
+    /// </value>
+    public Uri Href
+    {
+        get => (Uri)dictionary[HREF];
+    }
 
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        public string Name
-        {
-            get { return (string)dictionary[NAME]; }
-        }
+    /// <summary>
+    /// Gets the rel.
+    /// </summary>
+    /// <value>
+    /// The rel.
+    /// </value>
+    public string Rel
+    {
+        get => (string)dictionary[REL];
+    }
 
-        /// <summary>
-        /// Gets the prompt.
-        /// </summary>
-        /// <value>
-        /// The prompt.
-        /// </value>
-        public string Prompt
-        {
-            get { return (string)dictionary[PROMPT]; }
-        }
+    /// <summary>
+    /// Gets the name.
+    /// </summary>
+    /// <value>
+    /// The name.
+    /// </value>
+    public string Name
+    {
+        get => (string)dictionary[NAME];
+    }
 
-        /// <summary>
-        /// Gets the render semantic
-        /// </summary>
-        /// <value>
-        /// The render.
-        /// </value>
-        public string Render
-        {
-            get { return (string)dictionary[RENDER]; }
-        }
+    /// <summary>
+    /// Gets the prompt.
+    /// </summary>
+    /// <value>
+    /// The prompt.
+    /// </value>
+    public string Prompt
+    {
+        get => (string)dictionary[PROMPT];
+    }
+
+    /// <summary>
+    /// Gets the render semantic
+    /// </summary>
+    /// <value>
+    /// The render.
+    /// </value>
+    public string Render
+    {
+        get => (string)dictionary[RENDER];
     }
 }

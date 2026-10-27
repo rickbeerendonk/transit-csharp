@@ -23,367 +23,420 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 
-namespace Beerendonk.Transit.Impl
+namespace Beerendonk.Transit.Impl;
+
+/// <summary>
+/// Represents an abstract emitter.
+/// </summary>
+internal abstract class AbstractEmitter : IEmitter
 {
-    /// <summary>
-    /// Represents an abstract emitter.
-    /// </summary>
-    internal abstract class AbstractEmitter : IEmitter
+    private IImmutableDictionary<Type, IWriteHandler> handlers;
+    private readonly IWriteHandler defaultWriteHandler;
+    private readonly Func<object, object> transform;
+
+    public AbstractEmitter(IImmutableDictionary<Type, IWriteHandler> handlers)
+        : this(handlers, null, null)
     {
-        private IImmutableDictionary<Type, IWriteHandler> handlers;
+    }
 
-        public AbstractEmitter(IImmutableDictionary<Type, IWriteHandler> handlers)
-        {
-            this.handlers = handlers;
-        }
+    protected AbstractEmitter(
+        IImmutableDictionary<Type, IWriteHandler> handlers,
+        IWriteHandler defaultWriteHandler,
+        Func<object, object> transform)
+    {
+        this.handlers = handlers;
+        this.defaultWriteHandler = defaultWriteHandler;
+        this.transform = transform;
+    }
 
-        private IWriteHandler CheckBaseClasses(Type type)
+    private IWriteHandler CheckBaseClasses(Type type)
+    {
+        Type baseType = type.GetTypeInfo().BaseType;
+        while (baseType != null && baseType != typeof(object))
         {
-            Type baseType = type.GetTypeInfo().BaseType;
-            while (baseType != null && baseType != typeof(object))
+            IWriteHandler handler;
+            if (handlers.TryGetValue(baseType, out handler))
             {
-                IWriteHandler handler;
-                if (handlers.TryGetValue(baseType, out handler))
-                {
-                    handlers = handlers.Add(type, handler);
-                    return handler;
-                }
-
-                baseType = baseType.GetTypeInfo().BaseType;
+                handlers = handlers.Add(type, handler);
+                return handler;
             }
 
+            baseType = baseType.GetTypeInfo().BaseType;
+        }
+
+        return null;
+    }
+
+    private IWriteHandler CheckBaseTypes(Type type, IEnumerable<Type> baseTypes)
+    {
+        IDictionary<Type, IWriteHandler> possibles = new Dictionary<Type, IWriteHandler>();
+
+        foreach (Type item in baseTypes)
+        {
+            IWriteHandler baseTypeHandler;
+            if (handlers.TryGetValue(item, out baseTypeHandler))
+            {
+                possibles[item] = baseTypeHandler;
+            }
+        }
+
+        if (possibles.Count == 0)
+        {
             return null;
         }
 
-        private IWriteHandler CheckBaseTypes(Type type, IEnumerable<Type> baseTypes)
+        IWriteHandler h = possibles.First().Value;
+        if (possibles.Values.Any(candidate => !ReferenceEquals(candidate, h)))
         {
-            IDictionary<Type, IWriteHandler> possibles = new Dictionary<Type, IWriteHandler>();
-
-            foreach (Type item in baseTypes)
-            {
-                // TODO Better way to decide the most appropriate possibility
-                if (possibles.Count < 1)
-                {
-                    IWriteHandler h;
-                    if (handlers.TryGetValue(item, out h))
-                    {
-                        possibles.Add(item, h);
-                    }
-                }
-            }
-
-            switch (possibles.Count)
-            {
-                case 0: return null;
-                case 1:
-                    {
-                        IWriteHandler h = possibles.First().Value;
-                        handlers = handlers.Add(type, h);
-                        return h;
-                    }
-                default:
-                    throw new TransitException("More thane one match for " + type);
-            }
+            throw new TransitException("More than one match for " + type);
         }
 
-        private IWriteHandler CheckBaseInterfaces(Type type)
+        handlers = handlers.Add(type, h);
+        return h;
+    }
+
+    private IWriteHandler CheckBaseInterfaces(Type type)
+    {
+        Type[] matches = type.GetTypeInfo().ImplementedInterfaces
+            .Where(item => !item.GetTypeInfo().IsGenericType && handlers.ContainsKey(item))
+            .ToArray();
+
+        Type[] mostSpecificMatches = matches
+            .Where(candidate => !matches.Any(other =>
+                candidate != other && candidate.IsAssignableFrom(other)))
+            .ToArray();
+
+        if (mostSpecificMatches.Length == 0)
         {
-            IEnumerable<Type> implementedInterfaces = type.GetTypeInfo().ImplementedInterfaces;
-            return CheckBaseTypes(type, implementedInterfaces);
+            return null;
         }
 
-        private IWriteHandler CheckBaseGenericInterfaces(Type type)
+        if (mostSpecificMatches.Length > 1)
         {
-            IEnumerable<Type> genericImplementedInterfaces =
-                type.GetTypeInfo().ImplementedInterfaces
-                .Select(x => x.GetTypeInfo())
-                .Where(x => x.IsGenericType)
-                .Select(x => x.GetGenericTypeDefinition());
-
-            return CheckBaseTypes(type, genericImplementedInterfaces);
+            throw new TransitException("More than one match for " + type);
         }
 
-        private IWriteHandler GetHandler(object obj)
-        {
-            Type type = (obj != null) ? obj.GetType() : typeof(NullType);
-            IWriteHandler handler = null;
+        IWriteHandler handler = handlers[mostSpecificMatches[0]];
+        handlers = handlers.Add(type, handler);
+        return handler;
+    }
 
-            if (!handlers.TryGetValue(type, out handler))
+    private IWriteHandler CheckBaseGenericInterfaces(Type type)
+    {
+        IEnumerable<Type> genericImplementedInterfaces =
+            type.GetTypeInfo().ImplementedInterfaces
+            .Select(x => x.GetTypeInfo())
+            .Where(x => x.IsGenericType)
+            .Select(x => x.GetGenericTypeDefinition());
+
+        return CheckBaseTypes(type, genericImplementedInterfaces);
+    }
+
+    private IWriteHandler GetHandler(object obj)
+    {
+        Type type = (obj != null) ? obj.GetType() : typeof(NullType);
+        IWriteHandler handler = null;
+
+        if (!handlers.TryGetValue(type, out handler))
+        {
+            handler = CheckBaseClasses(type);
+
+            if (handler == null)
             {
-                handler = CheckBaseClasses(type);
+                handler = CheckBaseGenericInterfaces(type);
 
                 if (handler == null)
                 {
-                    handler = CheckBaseGenericInterfaces(type);
-
-                    if (handler == null)
-                    {
-                        handler = CheckBaseInterfaces(type);
-                    }
+                    handler = CheckBaseInterfaces(type);
                 }
             }
-
-            return handler;
         }
 
-        public string GetTag(object obj)
+        return handler;
+    }
+
+    public string GetTag(object obj)
+    {
+        if (transform != null)
         {
-            IWriteHandler handler = GetHandler(obj);
-            if (handler == null)
+            obj = transform(obj);
+        }
+
+        IWriteHandler handler = GetHandler(obj);
+        if (handler == null)
+        {
+            handler = defaultWriteHandler;
+        }
+
+        if (handler == null)
+        {
+            return null;
+        }
+
+        return handler.Tag(obj);
+    }
+
+    protected string Escape(string s)
+    {
+        int l = s.Length;
+        if (l > 0)
+        {
+            char c = s[0];
+            if (c == Constants.Esc || c == Constants.Sub || c == Constants.Reserved)
             {
-                return null;
+                return Constants.Esc + s;
             }
-
-            return handler.Tag(obj);
         }
+        return s;
+    }
 
-        protected string Escape(string s)
+    protected virtual void EmitTagged(string t, object obj, bool ignored, WriteCache cache)
+    {
+        EmitListStart(2L);
+        EmitString(Constants.EscTag, t, "", false, cache);
+        Marshal(obj, false, cache);
+        EmitListEnd();
+    }
+
+    protected void EmitEncoded(string t, IWriteHandler handler, object obj, bool asDictionaryKey, WriteCache cache)
+    {
+        if (t.Length == 1)
         {
-            int l = s.Length;
-            if (l > 0)
+            object r = handler.Representation(obj);
+            if (r is string)
             {
-                char c = s[0];
-                if (c == Constants.Esc || c == Constants.Sub || c == Constants.Reserved)
+                EmitString(Constants.EscStr, t, (string)r, asDictionaryKey, cache);
+            }
+            else
+                if (PrefersStrings() || asDictionaryKey)
                 {
-                    return Constants.Esc + s;
-                }
-            }
-            return s;
-        }
-
-        protected virtual void EmitTagged(string t, object obj, bool ignored, WriteCache cache)
-        {
-            EmitListStart(2L);
-            EmitString(Constants.EscTag, t, "", false, cache);
-            Marshal(obj, false, cache);
-            EmitListEnd();
-        }
-
-        protected void EmitEncoded(string t, IWriteHandler handler, object obj, bool asDictionaryKey, WriteCache cache)
-        {
-            if (t.Length == 1)
-            {
-                object r = handler.Representation(obj);
-                if (r is string)
-                {
-                    EmitString(Constants.EscStr, t, (string)r, asDictionaryKey, cache);
-                }
-                else
-                    if (PrefersStrings() || asDictionaryKey)
+                    string sr = handler.StringRepresentation(obj);
+                    if (sr != null)
                     {
-                        string sr = handler.StringRepresentation(obj);
-                        if (sr != null)
-                        {
-                            EmitString(Constants.EscStr, t, sr, asDictionaryKey, cache);
-                        }
-                        else
-                        {
-                            throw new TransitException("Cannot be encoded as a string " + obj);
-                        }
+                        EmitString(Constants.EscStr, t, sr, asDictionaryKey, cache);
                     }
                     else
                     {
-                        EmitTagged(t, r, asDictionaryKey, cache);
+                        throw new TransitException("Cannot be encoded as a string " + obj);
                     }
-            }
-            else
-            {
-                if (asDictionaryKey)
-                {
-                    throw new TransitException("Cannot be used as a map key " + obj);
                 }
                 else
                 {
-                    EmitTagged(t, handler.Representation(obj), asDictionaryKey, cache);
+                    EmitTagged(t, r, asDictionaryKey, cache);
                 }
+        }
+        else
+        {
+            if (asDictionaryKey)
+            {
+                throw new TransitException("Cannot be used as a map key " + obj);
+            }
+            else
+            {
+                EmitTagged(t, handler.Representation(obj), asDictionaryKey, cache);
             }
         }
+    }
 
-        private void EmitDictionary(dynamic keyValuePairEnumerable, bool ignored, WriteCache cache)
+    private void EmitDictionary(dynamic keyValuePairEnumerable, bool ignored, WriteCache cache)
+    {
+        var d = new Dictionary<object, object>();
+
+        foreach (var item in keyValuePairEnumerable)
         {
-            var d = new Dictionary<object, object>();
-
-            foreach (var item in keyValuePairEnumerable)
-            {
-                d.Add(item.Key, item.Value);
-            }
-
-            EmitDictionary(d, ignored, cache);
+            d.Add(item.Key, item.Value);
         }
 
-        abstract protected void EmitDictionary(IEnumerable<KeyValuePair<object, object>> keyValuePairs, 
-            bool ignored, WriteCache cache);
+        EmitDictionary(d, ignored, cache);
+    }
 
-        protected void EmitList(object o, bool ignored, WriteCache cache)
+    abstract protected void EmitDictionary(IEnumerable<KeyValuePair<object, object>> keyValuePairs,
+        bool ignored, WriteCache cache);
+
+    protected void EmitList(object o, bool ignored, WriteCache cache)
+    {
+        var enumerable = o as IEnumerable;
+        var length = enumerable.Cast<object>().Count();
+
+        EmitListStart(length);
+
+        if (o is IEnumerable<int>)
         {
-            var enumerable = o as IEnumerable;
-            var length = enumerable.Cast<object>().Count();
-
-            EmitListStart(length);
-
-            if (o is IEnumerable<int>)
-            {
-                foreach (var n in (IEnumerable<int>)o)
+            foreach (var n in (IEnumerable<int>)o)
 	            {
 		            EmitInteger(n, false, cache);
 	            }
-            }
-            else if (o is IEnumerable<short>)
-            {
-                foreach (var n in (IEnumerable<short>)o)
+        }
+        else if (o is IEnumerable<short>)
+        {
+            foreach (var n in (IEnumerable<short>)o)
 	            {
 		            EmitInteger(n, false, cache);
 	            }
-            }
-            else if (o is IEnumerable<long>)
-            {
-                foreach (var n in (IEnumerable<long>)o)
+        }
+        else if (o is IEnumerable<long>)
+        {
+            foreach (var n in (IEnumerable<long>)o)
 	            {
 		            EmitInteger(n, false, cache);
 	            }
-            }
-            else if (o is IEnumerable<float>)
-            {
-                foreach (var n in (IEnumerable<float>)o)
+        }
+        else if (o is IEnumerable<float>)
+        {
+            foreach (var n in (IEnumerable<float>)o)
 	            {
 		            EmitDouble(n, false, cache);
 	            }
-            }
-            else if (o is IEnumerable<double>)
-            {
-                foreach (var n in (IEnumerable<double>)o)
+        }
+        else if (o is IEnumerable<double>)
+        {
+            foreach (var n in (IEnumerable<double>)o)
 	            {
 		            EmitDouble(n, false, cache);
 	            }
-            }
-            else if (o is IEnumerable<bool>)
-            {
-                foreach (var n in (IEnumerable<bool>)o)
+        }
+        else if (o is IEnumerable<bool>)
+        {
+            foreach (var n in (IEnumerable<bool>)o)
 	            {
 		            EmitBoolean(n, false, cache);
 	            }
-            }
-            else if (o is IEnumerable<char>)
-            {
-                foreach (var n in (IEnumerable<char>)o)
+        }
+        else if (o is IEnumerable<char>)
+        {
+            foreach (var n in (IEnumerable<char>)o)
 	            {
 		            Marshal(n, false, cache);
 	            }
-            }
-            else 
-            {
-                foreach (var n in enumerable)
+        }
+        else
+        {
+            foreach (var n in enumerable)
 	            {
 		            Marshal(n, false, cache);
 	            }
-            }
-
-            EmitListEnd();
         }
 
-        protected void Marshal(object o, bool asDictionaryKey, WriteCache cache)
-        {
-            bool supported = false;
+        EmitListEnd();
+    }
 
-            IWriteHandler h = GetHandler(o);
-            if (h != null) 
-            { 
-                string t = h.Tag(o);
-                if (t != null) 
+    protected void Marshal(object o, bool asDictionaryKey, WriteCache cache)
+    {
+        if (transform != null)
+        {
+            o = transform(o);
+        }
+
+        bool supported = false;
+
+        IWriteHandler h = GetHandler(o);
+        if (h == null)
+        {
+            h = defaultWriteHandler;
+        }
+
+        if (h != null)
+        {
+            string t = h.Tag(o);
+            if (t != null)
+            {
+                supported = true;
+                if(t.Length == 1)
                 {
-                    supported = true;
-                    if(t.Length == 1)
+                    switch (t[0])
                     {
-                        switch (t[0]) 
-                        {
-                            case '_': EmitNull(asDictionaryKey, cache); break;
-                            case 's': EmitString(null, null, Escape((string)h.Representation(o)), asDictionaryKey, cache); break;
-                            case '?': EmitBoolean((bool)h.Representation(o), asDictionaryKey, cache); break;
-                            case 'i': EmitInteger(h.Representation(o), asDictionaryKey, cache); break;
-                            case 'd': EmitDouble(h.Representation(o), asDictionaryKey, cache); break;
-                            case 'b': EmitBinary(h.Representation(o), asDictionaryKey, cache); break;
-                            case '\'': EmitTagged(t, h.Representation(o), false, cache); break;
-                            default: EmitEncoded(t, h, o, asDictionaryKey, cache); break;
-                        }
+                        case '_': EmitNull(asDictionaryKey, cache); break;
+                        case 's': EmitString(null, null, Escape((string)h.Representation(o)), asDictionaryKey, cache); break;
+                        case '?': EmitBoolean((bool)h.Representation(o), asDictionaryKey, cache); break;
+                        case 'i': EmitInteger(h.Representation(o), asDictionaryKey, cache); break;
+                        case 'd': EmitDouble(h.Representation(o), asDictionaryKey, cache); break;
+                        case 'b': EmitBinary(h.Representation(o), asDictionaryKey, cache); break;
+                        case '\'': EmitTagged(t, h.Representation(o), false, cache); break;
+                        default: EmitEncoded(t, h, o, asDictionaryKey, cache); break;
                     }
-                    else 
+                }
+                else
+                {
+                    if (t.Equals("array"))
                     {
-                        if (t.Equals("array"))
+                        EmitList(h.Representation(o), asDictionaryKey, cache);
+                    }
+                    else
+                        if (t.Equals("map"))
                         {
-                            EmitList(h.Representation(o), asDictionaryKey, cache);
+                            EmitDictionary(h.Representation(o), asDictionaryKey, cache);
                         }
                         else
-                            if (t.Equals("map"))
-                            {
-                                EmitDictionary(h.Representation(o), asDictionaryKey, cache);
-                            }
-                            else
-                            {
-                                EmitEncoded(t, h, o, asDictionaryKey, cache);
-                            }
-                    }
-                    FlushWriter();
+                        {
+                            EmitEncoded(t, h, o, asDictionaryKey, cache);
+                        }
                 }
-            }
-
-            if (!supported)
-            {
-                throw new NotSupportedException("Not supported: " + o.GetType());
+                FlushWriter();
             }
         }
 
-        protected void MarshalTop(object obj, WriteCache cache)
+        if (!supported)
         {
-            IWriteHandler handler = GetHandler(obj);
-            if (handler == null) 
-            {
-                throw new NotSupportedException(
-                    string.Format("Cannot marshal type {0} ({1})", obj != null ? obj.GetType() : null, obj));
-            }
+            throw new NotSupportedException("Not supported: " + o.GetType());
+        }
+    }
 
-            string tag = handler.Tag(obj);
-            if (tag == null) 
-            {
-                throw new NotSupportedException(
-                    string.Format("Cannot marshal type {0} ({1})", obj != null ? obj.GetType() : null, obj));
-            }
-
-            if (tag.Length == 1)
-                obj = new Quote(obj);
-
-            Marshal(obj, false, cache);
+    protected void MarshalTop(object obj, WriteCache cache)
+    {
+        IWriteHandler handler = GetHandler(obj);
+        if (handler == null)
+        {
+            handler = defaultWriteHandler;
         }
 
-        public abstract void Emit(object obj, bool asDictionaryKey, WriteCache cache);
+        if (handler == null)
+        {
+            throw new NotSupportedException(
+                string.Format("Cannot marshal type {0} ({1})", obj != null ? obj.GetType() : null, obj));
+        }
 
-        public abstract void EmitNull(bool asDictionaryKey, WriteCache cache);
+        string tag = handler.Tag(obj);
+        if (tag == null)
+        {
+            throw new NotSupportedException(
+                string.Format("Cannot marshal type {0} ({1})", obj != null ? obj.GetType() : null, obj));
+        }
 
-        public abstract void EmitString(string prefix, string tag, string s, bool asDictionaryKey, WriteCache cache);
+        if (tag.Length == 1)
+            obj = new Quote(obj);
 
-        public abstract void EmitBoolean(bool b, bool asDictionaryKey, WriteCache cache);
-
-        public abstract void EmitInteger(object o, bool asDictionaryKey, WriteCache cache);
-
-        public abstract void EmitInteger(long i, bool asDictionaryKey, WriteCache cache);
-
-        public abstract void EmitDouble(object d, bool asDictionaryKey, WriteCache cache);
-
-        public abstract void EmitDouble(float d, bool asDictionaryKey, WriteCache cache);
-
-        public abstract void EmitDouble(double d, bool asDictionaryKey, WriteCache cache);
-
-        public abstract void EmitBinary(object b, bool asDictionaryKey, WriteCache cache);
-
-        public abstract void EmitListStart(long size);
-
-        public abstract void EmitListEnd();
-
-        public abstract void EmitDictionaryStart(long size);
-
-        public abstract void EmitDictionaryEnd();
-
-        public abstract bool PrefersStrings();
-
-        public abstract void FlushWriter();
+        Marshal(obj, false, cache);
     }
+
+    public abstract void Emit(object obj, bool asDictionaryKey, WriteCache cache);
+
+    public abstract void EmitNull(bool asDictionaryKey, WriteCache cache);
+
+    public abstract void EmitString(string prefix, string tag, string s, bool asDictionaryKey, WriteCache cache);
+
+    public abstract void EmitBoolean(bool b, bool asDictionaryKey, WriteCache cache);
+
+    public abstract void EmitInteger(object o, bool asDictionaryKey, WriteCache cache);
+
+    public abstract void EmitInteger(long i, bool asDictionaryKey, WriteCache cache);
+
+    public abstract void EmitDouble(object d, bool asDictionaryKey, WriteCache cache);
+
+    public abstract void EmitDouble(float d, bool asDictionaryKey, WriteCache cache);
+
+    public abstract void EmitDouble(double d, bool asDictionaryKey, WriteCache cache);
+
+    public abstract void EmitBinary(object b, bool asDictionaryKey, WriteCache cache);
+
+    public abstract void EmitListStart(long size);
+
+    public abstract void EmitListEnd();
+
+    public abstract void EmitDictionaryStart(long size);
+
+    public abstract void EmitDictionaryEnd();
+
+    public abstract bool PrefersStrings();
+
+    public abstract void FlushWriter();
 }

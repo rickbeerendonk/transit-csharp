@@ -16,18 +16,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Interface for reading values in transit format.
+/// </summary>
+public interface IReader
 {
     /// <summary>
-    /// Interface for reading values in transit format.
+    /// Reads a single value from an input source.
     /// </summary>
-    public interface IReader
-    {
-        /// <summary>
-        /// Reads a single value from an input source.
-        /// </summary>
-        /// <typeparam name="T">The type of the value.</typeparam>
-        /// <returns>The value.</returns>
-        T Read<T>();
-    }
+    /// <typeparam name="T">The type of the value.</typeparam>
+    /// <returns>The value.</returns>
+    T Read<T>();
 }

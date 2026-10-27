@@ -19,33 +19,32 @@
 using System;
 using System.Numerics;
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Represents a ratio using BigIntegers.
+/// </summary>
+public interface IRatio : IComparable, IComparable<IRatio>, IEquatable<IRatio>
 {
     /// <summary>
-    /// Represents a ratio using BigIntegers.
+    /// The value of the ratio as double.
     /// </summary>
-    public interface IRatio : IComparable, IComparable<IRatio>, IEquatable<IRatio>
-    {
-        /// <summary>
-        /// The value of the ratio as double.
-        /// </summary>
-        /// <returns>A double.</returns>
-        Double GetValue();
+    /// <returns>A double.</returns>
+    Double GetValue();
 
-        /// <summary>
-        /// Gets the numerator.
-        /// </summary>
-        /// <value>
-        /// The numerator.
-        /// </value>
-        BigInteger Numerator { get; }
+    /// <summary>
+    /// Gets the numerator.
+    /// </summary>
+    /// <value>
+    /// The numerator.
+    /// </value>
+    BigInteger Numerator { get; }
 
-        /// <summary>
-        /// Gets the denominator.
-        /// </summary>
-        /// <value>
-        /// The denominator.
-        /// </value>
-        BigInteger Denominator { get; }
-    }
+    /// <summary>
+    /// Gets the denominator.
+    /// </summary>
+    /// <value>
+    /// The denominator.
+    /// </value>
+    BigInteger Denominator { get; }
 }

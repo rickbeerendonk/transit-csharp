@@ -68,13 +68,11 @@
   <Filter entryType="Class" fullName="Beerendonk.Transit.Impl.Symbol" filterName="Symbol" isExposed="True" />
   <Filter entryType="Class" fullName="Beerendonk.Transit.Impl.TaggedValue" filterName="TaggedValue" isExposed="True" />
 </Filter>
-<Filter entryType="Namespace" fullName="Beerendonk.Transit.Impl.ReadHandlers" isExposed="False" />
 <Filter entryType="Namespace" fullName="Beerendonk.Transit.Java" isExposed="False" /></ApiFilter>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected</VisibleItems>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="Beerendonk.Transit" isDocumented="True">Contains the main transit interfaces and classes.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="Beerendonk.Transit.Impl" isDocumented="False">Contains the interface implementations.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Beerendonk.Transit.Impl.ReadHandlers" isDocumented="False">Contains the read handlers</NamespaceSummaryItem>
 <NamespaceSummaryItem name="Beerendonk.Transit.Java" isDocumented="False">Contains .NET versions of Java types.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="Beerendonk.Transit.Numerics" isDocumented="True">Contains numerics that are not part of the .NET Framework.</NamespaceSummaryItem>
 <NamespaceSummaryItem name="(global)" isDocumented="False" />

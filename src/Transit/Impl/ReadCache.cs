@@ -16,92 +16,91 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit.Impl
+namespace Beerendonk.Transit.Impl;
+
+/// <summary>
+/// Represents a read cache.
+/// </summary>
+internal class ReadCache
 {
+    private object[] cache;
+    private int index;
+
     /// <summary>
-    /// Represents a read cache.
+    /// Initializes a new instance of the <see cref="ReadCache"/> class.
     /// </summary>
-    internal class ReadCache
+    public ReadCache()
     {
-        private object[] cache;
-        private int index;
+        cache = new object[WriteCache.MaxCacheEntries];
+        index = 0;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ReadCache"/> class.
-        /// </summary>
-        public ReadCache()
+    private bool CacheCode(string s)
+    {
+        return (s[0] == Constants.Sub) && (!s.Equals(Constants.DirectoryAsList));
+    }
+
+    private int CodeToIndex(string s)
+    {
+        int sz = s.Length;
+        if (sz == 2)
         {
-            cache = new object[WriteCache.MaxCacheEntries];
-            index = 0;
+            return ((int)s[1] - WriteCache.BaseCharIdx);
         }
-
-        private bool CacheCode(string s)
+        else
         {
-            return (s[0] == Constants.Sub) && (!s.Equals(Constants.DirectoryAsList));
+            return (((int)s[1] - WriteCache.BaseCharIdx) * WriteCache.CacheCodeDigits) +
+                    ((int)s[2] - WriteCache.BaseCharIdx);
         }
+    }
 
-        private int CodeToIndex(string s)
+    /// <summary>
+    /// Caches the read.
+    /// </summary>
+    /// <param name="s">The s.</param>
+    /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
+    /// <returns></returns>
+    public object CacheRead(string s, bool asDictionaryKey)
+    {
+        return CacheRead(s, asDictionaryKey, null);
+    }
+
+    /// <summary>
+    /// Caches the read.
+    /// </summary>
+    /// <param name="s">The s.</param>
+    /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
+    /// <param name="p">The p.</param>
+    /// <returns></returns>
+    public object CacheRead(string s, bool asDictionaryKey, AbstractParser p)
+    {
+        if (s.Length != 0)
         {
-            int sz = s.Length;
-            if (sz == 2)
+            if (CacheCode(s))
             {
-                return ((int)s[1] - WriteCache.BaseCharIdx);
+                return cache[CodeToIndex(s)];
             }
-            else
+            else if (WriteCache.IsCacheable(s, asDictionaryKey))
             {
-                return (((int)s[1] - WriteCache.BaseCharIdx) * WriteCache.CacheCodeDigits) +
-                        ((int)s[2] - WriteCache.BaseCharIdx);
-            }
-        }
-
-        /// <summary>
-        /// Caches the read.
-        /// </summary>
-        /// <param name="s">The s.</param>
-        /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
-        /// <returns></returns>
-        public object CacheRead(string s, bool asDictionaryKey) 
-        { 
-            return CacheRead(s, asDictionaryKey, null); 
-        }
-
-        /// <summary>
-        /// Caches the read.
-        /// </summary>
-        /// <param name="s">The s.</param>
-        /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
-        /// <param name="p">The p.</param>
-        /// <returns></returns>
-        public object CacheRead(string s, bool asDictionaryKey, AbstractParser p)
-        {
-            if (s.Length != 0)
-            {
-                if (CacheCode(s))
+                if (index == WriteCache.MaxCacheEntries)
                 {
-                    return cache[CodeToIndex(s)];
+                    Init();
                 }
-                else if (WriteCache.IsCacheable(s, asDictionaryKey))
-                {
-                    if (index == WriteCache.MaxCacheEntries)
-                    {
-                        Init();
-                    }
-                    return cache[index++] = (p != null ? p.ParseString(s) : s);
-                }
+                return cache[index++] = (p != null ? p.ParseString(s) : s);
             }
-
-            return p != null ? p.ParseString(s) : s;
         }
 
-        /// <summary>
-        /// Initializes this instance.
-        /// </summary>
-        /// <returns>The read cache.</returns>
-        public ReadCache Init()
-        {
-            //need not clear array
-            index = 0;
-            return this;
-        }
+        return p != null ? p.ParseString(s) : s;
+    }
+
+    /// <summary>
+    /// Initializes this instance.
+    /// </summary>
+    /// <returns>The read cache.</returns>
+    public ReadCache Init()
+    {
+        //need not clear array
+        index = 0;
+        return this;
     }
 }

@@ -16,18 +16,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Interface for writing values in transit format.
+/// </summary>
+/// <typeparam name="T">The type of the values.</typeparam>
+public interface IWriter<T>
 {
     /// <summary>
-    /// Interface for writing values in transit format.
+    /// Writes a single value to an output target.
     /// </summary>
-    /// <typeparam name="T">The type of the values.</typeparam>
-    public interface IWriter<T>
-    {
-        /// <summary>
-        /// Writes a single value to an output target.
-        /// </summary>
-        /// <param name="value">The value to write.</param>
-        void Write(T value);
-    }
+    /// <param name="value">The value to write.</param>
+    void Write(T value);
 }

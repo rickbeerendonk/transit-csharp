@@ -16,20 +16,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Provides a <see cref="IDictionaryReader"/> to Transit
+/// to use in incrementally parsing a map representation of a value.
+/// </summary>
+public interface IDictionaryReadHandler : IReadHandler
 {
     /// <summary>
-    /// Provides a <see cref="IDictionaryReader"/> to Transit 
-    /// to use in incrementally parsing a map representation of a value.
+    /// Provides an <see cref="IDictionaryReader"/>
+    /// that a parser can use to convert a dictionary
+    /// representation to an instance of a type incrementally.
     /// </summary>
-    public interface IDictionaryReadHandler : IReadHandler 
-    {
-        /// <summary>
-        /// Provides an <see cref="IDictionaryReader"/> 
-        /// that a parser can use to convert a dictionary 
-        /// representation to an instance of a type incrementally.
-        /// </summary>
-        /// <returns>A DictionaryReader.</returns>
-        IDictionaryReader DictionaryReader();
-    }
+    /// <returns>A DictionaryReader.</returns>
+    IDictionaryReader DictionaryReader();
 }

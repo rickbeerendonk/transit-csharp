@@ -16,21 +16,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Provides an <see cref="IListReader"/> to Transit
+/// to use in incrementally parsing a list representation of
+/// a value.
+/// </summary>
+public interface IListReadHandler : IReadHandler
 {
     /// <summary>
-    /// Provides an <see cref="IListReader"/> to Transit 
-    /// to use in incrementally parsing a list representation of 
-    /// a value.
+    /// Provides an <see cref="IListReader"/> that
+    /// a parser can use to convert a list representation to
+    /// an instance of a type incrementally.
     /// </summary>
-    public interface IListReadHandler : IReadHandler
-    {
-        /// <summary>
-        /// Provides an <see cref="IListReader"/> that 
-        /// a parser can use to convert a list representation to 
-        /// an instance of a type incrementally.
-        /// </summary>
-        /// <returns>A ListReader.</returns>
-        IListReader ListReader();
-    }
+    /// <returns>A ListReader.</returns>
+    IListReader ListReader();
 }

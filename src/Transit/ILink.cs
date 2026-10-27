@@ -19,57 +19,56 @@
 using System;
 using System.Collections.Generic;
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Represents a hypermedia link, as per http://amundsen.com/media-types/collection/format/#arrays-links
+/// </summary>
+public interface ILink
 {
     /// <summary>
-    /// Represents a hypermedia link, as per http://amundsen.com/media-types/collection/format/#arrays-links
+    /// Gets the href.
     /// </summary>
-    public interface ILink
-    {
-        /// <summary>
-        /// Gets the href.
-        /// </summary>
-        /// <value>
-        /// The href.
-        /// </value>
-        Uri Href { get; }
+    /// <value>
+    /// The href.
+    /// </value>
+    Uri Href { get; }
 
-        /// <summary>
-        /// Gets the rel.
-        /// </summary>
-        /// <value>
-        /// The rel.
-        /// </value>
-        string Rel { get; }
+    /// <summary>
+    /// Gets the rel.
+    /// </summary>
+    /// <value>
+    /// The rel.
+    /// </value>
+    string Rel { get; }
 
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        string Name { get; }
+    /// <summary>
+    /// Gets the name.
+    /// </summary>
+    /// <value>
+    /// The name.
+    /// </value>
+    string Name { get; }
 
-        /// <summary>
-        /// Gets the prompt.
-        /// </summary>
-        /// <value>
-        /// The prompt.
-        /// </value>
-        string Prompt { get; }
+    /// <summary>
+    /// Gets the prompt.
+    /// </summary>
+    /// <value>
+    /// The prompt.
+    /// </value>
+    string Prompt { get; }
 
-        /// <summary>
-        /// Gets the render semantic
-        /// </summary>
-        /// <value>
-        /// The render.
-        /// </value>
-        string Render { get; }
+    /// <summary>
+    /// Gets the render semantic
+    /// </summary>
+    /// <value>
+    /// The render.
+    /// </value>
+    string Render { get; }
 
-        /// <summary>
-        /// Converts the link to a dictionary.
-        /// </summary>
-        /// <returns>The dictionary.</returns>
-        IDictionary<string, object> ToDictionary();
-    }
+    /// <summary>
+    /// Converts the link to a dictionary.
+    /// </summary>
+    /// <returns>The dictionary.</returns>
+    IDictionary<string, object> ToDictionary();
 }

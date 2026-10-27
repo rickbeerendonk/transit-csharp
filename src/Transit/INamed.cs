@@ -16,23 +16,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Represents a namespace-scoped named object.
+/// </summary>
+public interface INamed
 {
     /// <summary>
-    /// Represents a namespace-scoped named object.
+    /// Gets the namespace.
     /// </summary>
-    public interface INamed
-    {
-        /// <summary>
-        /// Gets the namespace.
-        /// </summary>
-        /// <returns>Namespace.</returns>
-        string Namespace { get; }
+    /// <returns>Namespace.</returns>
+    string Namespace { get; }
 
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <returns>Name.</returns>
-        string Name { get; }
-    }
+    /// <summary>
+    /// Gets the name.
+    /// </summary>
+    /// <returns>Name.</returns>
+    string Name { get; }
 }

@@ -14,23 +14,22 @@
 
 using Newtonsoft.Json;
 
-namespace Beerendonk.Transit.Extensions
-{
-    internal static class JsonTextReaderExtensions
-    {
-        /// <summary>
-        /// Tries to read the next token and returns the token type.
-        /// </summary>
-        /// <param name="jsonTextReader">A JsonTextReader</param>
-        /// <returns>The token type</returns>
-        public static JsonToken NextToken(this JsonTextReader jsonTextReader)
-        {
-            if (jsonTextReader.Read())
-            {
-                return jsonTextReader.TokenType;
-            }
+namespace Beerendonk.Transit.Extensions;
 
-            return default(JsonToken);
+internal static class JsonTextReaderExtensions
+{
+    /// <summary>
+    /// Tries to read the next token and returns the token type.
+    /// </summary>
+    /// <param name="jsonTextReader">A JsonTextReader</param>
+    /// <returns>The token type</returns>
+    public static JsonToken NextToken(this JsonTextReader jsonTextReader)
+    {
+        if (jsonTextReader.Read())
+        {
+            return jsonTextReader.TokenType;
         }
+
+        return default(JsonToken);
     }
 }

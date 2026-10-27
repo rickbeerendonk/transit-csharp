@@ -16,33 +16,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Identifies a list reader.
+/// </summary>
+public interface IListReader
 {
     /// <summary>
-    /// Identifies a list reader.
+    /// Initializes a new gestational list.
     /// </summary>
-    public interface IListReader
-    {
-        /// <summary>
-        /// Initializes a new gestational list.
-        /// </summary>
-        /// <returns>A new gestational list.</returns>
-        object Init();
+    /// <returns>A new gestational list.</returns>
+    object Init();
 
-        /// <summary>
-        /// Adds an item to the list, returning a new list; 
-        /// new list must be used for any further invocations.
-        /// </summary>
-        /// <param name="list">A gestational list.</param>
-        /// <param name="item">An item.</param>
-        /// <returns>A new gestational list.</returns>
-        object Add(object list, object item);
+    /// <summary>
+    /// Adds an item to the list, returning a new list;
+    /// new list must be used for any further invocations.
+    /// </summary>
+    /// <param name="list">A gestational list.</param>
+    /// <param name="item">An item.</param>
+    /// <returns>A new gestational list.</returns>
+    object Add(object list, object item);
 
-        /// <summary>
-        /// Completes building of a list from a gestational list.
-        /// </summary>
-        /// <param name="list">The gestational list.</param>
-        /// <returns>The completed list.</returns>
-        object Complete(object list);
-    }
+    /// <summary>
+    /// Completes building of a list from a gestational list.
+    /// </summary>
+    /// <param name="list">The gestational list.</param>
+    /// <returns>The completed list.</returns>
+    object Complete(object list);
 }

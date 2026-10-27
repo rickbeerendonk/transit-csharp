@@ -16,31 +16,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit.Impl
+namespace Beerendonk.Transit.Impl;
+
+/// <summary>
+/// Represents a tag.
+/// </summary>
+internal class Tag(string value)
 {
     /// <summary>
-    /// Represents a tag.
+    /// Gets the value.
     /// </summary>
-    internal class Tag
-    {
-        private string value;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Tag"/> class.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        public Tag(string value)
-        {
-            this.value = value;
-        }
-
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        /// <returns>The value.</returns>
-        public string GetValue()
-        {
-            return value;
-        }
-    }
+    /// <returns>The value.</returns>
+    public string GetValue() => value;
 }

@@ -18,19 +18,18 @@
 
 using System;
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Represents a symbol.
+/// </summary>
+public interface ISymbol : IComparable<ISymbol>
 {
     /// <summary>
-    /// Represents a symbol.
+    /// Gets the value.
     /// </summary>
-    public interface ISymbol : IComparable<ISymbol>
-    {
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        /// <value>
-        /// The value.
-        /// </value>
-        string Value { get; }
-    }
+    /// <value>
+    /// The value.
+    /// </value>
+    string Value { get; }
 }

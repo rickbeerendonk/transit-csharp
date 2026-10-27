@@ -16,34 +16,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Identifies a dictionary reader.
+/// </summary>
+public interface IDictionaryReader
 {
     /// <summary>
-    /// Identifies a dictionary reader.
+    /// Initializes a new gestational dictionary.
     /// </summary>
-    public interface IDictionaryReader 
-    {
-        /// <summary>
-        /// Initializes a new gestational dictionary.
-        /// </summary>
-        /// <returns>A new gestational dictionary.</returns>
-        object Init();
+    /// <returns>A new gestational dictionary.</returns>
+    object Init();
 
-        /// <summary>
-        /// Adds a key and value to the dictionary, returning a new dictionary; 
-        /// new dictionary must be used for any further invocations.
-        /// </summary>
-        /// <param name="dictionary">A gestational dictionary.</param>
-        /// <param name="key">A key.</param>
-        /// <param name="value">A value.</param>
-        /// <returns>A new gestational dictionary.</returns>
-        object Add(object dictionary, object key, object value);
+    /// <summary>
+    /// Adds a key and value to the dictionary, returning a new dictionary;
+    /// new dictionary must be used for any further invocations.
+    /// </summary>
+    /// <param name="dictionary">A gestational dictionary.</param>
+    /// <param name="key">A key.</param>
+    /// <param name="value">A value.</param>
+    /// <returns>A new gestational dictionary.</returns>
+    object Add(object dictionary, object key, object value);
 
-        /// <summary>
-        /// Completes building of a dictionary from a gestational dictionary.
-        /// </summary>
-        /// <param name="dictionary">The gestational dictionary.</param>
-        /// <returns>The completed dictionary.</returns>
-        object Complete(object dictionary);
-    }
+    /// <summary>
+    /// Completes building of a dictionary from a gestational dictionary.
+    /// </summary>
+    /// <param name="dictionary">The gestational dictionary.</param>
+    /// <returns>The completed dictionary.</returns>
+    object Complete(object dictionary);
 }

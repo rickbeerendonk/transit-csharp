@@ -18,122 +18,121 @@
 
 using System.Collections.Immutable;
 
-namespace Beerendonk.Transit.Impl
+namespace Beerendonk.Transit.Impl;
+
+/// <summary>
+/// Represents a write cache.
+/// </summary>
+internal class WriteCache
 {
     /// <summary>
-    /// Represents a write cache.
+    /// The minimum size cacheable.
     /// </summary>
-    internal class WriteCache
+    public const int MinSizeCacheable = 4;
+
+    /// <summary>
+    /// The cache code digits.
+    /// </summary>
+    public const int CacheCodeDigits = 44;
+
+    /// <summary>
+    /// The maximum cache entries.
+    /// </summary>
+    public const int MaxCacheEntries = CacheCodeDigits * CacheCodeDigits;
+
+    /// <summary>
+    /// The base character index.
+    /// </summary>
+    public const int BaseCharIdx = 48;
+
+    private IImmutableDictionary<string, string> cache = ImmutableDictionary.Create<string, string>();
+    private int index;
+    private bool enabled;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="WriteCache"/> class.
+    /// </summary>
+    public WriteCache()
+        : this(true)
     {
-        /// <summary>
-        /// The minimum size cacheable.
-        /// </summary>
-        public const int MinSizeCacheable = 4;
+    }
 
-        /// <summary>
-        /// The cache code digits.
-        /// </summary>
-        public const int CacheCodeDigits = 44;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="WriteCache"/> class.
+    /// </summary>
+    /// <param name="enabled">if set to <c>true</c> [enabled].</param>
+    public WriteCache(bool enabled)
+    {
+        index = 0;
+        this.enabled = enabled;
+    }
 
-        /// <summary>
-        /// The maximum cache entries.
-        /// </summary>
-        public const int MaxCacheEntries = CacheCodeDigits * CacheCodeDigits;
+    /// <summary>
+    /// Determines whether the specified s is cacheable.
+    /// </summary>
+    /// <param name="s">The s.</param>
+    /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
+    /// <returns></returns>
+    public static bool IsCacheable(string s, bool asDictionaryKey)
+    {
+        return (s.Length >= MinSizeCacheable) &&
+            (asDictionaryKey ||
+                (s[0] == Constants.Esc &&
+                (s[1] == ':' || s[1] == '$' || s[1] == '#')));
+    }
 
-        /// <summary>
-        /// The base character index.
-        /// </summary>
-        public const int BaseCharIdx = 48;
-
-        private IImmutableDictionary<string, string> cache = ImmutableDictionary.Create<string, string>();
-        private int index;
-        private bool enabled;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WriteCache"/> class.
-        /// </summary>
-        public WriteCache() 
-            : this(true)
+    private string IndexToCode(int index)
+    {
+        int hi = index / CacheCodeDigits;
+        int lo = index % CacheCodeDigits;
+        if (hi == 0)
         {
+            return Constants.SubStr + (char)(lo + BaseCharIdx);
         }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WriteCache"/> class.
-        /// </summary>
-        /// <param name="enabled">if set to <c>true</c> [enabled].</param>
-        public WriteCache(bool enabled) 
+        else
         {
-            index = 0;
-            this.enabled = enabled;
+            return Constants.SubStr + (char)(hi + BaseCharIdx) + (char)(lo + BaseCharIdx);
         }
+    }
 
-        /// <summary>
-        /// Determines whether the specified s is cacheable.
-        /// </summary>
-        /// <param name="s">The s.</param>
-        /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
-        /// <returns></returns>
-        public static bool IsCacheable(string s, bool asDictionaryKey) 
+    /// <summary>
+    /// Caches the write.
+    /// </summary>
+    /// <param name="s">The s.</param>
+    /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
+    /// <returns></returns>
+    public string CacheWrite(string s, bool asDictionaryKey)
+    {
+        if (enabled && IsCacheable(s, asDictionaryKey))
         {
-            return (s.Length >= MinSizeCacheable) &&
-                (asDictionaryKey || 
-                    (s[0] == Constants.Esc &&
-                    (s[1] == ':' || s[1] == '$' || s[1] == '#')));
-        }
-
-        private string IndexToCode(int index) 
-        {
-            int hi = index / CacheCodeDigits;
-            int lo = index % CacheCodeDigits;
-            if (hi == 0) 
+            string val;
+            if (cache.TryGetValue(s, out val))
             {
-                return Constants.SubStr + (char)(lo + BaseCharIdx);
-            } 
-            else 
+                return val;
+            }
+            else
             {
-                return Constants.SubStr + (char)(hi + BaseCharIdx) + (char)(lo + BaseCharIdx);
+                if (index == MaxCacheEntries)
+                {
+                    Init();
+                }
+
+                cache = cache.SetItem(s, IndexToCode(index++));
             }
         }
 
-        /// <summary>
-        /// Caches the write.
-        /// </summary>
-        /// <param name="s">The s.</param>
-        /// <param name="asDictionaryKey">if set to <c>true</c> [as dictionary key].</param>
-        /// <returns></returns>
-        public string CacheWrite(string s, bool asDictionaryKey) 
-        {
-            if (enabled && IsCacheable(s, asDictionaryKey)) 
-            {
-                string val;
-                if (cache.TryGetValue(s, out val))
-                {
-                    return val;
-                }
-                else
-                {
-                    if (index == MaxCacheEntries)
-                    {
-                        Init();
-                    }
+        // TODO Either s or val is returned. Weird?!
+        return s;
+    }
 
-                    cache = cache.SetItem(s, IndexToCode(index++));
-                }
-            }
-
-            // TODO Either s or val is returned. Weird?!
-            return s;
-        }
-
-        /// <summary>
-        /// Initializes this instance.
-        /// </summary>
-        /// <returns>The write cache.</returns>
+    /// <summary>
+    /// Initializes this instance.
+    /// </summary>
+    /// <returns>The write cache.</returns>
 	    public WriteCache Init()
-        {
+    {
 		    index = 0;
 		    cache = cache.Clear();
 		    return this;
 	    }
-    }
 }

@@ -14,45 +14,44 @@
 
 using System;
 
-namespace Beerendonk.Transit.Java
+namespace Beerendonk.Transit.Java;
+
+/// <summary>
+/// Contains conversations from Java to .NET and vice versa.
+/// </summary>
+internal static class Convert
 {
+    private const long JavaTimePrecisionDifference = 10000;
+    private static readonly long JavaTimeEpochTicks = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks;
+
     /// <summary>
-    /// Contains conversations from Java to .NET and vice versa.
+    /// Converts a <see cref="DateTime"/> to a Java time.
     /// </summary>
-    internal static class Convert
+    /// <param name="value">A <see cref="DateTime"/></param>
+    /// <returns>A Java time</returns>
+    public static long ToJavaTime(DateTime value)
     {
-        private const long JavaTimePrecisionDifference = 10000;
-        private static readonly long JavaTimeEpochTicks = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks;
+        DateTime valueUtc = new DateTimeOffset(value).UtcDateTime;
+        return (valueUtc.Ticks - JavaTimeEpochTicks) / JavaTimePrecisionDifference;
+    }
 
-        /// <summary>
-        /// Converts a <see cref="DateTime"/> to a Java time.
-        /// </summary>
-        /// <param name="value">A <see cref="DateTime"/></param>
-        /// <returns>A Java time</returns>
-        public static long ToJavaTime(DateTime value)
-        {
-            DateTime valueUtc = new DateTimeOffset(value).UtcDateTime;
-            return (valueUtc.Ticks - JavaTimeEpochTicks) / JavaTimePrecisionDifference;
-        }
+    /// <summary>
+    /// Converts a Java time to a <see cref="DateTime"/> in the local time zone.
+    /// </summary>
+    /// <param name="javaTime">A Java time</param>
+    /// <returns>A <see cref="DateTime"/> in the local time zone</returns>
+    public static DateTime FromJavaTimeToLocal(long javaTime)
+    {
+        return new DateTimeOffset(FromJavaTimeToUtc(javaTime)).LocalDateTime;
+    }
 
-        /// <summary>
-        /// Converts a Java time to a <see cref="DateTime"/> in the local time zone.
-        /// </summary>
-        /// <param name="javaTime">A Java time</param>
-        /// <returns>A <see cref="DateTime"/> in the local time zone</returns>
-        public static DateTime FromJavaTimeToLocal(long javaTime)
-        {
-            return new DateTimeOffset(FromJavaTimeToUtc(javaTime)).LocalDateTime;
-        }
-
-        /// <summary>
-        /// Converts a Java time to a <see cref="DateTime"/> in the UTC time zone.
-        /// </summary>
-        /// <param name="javaTime">A Java time</param>
-        /// <returns>A <see cref="DateTime"/> in the UTC time zone</returns>
-        public static DateTime FromJavaTimeToUtc(long javaTime)
-        {
-            return new DateTime(JavaTimePrecisionDifference * javaTime + JavaTimeEpochTicks, DateTimeKind.Utc);
-        }
+    /// <summary>
+    /// Converts a Java time to a <see cref="DateTime"/> in the UTC time zone.
+    /// </summary>
+    /// <param name="javaTime">A Java time</param>
+    /// <returns>A <see cref="DateTime"/> in the UTC time zone</returns>
+    public static DateTime FromJavaTimeToUtc(long javaTime)
+    {
+        return new DateTime(JavaTimePrecisionDifference * javaTime + JavaTimeEpochTicks, DateTimeKind.Utc);
     }
 }

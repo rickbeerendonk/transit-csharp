@@ -16,25 +16,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit.Impl
+namespace Beerendonk.Transit.Impl;
+
+internal interface IEmitter
 {
-    internal interface IEmitter
-    {
-        void Emit(object obj, bool asDictionaryKey, WriteCache cache);
-        void EmitNull(bool asDictionaryKey, WriteCache cache);
-        void EmitString(string prefix, string tag, string s, bool asDictionaryKey, WriteCache cache);
-        void EmitBoolean(bool b, bool asDictionaryKey, WriteCache cache);
-        void EmitInteger(object i, bool asDictionaryKey, WriteCache cache);
-        void EmitInteger(long i, bool asDictionaryKey, WriteCache cache);
-        void EmitDouble(object d, bool asDictionaryKey, WriteCache cache);
-        void EmitDouble(float d, bool asDictionaryKey, WriteCache cache);
-        void EmitDouble(double d, bool asDictionaryKey, WriteCache cache);
-        void EmitBinary(object b, bool asDictionaryKey, WriteCache cache);
-        void EmitListStart(long size);
-        void EmitListEnd();
-        void EmitDictionaryStart(long size);
-        void EmitDictionaryEnd();
-        bool PrefersStrings();
-        void FlushWriter();
-    }
+    void Emit(object obj, bool asDictionaryKey, WriteCache cache);
+    void EmitNull(bool asDictionaryKey, WriteCache cache);
+    void EmitString(string prefix, string tag, string s, bool asDictionaryKey, WriteCache cache);
+    void EmitBoolean(bool b, bool asDictionaryKey, WriteCache cache);
+    void EmitInteger(object i, bool asDictionaryKey, WriteCache cache);
+    void EmitInteger(long i, bool asDictionaryKey, WriteCache cache);
+    void EmitDouble(object d, bool asDictionaryKey, WriteCache cache);
+    void EmitDouble(float d, bool asDictionaryKey, WriteCache cache);
+    void EmitDouble(double d, bool asDictionaryKey, WriteCache cache);
+    void EmitBinary(object b, bool asDictionaryKey, WriteCache cache);
+    void EmitListStart(long size);
+    void EmitListEnd();
+    void EmitDictionaryStart(long size);
+    void EmitDictionaryEnd();
+    bool PrefersStrings();
+    void FlushWriter();
 }

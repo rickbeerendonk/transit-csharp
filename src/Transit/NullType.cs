@@ -12,13 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Represents a typeof(null) to use in dictionaries,
+/// because dictionaries don't accept null as a key.
+/// </summary>
+public class NullType
 {
-    /// <summary>
-    /// Represents a typeof(null) to use in dictionaries, 
-    /// because dictionaries don't accept null as a key.
-    /// </summary>
-    public class NullType
-    {
-    }
 }

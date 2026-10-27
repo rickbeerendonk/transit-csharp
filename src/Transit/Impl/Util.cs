@@ -17,34 +17,34 @@
 // limitations under the License.
 
 using System.Text;
-namespace Beerendonk.Transit.Impl
+namespace Beerendonk.Transit.Impl;
+
+internal static class Util
 {
-    internal static class Util
+    public static long NumberToPrimitiveLong(object o)
     {
-        public static long NumberToPrimitiveLong(object o)
-        {
-            long i;
+        long i;
 
-            if (o is long)
-                i = (long)o;
-            else if (o is int)
-                i = (int)o;
-            else if (o is short)
-                i = (short)o;
-            else if (o is byte)
-                i = (byte)o;
-            else
-                throw new TransitException("Unknown integer type: " + o.GetType());
+        if (o is long)
+            i = (long)o;
+        else if (o is int)
+            i = (int)o;
+        else if (o is short)
+            i = (short)o;
+        else if (o is byte)
+            i = (byte)o;
+        else
+            throw new TransitException("Unknown integer type: " + o.GetType());
 
-            return i;
-        }
+        return i;
+    }
 
 	    public static string MaybePrefix(string prefix, string tag, string s)
+    {
+        if (prefix == null && tag == null)
         {
-            if (prefix == null && tag == null)
-            {
-                return s;
-            }
+            return s;
+        }
 
 		    prefix = (prefix == null) ? "" : prefix;
 		    tag = (tag == null) ? "" : tag;
@@ -53,7 +53,7 @@ namespace Beerendonk.Transit.Impl
 		    return sb.Append(prefix).Append(tag).Append(s).ToString();
 	    }
 
-        /*
+    /*
 	    public static long arraySize(Object a) {
 	        if(a instanceof Collection)
 	            return ((Collection)a).size();
@@ -66,8 +66,8 @@ namespace Beerendonk.Transit.Impl
 	            }
 	            return i;
 	        } else if (a instanceof List) {
-                return ((List)a).size();
-            }
+            return ((List)a).size();
+        }
 	        else
 	            throw new UnsupportedOperationException("arraySize not supported on this type " + a.getClass().getSimpleName());
 
@@ -76,11 +76,10 @@ namespace Beerendonk.Transit.Impl
 	    public static long mapSize(Object m) {
 	        if(m instanceof Collection)
 	            return ((Collection) m).size();
-            else if (m instanceof Map)
-                return ((Map)m).size();
+        else if (m instanceof Map)
+            return ((Map)m).size();
 	        else
 	            throw new UnsupportedOperationException("mapSize not supported on this type " + m.getClass().getSimpleName());
 	    }
-        */
-    }
+    */
 }

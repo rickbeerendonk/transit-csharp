@@ -16,20 +16,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Processes a non-decodable transit value.
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public interface IDefaultReadHandler<out T>
 {
     /// <summary>
-    /// Processes a non-decodable transit value.
+    /// Reads a transit representation that cannot otherwise be read.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IDefaultReadHandler<out T>
-    {
-        /// <summary>
-        /// Reads a transit representation that cannot otherwise be read.
-        /// </summary>
-        /// <param name="tag">The transit value's tag.</param>
-        /// <param name="representation">The transit value's representation.</param>
-        /// <returns>The resulting generic object.</returns>
-        T FromRepresentation(string tag, object representation);
-    }
+    /// <param name="tag">The transit value's tag.</param>
+    /// <param name="representation">The transit value's representation.</param>
+    /// <returns>The resulting generic object.</returns>
+    T FromRepresentation(string tag, object representation);
 }

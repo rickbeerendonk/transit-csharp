@@ -1,4 +1,4 @@
-﻿// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
+// Copyright © 2014 Rick Beerendonk. All Rights Reserved.
 //
 // This code is a C# port of the Java version created and maintained by Cognitect, therefore
 //
@@ -16,21 +16,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections;
-using System.Collections.Generic;
+namespace Beerendonk.Transit.Impl;
 
-namespace Beerendonk.Transit.Impl.WriteHandlers
+internal abstract class AbstractWriteHandler : IWriteHandler
 {
-    internal class ListWriteHandler : AbstractWriteHandler
-    {
-        public override string Tag(object ignored)
-        {
-            return "array";
-        }
+    public abstract string Tag(object obj);
 
-        public override object Representation(object obj)
-        {
-            return obj;
-        }
+    public abstract object Representation(object obj);
+
+    public virtual string StringRepresentation(object ignored)
+    {
+        return null;
+    }
+
+    public virtual IWriteHandler GetVerboseHandler()
+    {
+        return null;
     }
 }

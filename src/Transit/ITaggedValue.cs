@@ -17,31 +17,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Represents a transit tag and value. Returned by default when a reader encounters a tag for
+/// which there is no registered <see cref="IReadHandler"/>. Can also be used in a
+/// custom <see cref="IWriteHandler"/> implementation to force representation to use a transit
+/// ground type using a representation for which there is no registered handler (e.g., an
+/// enumerable for the representation of an array).
+/// </summary>
+public interface ITaggedValue
 {
     /// <summary>
-    /// Represents a transit tag and value. Returned by default when a reader encounters a tag for 
-    /// which there is no registered <see cref="IReadHandler"/>. Can also be used in a 
-    /// custom <see cref="IWriteHandler"/> implementation to force representation to use a transit 
-    /// ground type using a representation for which there is no registered handler (e.g., an 
-    /// enumerable for the representation of an array).
+    /// Gets the tag.
     /// </summary>
-    public interface ITaggedValue
-    {
-        /// <summary>
-        /// Gets the tag.
-        /// </summary>
-        /// <value>
-        /// The tag.
-        /// </value>
-        string Tag { get; }
+    /// <value>
+    /// The tag.
+    /// </value>
+    string Tag { get; }
 
-        /// <summary>
-        /// Gets the representation.
-        /// </summary>
-        /// <value>
-        /// The representation.
-        /// </value>
-        object Representation { get; }
-    }
+    /// <summary>
+    /// Gets the representation.
+    /// </summary>
+    /// <value>
+    /// The representation.
+    /// </value>
+    object Representation { get; }
 }

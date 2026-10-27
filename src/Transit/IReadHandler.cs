@@ -16,21 +16,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Beerendonk.Transit
+namespace Beerendonk.Transit;
+
+/// <summary>
+/// Converts a transit representation to an instance of a type; if type
+/// implements <see cref="IListReadHandler"/> or
+/// <see cref="IDictionaryReadHandler"/> to support
+/// incremental parsing of representation, that interface will be used instead.
+/// </summary>
+public interface IReadHandler
 {
     /// <summary>
-    /// Converts a transit representation to an instance of a type; if type 
-    /// implements <see cref="IListReadHandler"/> or 
-    /// <see cref="IDictionaryReadHandler"/> to support 
-    /// incremental parsing of representation, that interface will be used instead.
+    /// Converts a transit value to an instance of a type.
     /// </summary>
-    public interface IReadHandler
-    {
-        /// <summary>
-        /// Converts a transit value to an instance of a type.
-        /// </summary>
-        /// <param name="representation">The transit value.</param>
-        /// <returns>The converted object.</returns>
-        object FromRepresentation(object representation);
-    }
+    /// <param name="representation">The transit value.</param>
+    /// <returns>The converted object.</returns>
+    object FromRepresentation(object representation);
 }
