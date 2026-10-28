@@ -17,13 +17,9 @@
 // limitations under the License.
 
 using Newtonsoft.Json;
-using Beerendonk.Transit;
 using Beerendonk.Transit.Numerics;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
 using System.Numerics;
 
 namespace Beerendonk.Transit.Impl;

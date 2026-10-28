@@ -17,7 +17,6 @@
 // limitations under the License.
 
 using Beerendonk.Transit.Numerics;
-using System;
 using System.Numerics;
 
 namespace Beerendonk.Transit.Impl;

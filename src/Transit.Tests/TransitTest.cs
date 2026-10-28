@@ -16,17 +16,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Beerendonk.Transit.Impl;
 using Beerendonk.Transit.Java;
 using Beerendonk.Transit.Numerics;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 using System.Numerics;
 using System.Text;
 

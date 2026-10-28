@@ -18,13 +18,9 @@
 
 using Beerendonk.Transit.Java;
 using Beerendonk.Transit.Numerics;
-using System.Collections.Generic;
 using System.Collections;
 using System.Globalization;
 using System.Numerics;
-using System.Text;
-using System;
-
 namespace Beerendonk.Transit.Impl;
 
 internal static class WriteHandlers

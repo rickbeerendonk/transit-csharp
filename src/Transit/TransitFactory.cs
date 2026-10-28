@@ -18,10 +18,7 @@
 
 using Beerendonk.Transit.Impl;
 using Beerendonk.Transit.Spi;
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
 using System.Numerics;
 
 namespace Beerendonk.Transit;

@@ -20,14 +20,9 @@ using Beerendonk.Transit.Impl;
 using Beerendonk.Transit.Java;
 using Beerendonk.Transit.Numerics;
 using MessagePack;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Buffers;
 using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Numerics;
 using System.Text;
 

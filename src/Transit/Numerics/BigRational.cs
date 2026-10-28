@@ -34,7 +34,6 @@
 ** O(n(log n)^5 (log log n)) steps as n -> +infinity
 ============================================================*/
 
-using System;
 using System.Globalization;
 using System.Numerics;
 using System.Runtime.InteropServices;

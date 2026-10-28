@@ -18,11 +18,9 @@
 
 using Beerendonk.Transit.Java;
 using Beerendonk.Transit.Numerics;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Numerics;
-using System;
 
 namespace Beerendonk.Transit.Impl;
 

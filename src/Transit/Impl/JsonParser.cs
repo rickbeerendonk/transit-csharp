@@ -18,7 +18,6 @@
 
 using Newtonsoft.Json;
 using Beerendonk.Transit.Extensions;
-using System;
 using System.Collections.Immutable;
 
 namespace Beerendonk.Transit.Impl;
